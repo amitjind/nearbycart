@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EWT_PSQNEWModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="EWT_PSQNEWEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="AuthenticateLogin" ReturnType="Collection(EWT_PSQNEWModel.AuthenticateLogin_Result)">
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ChangePassword" ReturnType="Collection(EWT_PSQNEWModel.ChangePassword_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="OldPassword" Mode="In" Type="String" />
+      <Parameter Name="NewPassword" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ForgetPassword" ReturnType="Collection(EWT_PSQNEWModel.ForgetPassword_Result)">
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="NewPassword" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetAddress" ReturnType="Collection(EWT_PSQNEWModel.GetAddress_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetAddToCart" ReturnType="Collection(EWT_PSQNEWModel.GetAddToCart_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllInterest" ReturnType="Collection(EWT_PSQNEWModel.GetAllInterest_Result)" />
+    <FunctionImport Name="GetBusinessDetail" ReturnType="Collection(EWT_PSQNEWModel.GetBusinessDetail_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetCity" ReturnType="Collection(EWT_PSQNEWModel.GetCity_Result)">
+      <Parameter Name="StateId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetCountry" ReturnType="Collection(EWT_PSQNEWModel.GetCountry_Result)" />
+    <FunctionImport Name="GetCoupon" ReturnType="Collection(EWT_PSQNEWModel.GetCoupon_Result)">
+      <Parameter Name="CouponCode" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetNetwork" ReturnType="Collection(EWT_PSQNEWModel.GetNetwork_Result)">
+      <Parameter Name="LogInUserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetOrders" ReturnType="Collection(EWT_PSQNEWModel.GetOrders_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="SaleOrderId" Mode="In" Type="Int64" />
+      <Parameter Name="ProductId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetParentCategory" ReturnType="Collection(EWT_PSQNEWModel.GetParentCategory_Result)">
+      <Parameter Name="ParentCatId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetPopularProductId" ReturnType="Collection(EWT_PSQNEWModel.GetPopularProductId_Result)">
+      <Parameter Name="ProductCatId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetProduct" ReturnType="Collection(EWT_PSQNEWModel.GetProduct_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetProductCategory" ReturnType="Collection(EWT_PSQNEWModel.GetProductCategory_Result)">
+      <Parameter Name="ParentId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetProductDetail" ReturnType="Collection(EWT_PSQNEWModel.GetProductDetail_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="userId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetProfession" ReturnType="Collection(EWT_PSQNEWModel.GetProfession_Result)" />
+    <FunctionImport Name="GetProfessionalKeyword" ReturnType="Collection(EWT_PSQNEWModel.GetProfessionalKeyword_Result)" />
+    <FunctionImport Name="GetReview" ReturnType="Collection(EWT_PSQNEWModel.GetReview_Result)">
+      <Parameter Name="ProductId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetSortedProducts" ReturnType="Collection(EWT_PSQNEWModel.GetSortedProducts_Result)">
+      <Parameter Name="SortOrder" Mode="In" Type="String" />
+      <Parameter Name="PageIndex" Mode="In" Type="Int64" />
+      <Parameter Name="ProductCatId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetState" ReturnType="Collection(EWT_PSQNEWModel.GetState_Result)">
+      <Parameter Name="CountryId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserBusiness" ReturnType="Collection(EWT_PSQNEWModel.GetUserBusiness_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserInterest" ReturnType="Collection(EWT_PSQNEWModel.GetUserInterest_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserProfile" ReturnType="Collection(EWT_PSQNEWModel.GetUserProfile_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetUsersProfileList" ReturnType="Collection(EWT_PSQNEWModel.GetUsersProfileList_Result)">
+      <Parameter Name="LogInUserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetWishlist" ReturnType="Collection(EWT_PSQNEWModel.GetWishlist_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="InterestCategories" ReturnType="Collection(EWT_PSQNEWModel.InterestCategories_Result)" />
+    <FunctionImport Name="IsBusinessExist" ReturnType="Collection(EWT_PSQNEWModel.IsBusinessExist_Result)">
+      <Parameter Name="BusinessName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="IsEmailExist" ReturnType="Collection(EWT_PSQNEWModel.IsEmailExist_Result)">
+      <Parameter Name="Email" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="IsParentCategory" ReturnType="Collection(EWT_PSQNEWModel.IsParentCategory_Result)">
+      <Parameter Name="ProductCatId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="LoginAuthenticate" ReturnType="Collection(EWT_PSQNEWModel.LoginAuthenticate_Result)">
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="OTP" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="RegisterNewUser" ReturnType="Collection(EWT_PSQNEWModel.RegisterNewUser_Result)">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="RegisterType" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="RegisterUser" ReturnType="Collection(EWT_PSQNEWModel.RegisterUser_Result)">
+      <Parameter Name="UserMobile" Mode="In" Type="String" />
+      <Parameter Name="Operation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveAddress" ReturnType="Collection(EWT_PSQNEWModel.SaveAddress_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="Pincode" Mode="In" Type="String" />
+      <Parameter Name="Locality" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="CityId" Mode="In" Type="Int64" />
+      <Parameter Name="StateId" Mode="In" Type="Int64" />
+      <Parameter Name="Landmark" Mode="In" Type="String" />
+      <Parameter Name="AlternatePhone" Mode="In" Type="String" />
+      <Parameter Name="operation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveAddToCart" ReturnType="Collection(EWT_PSQNEWModel.SaveAddToCart_Result)">
+      <Parameter Name="CartDetails" Mode="In" Type="String" />
+      <Parameter Name="Operation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveBusiness" ReturnType="Collection(EWT_PSQNEWModel.SaveBusiness_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="BusinessName" Mode="In" Type="String" />
+      <Parameter Name="Location" Mode="In" Type="String" />
+      <Parameter Name="BusinessLogo" Mode="In" Type="String" />
+      <Parameter Name="ProfessionalCatId" Mode="In" Type="Int64" />
+      <Parameter Name="ProfessionalKeyword" Mode="In" Type="String" />
+      <Parameter Name="CityId" Mode="In" Type="Int64" />
+      <Parameter Name="PinCode" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="CountryId" Mode="In" Type="Int64" />
+      <Parameter Name="Website" Mode="In" Type="String" />
+      <Parameter Name="operation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveContactUs" ReturnType="Collection(EWT_PSQNEWModel.SaveContactUs_Result)">
+      <Parameter Name="FullName" Mode="In" Type="String" />
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Message" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveCouponHistory" ReturnType="Collection(EWT_PSQNEWModel.SaveCouponHistory_Result)">
+      <Parameter Name="CouponId" Mode="In" Type="Int64" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="OrderId" Mode="In" Type="Int64" />
+      <Parameter Name="Discount" Mode="In" Type="Decimal" />
+      <Parameter Name="Operation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveNetwork" ReturnType="Collection(EWT_PSQNEWModel.SaveNetwork_Result)">
+      <Parameter Name="LogInUserId" Mode="In" Type="Int64" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="UserProfileId" Mode="In" Type="Int64" />
+      <Parameter Name="operation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveOrders" ReturnType="Collection(EWT_PSQNEWModel.SaveOrders_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="TotalDiscount" Mode="In" Type="Decimal" />
+      <Parameter Name="Amount" Mode="In" Type="Decimal" />
+      <Parameter Name="PaymentMode" Mode="In" Type="String" />
+      <Parameter Name="SaleOrderDetail" Mode="In" Type="String" />
+      <Parameter Name="Operation" Mode="In" Type="String" />
+      <Parameter Name="SaleOrderId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="SaveProduct" ReturnType="Collection(EWT_PSQNEWModel.SaveProduct_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="ProductName" Mode="In" Type="String" />
+      <Parameter Name="ProductCatId" Mode="In" Type="Int64" />
+      <Parameter Name="ProductImage" Mode="In" Type="String" />
+      <Parameter Name="SellingPrice" Mode="In" Type="Decimal" />
+      <Parameter Name="DiscountPrice" Mode="In" Type="Decimal" />
+      <Parameter Name="BusinessId" Mode="In" Type="Int64" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="Operation" Mode="In" Type="String" />
+      <Parameter Name="ProductImages" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveProductImages" ReturnType="Collection(EWT_PSQNEWModel.SaveProductImages_Result)">
+      <Parameter Name="ProductId" Mode="In" Type="Int64" />
+      <Parameter Name="ProductImages" Mode="In" Type="String" />
+      <Parameter Name="operation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveProfile" ReturnType="Collection(EWT_PSQNEWModel.SaveProfile_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="ProfileImage" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="EmailId" Mode="In" Type="String" />
+      <Parameter Name="ProfessionalCatId" Mode="In" Type="Int64" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="ProfessionalKeyword" Mode="In" Type="String" />
+      <Parameter Name="CityId" Mode="In" Type="Int64" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="GenderId" Mode="In" Type="Int64" />
+      <Parameter Name="DOB" Mode="In" Type="DateTime" />
+      <Parameter Name="Location" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Pincode" Mode="In" Type="String" />
+      <Parameter Name="CountryId" Mode="In" Type="Int64" />
+      <Parameter Name="OfficeAddress" Mode="In" Type="String" />
+      <Parameter Name="OtherAddress" Mode="In" Type="String" />
+      <Parameter Name="InterestCatId" Mode="In" Type="Int64" />
+      <Parameter Name="UserInterestDetail" Mode="In" Type="String" />
+      <Parameter Name="UserAddressDetail" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveReview" ReturnType="Collection(EWT_PSQNEWModel.SaveReview_Result)">
+      <Parameter Name="ProductId" Mode="In" Type="Int64" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="TotalRating" Mode="In" Type="Decimal" />
+      <Parameter Name="GivenRating" Mode="In" Type="Decimal" />
+      <Parameter Name="Review" Mode="In" Type="String" />
+      <Parameter Name="Operation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveUserForgetPasswordLink" ReturnType="Collection(EWT_PSQNEWModel.SaveUserForgetPasswordLink_Result)">
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="operation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveUserInterest" ReturnType="Collection(EWT_PSQNEWModel.SaveUserInterest_Result)">
+      <Parameter Name="UserInterestDetail" Mode="In" Type="String" />
+      <Parameter Name="operation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveUserKeyword" ReturnType="Collection(EWT_PSQNEWModel.SaveUserKeyword_Result)">
+      <Parameter Name="Keyword" Mode="In" Type="String" />
+      <Parameter Name="operation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveWishlist" ReturnType="Collection(EWT_PSQNEWModel.SaveWishlist_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="ProductId" Mode="In" Type="Int64" />
+      <Parameter Name="Operation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UserInterestedCategory" ReturnType="Collection(EWT_PSQNEWModel.UserInterestedCategory_Result)">
+      <Parameter Name="userId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="UserProductList" ReturnType="Collection(EWT_PSQNEWModel.UserProductList_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetChildCategory" ReturnType="Collection(EWT_PSQNEWModel.GetChildCategory_Result)">
+      <Parameter Name="ProductCatId" Mode="In" Type="Int64" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="AuthenticateLogin_Result">
+    <Property Type="String" Name="Response" Nullable="false" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ChangePassword_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="29" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ForgetPassword_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="29" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetAddress_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Address" Nullable="true" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="true" />
+    <Property Type="String" Name="Mobile" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Pincode" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Locality" Nullable="true" MaxLength="10" />
+    <Property Type="Int64" Name="CityId" Nullable="true" />
+    <Property Type="Int64" Name="StateId" Nullable="true" />
+    <Property Type="String" Name="Landmark" Nullable="true" />
+    <Property Type="String" Name="AlternatePhone" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Type" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="CityName" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetAddToCart_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="UserId" Nullable="false" />
+    <Property Type="Int64" Name="ProductId" Nullable="false" />
+    <Property Type="Int32" Name="Qty" Nullable="false" />
+    <Property Type="Decimal" Name="Amount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Discount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TotalAmount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="ProductName" Nullable="true" />
+    <Property Type="Int64" Name="ProductCatId" Nullable="true" />
+    <Property Type="String" Name="ProductImage" Nullable="true" />
+    <Property Type="Decimal" Name="SellingPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="DiscountPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int64" Name="BusinessId" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="String" Name="BusinessName" Nullable="true" />
+    <Property Type="String" Name="BusinessLogo" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetAllInterest_Result">
+    <Property Type="Int64" Name="InterestId" Nullable="false" />
+    <Property Type="String" Name="InterestName" Nullable="true" />
+    <Property Type="Int64" Name="InterestCatId" Nullable="true" />
+    <Property Type="String" Name="InterestCatName" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetBusinessDetail_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="BusinessName" Nullable="true" />
+    <Property Type="String" Name="Location" Nullable="true" />
+    <Property Type="String" Name="BusinessLogo" Nullable="true" />
+    <Property Type="Int64" Name="ProfessionalCatId" Nullable="true" />
+    <Property Type="String" Name="ProfessionalKeyword" Nullable="true" />
+    <Property Type="Int64" Name="CityId" Nullable="true" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+    <Property Type="Int64" Name="StateId" Nullable="true" />
+    <Property Type="String" Name="PinCode" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Email" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="Int64" Name="CountryId" Nullable="true" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Website" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetCity_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" />
+    <Property Type="DateTime" Name="RecordDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="DeletedStatus" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="UpdatedStatus" Nullable="true" Precision="23" />
+    <Property Type="String" Name="AppStatus" Nullable="true" MaxLength="1" />
+    <Property Type="Int64" Name="StateId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetCountry_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetCoupon_Result">
+    <Property Type="String" Name="response" Nullable="false" MaxLength="12" />
+    <Property Type="Boolean" Name="success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetNetwork_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="String" Name="ProfileImage" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="String" Name="EmailId" Nullable="true" />
+    <Property Type="Int64" Name="ProfessionalCatId" Nullable="true" />
+    <Property Type="String" Name="Profession" Nullable="true" />
+    <Property Type="String" Name="Title" Nullable="true" />
+    <Property Type="String" Name="ProfessionalKeyword" Nullable="true" />
+    <Property Type="Int64" Name="CityId" Nullable="true" />
+    <Property Type="String" Name="InterestId" Nullable="true" />
+    <Property Type="String" Name="InterestName" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetOrders_Result">
+    <Property Type="String" Name="ProductName" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="ProductImage" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="ProductImages" Nullable="false" MaxLength="3" />
+    <Property Type="Int32" Name="Quantity" Nullable="false" />
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="OrderNo" Nullable="true" />
+    <Property Type="DateTime" Name="OrderDate" Nullable="false" Precision="23" />
+    <Property Type="Decimal" Name="Amount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="PaymentMode" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetParentCategory_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="Int64" Name="ParentCatId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetPopularProductId_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" />
+    <Property Type="Int64" Name="ProductCatId" Nullable="true" />
+    <Property Type="String" Name="ProductImage" Nullable="true" />
+    <Property Type="Decimal" Name="SellingPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="DiscountPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int64" Name="BusinessId" Nullable="true" />
+    <Property Type="DateTime" Name="RecordDate" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="Int64" Name="ParentCatId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetProduct_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" />
+    <Property Type="Int64" Name="ProductCatId" Nullable="true" />
+    <Property Type="String" Name="ProductImage" Nullable="true" />
+    <Property Type="Decimal" Name="SellingPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="DiscountPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int64" Name="BusinessId" Nullable="true" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="Int64" Name="ParentCatId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetProductCategory_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="Int64" Name="ParentCatId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetProductDetail_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" />
+    <Property Type="Int64" Name="ProductCatId" Nullable="true" />
+    <Property Type="String" Name="Category" Nullable="false" />
+    <Property Type="String" Name="ProductImage" Nullable="true" />
+    <Property Type="Decimal" Name="SellingPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="DiscountPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int64" Name="BusinessId" Nullable="true" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+    <Property Type="String" Name="description" Nullable="true" />
+    <Property Type="String" Name="ProductImages" Nullable="true" />
+    <Property Type="String" Name="VendorName" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetProfession_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetProfessionalKeyword_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetReview_Result">
+    <Property Type="Int64" Name="ProductId" Nullable="true" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="true" />
+    <Property Type="Decimal" Name="TotalRating" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Decimal" Name="GivenRating" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="Review" Nullable="true" />
+    <Property Type="DateTime" Name="RecordDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="AppStatus" Nullable="true" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="GetSortedProducts_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" />
+    <Property Type="Int64" Name="ProductCatId" Nullable="true" />
+    <Property Type="String" Name="ProductImage" Nullable="true" />
+    <Property Type="Decimal" Name="SellingPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="DiscountPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int64" Name="BusinessId" Nullable="true" />
+    <Property Type="DateTime" Name="RecordDate" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetState_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" />
+    <Property Type="Int64" Name="CountryId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetUserBusiness_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="BusinessName" Nullable="true" />
+    <Property Type="String" Name="Location" Nullable="true" />
+    <Property Type="String" Name="BusinessLogo" Nullable="true" />
+    <Property Type="Int64" Name="ProfessionalCatId" Nullable="true" />
+    <Property Type="String" Name="ProfessionalKeyword" Nullable="true" />
+    <Property Type="Int64" Name="CityId" Nullable="true" />
+    <Property Type="String" Name="PinCode" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Email" Nullable="true" />
+    <Property Type="Int64" Name="CountryId" Nullable="true" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetUserInterest_Result">
+    <Property Type="Int64" Name="InterestCatId" Nullable="true" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+    <Property Type="Int64" Name="InterestId" Nullable="true" />
+    <Property Type="String" Name="InterestName" Nullable="true" />
+    <Property Type="String" Name="InterestCatName" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetUserProfile_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+    <Property Type="String" Name="FirstName" Nullable="true" />
+    <Property Type="String" Name="LastName" Nullable="true" />
+    <Property Type="String" Name="ProfileImage" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="String" Name="EmailId" Nullable="true" />
+    <Property Type="Int64" Name="ProfessionalCatId" Nullable="true" />
+    <Property Type="String" Name="Title" Nullable="true" />
+    <Property Type="String" Name="ProfessionalKeyword" Nullable="true" />
+    <Property Type="Int64" Name="CityId" Nullable="true" />
+    <Property Type="String" Name="Password" Nullable="true" />
+    <Property Type="Int64" Name="GenderId" Nullable="false" />
+    <Property Type="DateTime" Name="DOB" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Pincode" Nullable="true" MaxLength="10" />
+    <Property Type="Int64" Name="CountryId" Nullable="true" />
+    <Property Type="String" Name="Location" Nullable="true" />
+    <Property Type="String" Name="OfficeAddress" Nullable="true" />
+    <Property Type="String" Name="OtherAddress" Nullable="true" />
+    <Property Type="Int64" Name="InterestCatId" Nullable="true" />
+    <Property Type="String" Name="StrUserInterestIds" Nullable="true" />
+    <Property Type="String" Name="StrUserAddress" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetUsersProfileList_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="String" Name="ProfileImage" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="String" Name="EmailId" Nullable="true" />
+    <Property Type="Int64" Name="ProfessionalCatId" Nullable="true" />
+    <Property Type="String" Name="Profession" Nullable="true" />
+    <Property Type="String" Name="Title" Nullable="true" />
+    <Property Type="String" Name="ProfessionalKeyword" Nullable="true" />
+    <Property Type="Int64" Name="CityId" Nullable="true" />
+    <Property Type="String" Name="Location" Nullable="true" />
+    <Property Type="String" Name="InterestId" Nullable="true" />
+    <Property Type="String" Name="InterestName" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetWishlist_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="UserId" Nullable="false" />
+    <Property Type="Int64" Name="ProductId" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" />
+    <Property Type="Int64" Name="ProductCatId" Nullable="true" />
+    <Property Type="String" Name="ProductImage" Nullable="true" />
+    <Property Type="Decimal" Name="SellingPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="DiscountPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int64" Name="BusinessId" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="String" Name="BusinessName" Nullable="true" />
+    <Property Type="String" Name="BusinessLogo" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InterestCategories_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="IsBusinessExist_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="5" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="IsEmailExist_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="5" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="IsParentCategory_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="5" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="LoginAuthenticate_Result">
+    <Property Type="String" Name="Response" Nullable="false" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="RegisterNewUser_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="11" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="RegisterUser_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="8" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveAddress_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="12" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveAddToCart_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="10" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveBusiness_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="13" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveContactUs_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="13" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveCouponHistory_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="20" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveNetwork_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="13" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveOrders_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="11" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveProduct_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="11" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveProductImages_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="11" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveProfile_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="17" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveReview_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="13" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveUserForgetPasswordLink_Result">
+    <Property Type="String" Name="Response" Nullable="true" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveUserInterest_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="17" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveUserKeyword_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="14" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveWishlist_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="14" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="UserInterestedCategory_Result">
+    <Property Type="Int64" Name="InterestCatId" Nullable="true" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+    <Property Type="Int64" Name="InterestId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="UserProductList_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" />
+    <Property Type="Int64" Name="ProductCatId" Nullable="true" />
+    <Property Type="String" Name="ProductImage" Nullable="true" />
+    <Property Type="Decimal" Name="SellingPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="DiscountPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int64" Name="BusinessId" Nullable="true" />
+    <Property Type="DateTime" Name="RecordDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="DeletedStatus" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="UpdatedStatus" Nullable="true" Precision="23" />
+    <Property Type="String" Name="AppStatus" Nullable="true" MaxLength="1" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetChildCategory_Result">
+    <Property Type="Int64" Name="ProductCatId" Nullable="false" />
+  </ComplexType>
+</Schema>

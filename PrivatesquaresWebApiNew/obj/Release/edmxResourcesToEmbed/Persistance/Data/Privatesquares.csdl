@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EWT_PSQNEWModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="EWT_PSQNEWEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="InterestCategories" ReturnType="Collection(EWT_PSQNEWModel.InterestCategories_Result)" />
+    <FunctionImport Name="LoginAuthenticate" ReturnType="Collection(EWT_PSQNEWModel.LoginAuthenticate_Result)">
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="OTP" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="RegisterUser" ReturnType="Collection(EWT_PSQNEWModel.RegisterUser_Result)">
+      <Parameter Name="UserMobile" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SaveUserProfile" ReturnType="Collection(EWT_PSQNEWModel.SaveUserProfile_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="ProfileImage" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="EmailId" Mode="In" Type="String" />
+      <Parameter Name="ProfessionalCatId" Mode="In" Type="Int64" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="ProfessionalKeywordId" Mode="In" Type="Int64" />
+      <Parameter Name="CityId" Mode="In" Type="Int64" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="GenderId" Mode="In" Type="Int64" />
+      <Parameter Name="DOB" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="UserInterestedCategory" ReturnType="Collection(EWT_PSQNEWModel.UserInterestedCategory_Result)">
+      <Parameter Name="userId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="Businesses" EntityType="EWT_PSQNEWModel.Business" />
+    <EntitySet Name="BusinessLocations" EntityType="EWT_PSQNEWModel.BusinessLocation" />
+    <EntitySet Name="Cities" EntityType="EWT_PSQNEWModel.City" />
+    <EntitySet Name="Genders" EntityType="EWT_PSQNEWModel.Gender" />
+    <EntitySet Name="InterestCategories1" EntityType="EWT_PSQNEWModel.InterestCategory" />
+    <EntitySet Name="Products" EntityType="EWT_PSQNEWModel.Product" />
+    <EntitySet Name="Professions" EntityType="EWT_PSQNEWModel.Profession" />
+    <EntitySet Name="ProfessionalKeywords" EntityType="EWT_PSQNEWModel.ProfessionalKeyword" />
+    <EntitySet Name="Reviews" EntityType="EWT_PSQNEWModel.Review" />
+    <EntitySet Name="Roles" EntityType="EWT_PSQNEWModel.Role" />
+    <EntitySet Name="UserInteresteds" EntityType="EWT_PSQNEWModel.UserInterested" />
+    <EntitySet Name="UserMasters" EntityType="EWT_PSQNEWModel.UserMaster" />
+    <EntitySet Name="UserProfiles" EntityType="EWT_PSQNEWModel.UserProfile" />
+    <EntitySet Name="UserRights" EntityType="EWT_PSQNEWModel.UserRight" />
+    <FunctionImport Name="SaveProfile" ReturnType="Collection(EWT_PSQNEWModel.SaveProfile_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="ProfileImage" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="EmailId" Mode="In" Type="String" />
+      <Parameter Name="ProfessionalCatId" Mode="In" Type="Int64" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="ProfessionalKeywordId" Mode="In" Type="Int64" />
+      <Parameter Name="CityId" Mode="In" Type="Int64" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="GenderId" Mode="In" Type="Int64" />
+      <Parameter Name="DOB" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="InterestCategories_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="LoginAuthenticate_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="45" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="RegisterUser_Result">
+    <Property Type="String" Name="Response" Nullable="true" MaxLength="5" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaveUserProfile_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="15" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="UserInterestedCategory_Result">
+    <Property Type="Int64" Name="InterestCatId" Nullable="true" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="Business">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BusinessName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BusinessLogo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProfessionalCatId" Type="Int64" />
+    <Property Name="ProfessionalKeywordId" Type="Int64" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="BusinessLocation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BusinessId" Type="Int64" />
+    <Property Name="CityId" Type="Int64" />
+    <Property Name="UserId" Type="Int64" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedStatus" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedStatus" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedStatus" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedStatus" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="InterestCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedStatus" Type="DateTime" Precision="3" />
+    <Property Name="DeletedStatus" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="Int64" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductCatId" Type="Int64" />
+    <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SellingPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="DiscountPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="BusinessId" Type="Int64" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Profession">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedStatus" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ProfessionalKeyword">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedStatus" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedStatus" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int64" />
+    <Property Name="UserId" Type="Int64" />
+    <Property Name="TotalRating" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="GivenRating" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedStatus" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedStatus" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UserInterested">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InterestCatId" Type="Int64" />
+    <Property Name="UserId" Type="Int64" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedStatus" Type="DateTime" Precision="3" />
+    <Property Name="DeletedStatus" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Otp" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedStatus" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedStatus" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int64" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProfessionalCatId" Type="Int64" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProfessionalKeywordId" Type="Int64" />
+    <Property Name="CityId" Type="Int64" />
+    <Property Name="Interests" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GenderId" Type="Int64" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedStatus" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedStatus" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UserRight">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int64" />
+    <Property Name="UserId" Type="Int64" />
+    <Property Name="RecordDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedStatus" Type="DateTime" Precision="3" />
+    <Property Name="DeletedStatus" Type="DateTime" Precision="3" />
+    <Property Name="AppStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <ComplexType Name="SaveProfile_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="12" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
+  </ComplexType>
+</Schema>

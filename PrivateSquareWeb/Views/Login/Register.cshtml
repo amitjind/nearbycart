@@ -1,0 +1,83 @@
+﻿@*@model PrivateSquareWeb.Models.UserRegisterModel*@
+@model PrivateSquareWeb.Models.LoginModel
+@{
+    /**/
+
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@using (Html.BeginForm("RegisterUser", "Login", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="signin-wrapper">
+
+        <div class="signin-box">
+            <!--<img src="../img/logo.png" alt="logo" class="logo-width"> -->
+            <!-- <h2 class="slim-logo"><a href="index.html">slim<span>.</span></a></h2> -->
+            <h2 class="sign-up-heading text-center">Sign Up to Write Quotes and earn points <br>from Privatesquares</h2>
+            @ViewBag.RegisterMessage
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Full Name" })
+                @*<input type="text" class="form-control" placeholder="Full Name">*@
+            </div><!-- form-group -->
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", placeholder = "Email Id" })
+                @*<input type="password" class="form-control" placeholder="Email Address">*@
+            </div><!-- form-group -->
+            <div class="form-group">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                @*<input type="password" class="form-control" placeholder="Password">*@
+            </div><!-- form-group -->
+            <button class="btn btn-block btn-sign-in">Sign Up</button>
+            <p class="mg-b-0">Don't have an account? <a href="/Login/Index" class="sign-up-col">Sign In</a></p>
+        </div><!-- signin-box -->
+
+    </div><!-- signin-wrapper -->
+
+
+}
+
+
+
+
+
+
+@*<div class="signin-wrapper">
+
+        <div class="signin-box signup">
+            <img src="~/Content/img/logo.png" alt="logo" class="logo-width">
+            <!-- <h2 class="slim-logo"><a href="index.html">slim<span>.</span></a></h2> -->
+            <div class="ps-step-one">
+                <h3 class="signin-title-primary">Get Started!</h3>
+                <h5 class="signin-title-secondary lh-4">It's free to signup and only takes a minute.</h5>
+                <div class="row row-xs mg-b-10">
+                    <p style="color:red;">@ViewBag.RegisterMessage</p>
+                    @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control", placeholder = "Mobile" })
+                    <input type="hidden" name="txttype" id="txttype" value="R" />
+                </div><br />
+                <!-- row -->
+                <button class="btn btn-primary btn-block btn-signin" id="step-2">Register</button>
+                <p class="mg-t-40 mg-b-0 tx-center">Do you have an account? click <a href="/Login/Index">Login</a> to Sign In </p>
+
+
+                <div class="signup-separator"><span>or signup using</span></div>
+
+                <div class="tx-20 tx-center">
+                    <a href="" class="tx-primary mg-r-5"><i class="fa fa-facebook"></i></a>
+                    <a href="" class="tx-info mg-r-5"><i class="fa fa-twitter"></i></a>
+                    <a href="" class="tx-danger mg-r-5"><i class="fa fa-google-plus"></i></a>
+                    <a href="" class="tx-danger mg-r-5"><i class="fa fa-pinterest"></i></a>
+                    <a href="" class="tx-inverse mg-r-5"><i class="fa fa-github"></i></a>
+                    <a href="" class="tx-pink mg-r-5"><i class="fa fa-instagram"></i></a>
+                </div>
+
+
+            </div>
+        </div><!-- signin-box -->
+
+    </div><!-- signin-wrapper -->*@
+
+
+

@@ -1,0 +1,101 @@
+﻿@model PrivateSquareWeb.Models.ProductModel
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+
+    var AddToCartCatWise = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage, ProductCatId) {
+        var salePrice = SellingPrice;
+        var discountPrice = DiscountPrice;
+        var ProductId = Id;
+        var ProductName = "" + ProductName + "";
+        var Qty = 1;
+        var ImageName = ProductImage;
+        var Price = discountPrice; /*Number((Number(salePrice) - Number(discountPrice)));*/
+        var Amount = Number(Price) * Number(Qty);
+
+        var TotalAmount = 0;
+        $.ajax({
+            url: "../../WebHome/AddToCart",
+            type: "POST",
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductName,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result) {
+                $("#Cartcontent").load(location.href + ' #Cartcontent');
+                swal(" ", "Product Added to the Cart", "success");
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    var AddToWishlist = function (Id) {
+
+        var ProductId = Id;
+        $.ajax({
+            url: "../../WebHome/AddToWishlist",
+            type: "POST",
+            data: { ProductId: ProductId },
+            success: function (result) {
+                if (result == "Please Login to access wishlist") {
+                    swal(result);
+                }
+                else if (result == "Product Exists") {
+                    swal("Product already added to the Wishlist");
+                }
+                else {
+                    swal(" ", result, "success");
+                }
+            },
+            error: function (error) {
+                console.log('error');
+            }
+
+        })
+
+    }
+</script>
+
+@foreach (var Users in ViewBag.UsersProduct)
+{
+    <div class="ps-product-wrap">
+        <div class="ps-product--fashion">
+            <div class="ps-product__thumbnail">
+                <a class="ps-product__overlay" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))"></a>
+                @{ if (@Users.ProductImage != null)
+                    {
+                        <img src="~/DocImg/@Users.ProductImage" alt="">
+                    }
+                    else
+                    {
+                        <img src="~/WebSiteTheme/images/product/fashion-1.jpg" alt="">
+
+                    }
+                }
+               
+                @*<div class="ps-badge ps-badge--sale-off"><span>-@off%</span></div>*@
+                <ul class="ps-product__actions">
+               
+                    <li><a href="#" title="Favorite"><i class="ps-icon-heart" onclick="AddToWishlist(@Users.Id)"></i></a></li>
+                </ul>
+            </div>
+            <div class="ps-product__content">
+                <a class="ps-product__title" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))">@Users.ProductName</a>
+                <p class="ps-product__price">
+                   ₹@Users.DiscountPrice
+                </p><a class="ps-product__cart" onclick="AddToCartCatWise('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage','@Users.ProductCatId')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a>
+            </div>
+        </div>
+    </div>
+}
+    

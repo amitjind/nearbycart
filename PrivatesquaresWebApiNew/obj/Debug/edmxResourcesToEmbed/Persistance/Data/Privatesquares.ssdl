@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EWT_PSQNEWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="AuthenticateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Mobile" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ChangePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="OldPassword" Type="nvarchar" Mode="In" />
+    <Parameter Name="NewPassword" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ForgetPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="NewPassword" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetAddToCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetAllInterest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares" />
+  <Function Name="GetBusinessDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetChildCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="ProductCatId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="StateId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetCountry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares" />
+  <Function Name="GetCoupon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="CouponCode" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetNetwork" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="LogInUserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="SaleOrderId" Type="bigint" Mode="In" />
+    <Parameter Name="ProductId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetParentCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="ParentCatId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetPopularProductId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="ProductCatId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetProductCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="ParentId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetProductDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="userId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetProfession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares" />
+  <Function Name="GetProfessionalKeyword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares" />
+  <Function Name="GetReview" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="ProductId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetSortedProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="SortOrder" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="PageIndex" Type="bigint" Mode="In" />
+    <Parameter Name="ProductCatId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="CountryId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetUserBusiness" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetUserInterest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetUserProfile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetUsersProfileList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="LogInUserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetWishlist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="InterestCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares" />
+  <Function Name="IsBusinessExist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="BusinessName" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="IsEmailExist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="IsParentCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="ProductCatId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="LoginAuthenticate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="Mobile" Type="varchar" Mode="In" />
+    <Parameter Name="OTP" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="RegisterNewUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Mobile" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+    <Parameter Name="RegisterType" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="RegisterUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserMobile" Type="varchar" Mode="In" />
+    <Parameter Name="Operation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SaveAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Mobile" Type="varchar" Mode="In" />
+    <Parameter Name="Pincode" Type="nchar" Mode="In" />
+    <Parameter Name="Locality" Type="nchar" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="CityId" Type="bigint" Mode="In" />
+    <Parameter Name="StateId" Type="bigint" Mode="In" />
+    <Parameter Name="Landmark" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="AlternatePhone" Type="varchar" Mode="In" />
+    <Parameter Name="operation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SaveAddToCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="CartDetails" Type="xml" Mode="In" />
+    <Parameter Name="Operation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SaveBusiness" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="BusinessName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Location" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="BusinessLogo" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProfessionalCatId" Type="bigint" Mode="In" />
+    <Parameter Name="ProfessionalKeyword" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="CityId" Type="bigint" Mode="In" />
+    <Parameter Name="PinCode" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="CountryId" Type="bigint" Mode="In" />
+    <Parameter Name="Website" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="operation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SaveContactUs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Mobile" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Message" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="SaveCouponHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="CouponId" Type="bigint" Mode="In" />
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="OrderId" Type="bigint" Mode="In" />
+    <Parameter Name="Discount" Type="decimal" Mode="In" />
+    <Parameter Name="Operation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SaveNetwork" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="LogInUserId" Type="bigint" Mode="In" />
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="UserProfileId" Type="bigint" Mode="In" />
+    <Parameter Name="operation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SaveOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="TotalDiscount" Type="decimal" Mode="In" />
+    <Parameter Name="Amount" Type="decimal" Mode="In" />
+    <Parameter Name="PaymentMode" Type="varchar" Mode="In" />
+    <Parameter Name="SaleOrderDetail" Type="xml" Mode="In" />
+    <Parameter Name="Operation" Type="varchar" Mode="In" />
+    <Parameter Name="SaleOrderId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="SaveProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="ProductName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProductCatId" Type="bigint" Mode="In" />
+    <Parameter Name="ProductImage" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SellingPrice" Type="decimal" Mode="In" />
+    <Parameter Name="DiscountPrice" Type="decimal" Mode="In" />
+    <Parameter Name="BusinessId" Type="bigint" Mode="In" />
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Operation" Type="varchar" Mode="In" />
+    <Parameter Name="ProductImages" Type="xml" Mode="In" />
+  </Function>
+  <Function Name="SaveProductImages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="ProductId" Type="bigint" Mode="In" />
+    <Parameter Name="ProductImages" Type="xml" Mode="In" />
+    <Parameter Name="operation" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SaveProfile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="FirstName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="LastName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProfileImage" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EmailId" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProfessionalCatId" Type="bigint" Mode="In" />
+    <Parameter Name="Title" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProfessionalKeyword" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="CityId" Type="bigint" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="GenderId" Type="bigint" Mode="In" />
+    <Parameter Name="DOB" Type="datetime" Mode="In" />
+    <Parameter Name="Location" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="Pincode" Type="varchar" Mode="In" />
+    <Parameter Name="CountryId" Type="bigint" Mode="In" />
+    <Parameter Name="OfficeAddress" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="OtherAddress" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="InterestCatId" Type="bigint" Mode="In" />
+    <Parameter Name="UserInterestDetail" Type="xml" Mode="In" />
+    <Parameter Name="UserAddressDetail" Type="xml" Mode="In" />
+  </Function>
+  <Function Name="SaveReview" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="ProductId" Type="bigint" Mode="In" />
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="TotalRating" Type="decimal" Mode="In" />
+    <Parameter Name="GivenRating" Type="decimal" Mode="In" />
+    <Parameter Name="Review" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Operation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SaveUserForgetPasswordLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="operation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SaveUserInterest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserInterestDetail" Type="xml" Mode="In" />
+    <Parameter Name="operation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SaveUserKeyword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="Keyword" Type="xml" Mode="In" />
+    <Parameter Name="operation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SaveWishlist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="ProductId" Type="bigint" Mode="In" />
+    <Parameter Name="Operation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UserInterestedCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="userId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="UserProductList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <EntityContainer Name="EWT_PSQNEWModelStoreContainer" />
+</Schema>

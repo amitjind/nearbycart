@@ -1,0 +1,165 @@
+﻿<footer class="ps-footer site-footer">
+    <div class="ps-footer__content">
+        <div class="ps-container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+
+                    <div class="ps-site-info site-info">
+                        <a class="ps-logo" href="~/WebHome/Index"><img src="~/WebSiteTheme/images/logo.png" alt=""></a>
+
+                        <p>NearByCart is a destination for 20-somethings. We sell cutting-edge products and offer a wide variety of all types of content, making NearByCart Store the hub of a thriving community.</p>
+                        <div class="ps-site-info__contact">
+                            @*<h4>Contact Info</h4>
+                            <p>SCO 68, Swastik Vihar, Sector 5 MDC, Panchkula, Haryana 134114</p>
+                            <p>+91-172-4668920</p>*@
+                        </div>
+                        <ul class="ps-social">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+
+                            <div class="ps-widget ps-widget--footer widget widget_footer">
+
+                                <h2 class="ps-widget__title">Categories</h2>
+
+                                <ul class="ps-list--line">
+
+                                    <li><a class="text-uppercase" href="~/ProductCatWise/Index/36">Beauty & Personal care</a></li>
+
+                                    <li><a class="text-uppercase" href="~/ProductCatWise/Index/37">Household Supplies</a></li>
+
+                                    <li><a class="text-uppercase" href="~/ProductCatWise/Index/38">Diet & Nutrition</a></li>
+
+                                    <li><a class="text-uppercase" href="~/ProductCatWise/Index39">All Grocery & Gourmet Foods</a></li>
+
+                                    <li><a class="text-uppercase" href="~/ProductCatWise/Index/41">Baby Care</a></li>
+                                    <li><a class="text-uppercase" href="~/ProductCatWise/Index/42">Bakery, Cakes & Dairy</a></li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+
+                            <div class="ps-widget ps-widget--footer widget widget_footer">
+
+                                <h2 class="ps-widget__title">Customer Care</h2>
+
+                                <ul class="ps-list--line">
+
+                                    @*<li><a href="#">About Us</a></li>*@
+
+                                    <li><a href="~/WebContactUs/Index">Contact Us</a></li>
+
+                                    @*<li><a href="#">Customer Service</a></li>
+
+                                        <li><a href="#">FAQs</a></li>
+
+                                        <li><a href="#">Product Support</a></li>*@
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+
+                            <div class="ps-widget ps-widget--footer widget widget_footer">
+
+                                <h2 class="ps-widget__title">Your Account</h2>
+
+                                <ul class="ps-list--line">
+
+                                    @*<li><a href="#">Your account</a></li>
+
+                                        <li><a href="#">Newsletter</a></li>
+
+                                        <li><a href="#">Information</a></li>*@
+
+                                    <li><a href="~/ViewCart/ViewCart">Your Cart</a></li>
+
+                                    <li><a href="javascript:void()" onclick="OpenWishlist()">Your wishlist</a></li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="ps-footer__copyright">
+
+        <div class="ps-container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+
+                    <p>&copy; Copyright by <span>NearByCart STORE</span>. Design by <a href="http://www.elitewebtechnologies.com/">Elite Web Technologies</a>.</p>
+
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+
+                    <div class="ps-footer__payment-methods">
+                        <a href="#"></a>
+                        @*<img src="~/WebSiteTheme/images/payment-method/paypal.png" alt="">
+                            </a><a href="#"><img src="~/WebSiteTheme/images/payment-method/visa.png" alt=""></a>
+                            <a href="#"><img src="~/WebSiteTheme/images/payment-method/master-card.png" alt=""></a>*@
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    var OpenWishlist = function () {
+        $.ajax({
+            url: "../../WebHome/Wishlist",
+            type: "POST",
+            success: function (result) {
+                if (result != "window.swal('Please Login to access wishlist');") {
+                    window.location.href = "../../WebHome/Wishlist";
+                }
+                //console.log(result);
+                //debugger;
+            },
+            error: function (error) {
+                console.log('error');
+            }
+
+        })
+    }
+</script>

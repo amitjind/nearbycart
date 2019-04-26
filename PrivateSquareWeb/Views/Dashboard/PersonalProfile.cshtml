@@ -1,0 +1,323 @@
+﻿@model PrivateSquareWeb.Models.UserProfileModel
+@{
+    ViewBag.Title = "PersonalProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+    <script src="~/Scripts/select2.js"></script>*@
+<link href="~/theme/css/slim.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ProfessionalKeyword").autocomplete({
+            source: function (req, resp) {
+                $.ajax({
+                    url: "../../Dashboard/bindProfessionalKeyword",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: GetCurrentSearchTerm(req.term) },
+                    success: function (data) {
+                        if (data.length == 0) {
+                            var facData = [{ Id: 0, Name: "Coding" }];
+                            facData.pop();
+                            facData.push(facData.id);
+                            facData.push("");
+                            this.id = facData.join(",");
+                            resp($.map(facData,
+                                function (item) {
+                                    return { label: GetCurrentSearchTerm(req.term), value: GetCurrentSearchTerm(req.term), id: 0 };
+
+                                }))
+                        }
+                        else {
+                            resp($.map(data, function (item) {
+                                return { label: item.Name, value: item.Name, id: item.id };
+                            }))
+                        }
+                    }
+                })
+            },
+            select: function (event, ui) {
+                var LastId = splitCurrentText(this.id);
+                LastId.pop();
+                LastId.push(ui.item.id);
+                LastId.push("");
+                this.id = LastId.join(",");
+                var LastValue = splitCurrentText(this.value);
+                LastValue.pop();
+                LastValue.push(ui.item.value);
+                LastValue.push("");
+                this.value = LastValue.join(",");
+                return false;
+            },
+            focus: function () {
+                return false;
+            }
+
+        });
+
+        function splitCurrentText(LastTerm) {
+            return LastTerm.split(/,\s*/);
+        }
+        function GetCurrentSearchTerm(LastTerm) {
+            return splitCurrentText(LastTerm).pop();
+        }
+    });
+
+</script>
+
+<script>
+    function BtnCancel() {
+
+        window.location.href = "/Home/Index";
+    }
+</script>
+<script>
+    function GetCatwiseInterest() {
+
+        $('#UserInterestIds').empty();
+        var InterestCatId = document.getElementById("InterestCatId").value;
+        $.ajax({
+            url: "../../Dashboard/GetCateWiseInterest",
+            type: "POST",
+            data: {
+                CatId: InterestCatId
+
+            },
+            success: function (result) {
+                console.log(result);
+                var InterestCatwise = result;
+                // var resultlength = result.length;
+
+                $('#UserInterestIds').append(defaultV);
+                for (var i = 0; i < InterestCatwise.length; i++) {
+                    var opt = new Option(InterestCatwise[i].InterestName, InterestCatwise[i].InterestId);
+                    $('#UserInterestIds').append(opt);
+                }
+                if (InterestCatwise.length == 0) {
+                    var defaultV = new Option("--No Data Found--", 0, true);
+                    $('#UserInterestIds').append(defaultV);
+                }
+                //var resp = JSON.parse(result);
+
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    var arrHead = new Array();
+    arrHead = ['', 'Prof.Address'];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
+
+    // ADD A NEW ROW TO THE TABLE.s
+    function addTableRow() {
+        var empTab = document.getElementById('TblAddress');
+        var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
+        var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
+        tr = empTab.insertRow(rowCnt);
+
+        for (var c = 0; c < arrHead.length; c++) {
+            var td = document.createElement('td');          // TABLE DEFINITION.
+            td = tr.insertCell(c);
+
+            if (c == 0) {           // FIRST COLUMN.
+                // ADD A BUTTON.
+                var button = document.createElement('input');
+
+                // SET INPUT ATTRIBUTE.
+                button.setAttribute('type', 'button');
+                button.setAttribute('value', 'X');
+
+                // ADD THE BUTTON's 'onclick' EVENT.
+                button.setAttribute('onclick', 'removeRow(this)');
+
+                td.appendChild(button);
+            }
+            else {
+                // CREATE AND ADD TEXTBOX IN EACH CELL.
+                var ele = document.createElement('input');
+                ele.setAttribute('type', 'text');
+                ele.setAttribute('id', 'txtAddress[]');
+                ele.setAttribute('Name', 'txtAddress');
+                ele.setAttribute('class', 'form-control');
+                ele.setAttribute('value', '');
+
+                td.appendChild(ele);
+            }
+        }
+    }
+
+    // DELETE TABLE ROW.
+    function removeRow(oButton) {
+        var empTab = document.getElementById('TblAddress');
+        empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);       // BUTTON -> TD -> TR.
+    }
+</script>
+@using (Html.BeginForm("SaveProfile", "Dashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="slim-mainpanel mg-t-40">
+        <div class="container">
+            <div>
+                <div class="form-layout">
+                    <div class="row">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="col-sm-6 col-md-3">
+                            @*<div class="box-shadow-bc">
+                                <div class="text-center mg-t-30">
+                                <img src="~/DocImg/@Model.ProfileImage" class="wd-100 rounded-circle" alt="">
+                                    <div class="col-lg-12 mg-t-21 p-0">
+                                        <h1 class="profile-title tx-17"> @Model.FirstName</h1>
+                                        <div class="custom-file">
+                                            <input type="file" title="search image" id="FileUploadImage" name="FileUploadImage" class="custom-file-input-1">
+                                            <a href="javascript:void(0);" class="link-button" for="customFile">Upload Profile Photo</a>
+                                        </div><!-- custom-file -->
+                                    </div>
+                                    </div>
+                                    <hr/>
+                                    <h1 class="profile-title tx-18 pd-l-30"> My account</h1>
+                                    <ul class="account-list">
+                                        <li class="active"><a href="#">Profile Information</a></li>
+                                        <li><a href="#">Manage Address</a></li>
+                                        <li><a href="#">Change Password</a></li>
+                                    </ul>
+                                </div><!-- col -->*@
+                            @{
+                                //Html.RenderPartial("_Header");
+                                Html.RenderAction("HeaderValue", "SidebarProfile");
+                            }
+                        </div>
+                        <div class="col-sm-6 col-md-9">
+                            <div class="box-shadow-bc pd-40">
+                                <label class="section-title mg-t-0 mg-b-20">Personal Information</label>
+
+                                <div class="row">
+                                    <div class="col-lg-4 pd-0">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Firstname: <span class="tx-danger">*</span></label>
+                                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "Enter firstname", @autocomplete = "off" })
+                                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                                @*<input class="form-control" type="text" name="firstname" value="@Model.FirstName" placeholder="Enter firstname">*@
+                                            </div>
+                                        </div><!-- col-4 -->
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Lastname: <span class="tx-danger">*</span></label>
+                                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Enter LastName" })
+                                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+
+                                                @*<input class="form-control" type="text" name="lastname" value="@Model.LastName" placeholder="Enter lastname">*@
+                                            </div>
+                                        </div><!-- col-4 -->
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Email address: <span class="tx-danger">*</span></label>
+                                                @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", @placeholder = "Enter email address" })
+                                                @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
+
+                                                @*<input class="form-control" type="text" name="email" value="@Model.EmailId" placeholder="Enter email address">*@
+                                            </div>
+                                        </div><!-- col-4 -->
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Phone: <span class="tx-danger">*</span></label>
+                                                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @placeholder = "Enter Phone No" })
+                                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+
+                                                @*<input class="form-control" type="text" name="email" value="@Model.EmailId" placeholder="Enter email address">*@
+                                            </div>
+                                        </div><!-- col-4 -->
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">DOB: <span class="tx-danger">*</span></label>
+                                                @Html.TextBoxFor(m => m.DOB, "{0:dd/MM/yyyy}", new { @class = "form-control", @placeholder = "DD/MM/YYYY" })
+                                                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger", id = "valEmail" })
+                                                @*<input type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY" value="@Model.DOB" name="dob" id="dob">*@
+                                            </div>
+                                        </div><!-- col-4 -->
+
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                Gender<br />
+                                                Male:   @Html.RadioButton("Gender", "Male")
+                                                Female: @Html.RadioButton("Gender", "Female")
+
+                                            </div>
+                                        </div><!-- col-4 -->
+
+                                        <div class="col-lg-12">
+                                            <div class="form-group mg-b-10-force">
+                                                <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
+                                                @Html.DropDownListFor(m => m.CountryId, ViewBag.CountryList as SelectList, "--Select--", new { @class = "form-control select2" })
+                                                @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+                                                @*<select class="form-control select2" data-placeholder="Choose country" name="country" id="country">
+                                                        <option label="Choose country"></option>
+                                                        @foreach (var Country in ViewBag.CountryList)
+                                                        {
+                                                            <option value="@Country.value">@Country.Text</option>
+                                                        }
+                                                    </select>*@
+                                            </div>
+                                        </div><!-- col-4 -->
+                                        @*<div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">State: <span class="tx-danger">*</span></label>
+                                                    @Html.DropDownListFor(m => m.StateId, ViewBag.StateList as SelectList, new { @class = "form-control select2-show-search" })
+
+                                                </div>
+                                            </div>*@<!-- col-4 -->
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">City: <span class="tx-danger">*</span></label>
+                                                @Html.DropDownListFor(m => m.CityId, ViewBag.CityList as SelectList, "--Select--", new { @class = "form-control select2-show-search" })
+                                                @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group">
+                                                @*<label class="form-control-label">Professional Category: <span class="tx-danger">*</span></label>*@
+                                                Professional Category:
+                                                @Html.DropDownListFor(m => m.ProfessionalCatId, ViewBag.ProfessionList as SelectList, "--Select--", new { @class = "form-control select2-show-search" })
+                                                @Html.ValidationMessageFor(model => model.ProfessionalCatId, "", new { @class = "text-danger", id = "valEmail" })
+                                            </div>
+                                        </div><!-- col-4 -->
+
+
+
+                                        <div class="col-lg-12">
+                                            @*<label class="form-control-label"> Interest Category: <span class="tx-danger">*</span></label>*@
+                                            Interest Category:
+                                            @Html.DropDownListFor(m => m.InterestCatId, ViewBag.InterestCategoryList as SelectList,"Select Interest Category" ,new { @class = "form-control select2-show-search",
+                                   onchange = "GetCatwiseInterest()" ,id= "InterestCatId"
+
+                               })
+                                            @Html.ValidationMessageFor(model => model.InterestCatId, "", new { @class = "text-danger" })
+
+                                        </div><!-- col-8 -->
+
+                                        <div class="col-lg-8">
+                                            <label class="form-control-label"> Interest: <span class="tx-danger">*</span></label>
+                                            @Html.ListBoxFor(m => m.UserInterestIds, ViewBag.ListInterestUser as SelectList, new { @class = "form-control select2-show-search" })
+
+                                            @Html.ValidationMessageFor(model => model.UserInterestIds, "", new { @class = "text-danger" })
+                                        </div><!-- col-8 -->
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <a href="" class="btn cancel-button mg-r-10">CANCEL</a>
+
+                                        <input type="submit" class="btn save-button" value="SAVE" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- row -->
+                </div><!-- form-layout -->
+            </div><!-- section-wrapper -->
+        </div>
+    </div>
+}

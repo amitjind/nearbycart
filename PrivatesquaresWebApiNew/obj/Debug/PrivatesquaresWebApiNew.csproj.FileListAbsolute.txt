@@ -1,0 +1,282 @@
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.dll.config
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.pdb
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\csc.exe
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\csc.exe.config
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\csc.rsp
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\csi.exe
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\csi.exe.config
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\csi.rsp
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.Managed.Core.targets
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.AppContext.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Collections.Immutable.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Console.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Compression.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.IO.FileSystem.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Pipes.AccessControl.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Pipes.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Reflection.Metadata.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Security.AccessControl.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Claims.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Principal.Windows.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.ValueTuple.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XmlDocument.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XPath.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\vbc.exe
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\vbc.exe.config
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\vbc.rsp
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\VBCSCompiler.exe
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\roslyn\VBCSCompiler.exe.config
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\Antlr3.Runtime.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\EntityFramework.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\EntityFramework.SqlServer.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\Microsoft.Web.Infrastructure.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\Newtonsoft.Json.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Diagnostics.DiagnosticSource.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Net.Http.Formatting.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.Helpers.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.Http.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.Http.WebHost.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.Mvc.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.Optimization.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.Razor.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Deployment.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.WebPages.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Razor.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\WebGrease.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\EntityFramework.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\EntityFramework.SqlServer.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Diagnostics.DiagnosticSource.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\Newtonsoft.Json.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Net.Http.Formatting.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.Helpers.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.Http.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.Http.WebHost.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.Mvc.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.Optimization.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.Razor.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.WebPages.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Deployment.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Razor.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\Antlr3.Runtime.pdb
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.csprojAssemblyReference.cache
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.csproj.CoreCompileInputs.cache
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.csproj.CopyComplete
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.dll
+E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.pdb
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.dll.config
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.pdb
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\csc.exe
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\csc.exe.config
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\csc.rsp
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\csi.exe
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\csi.exe.config
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\csi.rsp
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CSharp.Core.targets
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.Managed.Core.targets
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.VisualBasic.Core.targets
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.AppContext.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Collections.Immutable.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Console.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Diagnostics.StackTrace.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Compression.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.IO.FileSystem.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.IO.FileSystem.Primitives.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Pipes.AccessControl.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Pipes.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Reflection.Metadata.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Security.AccessControl.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Claims.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Encoding.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Primitives.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Principal.Windows.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Text.Encoding.CodePages.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.ValueTuple.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.ReaderWriter.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XmlDocument.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XPath.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XPath.XDocument.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\vbc.exe
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\vbc.exe.config
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\vbc.rsp
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\VBCSCompiler.exe
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\roslyn\VBCSCompiler.exe.config
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\Antlr3.Runtime.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\EntityFramework.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\EntityFramework.SqlServer.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\Microsoft.Web.Infrastructure.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\Newtonsoft.Json.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Diagnostics.DiagnosticSource.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Net.Http.Formatting.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.Helpers.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.Http.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.Http.WebHost.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.Mvc.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.Optimization.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.Razor.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Deployment.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.WebPages.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Razor.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\WebGrease.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\EntityFramework.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\EntityFramework.SqlServer.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Diagnostics.DiagnosticSource.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\Newtonsoft.Json.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Net.Http.Formatting.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.Helpers.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.Http.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.Http.WebHost.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.Mvc.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.Optimization.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.Razor.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.WebPages.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Deployment.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Razor.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\Antlr3.Runtime.pdb
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.csprojAssemblyReference.cache
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.csproj.CoreCompileInputs.cache
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.csproj.CopyComplete
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.dll
+S:\Projects\Private Squares\private\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.pdb
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.csproj.CoreCompileInputs.cache
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.dll.config
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.pdb
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\csc.exe
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\csc.exe.config
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\csc.rsp
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\csi.exe
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\csi.exe.config
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\csi.rsp
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.Managed.Core.targets
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.AppContext.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Collections.Immutable.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Console.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Compression.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.IO.FileSystem.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Pipes.AccessControl.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Pipes.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Reflection.Metadata.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Security.AccessControl.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Claims.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Principal.Windows.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.ValueTuple.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XmlDocument.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XPath.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\vbc.exe
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\vbc.exe.config
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\vbc.rsp
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\VBCSCompiler.exe
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\roslyn\VBCSCompiler.exe.config
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Antlr3.Runtime.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\EntityFramework.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\EntityFramework.SqlServer.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Logging.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Tokens.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.Web.Infrastructure.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Newtonsoft.Json.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Diagnostics.DiagnosticSource.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.IdentityModel.Tokens.Jwt.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Net.Http.Formatting.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.Helpers.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.Http.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.Http.WebHost.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.Mvc.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.Optimization.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.Razor.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Deployment.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.WebPages.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Razor.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\WebGrease.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\EntityFramework.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\EntityFramework.SqlServer.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.JsonWebTokens.pdb
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Logging.pdb
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Logging.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Tokens.pdb
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Tokens.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Diagnostics.DiagnosticSource.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.IdentityModel.Tokens.Jwt.pdb
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.IdentityModel.Tokens.Jwt.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Newtonsoft.Json.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Net.Http.Formatting.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.Helpers.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.Http.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.Http.WebHost.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.Mvc.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.Optimization.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.Razor.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.WebPages.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Deployment.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Razor.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Antlr3.Runtime.pdb
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.csproj.CopyComplete
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.dll
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.pdb
+E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\obj\Debug\PrivatesquaresWebApiNew.csprojAssemblyReference.cache

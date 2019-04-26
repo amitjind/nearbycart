@@ -1,0 +1,379 @@
+﻿@model PrivateSquareWeb.Models.ProductModel
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .imgDynamic {
+        width: 50px;
+        height: 50px;
+    }
+</style>
+<script>
+
+
+    function BtnCancel() {
+
+        window.location.href = "/Products/ProductList";
+    }
+
+    //$('#fileUploadFiles').on('change', function (e) {
+    //    var files = e.target.files;
+    //    console.log('onChange');
+    //    console.log(files);
+    //    //var myID = 3; //uncomment this to make sure the ajax URL works
+    //    if (files.length > 0) {
+    //        if (window.FormData !== undefined) {
+    //            var data = new FormData();
+    //            for (var x = 0; x < files.length; x++) {
+    //                data.append("file" + x, files[x]);
+    //            }
+
+    //            $.ajax({
+    //                type: "POST",
+    //                url: '/MyController/UploadFile?id=' + myID,
+    //                contentType: false,
+    //                processData: false,
+    //                data: data,
+    //                success: function (result) {
+    //                    console.log(result);
+    //                },
+    //                error: function (xhr, status, p3, p4) {
+    //                    var err = "Error " + " " + status + " " + p3 + " " + p4;
+    //                    if (xhr.responseText && xhr.responseText[0] == "{")
+    //                        err = JSON.parse(xhr.responseText).Message;
+    //                    console.log(err);
+    //                }
+    //            });
+    //        } else {
+    //            alert("This browser doesn't support HTML5 file uploads!");
+    //        }
+    //    }
+    //});
+
+
+
+    //function ShowImages(e) {
+    //    console.log('ShowImage Call');
+    //    var fileInput = $("#fileUploadFiles").prop("files");
+    //    console.log(fileInput);
+    //    console.log(fileInput.length + 'Name=' + fileInput[0]);
+    //    //console.log(URL.createObjectURL(fileInput[0]));
+    //    var DivProductImages = $("#DivProductImages");
+    //    DivProductImages.html("");
+    //    var formdata = new FormData(); //FormData object
+    //    var productImage = "";
+    //    for (i = 0; i < fileInput.length; i++) {
+    //        // Appending each file to FormData object
+    //        formdata.append(fileInput[i].name, fileInput[i]);
+
+    //        var reader = new FileReader();
+
+    //        reader.onload = function (e) {
+    //            // alert('onload');
+    //            console.log(e);
+    //            var img = $("<img />");
+    //            img.attr("style", "height:100px;width: 100px");
+    //            img.attr("src", e.target.result);
+    //            img.attr("name", "img1");
+    //            img.attr("id", "img1");
+    //            DivProductImages.append(img);
+
+    //            var rdo = $("<input />");
+    //            rdo.attr("style", "height:10px;width: 10px");
+    //            rdo.attr("type", "radio");
+    //            rdo.attr("name", "SetDefaultImage");
+    //            rdo.attr("id", "SetDefaultImage");
+
+    //            DivProductImages.append(rdo);
+    //            var index = 1;
+    //            $('input[type="radio"]').each(function () {
+    //                $(this).attr('id', 'SetDefaultImage' + index);
+    //                $(this).attr('name', 'SetDefaultImage' + index);
+    //                index++;
+    //            })
+    //            //productImage += "<img src='" + e.target.result + "'/></br>";
+    //            //$('#myImg').attr('src', e.target.result);
+    //            //  console.log(productImage);
+    //        }
+    //        reader.readAsDataURL(fileInput[i]);
+
+
+    //        //productImage += "<img src='" + fileInput[i].name + "'/></br>";
+    //    }
+    //    var divImages = document.getElementById("DivProductImages");
+    //    // divImages.innerHTML = productImage;
+    //    // console.log(formdata);
+
+
+
+    //    $.ajax({
+    //        url: "../../Products/ShowImages",
+    //        type: "POST",
+    //        contentType: false,
+    //        processData: false,
+    //        data: formdata,
+    //        success: function (result) {
+
+    //        }
+    //    });
+    // }
+    var loadFile = function (event) {
+
+        var files = event.target.files;
+        var formData = new FormData(); //FormData object
+        for (var i = 0; i < files.length; i++) {
+            // console.log(files[i]);
+            formData.append("ImageName", files[i].name);
+            formData.append("ImageFile", files[i]);
+            formData.append("ImageUrl", URL.createObjectURL(event.target.files[i]));
+            //formdata.append(fileInput[i].name, fileInput[i], URL.createObjectURL(event.target.files[i]));
+            //   $("#dynamicImagesAdd").append("<input type='radio'  name='radioBtn' value='" + i + "' id='radioBtn" + i + "'/><a  id='delBtn" + i + "' onclick='ClearPreview(" + i + ")'>Delet</a><img src='" + URL.createObjectURL(event.target.files[i]) + "' id='img" + i + "' class='dynamicimg' /> <br/>");
+
+        }
+        $.ajax({
+            url: "../../Products/AddImageList",
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (result) {
+                // console.log(result);
+                for (var i = 0; i < result.length; i++) {
+                    // console.log(result[i].ImageUrl);
+                    $("#dynamicImagesAdd").append("<div class='col-lg-2 pull-left text-center'><img src='" + result[i].ImageUrl + "' id='img" + i + "' /><input type='radio'  name='radioBtn' value='" + i + "' id='radioBtn" + i + "'/><label class='control-label'>set default</label><a  id='delBtn" + i + "' onclick='ClearPreview(" + i + ")'>Delet <i class='icon ion-trash-a'></i></a></div> ");
+
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    var ClearPreview = function (i) {
+        //alert(i);
+        $("#img" + i + "").remove();
+        $("#delBtn" + i + "").remove();
+        $("#radioBtn" + i + "").remove();
+
+    }
+    var EditDeleteImage = function (RemoveIndex) {
+        alert(RemoveIndex);
+        $.ajax({
+            url: "../../Products/EditDeleteImage",
+            type: "POST",
+            //contentType: false,
+            //processData: false,
+            data: { RemoveIndex: RemoveIndex },
+            success: function (result) {
+                $("#DivProductImagesEdit").empty();
+                //  console.log(result);
+                for (var i = 0; i < result.length; i++) {
+                    // console.log(result[i].ImageUrl);
+                    $("#DivProductImagesEdit").append("<div class='col-lg-2 pull-left text-center'><img src='../../DocImg/" + result[i].Name + "' id='imgEdit" + i + "'/><input type='radio'  name='radioBtnEdit' value='" + i + "' id='radioBtnEdit" + i + "'/><label class='control-label'>set default</label><a  id='delBtnEdit" + i + "' onclick='EditDeleteImage(" + i + ")'>Delete  <i class='icon ion-trash-a'></i></a></div>");
+
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+@using (Html.BeginForm("SaveProduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="slim-mainpanel">
+        <div class="container">
+            <div class="slim-pageheader">
+                <ol class="breadcrumb slim-breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Product</li>
+                </ol>
+                <h6 class="slim-pagetitle">Product</h6>
+            </div>
+            <div class="section-wrapper">
+                <div class="form-layout">
+                    <div class="row">
+
+                        <div class="col-sm-6 col-md-3">
+                            <img src="~/DocImg/@Model.ProductImage" class="img-fluid" alt="">
+                            <div class="col-lg-12 mg-t-21 p-0">
+                                <div class="custom-file">
+                                    <input type="file" title="search image" id="FileUploadImage" name="FileUploadImage" class="custom-file-input">
+
+                                    <label class="custom-file-label custom-file-label-inverse" for="customFile">Upload Product Image</label>
+                                </div><!-- custom-file -->
+                            </div><!-- col -->
+                        </div>
+                        <div class="col-sm-6 col-md-9">
+                            <label class="section-title">Product Info</label>
+                            <hr />
+                            <div class="row">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Product Name: <span class="tx-danger">*</span></label>
+
+                                        @Html.HiddenFor(m => m.Id)
+                                        @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control", @placeholder = "Enter product name" })
+                                        @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Selling Price: <span class="tx-danger">*</span></label>
+                                        @Html.TextBoxFor(m => m.SellingPrice, new { @class = "form-control", @placeholder = "Enter selling price" })
+                                        @Html.ValidationMessageFor(model => model.SellingPrice, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Discount Price: <span class="tx-danger">*</span></label>
+                                        @Html.TextBoxFor(m => m.DiscountPrice, new { @class = "form-control", @placeholder = "Enter discount price" })
+
+                                        @*<input class="form-control" type="text" name="discountPrice" value="" placeholder="Enter discount price">*@
+                                    </div>
+                                </div><!-- col-4 -->
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Category: <span class="tx-danger">*</span></label>
+                                        @Html.DropDownListFor(m => m.ProductCatId, ViewBag.ProductCatList as SelectList, "--Select--", new { @class = "form-control select2-show-search" })
+
+
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Bussiness: <span class="tx-danger">*</span></label>
+                                        @Html.DropDownListFor(m => m.BusinessId, ViewBag.BusinessList as SelectList, "--Select--", new { @class = "form-control select2-show-search" })
+
+
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Description: <span class="tx-danger">*</span></label>
+
+                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @placeholder = "description" })
+
+                                    </div>
+
+                                </div><!-- col-12 -->
+                                @*<div class="col-sm-6 col-md-3">
+                                        <div class="col-lg-12 mg-t-21 p-0">
+                                            <div class="custom-file">
+                                                <input type='file' multiple id='fileUploadFiles' name="fileUploadFiles" onchange="ShowImages(this)" class="custom-file-input" />
+                                              <!--  @*<input type="file" title="search image" multiple id="FileUploadMultiImage" name="FileUploadMultiImage" class="custom-file-input">-->
+
+                                                <label class="custom-file-label custom-file-label-inverse" for="customFile">Upload Product Multi Image</label>
+                                            </div><!-- custom-file -->
+                                        </div><!-- col -->
+
+                                    </div>*@
+
+
+                                <div class="form-group">
+                                    <input type="file" id="files" name="files" onchange="loadFile(event)" multiple />
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <h5>Browse Image </h5>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div id="dynamicImagesAdd" class="col-lg-12"></div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <h5>Edit Images </h5>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12" id="DivProductImagesEdit">
+
+
+
+                                    @{ int index = 0;
+                                        foreach (var item in ViewBag.ProductImages)
+                                        {
+                                            <!-- @Html.RadioButton("SetDefaultImage", 1, false)-->
+                                            @*<a class="thumbnail">
+                                                    <input type="radio" id="@("radioBtn"+@index)" value="@index" name="radioBtnEdit" checked="@item.IsSelected" />
+                                                    <img src="~/DocImg/@item.Name" id="@index" class="portrait" />
+                                                    <a onclick="EditDeleteImage(@index)">Delete</a>
+                                                    <label class="control-label"></label>
+                                                </a>*@
+
+                                            <div class="col-lg-2 pull-left text-center">
+                                                <img src="~/DocImg/@item.Name" id="@index" />
+
+                                                <input type="radio" id="@("radioBtn"+@index)" value="@index" name="radioBtnEdit" checked="@item.IsSelected" />
+                                                <label class="control-label">set default</label>
+
+                                                <a onclick="EditDeleteImage(@index)">Delete <i class="icon ion-trash-a"></i></a>
+                                            </div>
+                                            index++;
+                                        }
+                                    }
+                                </div>
+
+                                <!--  <div class="col-lg-12">
+                                    <div class="col-lg-3 pull-left text-center">
+                                        <img src="~/DocImg/user.png" alt="dc" />
+                                        <div>
+                                            <input type="radio" id="radioBtn1" value="1" name="radioBtnEdit" checked="" />
+                                            <label class="control-label">set default</label>
+                                        </div>
+                                        <a onclick="EditDeleteImage(1)">Delete <i class="icon ion-trash-a"></i></a>
+
+                                    </div>
+                                    <div class="col-lg-3 pull-left text-center">
+                                        <img src="~/DocImg/user.png" alt="dc" />
+                                        <div>
+                                            <input type="radio" id="radioBtn1" value="1" name="radioBtnEdit" checked="" />
+                                            <label class="control-label">set default</label>
+                                        </div>
+                                        <a onclick="EditDeleteImage(1)">Delete <i class="icon ion-trash-a"></i></a>
+
+                                    </div>
+                                    <div class="col-lg-3  pull-left text-center">
+                                        <img src="~/DocImg/user.png" alt="dc" />
+                                        <div>
+                                            <input type="radio" id="radioBtn1" value="1" name="radioBtnEdit" checked="" />
+                                            <label class="control-label">set default</label>
+                                        </div>
+                                        <a onclick="EditDeleteImage(1)">Delete <i class="icon ion-trash-a"></i></a>
+                                    </div>
+                                    <div class="col-lg-3  pull-left text-center">
+                                        <img src="~/DocImg/user.png" alt="dc" />
+                                        <div>
+                                            <input type="radio" id="radioBtn1" value="1" name="radioBtnEdit" checked="" />
+                                            <label class="control-label">set default</label>
+                                        </div>
+                                        <a onclick="EditDeleteImage(1)">Delete <i class="icon ion-trash-a"></i></a>
+                                    </div>
+
+                                </div>-->
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 p-0">
+                            <div class="clearfix"></div>
+                            <hr />
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="form-layout-footer">
+                            <button class="btn btn-primary bd-0">Save</button>
+                            <input type="button" value="Cancel" onclick="BtnCancel()" class="btn btn-secondary bd-0" />
+                        </div><!-- form-layout-footer -->
+                    </div><!-- form-layout -->
+                </div><!-- section-wrapper -->
+            </div>
+
+        </div>
+    </div>
+}

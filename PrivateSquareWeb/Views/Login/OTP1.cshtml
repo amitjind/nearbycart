@@ -1,0 +1,220 @@
+﻿
+@model PrivateSquareWeb.Models.UserRegisterModel
+
+@{
+    /**/
+
+    ViewBag.Title = "OTP";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Twitter -->
+    <meta name="twitter:site" content="">
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Slim">
+    <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
+    <meta name="twitter:image" content="http://themepixels.me/slim/img/slim-social.png">
+
+    <!-- Facebook -->
+    <meta property="og:url" content="http://themepixels.me/slim">
+    <meta property="og:title" content="Slim">
+    <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
+
+    <meta property="og:image" content="http://themepixels.me/slim/img/slim-social.png">
+    <meta property="og:image:secure_url" content="http://themepixels.me/slim/img/slim-social.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+
+    <!-- Meta -->
+    <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
+    <meta name="author" content="ThemePixels">
+
+    <title>Slim Responsive Bootstrap 4 Admin Template</title>
+
+    <!-- Vendor css -->
+    <link href="~/Content/Login/Login.css" rel="stylesheet">
+    <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
+
+    <!-- Slim CSS -->
+    <link rel="stylesheet" href="../css/slim.css">
+
+</head>
+<body>
+    @using (Html.BeginForm("UserRegister", "Login", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="signin-wrapper">
+
+            <div class="signin-box signup">
+                <img src="~/Content/img/logo.png" alt="logo" class="logo-width">
+                <!-- <h2 class="slim-logo"><a href="index.html">slim<span>.</span></a></h2> -->
+                <div class="ps-step-two">
+                    <h3 class="signin-title-primary">One Time Password</h3>
+                    <h5 class="signin-title-secondary lh-4">Enter OTP and set your password</h5>
+
+                    <div class="row row-xs mg-b-10">
+                        <div class="col-lg"><input type="text" class="form-control" placeholder="OTP"></div>
+                    </div><!-- row -->
+
+
+                    <div class="row row-xs mg-b-10">
+                        <div class="col-sm-12"><button class="btn btn-primary float-right" id="next-2">Next</button></div>
+                    </div>
+
+
+                    <!-- <p class="mg-t-40 mg-b-0">Already have an account? <a href="page-signin.html">Sign In</a></p> -->
+                </div>
+                <div class="ps-step-two" style="display:none">
+                    <h3 class="signin-title-primary">One Time Password</h3>
+                    <h5 class="signin-title-secondary lh-4">Enter OTP and set your password</h5>
+
+                    <div class="row row-xs mg-b-10">
+                        <div class="col-lg"><input type="text" class="form-control" placeholder="OTP"></div>
+                        <!-- <div class="col-sm mg-t-10 mg-sm-t-0"><input type="text" class="form-control" placeholder="Lastname"></div> -->
+                    </div><!-- row -->
+                    <!-- <div class="row row-xs mg-b-10"> -->
+                    <!-- <div class="col-sm"><input type="password" class="form-control" placeholder="Password"></div> -->
+                    <!-- <div class="col-sm mg-t-10 mg-sm-t-0"><input type="password" class="form-control" placeholder="Confirm Password"></div> -->
+                    <!-- </div> -->
+                    <!-- row -->
+
+                    <div class="row row-xs mg-b-10">
+                        <div class="col-sm-12"><button class="btn btn-primary pull-right" id="next-2">Next</button></div>
+                    </div>
+
+
+                    <!-- <p class="mg-t-40 mg-b-0">Already have an account? <a href="page-signin.html">Sign In</a></p> -->
+                </div>
+
+
+
+
+
+
+                <div class="ps-step-third" style="display:none">
+                    <h3 class="signin-title-primary">PS Profile</h3>
+                    <h5 class="signin-title-secondary lh-4">Creating a professional and marketable PS profile</h5>
+
+
+                    <div class="set-profile">
+                        <img src="../img/img0.jpg" class="img-fluid rounded-circle" alt="">
+                    </div>
+
+
+                    <div class="row row-xs mg-b-10">
+                        <div class="col-sm"><input type="text" class="form-control" placeholder="Email"></div>
+                        <!-- <div class="col-sm mg-t-10 mg-sm-t-0"><input type="text" class="form-control" placeholder="Lastname"></div>  -->
+                        <div class="col-sm mg-t-10 mg-sm-t-0">
+                            <select class="form-control select2 select2-hidden-accessible" data-placeholder="Professional Category" tabindex="-1" aria-hidden="true">
+                                <option label="Professional Category"></option>
+                                <option value="Bussiness">Bussiness</option>
+                                <option value="Software Developer">Software Developer</option>
+                                <option value="Programmer">Programmer</option>
+
+                            </select>
+
+                        </div>
+                    </div><!-- row -->
+
+                    <div class="row row-xs mg-b-10">
+                        <div class="col-sm"><input type="title" class="form-control" placeholder="Title"></div>
+
+                        <div class="col-sm"><input type="password" class="form-control" placeholder="Professional Keyboard"> </div>
+
+                    </div><!-- row -->
+
+                    <div class="row row-xs mg-b-10">
+                        <div class="col-sm"><input type="title" class="form-control" placeholder="City"></div>
+                        <div class="col-sm mg-t-10 mg-sm-t-0"><input type="interests" class="form-control" placeholder="Interests"></div>
+                    </div><!-- row -->
+                    <div class="row row-xs mg-b-10">
+
+
+                        <div class="col-sm"><button class="btn btn-secondary btn-block mg-b-10" id="skip-3">Skip</button></div>
+                        <div class="col-sm"><button class="btn btn-primary btn-block mg-b-10" id="next-3">Next</button></div>
+                    </div>
+
+
+                    <p class="mg-t-40 mg-b-0">Already have an account? <a href="page-signin.html">Sign In</a></p>
+                </div>
+
+                <div class="ps-step-fourth" style="display:none">
+                    <h3 class="signin-title-primary">Get Started!</h3>
+                    <h5 class="signin-title-secondary lh-4">It's free to signup and only takes a minute.</h5>
+
+                    <div class="row row-xs mg-b-10">
+                        <div class="col-lg"><input type="text" class="form-control" placeholder="Enter Promo Codes"></div>
+                        <!-- <div class="col-sm mg-t-10 mg-sm-t-0"><input type="text" class="form-control" placeholder="Lastname"></div> -->
+                    </div><!-- row -->
+
+
+                    <div class="row row-xs mg-b-10">
+
+
+                        <div class="col-sm"><a href="business.html" class="btn btn-secondary btn-block mg-b-10">Skip</a></div>
+                        <div class="col-sm"><a href="business.html" class="btn btn-primary btn-block mg-b-10">Next</a></div>
+                    </div>
+
+
+                    <p class="mg-t-40 mg-b-0">Already have an account? <a href="page-signin.html">Sign In</a></p>
+                </div>
+
+
+
+                <div class="ps-step-fifth" style="display:none">
+                    <h3 class="signin-title-primary">Get Started</h3>
+                    <p class="text-center">Follows hashtags you're interest in to see this content at the top of your field</p>
+
+
+
+
+                    <div class="row row-xs mg-b-10">
+                        <div class="col-sm-12 text-center"><button class="btn btn-primary" id="next-6">Get Started</button></div>
+                    </div>
+
+                    <p class="text-center"><a href="">Not now</a></p>
+
+                </div>
+
+
+
+
+            </div><!-- signin-box -->
+
+        </div><!-- signin-wrapper -->
+    }
+    <script src="../lib/jquery/js/jquery.js"></script>
+    <script src="../lib/popper.js/js/popper.js"></script>
+    <script src="../lib/bootstrap/js/bootstrap.js"></script>
+
+    <script src="../js/slim.js"></script>
+    <script>
+        $("#step-2").click(function () {
+            $(".ps-step-one").hide();
+            $(".ps-step-two").show();
+        });
+        $("#skip-2, #next-2").click(function () {
+            $(".ps-step-two").hide();
+            $(".ps-step-fifth").show();
+        });
+        $("#skip-3, #next-3").click(function () {
+            $(".ps-step-third").hide();
+            $(".ps-step-fourth").show();
+        });
+        $("#next-6").click(function () {
+            $(".ps-step-fifth").hide();
+            $(".ps-step-third").show();
+        });
+    </script>
+
+</body>
+</html>

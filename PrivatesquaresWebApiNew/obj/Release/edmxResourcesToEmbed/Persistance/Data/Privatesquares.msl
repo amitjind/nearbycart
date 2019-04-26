@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EWT_PSQNEWModelStoreContainer" CdmEntityContainer="EWT_PSQNEWEntities">
+    <FunctionImportMapping FunctionImportName="InterestCategories" FunctionName="EWT_PSQNEWModel.Store.InterestCategories">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EWT_PSQNEWModel.InterestCategories_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="LoginAuthenticate" FunctionName="EWT_PSQNEWModel.Store.LoginAuthenticate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EWT_PSQNEWModel.LoginAuthenticate_Result">
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="Success" ColumnName="Success" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="RegisterUser" FunctionName="EWT_PSQNEWModel.Store.RegisterUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EWT_PSQNEWModel.RegisterUser_Result">
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="Success" ColumnName="Success" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SaveUserProfile" FunctionName="EWT_PSQNEWModel.Store.SaveUserProfile">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EWT_PSQNEWModel.SaveUserProfile_Result">
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="Success" ColumnName="Success" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UserInterestedCategory" FunctionName="EWT_PSQNEWModel.Store.UserInterestedCategory">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EWT_PSQNEWModel.UserInterestedCategory_Result">
+          <ScalarProperty Name="InterestCatId" ColumnName="InterestCatId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Businesses">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.Business">
+        <MappingFragment StoreEntitySet="Business">
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="ProfessionalKeywordId" ColumnName="ProfessionalKeywordId" />
+          <ScalarProperty Name="ProfessionalCatId" ColumnName="ProfessionalCatId" />
+          <ScalarProperty Name="BusinessLogo" ColumnName="BusinessLogo" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="BusinessName" ColumnName="BusinessName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BusinessLocations">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.BusinessLocation">
+        <MappingFragment StoreEntitySet="BusinessLocation">
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="BusinessId" ColumnName="BusinessId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="UpdatedStatus" ColumnName="UpdatedStatus" />
+          <ScalarProperty Name="DeletedStatus" ColumnName="DeletedStatus" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genders">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.Gender">
+        <MappingFragment StoreEntitySet="Gender">
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="UpdatedStatus" ColumnName="UpdatedStatus" />
+          <ScalarProperty Name="DeletedStatus" ColumnName="DeletedStatus" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InterestCategories1">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.InterestCategory">
+        <MappingFragment StoreEntitySet="InterestCategory">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="DeletedStatus" ColumnName="DeletedStatus" />
+          <ScalarProperty Name="UpdatedStatus" ColumnName="UpdatedStatus" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="BusinessId" ColumnName="BusinessId" />
+          <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+          <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+          <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+          <ScalarProperty Name="ProductCatId" ColumnName="ProductCatId" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Professions">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.Profession">
+        <MappingFragment StoreEntitySet="Profession">
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="UpdatedStatus" ColumnName="UpdatedStatus" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfessionalKeywords">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.ProfessionalKeyword">
+        <MappingFragment StoreEntitySet="ProfessionalKeyword">
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="UpdatedStatus" ColumnName="UpdatedStatus" />
+          <ScalarProperty Name="DeletedStatus" ColumnName="DeletedStatus" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reviews">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.Review">
+        <MappingFragment StoreEntitySet="Reviews">
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="GivenRating" ColumnName="GivenRating" />
+          <ScalarProperty Name="TotalRating" ColumnName="TotalRating" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="UpdatedStatus" ColumnName="UpdatedStatus" />
+          <ScalarProperty Name="DeletedStatus" ColumnName="DeletedStatus" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInteresteds">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.UserInterested">
+        <MappingFragment StoreEntitySet="UserInterested">
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="DeletedStatus" ColumnName="DeletedStatus" />
+          <ScalarProperty Name="UpdatedStatus" ColumnName="UpdatedStatus" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="InterestCatId" ColumnName="InterestCatId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserMasters">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.UserMaster">
+        <MappingFragment StoreEntitySet="UserMaster">
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="UpdatedStatus" ColumnName="UpdatedStatus" />
+          <ScalarProperty Name="DeletedStatus" ColumnName="DeletedStatus" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="Otp" ColumnName="Otp" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProfiles">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.UserProfile">
+        <MappingFragment StoreEntitySet="UserProfile">
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="UpdatedStatus" ColumnName="UpdatedStatus" />
+          <ScalarProperty Name="DeletedStatus" ColumnName="DeletedStatus" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Interests" ColumnName="Interests" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="ProfessionalKeywordId" ColumnName="ProfessionalKeywordId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ProfessionalCatId" ColumnName="ProfessionalCatId" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRights">
+      <EntityTypeMapping TypeName="EWT_PSQNEWModel.UserRight">
+        <MappingFragment StoreEntitySet="UserRight">
+          <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+          <ScalarProperty Name="DeletedStatus" ColumnName="DeletedStatus" />
+          <ScalarProperty Name="UpdatedStatus" ColumnName="UpdatedStatus" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SaveProfile" FunctionName="EWT_PSQNEWModel.Store.SaveProfile">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EWT_PSQNEWModel.SaveProfile_Result">
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="Success" ColumnName="Success" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,90 @@
+﻿@model PrivateSquareWeb.Models.ContactUsModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("ContactUs", "ContactUs", FormMethod.Post))
+
+{
+    @Html.AntiForgeryToken()
+
+    <div class="signin-wrapper spc-padding-100">
+
+        <div class="container container-width">
+
+            <div class="section-wrapper">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-layout form-layout-4">
+
+                    <div class="row">
+
+                        <label class="col-sm-3 form-control-label">Full Name: <span class="tx-danger">*</span></label>
+
+                        <div class="col-sm-9 mg-t-10 mg-sm-t-0">
+
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", placeholder = "Enter your Full name" })
+
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger", id = "" })
+                        </div>
+                    </div><!-- row -->
+                    <div class="row mg-t-20">
+                        <label class="col-sm-3 form-control-label">Mobile No: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-9 mg-t-10 mg-sm-t-0">
+                            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", placeholder = "Enter Mobile" })
+                            @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-3 form-control-label">Email: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-9 mg-t-10 mg-sm-t-0">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter Email" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+
+                    <div class="row mg-t-20">
+
+                        <label class="col-sm-3 form-control-label">Message: <span class="tx-danger">*</span></label>
+
+                        <div class="col-sm-9 mg-t-10 mg-sm-t-0">
+
+                            @Html.TextBoxFor(m => m.Message, new { @class = "form-control", placeholder = "Enter Message" })
+
+                            @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row mg-t-30">
+
+                        <div class="col-sm-9 mg-l-auto">
+                            <p style="color:red;"> @ViewBag.ResponseMessage</p>
+                            <div class="form-layout-footer">
+
+                                <input type="submit" class="btn btn-primary bd-0" value="Submit" />
+
+                                <input type="button" class="btn btn-secondary bd-0" value="Cancel" onclick="location.href='@Url.Action("Index", "Login")'" />
+
+                            </div><!-- form-layout-footer -->
+
+                        </div><!-- col-8 -->
+
+                    </div>
+
+                </div>
+
+            </div><!--section wrapper-->
+
+        </div><!--container -->
+
+    </div>
+
+}

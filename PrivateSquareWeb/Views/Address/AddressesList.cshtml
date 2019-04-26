@@ -1,0 +1,128 @@
+﻿@model PrivateSquareWeb.Models.AddressModel
+
+@{
+
+    ViewBag.Title = "AddressesList";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="slim-mainpanel mg-t-40">
+
+<div class="container">
+
+    <div>
+
+        <div class="form-layout">
+
+            <div class="row">
+
+                <div class="col-sm-6 col-md-3">
+
+                    @{
+
+                        //Html.RenderPartial("_Header");
+
+                        Html.RenderAction("HeaderValue", "SidebarProfile");
+
+                    }
+
+                </div>
+
+                <div class="col-sm-6 col-md-9">
+
+                    <div class="box-shadow-bc pd-40 addresses min-height">
+
+                        <label class="section-title mg-t-0 mg-b-20">Manage Address</label>
+
+                        <div class="row">
+
+
+
+                            <div class="col-lg-12">
+
+                                @{foreach (var item in ViewBag.UserAddress)
+
+                                    {
+
+                                        <div class="row">
+
+                                            <div class="col-lg-5">
+
+                                                <div class="box-shadow-bc manage-addresses pd-15">
+
+                                                    <h2>House</h2>
+
+                                                    <p>
+
+                                                        @item.Address<br />
+
+                                                        @item.Mobile<br />
+
+                                                        @item.CityName<br />
+
+                                                        @item.StateId
+
+                                                    </p>
+
+                                                    <div class="slim-full-width mg-t-15">
+
+                                                        <a href="/Address/EditAddress/@item.Id" class="editAddress pull-left">Edit address</a>
+
+                                                        <a href="/Address/RemoveAddress/@item.Id" class="editAddress pull-right">remove address</a>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div><!-- col-5 -->
+
+                                        </div>
+
+                                    }
+
+                                }
+
+                                <div class="row mg-t-20">
+
+                                    <div class="col-lg-5">
+
+                                        <div class="box-shadow-bc manage-addresses pd-15 manage-addresses text-center">
+
+                                            <a href="~/Address/AddAddress" class="addNewAddress">
+
+                                                <img src="~/WebSiteTheme/Add icon.jpg" class="add_address" />
+
+                                                Add New Address
+
+                                            </a>
+
+                                        </div>
+
+                                    </div><!-- col-5 -->
+
+                                </div>
+
+
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+

@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EWT_PSQNEWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Business">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BusinessName" Type="nvarchar(max)" />
+    <Property Name="Location" Type="nvarchar(max)" />
+    <Property Name="BusinessLogo" Type="nvarchar(max)" />
+    <Property Name="ProfessionalCatId" Type="bigint" />
+    <Property Name="ProfessionalKeywordId" Type="bigint" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="BusinessLocation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BusinessId" Type="bigint" />
+    <Property Name="CityId" Type="bigint" />
+    <Property Name="UserId" Type="bigint" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="DeletedStatus" Type="datetime" />
+    <Property Name="UpdatedStatus" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="DeletedStatus" Type="datetime" />
+    <Property Name="UpdatedStatus" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="InterestCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="UpdatedStatus" Type="datetime" />
+    <Property Name="DeletedStatus" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+    <Property Name="UserId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar(max)" />
+    <Property Name="ProductCatId" Type="bigint" />
+    <Property Name="ProductImage" Type="nvarchar(max)" />
+    <Property Name="SellingPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="DiscountPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="BusinessId" Type="bigint" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Profession">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="UpdatedStatus" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="ProfessionalKeyword">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="DeletedStatus" Type="datetime" />
+    <Property Name="UpdatedStatus" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Reviews">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="UserId" Type="bigint" />
+    <Property Name="TotalRating" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="GivenRating" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar(max)" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="DeletedStatus" Type="datetime" />
+    <Property Name="UpdatedStatus" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="UserInterested">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InterestCatId" Type="bigint" />
+    <Property Name="UserId" Type="bigint" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="UpdatedStatus" Type="datetime" />
+    <Property Name="DeletedStatus" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Mobile" Type="varchar" MaxLength="20" />
+    <Property Name="Otp" Type="varchar" MaxLength="5" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="DeletedStatus" Type="datetime" />
+    <Property Name="UpdatedStatus" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="bigint" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="ProfileImage" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="EmailId" Type="nvarchar(max)" />
+    <Property Name="ProfessionalCatId" Type="bigint" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="ProfessionalKeywordId" Type="bigint" />
+    <Property Name="CityId" Type="bigint" />
+    <Property Name="Interests" Type="nvarchar(max)" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="GenderId" Type="bigint" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="DeletedStatus" Type="datetime" />
+    <Property Name="UpdatedStatus" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="UserRight">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="bigint" />
+    <Property Name="UserId" Type="bigint" />
+    <Property Name="RecordDate" Type="datetime" />
+    <Property Name="UpdatedStatus" Type="datetime" />
+    <Property Name="DeletedStatus" Type="datetime" />
+    <Property Name="AppStatus" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <Function Name="InterestCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares" />
+  <Function Name="LoginAuthenticate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="Mobile" Type="varchar" Mode="In" />
+    <Parameter Name="OTP" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="RegisterUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserMobile" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SaveProfile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="FirstName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="LastName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProfileImage" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EmailId" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProfessionalCatId" Type="bigint" Mode="In" />
+    <Parameter Name="Title" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProfessionalKeywordId" Type="bigint" Mode="In" />
+    <Parameter Name="CityId" Type="bigint" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="GenderId" Type="bigint" Mode="In" />
+    <Parameter Name="DOB" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="SaveUserProfile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="FirstName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="LastName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProfileImage" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EmailId" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProfessionalCatId" Type="bigint" Mode="In" />
+    <Parameter Name="Title" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProfessionalKeywordId" Type="bigint" Mode="In" />
+    <Parameter Name="CityId" Type="bigint" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="GenderId" Type="bigint" Mode="In" />
+    <Parameter Name="DOB" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="UserInterestedCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="userId" Type="bigint" Mode="In" />
+  </Function>
+  <EntityContainer Name="EWT_PSQNEWModelStoreContainer">
+    <EntitySet Name="Business" EntityType="Self.Business" Schema="privatesquares" store:Type="Tables" />
+    <EntitySet Name="BusinessLocation" EntityType="Self.BusinessLocation" Schema="privatesquares" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="privatesquares" store:Type="Tables" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" Schema="privatesquares" store:Type="Tables" />
+    <EntitySet Name="InterestCategory" EntityType="Self.InterestCategory" Schema="privatesquares" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="privatesquares" store:Type="Tables" />
+    <EntitySet Name="Profession" EntityType="Self.Profession" Schema="privatesquares" store:Type="Tables" />
+    <EntitySet Name="ProfessionalKeyword" EntityType="Self.ProfessionalKeyword" Schema="privatesquares" store:Type="Tables" />
+    <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="privatesquares" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="privatesquares" store:Type="Tables" />
+    <EntitySet Name="UserInterested" EntityType="Self.UserInterested" Schema="privatesquares" store:Type="Tables" />
+    <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="privatesquares" store:Type="Tables" />
+    <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="privatesquares" store:Type="Tables" />
+    <EntitySet Name="UserRight" EntityType="Self.UserRight" Schema="privatesquares" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Square</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <header>
+        @{
+            //Html.RenderPartial("_Header");
+            Html.RenderAction("HeaderValue", "HeaderPartial");
+        }
+    </header>
+
+    <div>
+        @RenderBody()
+
+    </div>
+    <footer>
+        @{Html.RenderPartial("_Footer");
+        }
+    </footer>
+  
+    <script>
+
+        var weburl = window.location.pathname;
+
+        $(".nav li a").each(function () {
+
+            var menuhref = $(this).attr('href');
+
+            if (weburl == menuhref) {
+
+                $(".nav li").removeClass("active");
+
+                $(this).parent('li').addClass("active");
+
+            }
+
+            else {
+
+            }
+
+        })
+        $(".account-list li a").each(function () {
+
+            var menuhref = $(this).attr('href');
+
+            if (weburl == menuhref) {
+
+                $(".account-list li").removeClass("active");
+
+                $(this).parent('li').addClass("active");
+
+            }
+
+            else {
+
+            }
+
+        })
+
+        $(function () {
+            'use strict';
+            $('.select2').select2({
+                minimumResultsForSearch: Infinity
+            });
+
+            // Select2 by showing the search
+            $('.select2-show-search').select2({
+                minimumResultsForSearch: ''
+            });
+            //
+            // Datepicker
+            $('.fc-datepicker').datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: true
+            });
+
+            $('#datepickerNoOfMonths').datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                numberOfMonths: 2
+            });
+        });
+
+    </script>
+</body>
+</html>

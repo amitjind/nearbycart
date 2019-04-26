@@ -1,0 +1,225 @@
+﻿@model PrivateSquareWeb.Models.HeaderPartialModel 
+
+<script type="text/javascript">
+    var DeleteItem = function (index) {
+
+        var divCart = document.getElementById('CartList');
+        var divCartTotal = document.getElementById('CartTotal');
+        var CartString = "";
+        var CartTotal = "";
+
+
+        $.ajax({
+            url: "../../WebsiteHeader/RemoveToCart",
+            type: "POST",
+         
+            data: {
+                index: index
+            },
+            success: function (result) {
+                var JsonResponse = JSON.parse(result);
+                console.log(JsonResponse);
+                console.log(JsonResponse.length);
+                var ProductName = "";
+                var Qty = "";
+                var ImageName = "";
+                var TotalAmount = 0;
+                for (var i = 0; i < JsonResponse.length; i++) {
+
+                   
+                    ProductName = JsonResponse[i].ProductName;
+                    Qty = JsonResponse[i].Qty;
+                    TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
+                    ImageName = JsonResponse[i].ImageName;
+                    console.log('~/DocImg/' + ImageName);
+                    CartString = CartString + '<div class="ps-cart-item"><a class="ps-cart-item__close" onclick="DeleteItem(' + i + ')"></a>' +
+                        '<div class="ps-cart-item__thumbnail">' +
+                        '<a href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '"></a>' +
+                        '<img src="../../DocImg/' + ImageName + '" alt="">' +
+                        '</div>' +
+                        '<div class="ps-cart-item__content">' +
+                        '<a class="ps-cart-item__title" href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '">' + JsonResponse[i].ProductName + '</a>' +
+                        '<p><span>Quantity:<i>' + JsonResponse[i].Qty + '</i></span><span>Total:<i>₹ ' + JsonResponse[i].Amount + '</i></span></p></div>' +
+                        '</div>';
+                }
+                if (JsonResponse.length == null || JsonResponse.length == 0) {
+
+                }
+                if (JsonResponse.length > 0) {
+
+
+                    CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
+                        "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
+
+                }
+              
+                divCart.innerHTML = CartString;
+                divCartTotal.innerHTML = CartTotal;
+                $("#CartCount").load(location.href + ' #CartCount');
+              
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }   
+
+
+</script>
+
+
+
+<div class="header--sidebar"></div>
+<header class="header" data-sticky="true">
+    <div class="header__top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-8 col-sm-6 col-xs-12 ">
+                    @*<p>SCO 68, Swastik Vihar, Sector 5 MDC, Panchkula, Haryana 134114</p>*@
+                </div>
+                <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 ">
+                    <div class="dropdown">
+                        <div class="header__actions">
+                            @{ if (@Model.UserId != 0)
+
+                                {                                    
+                                    <div class="btn-group ps-dropdown">
+                                        <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.UserName<i class="fa fa-angle-down"></i></a>
+
+                                        <ul class="dropdown-menu dropdown-content">
+
+                                            <li><a href="~/WebHome/MyOrders">My Orders</a></li>
+                                            <li><a href="~/WebHome/WishList">My Wishlist</a></li>
+                                            <li><a href="~/ChangePassword/WebIndex">Change Password</a></li>
+                                            <li><a href="/WebLogin/Logout">Log Out</a></li>
+
+
+
+                                        </ul>
+
+
+
+                                    </div>
+
+
+
+
+
+                                }
+
+                                else if (@Model.UserId == 0)
+
+                                {
+
+                                    <a href="/WebLogin/Index">Login & Regiser</a>
+
+                                }
+
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navigation">
+        <div class="container-fluid">
+            <div class="left">
+                <div class="header__logo"><a class="ps-logo" href="/WebHome/Index"><img src="~/WebSiteTheme/images/logo.png" alt=""></a></div>
+            </div>
+
+            <div class="center">
+
+                @using (Html.BeginForm("SearchBar", "WebHome", FormMethod.Post, new { @class = "" }))
+                {
+               
+
+                    @Html.DropDownListFor(m => m.ParentCatId, ViewBag.ParentCategories as SelectList, "All Categories", new { @class = "ps-select selectpicker col-lg-4 pull-left"})
+                    <div class="col-lg-8 pull-left">
+
+                      
+
+                        @Html.TextBoxFor(m => m.SearchBarText, new { @class = "form-control", placeholder = "Search Product…", value = "TxtSearch", id = "TxtSearch" })
+                      
+                        <button class="search-top"><i class="ps-icon-search"></i></button>
+
+                     
+
+                    </div>
+                }
+
+            </div>
+            <div class="right">
+                <div class="menu-toggle"><span></span></div>
+
+                <div class="ps-cart" id="Cartcontent">
+                    <div id="CartCount">
+                        <a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
+                    </div>
+                    <div class="ps-cart__listing">
+
+                        <div class="ps-cart__content">
+
+                            <div id="CartList">
+
+                                @{ int index = 0;
+
+                                    foreach (var item in ViewBag.AddToCart)
+
+                                    {
+
+                                        <div class="ps-cart-item">
+
+                                            <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
+
+                                            <div class="ps-cart-item__thumbnail">
+
+                                                <a href="/WebHome/ProductDetail/@item.ProductId"></a>
+
+                                                <img src="~/DocImg/@item.ImageName" alt="">
+
+                                            </div>
+
+                                            <div class="ps-cart-item__content">
+
+                                                <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
+
+                                                <p><span>Quantity:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
+
+                                            </div>
+
+                                        </div>
+
+                                    }
+
+                                }
+
+                            </div>
+
+                        </div>
+
+                        <div class="ps-cart__total" id="CartTotal">
+
+                            <p>Number of items:<span>@Model.CartItemCount</span></p>
+
+                            <p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>
+
+                        </div>
+
+                        <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+
+

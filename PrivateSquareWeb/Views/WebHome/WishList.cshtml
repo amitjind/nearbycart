@@ -1,0 +1,115 @@
+﻿@model PrivateSquareWeb.Models.ProductModel
+
+@{
+                /**/
+
+                ViewBag.Title = "WishList";
+                Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
+}
+
+<script type="text/javascript">
+    var DeleteWishlistItem = function (ProductId) {
+
+        
+
+        var productid = ProductId;
+      
+        $.ajax({
+            url: "../../WebHome/DeleteFromWishlist/"+productid,
+            type: "POST",
+            
+            data: {
+                ProductId: ProductId
+            },
+            success: function (result) {
+               
+                $("#wishlistproducts").load(location.href + ' #wishlistproducts');
+                
+            },
+            error: function (error) {
+                
+                $("#wishlistproducts").load(location.href + ' #wishlistproducts');
+            }
+        });
+    }
+</script>
+
+<div class="ps-hero">
+    <div class="container">
+        <h3>wishlist</h3>
+     
+    </div>
+</div>
+<div class="ps-content pt-80 pb-80" id="wishlistproducts">
+    <div class="ps-container">
+        <div class="table-responsive">
+            <table class="table ps-table ps-table--whishlist">
+                <thead>
+                    <tr>
+                        <th>All Products</th>
+                        <th>Price</th>
+                        <th>View</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    @foreach (var products in ViewBag.Wishlist)
+                    {
+                    <tr>
+                        <td><a class="ps-product--compare" href="~/Webhome/ProductDetail/@products.ProductId"><img class="mr-15" src="~/DocImg/@products.ProductImage" alt="">@products.ProductName</a></td>
+                        <td>₹ @products.DiscountPrice</td>
+                        <td><a class="ps-product-link" href="~/Webhome/ProductDetail/@products.ProductId">View Product</a></td>
+                        <td>
+                            <div class="ps-remove" onclick="DeleteWishlistItem(@products.ProductId)"></div>
+                        </td>
+                    </tr>
+                    }
+                 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="ps-section--partner">
+    <div class="ps-container">
+      
+    </div>
+</div>
+<div class="ps-section--features">
+    <div class="ps-container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                <div class="ps-iconbox">
+                    <header>
+                        <i class="ps-icon-delivery"></i>
+                        <h3>FREE SHIPPING</h3>
+                        <p>ON ORDER OVER $199</p>
+                    </header>
+                    <p>Want to track a package? Find tracking information and order details from Your Orders.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                <div class="ps-iconbox">
+                    <header>
+                        <i class="ps-icon-wallet"></i>
+                        <h3>100% MONEY BACK.</h3>
+                        <p>WITHIN 30 DAYS AFTER DELIVERY.</p>
+                    </header>
+                    <p>You may return most new, unopened items sold within 30 days of delivery for a full refund.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                <div class="ps-iconbox">
+                    <header>
+                        <i class="ps-icon-customer-service"></i>
+                        <h3>SUPPORT 24/7.</h3>
+                        <p>WE CAN HELP YOU ONLINE.</p>
+                    </header>
+                    <p>We offer a 24/7 customer hotline so you’re never alone if you have a question.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

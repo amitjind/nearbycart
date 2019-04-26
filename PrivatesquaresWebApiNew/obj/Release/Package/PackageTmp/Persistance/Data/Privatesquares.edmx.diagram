@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0eced36b09574d548cd957fa74308a45" Name="Diagram1" >
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.Business" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.BusinessLocation" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.City" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.Gender" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.InterestCategory" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.Product" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.Profession" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.ProfessionalKeyword" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.Review" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.Role" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.UserInterested" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.UserMaster" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.UserProfile" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EWT_PSQNEWModel.UserRight" Width="1.5" PointX="8.75" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,1456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B13215C2-1E64-4D68-861C-FECD11008CEF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PrivateSquareWeb</RootNamespace>
+    <AssemblyName>PrivateSquareWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ASPSnippets.FaceBookAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ExternalDlls\ASPSnippets.FaceBookAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.4.0\lib\net451\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.4.0\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.4.0\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.4.0\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CommonCls\CommonFile.cs" />
+    <Compile Include="CommonCls\CovnertJsonToDataTable.cs" />
+    <Compile Include="Constant.cs" />
+    <Compile Include="Controllers\BlankController.cs" />
+    <Compile Include="Controllers\Common\AddressController.cs" />
+    <Compile Include="Controllers\Common\ChangePasswordController.cs" />
+    <Compile Include="Controllers\Common\ContactUsController.cs" />
+    <Compile Include="Controllers\Common\ForgetPasswordController.cs" />
+    <Compile Include="Controllers\Common\LoginController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\QuotesController.cs" />
+    <Compile Include="Controllers\SidebarProfileController.cs" />
+    <Compile Include="Controllers\User\DashboardController.cs" />
+    <Compile Include="Controllers\User\DefaultController.cs" />
+    <Compile Include="Controllers\User\HeaderPartialController.cs" />
+    <Compile Include="Controllers\User\HomeController.cs" />
+    <Compile Include="Controllers\User\InterestController.cs" />
+    <Compile Include="Controllers\User\ProductsController.cs" />
+    <Compile Include="Controllers\User\RegisterationController.cs" />
+    <Compile Include="Controllers\Website\AddToCart.cs" />
+    <Compile Include="Controllers\Website\CheckoutController.cs" />
+    <Compile Include="Controllers\Website\ProductCatWiseController.cs" />
+    <Compile Include="Controllers\Website\ViewCartController.cs" />
+    <Compile Include="Controllers\Website\WebContactUsController.cs" />
+    <Compile Include="Controllers\Website\WebHomeController.cs" />
+    <Compile Include="Controllers\Website\WebLoginController.cs" />
+    <Compile Include="Controllers\Website\WebSidebarController.cs" />
+    <Compile Include="Controllers\Website\WebsiteForgetPasswordController.cs" />
+    <Compile Include="Controllers\Website\WebsiteHeaderController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AddressModel.cs" />
+    <Compile Include="Models\AddToCartModel.cs" />
+    <Compile Include="Models\BusinessModel.cs" />
+    <Compile Include="Models\ContactUsModel.cs" />
+    <Compile Include="Models\CouponModel.cs" />
+    <Compile Include="Models\DropDownModel.cs" />
+    <Compile Include="Models\FaceBookUser.cs" />
+    <Compile Include="Models\HeaderPartialModel.cs" />
+    <Compile Include="Models\InterestCategoryModel.cs" />
+    <Compile Include="Models\InterestModel.cs" />
+    <Compile Include="Models\JwtTokenManager.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\NetworkModel.cs" />
+    <Compile Include="Models\ProductImageModel.cs" />
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\RequestModel.cs" />
+    <Compile Include="Models\ResponseModel.cs" />
+    <Compile Include="Models\SaleOrderModel.cs" />
+    <Compile Include="Models\UserInterestModel.cs" />
+    <Compile Include="Models\UserProfileModel.cs" />
+    <Compile Include="Models\UserRegisterModel.cs" />
+    <Compile Include="Models\UsersProfileModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs" />
+    <Compile Include="Services.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\apple.jpg" />
+    <Content Include="Content\img\headphone.jpg" />
+    <Content Include="Content\img\hp.jpg" />
+    <Content Include="Content\img\icon1.svg" />
+    <Content Include="Content\img\icon2.svg" />
+    <Content Include="Content\img\img0.jpg" />
+    <Content Include="Content\img\img1.jpg" />
+    <Content Include="Content\img\img10.jpg" />
+    <Content Include="Content\img\img11.jpg" />
+    <Content Include="Content\img\img12.jpg" />
+    <Content Include="Content\img\img13.jpg" />
+    <Content Include="Content\img\img14.jpg" />
+    <Content Include="Content\img\img15.jpg" />
+    <Content Include="Content\img\img16.jpg" />
+    <Content Include="Content\img\img17.jpg" />
+    <Content Include="Content\img\img18.jpg" />
+    <Content Include="Content\img\img19.jpg" />
+    <Content Include="Content\img\img2.jpg" />
+    <Content Include="Content\img\img20.jpg" />
+    <Content Include="Content\img\img21.jpg" />
+    <Content Include="Content\img\img22.jpg" />
+    <Content Include="Content\img\img23.jpg" />
+    <Content Include="Content\img\img24.jpg" />
+    <Content Include="Content\img\img25.jpg" />
+    <Content Include="Content\img\img26.jpg" />
+    <Content Include="Content\img\img27.jpg" />
+    <Content Include="Content\img\img27.png" />
+    <Content Include="Content\img\img28.jpg" />
+    <Content Include="Content\img\img29.jpg" />
+    <Content Include="Content\img\img3.jpg" />
+    <Content Include="Content\img\img30.jpg" />
+    <Content Include="Content\img\img31.jpg" />
+    <Content Include="Content\img\img32.jpg" />
+    <Content Include="Content\img\img33.jpg" />
+    <Content Include="Content\img\img34.jpg" />
+    <Content Include="Content\img\img35.jpg" />
+    <Content Include="Content\img\img36.jpg" />
+    <Content Include="Content\img\img37.jpg" />
+    <Content Include="Content\img\img38.jpg" />
+    <Content Include="Content\img\img39.jpg" />
+    <Content Include="Content\img\img4.jpg" />
+    <Content Include="Content\img\img5.jpg" />
+    <Content Include="Content\img\img6.jpg" />
+    <Content Include="Content\img\img7.jpg" />
+    <Content Include="Content\img\img8.jpg" />
+    <Content Include="Content\img\img9.jpg" />
+    <Content Include="Content\img\landing1.png" />
+    <Content Include="Content\img\landing10.png" />
+    <Content Include="Content\img\landing2.png" />
+    <Content Include="Content\img\landing3.png" />
+    <Content Include="Content\img\landing4.png" />
+    <Content Include="Content\img\landing5.png" />
+    <Content Include="Content\img\landing6.png" />
+    <Content Include="Content\img\landing7.png" />
+    <Content Include="Content\img\landing8.png" />
+    <Content Include="Content\img\landing9.png" />
+    <Content Include="Content\img\laptop-1.jpg" />
+    <Content Include="Content\img\laptop-2.jpg" />
+    <Content Include="Content\img\laptop-3.jpg" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\logo1.jpg" />
+    <Content Include="Content\img\logo2.jpg" />
+    <Content Include="Content\img\logo3.jpg" />
+    <Content Include="Content\img\logo4.jpg" />
+    <Content Include="Content\img\logo5.jpg" />
+    <Content Include="Content\img\logo6.jpg" />
+    <Content Include="Content\img\logo8.jpg" />
+    <Content Include="Content\img\logo9.jpg" />
+    <Content Include="Content\img\mc-dsonald.jpg" />
+    <Content Include="Content\img\quotes1.png" />
+    <Content Include="Content\img\quotes10.png" />
+    <Content Include="Content\img\quotes11.png" />
+    <Content Include="Content\img\quotes2.png" />
+    <Content Include="Content\img\quotes3.png" />
+    <Content Include="Content\img\quotes4.png" />
+    <Content Include="Content\img\quotes5.png" />
+    <Content Include="Content\img\quotes6.png" />
+    <Content Include="Content\img\quotes7.png" />
+    <Content Include="Content\img\quotes8.png" />
+    <Content Include="Content\img\quotes9.png" />
+    <Content Include="Content\img\retale.jpg" />
+    <Content Include="Content\img\shoe.jpg" />
+    <Content Include="Content\img\user-1.jpg" />
+    <Content Include="Content\img\user-2.jpg" />
+    <Content Include="Content\img\user-3.jpg" />
+    <Content Include="Content\img\user-4.jpg" />
+    <Content Include="Content\img\user-5.jpg" />
+    <Content Include="Content\img\user-6.jpg" />
+    <Content Include="Content\img\user-7.jpg" />
+    <Content Include="Content\img\user-8.jpg" />
+    <Content Include="Content\Login\Login.css" />
+    <Content Include="Content\siteuser\business.css" />
+    <Content Include="Content\siteuser\dashboard.css" />
+    <Content Include="Content\siteuser\footer.css" />
+    <Content Include="Content\siteuser\header.css" />
+    <Content Include="Content\siteuser\networking.css" />
+    <Content Include="DocImg\0003257-nivea-purifying-face-wash-mixed-to-oily-skin-150ml.jpg" />
+    <Content Include="DocImg\0058660b-b9bd-42cc-a0c9-cb5aa79443b7.png" />
+    <Content Include="DocImg\005da909-c9e4-4994-a7e7-c1cdf8f17f1f.jpeg" />
+    <Content Include="DocImg\017b81f0-2158-44df-bdb8-6dc77b39c19c.png" />
+    <Content Include="DocImg\04a99768-3bac-46ca-b6d2-7c3aa5ffb356.jpeg" />
+    <Content Include="DocImg\04b23dd1-b73c-40bc-9752-9e86a6cb52f2.jpeg" />
+    <Content Include="DocImg\058d2653-f49c-4fb8-b731-1899e3638216.png" />
+    <Content Include="DocImg\0630605c-e358-4cf2-8e5c-e6cfa4400dc9.png" />
+    <Content Include="DocImg\0bf2c090-e801-47c7-a159-aea43387439f.png" />
+    <Content Include="DocImg\0c127ccc-6247-4669-bde2-f7c6c280533c.jpeg" />
+    <Content Include="DocImg\0e969089-8b32-4a0c-a713-00cd0adab319.jpeg" />
+    <Content Include="DocImg\118299a3-7079-467c-8236-04f22e761ae9.png" />
+    <Content Include="DocImg\12261d25-b8a7-40ef-91fb-16edd7473d42.jpeg" />
+    <Content Include="DocImg\181d80ed-84db-4caa-8696-2f16fe53ee65.jpeg" />
+    <Content Include="DocImg\19V69-Italia-Electrique-150ml.jpg" />
+    <Content Include="DocImg\19V69-Italia-La-Exotique-150ml.jpg" />
+    <Content Include="DocImg\19V69-Italia-La-Paradis-150ml.jpg" />
+    <Content Include="DocImg\19V69-Italia-Risque-150ml.jpg" />
+    <Content Include="DocImg\19V69-Italia-Vibrante-150ml.jpg" />
+    <Content Include="DocImg\1bfb03f3-bc76-422c-95b5-dd927713625e.jpeg" />
+    <Content Include="DocImg\1da7e96e-8444-4555-927a-0490d37bc6a7.jpeg" />
+    <Content Include="DocImg\1f54be0d-d5aa-42e0-a492-3acdbbd08b1c.jpeg" />
+    <Content Include="DocImg\203ef6ce-5c88-4b3e-ac94-2f0280a29ec5.png" />
+    <Content Include="DocImg\212Men_NYC_Carolina_Herrera_NewYork.jpg" />
+    <Content Include="DocImg\236d8932-39c6-48fb-968e-2dc7c1200b6a.jpeg" />
+    <Content Include="DocImg\24Mantra_organic_Chitkabra_Rajma_500g.jpg" />
+    <Content Include="DocImg\24Mantra_Organic_Wholewheat_Atta_5kg.jpg" />
+    <Content Include="DocImg\26f7cf4e-5619-44d4-a5c6-e9289ac4b90c.jpeg" />
+    <Content Include="DocImg\2cdbe4da-0910-48ef-81ba-b53db6d7e547.png" />
+    <Content Include="DocImg\2d179193-69a2-4c6e-9173-88bc9cb4673b.jpeg" />
+    <Content Include="DocImg\2d75006b-7f9d-4c0d-8d92-46521555d7d9.jpg" />
+    <Content Include="DocImg\37b5fb28-4acc-4441-847d-5c0de83681b9.png" />
+    <Content Include="DocImg\3cb9f11f-0b2c-4f06-9474-d966394543e2.png" />
+    <Content Include="DocImg\3d842869-8bda-4d53-bdfa-836849976194.jpeg" />
+    <Content Include="DocImg\3de9b3a4-0664-42f7-984a-4e42ab3458a2.jpeg" />
+    <Content Include="DocImg\4133ffb6-2369-4879-b4eb-27f9061117bc.png" />
+    <Content Include="DocImg\4205310b-04b7-4b0a-aa52-f556bea9ccdc.png" />
+    <Content Include="DocImg\45a2343f-de3b-437d-8b10-f23a39b1f8a4.jpeg" />
+    <Content Include="DocImg\45f08308-1826-493a-a258-8f220ab958af.png" />
+    <Content Include="DocImg\48a4bbf1-8449-4ab7-b05f-018ffb51a263.jpeg" />
+    <Content Include="DocImg\49501073-22c4-4fe5-8d4e-104cc9ae938a.png" />
+    <Content Include="DocImg\49780d55-5ef7-475e-9d8a-ece97bbf85f3.png" />
+    <Content Include="DocImg\4ddaaed6-d112-4451-9477-d95a05aa0692.jpeg" />
+    <Content Include="DocImg\4f22dc7f-e3b5-4ff7-95eb-302f46f896cb.jpeg" />
+    <Content Include="DocImg\55a577bc-0eda-4cb3-8e2d-91478cf0889a.jpeg" />
+    <Content Include="DocImg\56a54cbf-2998-4bc3-a0bf-b3b6f40e7e45.png" />
+    <Content Include="DocImg\5d2307e5-c0be-4db3-96b7-b4d333dca584.jpeg" />
+    <Content Include="DocImg\5e13b390-2a6a-4d7e-922a-8853418bb4ab.png" />
+    <Content Include="DocImg\6011eeb5-fbeb-4700-a24c-59f1b7cc8f95.jpeg" />
+    <Content Include="DocImg\62c93cfc-3d23-4130-9a6a-29d7f09cc68b.png" />
+    <Content Include="DocImg\6cee50d8-c0e1-4318-90c6-9ae8395a7080.jpg" />
+    <Content Include="DocImg\6d8e2a35-2216-4d7b-8bae-e096dd02c680.png" />
+    <Content Include="DocImg\6dd24c3b-ee04-4f38-bd98-10c9fedda11b.jpeg" />
+    <Content Include="DocImg\6fba705f-aecc-4d90-9924-f78db94cdeeb.jpeg" />
+    <Content Include="DocImg\7330c006-7ef0-4410-9434-13d1cbc34ed0.jpg" />
+    <Content Include="DocImg\735f93c8-6e3b-4947-a154-9749c558c194.png" />
+    <Content Include="DocImg\735ff213-ff3b-491d-8173-ab62389e4d76.png" />
+    <Content Include="DocImg\761bb56e-c478-45dd-acb3-e6c13d3ac084.jpeg" />
+    <Content Include="DocImg\768544d3-82b6-4dc1-b3b1-2b092e338905.png" />
+    <Content Include="DocImg\76b116f6-35a6-4d68-8302-e2c2cc365db1.jpeg" />
+    <Content Include="DocImg\7f83042a-f8cf-4710-a11f-705a507618c2.jpeg" />
+    <Content Include="DocImg\82be7295-d588-4165-ae96-060e9a0f3dd9.png" />
+    <Content Include="DocImg\84148bc9-164c-49c2-b9d0-96c68f460655.png" />
+    <Content Include="DocImg\84be4a17-fe9e-4f2d-af15-bc22d27980d4.png" />
+    <Content Include="DocImg\878b8cf5-8ae0-41bc-9f73-15710b5ecc27.jpeg" />
+    <Content Include="DocImg\88bac421-1139-4e75-907d-238aa081e61d.png" />
+    <Content Include="DocImg\89e77b38-1b2f-491c-8451-6d5c14278c49.jpeg" />
+    <Content Include="DocImg\8e8397b9-5cd8-482d-a42b-3fd48bea9a36.jpeg" />
+    <Content Include="DocImg\8ee38ef3-fae2-4d70-9211-5f2d6a8a93ed.jpeg" />
+    <Content Include="DocImg\90da42f7-4c93-4d96-97a1-8c47c5382344.jpeg" />
+    <Content Include="DocImg\921f8143-c582-467c-930d-3270315a3470.png" />
+    <Content Include="DocImg\932232be-68ca-48ae-8018-2fbb2abd5001.jpeg" />
+    <Content Include="DocImg\956dbe5e-2602-433f-89c0-b10bfe710d3d.jpeg" />
+    <Content Include="DocImg\95a6aa0c-d65d-40f3-96a6-ef9428c1f85f.png" />
+    <Content Include="DocImg\983f36ad-16a5-4945-8c30-ef620d543fe0.jpeg" />
+    <Content Include="DocImg\9949010b-3d93-4caf-a83b-8f127f64acb6.png" />
+    <Content Include="DocImg\9b158b3d-de63-4094-a920-464a4493608c.jpeg" />
+    <Content Include="DocImg\9e133868-c890-42eb-874a-a9378dae9486.jpeg" />
+    <Content Include="DocImg\9ea8a948-b2ea-45ec-930c-cdbacf3208a9.jpeg" />
+    <Content Include="DocImg\a2911547-1cc2-4651-b59f-ee85575de977.png" />
+    <Content Include="DocImg\a8d488e4-b251-4fee-a4d6-28aa2857b1d1.jpeg" />
+    <Content Include="DocImg\aa2616f7-c02c-423d-bc7e-6da54ccbad03.jpeg" />
+    <Content Include="DocImg\Aashirvaad_Salt_Iodised_1kg.jpg" />
+    <Content Include="DocImg\Aashirvaad_Shudh_Chakki_Atta_10kg.jpg" />
+    <Content Include="DocImg\Addias_Deo_Body_Spray%28VictoryLeague%29_150.jpg" />
+    <Content Include="DocImg\Addias_IceDive_150.jpg" />
+    <Content Include="DocImg\Adidas-Women-Floral-Dream-Perfumed-deo-150-ml.jpg" />
+    <Content Include="DocImg\Adidas-Women-Fruity-rhythm-150ml.jpg" />
+    <Content Include="DocImg\Adidas-Women-Natural-Vitality-Perfumed-deo-150ml.jpg" />
+    <Content Include="DocImg\Adidas-Women-Pure-Lightness-150ml.jpg" />
+    <Content Include="DocImg\ae8e05d7-9a41-4777-ae8e-c85ad59a8bc4.png" />
+    <Content Include="DocImg\Ambipur_Lavender_Spa_Car_Air_Freshene.jpg" />
+    <Content Include="DocImg\Ambi_Pur_Air_Effect_Rose_and_Blossom_Air_Freshener_275 g.jpg" />
+    <Content Include="DocImg\Ambi_Pur_Air_Effect_Rose_and_Blossom_Air_Freshener_275-g.jpg" />
+    <Content Include="DocImg\Ambi_Pur_Exotic_Jasmine_Car_Freshener_Refill.jpg" />
+    <Content Include="DocImg\Amul_Ice_Cream_Chocolate_750ml_Buy_1_Get_1_free.jpg" />
+    <Content Include="DocImg\Amul_Pure_Ghee_905g.jpg" />
+    <Content Include="DocImg\b00fa0e5-418a-4117-83fb-cc37080474e2.png" />
+    <Content Include="DocImg\b3560571-1b9d-4566-8695-0f3ec7da744e.jpeg" />
+    <Content Include="DocImg\b52bba6a-1933-4343-9f37-f25bdcd07f85.png" />
+    <Content Include="DocImg\b95dc8ae-9d16-494d-9461-78cb87abc8f8.png" />
+    <Content Include="DocImg\b98a74d6-f467-421a-bd7a-1fabef47fc47.jpeg" />
+    <Content Include="DocImg\b9e49a9c-3832-49d9-ace0-204eb9cb5c93.jpeg" />
+    <Content Include="DocImg\Baby_Dove_Tear_FreeShampoo_Rich_Moisture.jpg" />
+    <Content Include="DocImg\bbdd4f26-7131-4ede-8741-f5479ceb85d9.png" />
+    <Content Include="DocImg\Beverly_Hills_Polo_Club_Sport_8deo_175.jpg" />
+    <Content Include="DocImg\Beverly_Hills_Polo_Club_Sport_9deo_175.jpg" />
+    <Content Include="DocImg\bf12ffbb-4a3b-44fe-8c3e-1256c239abdf.jpeg" />
+    <Content Include="DocImg\bf576853-687f-4e71-a899-d41f56976cbe.jpg" />
+    <Content Include="DocImg\Biotique-Advanced-Fairness-Face-Wash-Bio-White150-ml.jpg" />
+    <Content Include="DocImg\Biotique-Bio-Honey-Gel-Refreshing-Foaming-FaceWash-300ml.jpg" />
+    <Content Include="DocImg\Biotique-Bio-Neem-Purifying-Face-Wash-150ml.jpg" />
+    <Content Include="DocImg\Biotique-Bio-Neem-Purifying-Face-Wash-300ml.jpg" />
+    <Content Include="DocImg\Biotique-Bio-Pineapple-Oil-Control-Foaming-Face-Wash-150ml.jpg" />
+    <Content Include="DocImg\Biotique-Bio-Pineapple-Oil-Control-Foaming-Face-Wash-300ml.jpg" />
+    <Content Include="DocImg\Biotique_Almond_Oil_Nourishing_Body_Soap.jpg" />
+    <Content Include="DocImg\Biotique_Basil_And_Parsley_Revitalizing_Body_Soap.jpg" />
+    <Content Include="DocImg\Biotique_Bio_White_Advanced_Fairness_Face_Wash.jpg" />
+    <Content Include="DocImg\blossamKochhar-Aroma-Magic-White-Tea-&amp;-Chamomile-Face--Wash100ml.jpg" />
+    <Content Include="DocImg\BlossomKochhar-Aroma-Magic-Grapefruit-Face-Wash-Skin-Lighting-&amp;-PoreTighting-100g.jpg" />
+    <Content Include="DocImg\BlossomKochhar-Aroma-Magic-Tea-Tree-Face-Wash100ml.jpg" />
+    <Content Include="DocImg\BlossomKochhar-Aroma-MagicActivated-Bamboo-Fach-Wash-100ml.jpg" />
+    <Content Include="DocImg\BlossomKochhar-Aroma-MagicLavender-Face-Wash-Hydrating-&amp;Softening-100ml.jpg" />
+    <Content Include="DocImg\BONN ROYAL BAKE WHITE BREAD%28.jpg" />
+    <Content Include="DocImg\boss-hugo-boss-bottled-edt-100.jpg" />
+    <Content Include="DocImg\Boss_HUGOBOSS_BottledNight_100.jpg" />
+    <Content Include="DocImg\britannia-fruit-bar-cake-90-gm-pouch_.png" />
+    <Content Include="DocImg\Britannia_Premium_Bake_Rusk_273g.jpg" />
+    <Content Include="DocImg\Britannia_Pure_Cow_ghee_902g.jpg" />
+    <Content Include="DocImg\Brown_Hi_Fibre_bread_Eat_Fresh_Eat_Brown_400g.jpg" />
+    <Content Include="DocImg\BRU_Gold_Instant_Coffee_50g.jpg" />
+    <Content Include="DocImg\c16d8623-f0f6-4ff4-be8e-44e0002e7e25.png" />
+    <Content Include="DocImg\c19e07b0-d46b-4aef-ab15-e3ba3c6ed458.jpeg" />
+    <Content Include="DocImg\c22f2223-d3fc-4686-886e-e9479c135b0b.png" />
+    <Content Include="DocImg\c23ee306-04ab-4f0f-a84d-8b8835c1c874.jpeg" />
+    <Content Include="DocImg\Calvin Klein_EuphoriaMen_152.jpg" />
+    <Content Include="DocImg\Calvin-Klein_CKONE152.jpg" />
+    <Content Include="DocImg\Calvin-Klein_EuphoriaMen_152.jpg" />
+    <Content Include="DocImg\CalvinKlein_CkOne_152.jpeg" />
+    <Content Include="DocImg\calvin_klein_eternity_for_men_body_spray_152ml.jpg" />
+    <Content Include="DocImg\Catch_Chana_Masala.jpg" />
+    <Content Include="DocImg\Charlie-Revlon-%28Gold%29-Perfumed-Body-Spray-120ml.jpg" />
+    <Content Include="DocImg\Chicco_Baby_Moments_No_Tears_Bath_Foam_200ml.jpg" />
+    <Content Include="DocImg\Chicco_Baby_Moment_Gentle_Body_Wash_and_Shampoo_500ml.jpg" />
+    <Content Include="DocImg\Clean&amp;Clear_Morning_Energy_Face_Wash_Purifying_Apple_100ml.jpg" />
+    <Content Include="DocImg\Clean-&amp;-Clear-Clear-Fairness-Face-Wash-100g.jpg" />
+    <Content Include="DocImg\Clean-&amp;-Clear-Foaming-Face-Wash-100ml.jpg" />
+    <Content Include="DocImg\Clean-&amp;-Clear-Foaming-Face-Wash-150ml.jpg" />
+    <Content Include="DocImg\Clean-&amp;-Clear-Natural-Bright-Face-wash-100g.jpg" />
+    <Content Include="DocImg\Clean-Clear-Morning-Energy-Face-wash-Energizing-Lemon-100ml.jpg" />
+    <Content Include="DocImg\Clean_&amp;_Clear_Morning_Energy_Face_Wash_Brightening_Berry_100_ml.jpg" />
+    <Content Include="DocImg\Clean_&amp;_Clear_Pimple_Clearing_Face_Wash_80g.jpg" />
+    <Content Include="DocImg\Clean_&amp;_Dry_Intimate_Wash_184_ml.jpg" />
+    <Content Include="DocImg\Colgate_Herbal_Toothpaste_200g.jpg" />
+    <Content Include="DocImg\Colgate_Plax_Spicy_Fresh_Mouthwash.jpg" />
+    <Content Include="DocImg\Colgate_Toothpaste_Strong_Teeth_Dental_Cream.jpg" />
+    <Content Include="DocImg\Colgate_Toothpaste_Total_Advance_Health.jpg" />
+    <Content Include="DocImg\ColinGlass_and_Surface_Cleaner_with_Shine_Boosters_Spray_500ml.jpg" />
+    <Content Include="DocImg\d3bd1dd8-7d38-49b6-b3b3-dc5eaaecc1f2.jpeg" />
+    <Content Include="DocImg\d56b5c70-c034-449a-8ef6-19a5cf2986e2.png" />
+    <Content Include="DocImg\d76efe0f-f47c-4e91-8d91-c1bc86548935.jpeg" />
+    <Content Include="DocImg\d9bd45ba-077b-43da-899e-716e78767eaa.png" />
+    <Content Include="DocImg\Daawat_Brown_Basmati_Rice_1kg.jpg" />
+    <Content Include="DocImg\Daawat_Rozana_Gold_Basmati_Rice_5kg.jpg" />
+    <Content Include="DocImg\Dabur_Red_Ayurvedic_Toothpaste.jpg" />
+    <Content Include="DocImg\Davidoff_Espresso_57_Intense.jpg" />
+    <Content Include="DocImg\David_Beckham_Beyond_150.jpg" />
+    <Content Include="DocImg\David_Beckham_Classic%28Black%29_150.jpg" />
+    <Content Include="DocImg\David_Beckham_Classic_Blue_150.jpg" />
+    <Content Include="DocImg\David_Beckham_Homme_150.jpg" />
+    <Content Include="DocImg\David_Beckham_Intimately_150.jpg" />
+    <Content Include="DocImg\dd0f0411-b3c4-4c64-951c-ab2ad664b975.png" />
+    <Content Include="DocImg\de3fe740-e2cc-40f2-b750-63e651825400.jpeg" />
+    <Content Include="DocImg\deafult.png" />
+    <Content Include="DocImg\Delmonte_Cherry_Berry_Mix.jpg" />
+    <Content Include="DocImg\Delmonte_Dried_Cranberries.jpg" />
+    <Content Include="DocImg\Delmonte_Pitted_Prunes.jpg" />
+    <Content Include="DocImg\Del_Monte_Dried_Cherries.jpg" />
+    <Content Include="DocImg\Del_Monte_Trail_Mix.jpg" />
+    <Content Include="DocImg\Denver-Pride-Hamilton-Deodorant-Body-Denver_165.jpg" />
+    <Content Include="DocImg\DenverPrestige_165.jpg" />
+    <Content Include="DocImg\Denver_Caliber_165.jpg" />
+    <Content Include="DocImg\Denver_Honour_165.jpg" />
+    <Content Include="DocImg\Denver_Prestige_165.jpg" />
+    <Content Include="DocImg\Denver_RoyalOud_150.jpg" />
+    <Content Include="DocImg\DettolCoolLiquidHandwash.jpg" />
+    <Content Include="DocImg\Dettol_Hand_Sanitizer_50g.jpg" />
+    <Content Include="DocImg\Dettol_Kitchen_Gel_750ml.jpg" />
+    <Content Include="DocImg\df9bc8a0-7589-40aa-9983-b470b2ce2cb8.jpeg" />
+    <Content Include="DocImg\Dhampure_Sulphurless_White_Sugar_5kg.jpg" />
+    <Content Include="DocImg\Dove-Perfumes-Dove %28Beauty finish%29150ml.jpg" />
+    <Content Include="DocImg\Dove-Perfumes-Dove-%28Beauty-finish%29150ml.jpg" />
+    <Content Include="DocImg\Dove-Perfumes-Sensitive-150ml.jpg" />
+    <Content Include="DocImg\Dove-Perfumes-Whitening-Original-150ml.jpg" />
+    <Content Include="DocImg\Dove_Cream_Beauty_Bathing_Bar_100g.jpg" />
+    <Content Include="DocImg\Dove_Nourishing_Oil_Care_Shampoo_340ml.jpg" />
+    <Content Include="DocImg\e5d9647b-2fa8-486c-b2c1-f2c4e1f9f9ef.jpeg" />
+    <Content Include="DocImg\eb233d74-7312-4343-b9eb-fa2917fc6fa6.jpeg" />
+    <Content Include="DocImg\ec6c591f-1203-43c5-ab35-ae7a5a74bc8c.jpg" />
+    <Content Include="DocImg\Elle_18_Eye_Drama_Kajal_Bold_Black.jpg" />
+    <Content Include="DocImg\Everest_Kitchen_King_Masala.jpg" />
+    <Content Include="DocImg\Everest_Masala-_Rajma_100g.jpg" />
+    <Content Include="DocImg\Everest_Pav_Bhaji_Masala.jpg" />
+    <Content Include="DocImg\Everest_Rajma_Masala.jpg" />
+    <Content Include="DocImg\Everyuth Purifying Neem Face Wash.jpg" />
+    <Content Include="DocImg\Everyuth-Purifying-Neem-Face-Wash.jpg" />
+    <Content Include="DocImg\Everyuth_Anti_Acne_AntiMarks_Tulsi_Turmeric_Face_50g.jpg" />
+    <Content Include="DocImg\Everyuth_Brightening_Lemon&amp;Cherry-_wash_50g.jpg" />
+    <Content Include="DocImg\Everyuth_Moisturizing_Fruit_Face_Wash_50g.jpg" />
+    <Content Include="DocImg\f0a4211b-e41a-47cd-b99c-8a7f662f6780.png" />
+    <Content Include="DocImg\f1531792-e990-4716-9166-8afd47a17a04.png" />
+    <Content Include="DocImg\f22d233a-27d3-4c86-bd1b-dee53cd53f9f.png" />
+    <Content Include="DocImg\f4aef525-16fb-42e9-ab4b-cbe3dab15c0e.png" />
+    <Content Include="DocImg\f5ce3036-f1eb-4ed6-9d79-7b51744e0be6.jpeg" />
+    <Content Include="DocImg\f768b42d-9e2c-4a7a-8d72-7ff3d2d02757.jpeg" />
+    <Content Include="DocImg\f8e0bcb5-145c-44da-a866-c23d7d30b0c8.jpeg" />
+    <Content Include="DocImg\ff94fd3a-67ca-45a9-9ce6-b7728d94a661.jpeg" />
+    <Content Include="DocImg\Flaving %28Peanut 1kg.jpg" />
+    <Content Include="DocImg\Flaving_Peanut_1kg.jpg" />
+    <Content Include="DocImg\Fogg-Fragranc- Body-Spray-Napoleon-120ml.jpg" />
+    <Content Include="DocImg\Fogg-Fragranc--Body-Spray-Napoleon-120ml.jpg" />
+    <Content Include="DocImg\Fogg-Fragrance-Body-Spra--Radiate-120ml.jpg" />
+    <Content Include="DocImg\Fogg-Fragrance-Body-Spra-Essence-120ml.jpg" />
+    <Content Include="DocImg\Fogg-Fragrance-Body-Spra-Monarch-120ml.jpg" />
+    <Content Include="DocImg\Fogg-Fragrance-Body-Spra-Paradise-120ml.jpg" />
+    <Content Include="DocImg\Fogg-Fragrance-Body-Spra-Victor-120ml.jpg" />
+    <Content Include="DocImg\Fogg-Fragrance-Body-Spray-Marco-120ml.jpg" />
+    <Content Include="DocImg\fogg-imperial.jpg" />
+    <Content Include="DocImg\Fogg-Scent-Dazzle-Eau-DeParfum_100ml.jpg" />
+    <Content Include="DocImg\FoggScent_Ico_100.jpg" />
+    <Content Include="DocImg\FoggScent_Intensio_100.jpg" />
+    <Content Include="DocImg\Fogg_Scent_Fame_100.jpg" />
+    <Content Include="DocImg\Fortune_Kachi_Ghani_Pure_Mustard_Oil_910g.jpg" />
+    <Content Include="DocImg\Gariner_Acno_Fight_AntiPimple_FaceWash_100ml.jpg" />
+    <Content Include="DocImg\Gariner_OilClear_Skin_PurifyingGel_FaceWash_100ml.jpg" />
+    <Content Include="DocImg\Gariner_Power_White_AntiDarkness_Fairness_Fce_Wash_100ml.jpg" />
+    <Content Include="DocImg\Gariner_Power_White_antiPollution_double_Action_FaceWash_100ml.jpg" />
+    <Content Include="DocImg\Garnier-Light-Complete-%28Action-Face-wash%29-100g.jpg" />
+    <Content Include="DocImg\Garnier-Light-Complete-Fairness-Face-Wash-100g.jpg" />
+    <Content Include="DocImg\Garnier-Soap-Free-Formula-Eucalyptus-leaf-extract-100g.jpg" />
+    <Content Include="DocImg\Garnier_Pure-_Active_Neem_Purifying_Face_Wash.jpg" />
+    <Content Include="DocImg\Godrej-Aer-Pocket-Fresh-Lush-Green-Air-Freshener.jpg" />
+    <Content Include="DocImg\Godrej_Aer_Pocket_Petal_Crush_Pink_Air_Freshener_10gm.jpg" />
+    <Content Include="DocImg\Godrej_Ezee_Liquid_Detergent _1_kg.jpg" />
+    <Content Include="DocImg\gourmia_california_prunes.jpg" />
+    <Content Include="DocImg\Gourmia_California_Roasted_Pistachios.jpg" />
+    <Content Include="DocImg\Gourmia_Dried_Blueberry.jpg" />
+    <Content Include="DocImg\Gourmia_Dried_Kiwi.jpg" />
+    <Content Include="DocImg\Gourmia_Roasted_Almonds_200g.jpg" />
+    <Content Include="DocImg\Gourmia_Roasted_Cashews_200g.jpg" />
+    <Content Include="DocImg\Guess_Dare_150ml.jpg" />
+    <Content Include="DocImg\Guess_Guess_Night_150.jpg" />
+    <Content Include="DocImg\Guess_Night_Access_150.jpg" />
+    <Content Include="DocImg\Guess_Seductive_Homme_150.jpg" />
+    <Content Include="DocImg\Guess_Seductive_Homme_Blue_Body_Spray_150ml.jpg" />
+    <Content Include="DocImg\Haldiram_Navratan_Mix_200g+30g.jpg" />
+    <Content Include="DocImg\Harpic_Powerplus_Toilet_Cleaner_Orange.jpg" />
+    <Content Include="DocImg\Head_and_Shoulders_Anti_Dandruff_Lemon_Fresh_Shampoo.jpg" />
+    <Content Include="DocImg\Herbal_Khatnil_for_all_insects.jpg" />
+    <Content Include="DocImg\Himalaya HerbalsIntense_Oil_Clear_Lemon_FaceWash_100ml.jpg" />
+    <Content Include="DocImg\himalaya neem facewash 100ml.jpg" />
+    <Content Include="DocImg\Himalaya-Baby-Powder-200gm.jpg" />
+    <Content Include="DocImg\Himalaya-BabyCare_Extra_Moisturizing_Baby_Wash_100ml.jpg" />
+    <Content Include="DocImg\Himalaya-Herbals-Deep-Cleansing-Apricot-Face-Wash-100ml.jpg" />
+    <Content Include="DocImg\Himalaya-Herbals-Fairness-Kesar-Face-Wash-100ml.jpg" />
+    <Content Include="DocImg\Himalaya-Herbals-Fresh-Start-Oil-Clear-Blueberry-100ml.jpg" />
+    <Content Include="DocImg\Himalaya-Herbals-Fresh-Start-Oil-Clear-Peach-100ml.jpg" />
+    <Content Include="DocImg\Himalaya-Herbals-Fresh-Start-Oil-Clear-Strawberry-100ml.jpg" />
+    <Content Include="DocImg\Himalaya-Herbals-Kajal---Black.jpg" />
+    <Content Include="DocImg\Himalaya-Herbals-Lemon-oil-clear-Foaming-Face-Wash-150ml.jpg" />
+    <Content Include="DocImg\Himalaya-Herbals-Oil-Clear-Lemon-Foaming-Face-Wash-100ml.jpg" />
+    <Content Include="DocImg\Himalaya-Herbals-Purifying-Neem-Face-Wash-150.jpg" />
+    <Content Include="DocImg\Himalaya-Herbals-Purifying-Neem-Face-Wash-200ml.jpg" />
+    <Content Include="DocImg\Himalaya-Herbals-Purifying-Neem-Foaming-Face-Wash-150ml.jpg" />
+    <Content Include="DocImg\Himalaya-Herbals-Tan-Removal-Orange-Face-Wash-100ml.jpg" />
+    <Content Include="DocImg\Himalaya-HerbalsIntense_Oil_Clear_Lemon_FaceWash_100ml.jpg" />
+    <Content Include="DocImg\Himalaya-Moisturizing-Aloevera-Face-wash-100ml.jpg" />
+    <Content Include="DocImg\himalaya-neem-facewash-100ml.jpg" />
+    <Content Include="DocImg\Himalaya_Herbals_Complete_Care_Mouthwash.jpg" />
+    <Content Include="DocImg\Himalaya_Herbals_Fairness_Kesar_Face_Wash.jpg" />
+    <Content Include="DocImg\Himalaya_Herbals_Fresh_Start_Oil_Clear_Lemon_100ml.jpg" />
+    <Content Include="DocImg\Himalaya_Herbals_Men_Active-port_FaceWash_100ml.jpg" />
+    <Content Include="DocImg\Himalaya_Herbals_Pimple_Clear_Men_50ml.jpg" />
+    <Content Include="DocImg\Himalaya_Herbals_Power_Glow_Licorice_Face_Wash_100ml.jpg" />
+    <Content Include="DocImg\Himalaya_Herbals_Sensitive_Toothpaste.jpg" />
+    <Content Include="DocImg\Himalaya_Men_Face_And_Beard_Wash_80ml.jpg" />
+    <Content Include="DocImg\Himalaya_Oil_Clear_Mud_Face_100g.jpg" />
+    <Content Include="DocImg\Himalaya_Purifying_Neem_Pack_normal_to_oil_skin_100g.jpg" />
+    <Content Include="DocImg\Himalaya_Refreshing_Fruit_Pack_100g.JPG" />
+    <Content Include="DocImg\hit_650.jpg" />
+    <Content Include="DocImg\India_Gate_Basmati_Rice_5kg.jpg" />
+    <Content Include="DocImg\Instant_Vada_Mix.jpg" />
+    <Content Include="DocImg\Jaguar_Classic_150ml.jpg" />
+    <Content Include="DocImg\Jaguar_Classic_Amber_150ml.jpg" />
+    <Content Include="DocImg\Jaguar_Classic_Black_150ml.jpg" />
+    <Content Include="DocImg\Jaguar_for_Men_150ml.jpg" />
+    <Content Include="DocImg\Jewel_FarmerSeeds_Nuts.jpg" />
+    <Content Include="DocImg\Jewel_FarmerWild_Berrymix.jpg" />
+    <Content Include="DocImg\Jewel_Farmer_American_Dried_Cranberries_Cranberries.jpg" />
+    <Content Include="DocImg\Jewel_Farmer_Blueberries.jpg" />
+    <Content Include="DocImg\JEWEL_FARMER_Blueberry_Cranberry_Mix.jpg" />
+    <Content Include="DocImg\Jewel_Farmer_California_Prunes_Dry.jpg" />
+    <Content Include="DocImg\JEWEL_FARMER_Dried_Strawberry.jpg" />
+    <Content Include="DocImg\Jewel_Farmer_Fitmix.jpg" />
+    <Content Include="DocImg\Jewel_Farmer_Flaxpowder.jpg" />
+    <Content Include="DocImg\Jewel_Farmer_Fruits_Berries.jpg" />
+    <Content Include="DocImg\JEWEL_FARMER_Mix_Fruit.jpg" />
+    <Content Include="DocImg\Jewel_Farmer_Organic_Dried_Pineapple.jpg" />
+    <Content Include="DocImg\Jewel_Farmer_Pumpkin_Seeds.jpg" />
+    <Content Include="DocImg\Jewel_Farmer_Real_Dried_Mango.jpg" />
+    <Content Include="DocImg\jewel_farmer_Regular_Hazelnutc.JPG" />
+    <Content Include="DocImg\JEWEL_FARMER_Roasted_Flax_Seeds.jpg" />
+    <Content Include="DocImg\Jewel_Farmer_Roasted_Nutmix .jpg" />
+    <Content Include="DocImg\Jewel_Farmer_Roasted_Nutmix-.jpg" />
+    <Content Include="DocImg\JEWEL_FARMER_Roasted_Seedmix.jpg" />
+    <Content Include="DocImg\Jewel_Farmer_Seed_and_Berries.jpg" />
+    <Content Include="DocImg\Jewel_Farmer_Thai_Trail_Mix.jpg" />
+    <Content Include="DocImg\JEWEL_FARMER_Wild_Blue_Berries.jpg" />
+    <Content Include="DocImg\Jewel_Farmer_Wild_Cranberries_Cranberries.jpg" />
+    <Content Include="DocImg\JohnsonsBaby_Milk_and_Rice_Baby_100g.jpg" />
+    <Content Include="DocImg\Johnsons_Baby_Milk_Soap.jpg" />
+    <Content Include="DocImg\Johnson_s_Baby_Active_Kids_Soft_Smooth_Shampoo.jpg" />
+    <Content Include="DocImg\Johnson_s_Baby_Lotion.jpg" />
+    <Content Include="DocImg\KamaSutra_on%28Blue%29Deo_150.jpg" />
+    <Content Include="DocImg\KamaSutra_Rush_Deo_150.jpg" />
+    <Content Include="DocImg\KamaSutra_Spark_Deo_150.jpg" />
+    <Content Include="DocImg\Kellogg%27s-_Cornflakes_Real_Thandai_Badaam.jpg" />
+    <Content Include="DocImg\Killer_Flirtatious_150.jpg" />
+    <Content Include="DocImg\Killer_Obsession_150.jpg" />
+    <Content Include="DocImg\Killer_Scandalous_150.jpg" />
+    <Content Include="DocImg\Killer_Sensual_150.jpg" />
+    <Content Include="DocImg\Kochhar-Aroma-MagicStrawberry-Face-Wash-%28Gentle &amp; moisturising%29-100ml.jpg" />
+    <Content Include="DocImg\Kochhar-Aroma-MagicStrawberry-Face-Wash-%28Gentle-&amp;-moisturising%29-100ml.jpg" />
+    <Content Include="DocImg\kwality_walls_Frozen_Dessert_Strawberry_700ml.jpg" />
+    <Content Include="DocImg\Lady-Diana-Monet-Spray-Perfume-90ml.jpg" />
+    <Content Include="DocImg\Lakme-Blush-&amp;-Glow-Crème-Face-wash-with-Peach-Extracts-100g.jpg" />
+    <Content Include="DocImg\Lakme-Blush--Glow-Strawberry-Extracts-Gel-Face-Wash-100g.jpg" />
+    <Content Include="DocImg\Lakme-Lakme-absolute-perfect-radiance-Skin-Lighting-face-wash-50g.jpg" />
+    <Content Include="DocImg\Lakme_Blush_&amp;_Glow_Lemon_Gel_Face_Wash.jpg" />
+    <Content Include="DocImg\Lakme_Eyeconic_Kajal_Deep_Black.jpg" />
+    <Content Include="DocImg\Lakme_Radiance_Complexion_Compact-_Natural_Pearl.jpg" />
+    <Content Include="DocImg\Lever-Ayush-Anti pimple Turmeric Face Wash-80g.jpg" />
+    <Content Include="DocImg\Lever-Ayush-Anti-pimple-Turmeric-Face-Wash-80g.jpg" />
+    <Content Include="DocImg\Lifebuoy_Cool_Fresh_Hand_Wash_185ml.jpg" />
+    <Content Include="DocImg\Lifebuoy_Lemon_Fresh_Hand_Sanitizer_50_ml.jpg" />
+    <Content Include="DocImg\Lipton_Loose_Green_Tea_250g.jpg" />
+    <Content Include="DocImg\Listerine_Cavity_Fighter_Mouthwash_250-ml.jpg" />
+    <Content Include="DocImg\LorealParis_Hair_Spa_Nourishing_Conditioner.jpg" />
+    <Content Include="DocImg\Lotus -JoJoBa-Face-wash-120ml.jpg" />
+    <Content Include="DocImg\Lotus -JoJoBa-Face-wash-80ml.jpg" />
+    <Content Include="DocImg\Lotus--JoJoBa-Face-wash-120ml.jpg" />
+    <Content Include="DocImg\Lotus--JoJoBa-Face-wash-80ml.jpg" />
+    <Content Include="DocImg\Lotus-Berryscrub-Strawberry-&amp;-Aloe-vera-Exfoliating Face Wash%29-80gm.jpg" />
+    <Content Include="DocImg\Lotus-Berryscrub-Strawberry-&amp;-Aloe-vera-Exfoliating-Face-Wash%29-80gm.jpg" />
+    <Content Include="DocImg\Lotus-Herbals-Neem-Clove-Purifying-80ml.jpg" />
+    <Content Include="DocImg\Lotus-TeaTree-Wash-80g.jpg" />
+    <Content Include="DocImg\Lotus_Kajal_The_Darkest_and_safest_Ecostay.jpg" />
+    <Content Include="DocImg\Lux_International_Creamy_White_Soap_125g.jpg" />
+    <Content Include="DocImg\MATRIX_By_fbb_Biolage_Colorlast_Orchid_Shampoo.jpg" />
+    <Content Include="DocImg\Maybelline New York The Colossal Kajal 24Hour Smudge Proof - Deep Black.jpg" />
+    <Content Include="DocImg\mdh-dal-makhani-masala-100g.jpg" />
+    <Content Include="DocImg\mdh_black_pepper.jpg" />
+    <Content Include="DocImg\MDH_Deggi_Mirch.jpg" />
+    <Content Include="DocImg\MDH_Garam_Masala.jpg" />
+    <Content Include="DocImg\Mdh_Masala_Chicken_100g.jpg" />
+    <Content Include="DocImg\MDH_Shahi_Paneer_Masala.jpg" />
+    <Content Include="DocImg\MDH_Turmeric.jpg" />
+    <Content Include="DocImg\Million_Paco_Rabanne_100.jpg" />
+    <Content Include="DocImg\Mortein-Insta-5-Combipack.jpg" />
+    <Content Include="DocImg\MTR_3_Minute_Khatta_Meetha_Poha_Pouch.jpg" />
+    <Content Include="DocImg\MTR_Instant_Multi_Grain_Dosa.jpg" />
+    <Content Include="DocImg\MTR_Rava_Idli_Break_Fast_Mix_1kg.jpg" />
+    <Content Include="DocImg\Nautica_Classic_150.jpg" />
+    <Content Include="DocImg\Nautica_Nautica_Blue_150.jpg" />
+    <Content Include="DocImg\Nautica_Voyage-_Sport_150.jpg" />
+    <Content Include="DocImg\Nautica_Voyage_150.jpg" />
+    <Content Include="DocImg\Nescafe_Classic_Coffee_100g.jpg" />
+    <Content Include="DocImg\Nestea_Iced_Tea_Lemon_400g.jpg" />
+    <Content Include="DocImg\Nestle ChefsNeed Nescafe Gold Blend.jpg" />
+    <Content Include="DocImg\Nestle_Everyday_Dairy_Whitening_Powder_400g.jpg" />
+    <Content Include="DocImg\NIMBARKOrganic_Brown_Basmati_Rice_1kg.jpg" />
+    <Content Include="DocImg\Nimbark_.Organic_Turmeric_Powder_100gm.jpg" />
+    <Content Include="DocImg\Nimbark_Organic_Turmeric_Powder_100_gm.jpg" />
+    <Content Include="DocImg\Nivea- Women-Gas Free-Body-Deo-Freshpetal-&amp;-care-150ml.jpg" />
+    <Content Include="DocImg\Nivea-Refreshing-Face-Wash-%28Normal Skin%29-150ml.jpg" />
+    <Content Include="DocImg\Nivea-Refreshing-Face-Wash-%28Normal-Skin%29-150ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Fresh-Flower-Deodorant-150ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Fresh-Natural-Deo-150ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Gas--Free-Freshcitrus-&amp;-Care-150ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Gas-Free-Freshlily--&amp;-Sandal150ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Gas-Free-Freshrose-&amp;-Care-150ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Gas-Free-Whitemusk-&amp;-care-%28Body-Deo%29-120ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Pearl &amp; Beauty Beautiful underarms-150ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Pearl-&amp;-Beauty-Beautiful-underarms-150ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Protect &amp; Care-150ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Protect-&amp;-Care-150ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Whitening-%28Sensitive%29150ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Whitening-%28smooth skin%29150ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Whitening-%28smooth-skin%29150ml.jpg" />
+    <Content Include="DocImg\Nivea-Women-Whitening-%28talc-touch%29150ml.jpg" />
+    <Content Include="DocImg\Nivea_Dark_Spot_Reduction_10xVitamin_C_Effect%29_100ml.jpg" />
+    <Content Include="DocImg\Nivea_Deep_Impact_Face_Beard_Wash_Black_Carbon_100ml.jpg" />
+    <Content Include="DocImg\Nivea_Men_Oil_Control_All_In_One_Face_Wash_Pump_150ml.jpg" />
+    <Content Include="DocImg\Nivea_Oil_Control_Face_Wash_100ml.jpg" />
+    <Content Include="DocImg\Nivea_Oil_Control_Face_Wash_10xWhiteningeffect_100ml.jpg" />
+    <Content Include="DocImg\NIVEA_Soap_Creme_Soft.jpg" />
+    <Content Include="DocImg\Odonil_Smile_Bathroom_and_Car_Freshener_joy.jpg" />
+    <Content Include="DocImg\Oleev_Pomace_Oil_910 g.jpg" />
+    <Content Include="DocImg\Oleev_Pomace_Oil_910-g.jpg" />
+    <Content Include="DocImg\Organic Nation Wild Forrest Honey.jpg" />
+    <Content Include="DocImg\Organic _Acne_Control_Face_Wash_with_organic_Neem &amp;_Tea_Tree_100g.jpg" />
+    <Content Include="DocImg\Organic-Nation-Wild-Forrest-Honey.jpg" />
+    <Content Include="DocImg\Organic-_Acne_Control_Face_Wash_with_organic_Neem-&amp;_Tea_Tree_100g.jpg" />
+    <Content Include="DocImg\OrganicTattva_Masor_Malka_Split%29_500g.jpg" />
+    <Content Include="DocImg\Organic_Arhar_Tur_Dal.jpg" />
+    <Content Include="DocImg\Organic_Harvest_3IN1_Face_Wash_Paraben_Free_100g.jpg" />
+    <Content Include="DocImg\Organic_Harvest_6In1_Face_Wash_Oil_Control_Cleansing_Lightening_100g.jpg" />
+    <Content Include="DocImg\Organic_Harvest_Fresh &amp;_Glow_Face_Wash_With_Organic_Green_Tea_Sulphate_Free_100g.jpg" />
+    <Content Include="DocImg\Organic_Harvest_Fresh-&amp;_Glow_Face_Wash_With_Organic_Green_Tea_Sulphate_Free_100g.jpg" />
+    <Content Include="DocImg\Organic_Harvest_Oil_Control_Face_Wash_with_organic_Lemon_and_Orange_50g.jpg" />
+    <Content Include="DocImg\Organic_Harvest_Skin_Lightening_Face_Wash_50g.jpg" />
+    <Content Include="DocImg\Organic_India_Tulsi_Masala_Chai_100g.jpg" />
+    <Content Include="DocImg\Organic_Tattva_Brown_suger_500_g.jpg" />
+    <Content Include="DocImg\Organic_Tattva_Chana_Dal_500g.jpg" />
+    <Content Include="DocImg\Organic_Tattva_Kabuli_Chana_500g.jpg" />
+    <Content Include="DocImg\Organic_Tattva_Kala_Chana_500g.jpg" />
+    <Content Include="DocImg\Organic_Tattva_Urad_Dal_Whole_White_500g.jpg" />
+    <Content Include="DocImg\Paco_Rabanne_Lady_Million_Deodorant_150ml.jpg" />
+    <Content Include="DocImg\Palmolive_Natural_Black_Orchid_&amp;_Milk_Hand_Wash_250-ml.jpg" />
+    <Content Include="DocImg\Pampers_Active_Baby_Large_Size_Diapers_78Count.jpg" />
+    <Content Include="DocImg\Pantene_Pro_V_Hair_Fall_Control_Shampoo_340ml.jpg" />
+    <Content Include="DocImg\Park_Avenue_Alter_Ego_130.jpg" />
+    <Content Include="DocImg\Park_Avenue_ANTI_DANDRUFF_Beer_shampoo.jpg" />
+    <Content Include="DocImg\Park_Avenue_Explore140.jpg" />
+    <Content Include="DocImg\Park_Avenue_Neo_130.jpg" />
+    <Content Include="DocImg\Park_Avenue_Voyage_130.jpg" />
+    <Content Include="DocImg\Parle_Hide-&amp;_Seek_Chocolate_Chip_Cookies_120g.jpg" />
+    <Content Include="DocImg\Patanjali-Honey-Orange-Face-Wash-60gm.jpg" />
+    <Content Include="DocImg\Patanjali-Lemon-Honey-Face-Wash-60g.jpg" />
+    <Content Include="DocImg\Patanjali-Neem-Tulsi-Face-Wash-60gm.jpg" />
+    <Content Include="DocImg\Patanjali-Rose-Face-wash-60gm.jpg" />
+    <Content Include="DocImg\Patanjali-Saundarya-Face-Wash-Aloe-vera-Neem-Tulsi-Orange-Peel-100g.jpg" />
+    <Content Include="DocImg\Patanjali-Saundarya-Neem-Tulsi-Face-Wash-60g.jpg" />
+    <Content Include="DocImg\Pears-Oil-Clear-Glow-Face-with-Pure-Lemon-Flower-Extraxts-60g.jpg" />
+    <Content Include="DocImg\Pears-Pure-Gentle-Face-wash-with-pure-Glycerin-690g.jpeg" />
+    <Content Include="DocImg\Pears-Pure-Gentle-Face-wash-with-pure-Glycerin-690g.jpg" />
+    <Content Include="DocImg\Pears-Soft-Fresh-Bathing-Bar-125g.jpg" />
+    <Content Include="DocImg\Pears_Fresh_Renewal_Facewash_withgentle_Exfoliating.jpg" />
+    <Content Include="DocImg\Pepsodent_Expert_Protection_Complete.jpg" />
+    <Content Include="DocImg\PlayBoy_Berlin_150.jpg" />
+    <Content Include="DocImg\PlayBoy_NewSuper_PlayBoy_150.jpg" />
+    <Content Include="DocImg\Playboy_NewYork_150.jpg" />
+    <Content Include="DocImg\Ponds-Pimple-Clear-Target-Pimple-Face-Wash-100g.jpg" />
+    <Content Include="DocImg\Ponds-Pure-white-Face-Wash-100g.jpg" />
+    <Content Include="DocImg\Ponds-White-Beauty-Spot-less-Fairness--Face-Wash-100g.jpg" />
+    <Content Include="DocImg\Pril_Perfect_Active_2xMolecules_425_ml.jpg" />
+    <Content Include="DocImg\Quaker_Oats_Pouch_1kg.jpg" />
+    <Content Include="DocImg\Red_Label_Tea_Leaf_Carton_500g.jpg" />
+    <Content Include="DocImg\Revlon_Charlie_Blue_Perfumed_Body_Spray_150ml.jpg" />
+    <Content Include="DocImg\RostaaSalted_Mix.jpg" />
+    <Content Include="DocImg\Rostaa_Being_Healthy.jpg" />
+    <Content Include="DocImg\Rostaa_Berrylicious_Sweet_Delicious.jpg" />
+    <Content Include="DocImg\rostaa_blueberry.jpg" />
+    <Content Include="DocImg\Rostaa_Cranberry_Blueberry_Fusion.jpg" />
+    <Content Include="DocImg\Rostaa_Dried_Cherries.jpg" />
+    <Content Include="DocImg\Rostaa_FruitBerry_Fusion.jpg" />
+    <Content Include="DocImg\Rostaa_Golden_Apricot.jpg" />
+    <Content Include="DocImg\Rostaa_Golden_Berries.jpg" />
+    <Content Include="DocImg\Rostaa_Morning_Berries.jpg" />
+    <Content Include="DocImg\Rostaa_Pouch_Hazelnuts.jpg" />
+    <Content Include="DocImg\Rostaa_Roasted_Salted_Cashew.jpg" />
+    <Content Include="DocImg\Rostaa_Roasted_Salted_Pepper_Cashew.jpg" />
+    <Content Include="DocImg\Rostaa_Trail_Mix.jpg" />
+    <Content Include="DocImg\Rostaa_Turkish_Apricots.jpg" />
+    <Content Include="DocImg\Rostaa_Turkish_Delight.jpg" />
+    <Content Include="DocImg\Schwarzkopf_BC_Bonacure_Hair_Therapy.jpg" />
+    <Content Include="DocImg\SensodyneRapid_Relief_Toothpaste.jpg" />
+    <Content Include="DocImg\Stayfree_Advanced_Ultra_Comfort_With_Wings.jpg" />
+    <Content Include="DocImg\sunflower_seed_jewel_farmer.jpg" />
+    <Content Include="DocImg\Sunsilk_Nourishing_Soft_and_Smooth_Shampoo.jpg" />
+    <Content Include="DocImg\SurfExcel_Matic_Top_Load_Detergent_Powder_4kg_with_Free_2kg.jpg" />
+    <Content Include="DocImg\Surf_Excel_Matic_Front_Load_Liquid_Detergent.jpg" />
+    <Content Include="DocImg\Surf_Excel_Matic_Liquid_Detergent_Top_Load.jpg" />
+    <Content Include="DocImg\Tata Tea Gold1kg.jpg" />
+    <Content Include="DocImg\Tata-Tea-Gold1kg.jpg" />
+    <Content Include="DocImg\Tata_Premium_Tea_250gm.jpg" />
+    <Content Include="DocImg\Tata_Salt_Lite_1_kg.jpg" />
+    <Content Include="DocImg\tattva-sugar-white-500gm.jpg" />
+    <Content Include="DocImg\Tetley_Green_Tea_Bags_Ginger_Mint_Lemon.jpg" />
+    <Content Include="DocImg\Tresemme_Smooth_n_Shine_Shampoo_580ml.jpg" />
+    <Content Include="DocImg\United-Dreams--Love-yourself-120ml.jpg" />
+    <Content Include="DocImg\United-Dreams-Stay-Positive-120ml.jpg" />
+    <Content Include="DocImg\United-Dreams-United-Colors-%28Blue-for-her%29-Deo-Spray-150ml.jpg" />
+    <Content Include="DocImg\Vanish_Oxi_Action_Stain_Remover_Liquid_800_ml.jpg" />
+    <Content Include="DocImg\Vardhan Poha.jpg" />
+    <Content Include="DocImg\Victoria_s Secret-Blush-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s Secret-Glan angel-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s Secret-Gold Angel-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s Secret-Night Angel-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s Secret-Pure Seduction-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s Secret-Rush-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s Secret-Shot of coconut-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s Secret-Vanilla-Lace-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s Secret-Velvet Petals-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Bare Vanilla-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Bare-Vanilla-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Blush-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Glan-angel-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Gold-Angel-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Love-Spell-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Night-Angel-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Passion-Struck-Fragrance-Mist-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Rush-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Shot-of-coconut-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Temptation%28water Blooms%29-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Temptation%28water-Blooms%29-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Vanilla-Lace-250ml.jpg" />
+    <Content Include="DocImg\Victoria_s-Secret-Velvet-Petals-250ml.jpg" />
+    <Content Include="DocImg\Vim-Dishwash-Bar-Tub-Pack.jpg" />
+    <Content Include="DocImg\Vim_Dishwash_Gel_Lemon_750ml.jpg" />
+    <Content Include="DocImg\WildStone_Ultra_Sensual_150.jpg" />
+    <Content Include="DocImg\Wild_Stone_Aqua_Fresh_150.jpg" />
+    <Content Include="DocImg\Wild_Stone_Edge_deo_150.jpg" />
+    <Content Include="DocImg\Wild_Stone_Forest_Spice_150.jpg" />
+    <Content Include="DocImg\Wild_Stone_Legend_150.jpg" />
+    <Content Include="DocImg\Wild_Stone_Ultra_Sensual_Deodorant_Spray.jpg" />
+    <Content Include="DocImg\Women-Engage-Engage -tease-120ml.jpg" />
+    <Content Include="DocImg\Women-Engage-Engage--tease-120ml.jpg" />
+    <Content Include="DocImg\Women-Engage-Engage-Drizzle-120ml.jpg" />
+    <Content Include="DocImg\Women-Engage-W2-Perfume-Spray-120ml.jpg" />
+    <Content Include="DocImg\Women-Engage-W3-Perfume-Spray-120ml.jpg" />
+    <Content Include="DocImg\Women-Engage-W4-Perfume-Spray-120ml.jpg" />
+    <Content Include="DocImg\Yardley London-Lace -150ml.jpg" />
+    <Content Include="DocImg\Yardley-London-Country- Breeze-150ml.jpg" />
+    <Content Include="DocImg\Yardley-London-Country--Breeze-150ml.jpg" />
+    <Content Include="DocImg\Yardley-London-English-%28Bluebell%29-Refreshing-Body-Spray-150ml.jpg" />
+    <Content Include="DocImg\Yardley-London-English-Lavender-150ml.jpg" />
+    <Content Include="DocImg\Yardley-London-Imperial-Jasmine-150ml.jpg" />
+    <Content Include="DocImg\Yardley-London-Imperial-Sandalwood-150ml.jpg" />
+    <Content Include="DocImg\Yardley-London-Lace--150ml.jpg" />
+    <Content Include="DocImg\Yardley-London-Lace-Satin-150ml.jpg" />
+    <Content Include="DocImg\Yardley-London-London-Mist-150ml.jpg" />
+    <Content Include="DocImg\Yardley-London-Morning-Dew-150ml.jpg" />
+    <Content Include="DocImg\Yardley-London-Royal-Red-Rose-150ml.jpg" />
+    <Content Include="DocImg\_Chicco_Nappy_Cream_100ml_Baby_Moments.jpg" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\img\Thumbs.db" />
+    <Content Include="DocImg\74e80e2d-2e3e-4a68-be01-5483b6899777" />
+    <Content Include="DocImg\8aa5e0e0-2fe2-47dc-9bee-8b8b2340a6a7" />
+    <Content Include="DocImg\Clean_&amp;_Dry_Intimate_Wash_184ml.webp" />
+    <Content Include="DocImg\de47d847-35f7-4765-8c8a-3926196d10bf" />
+    <Content Include="DocImg\desktop.ini" />
+    <Content Include="DocImg\Nivea-Women-Gas Free-Whitemusk &amp; care %28Body Deo%29-120ml.webp" />
+    <Content Include="WebSiteTheme\apple-touch-icon.png" />
+    <Content Include="WebSiteTheme\css\slider-1.css" />
+    <Content Include="WebSiteTheme\css\style.css" />
+    <Content Include="WebSiteTheme\favicon.png" />
+    <Content Include="WebSiteTheme\images\ads.jpg" />
+    <Content Include="WebSiteTheme\images\banner.jpg" />
+    <Content Include="WebSiteTheme\images\banner1.jpg" />
+    <Content Include="WebSiteTheme\images\banner\1.jpg" />
+    <Content Include="WebSiteTheme\images\banner\banner1.jpg" />
+    <Content Include="WebSiteTheme\images\banner\banner2.jpg" />
+    <Content Include="WebSiteTheme\images\banner\banner3.png" />
+    <Content Include="WebSiteTheme\images\banner\fashion-3.jpg" />
+    <Content Include="WebSiteTheme\images\banner\jewelry.jpg" />
+    <Content Include="WebSiteTheme\images\blog\1.jpg" />
+    <Content Include="WebSiteTheme\images\blog\10.jpg" />
+    <Content Include="WebSiteTheme\images\blog\2.jpg" />
+    <Content Include="WebSiteTheme\images\blog\3.jpg" />
+    <Content Include="WebSiteTheme\images\blog\4.jpg" />
+    <Content Include="WebSiteTheme\images\blog\5.jpg" />
+    <Content Include="WebSiteTheme\images\blog\6.jpg" />
+    <Content Include="WebSiteTheme\images\blog\7.jpg" />
+    <Content Include="WebSiteTheme\images\blog\8.jpg" />
+    <Content Include="WebSiteTheme\images\blog\9.jpg" />
+    <Content Include="WebSiteTheme\images\blog\blog-detail.jpg" />
+    <Content Include="WebSiteTheme\images\blog\home-1.jpg" />
+    <Content Include="WebSiteTheme\images\blog\home-2.jpg" />
+    <Content Include="WebSiteTheme\images\blog\home-3.jpg" />
+    <Content Include="WebSiteTheme\images\blog\list-1.jpg" />
+    <Content Include="WebSiteTheme\images\blog\list-2.jpg" />
+    <Content Include="WebSiteTheme\images\blog\list-3.jpg" />
+    <Content Include="WebSiteTheme\images\blog\list-4.jpg" />
+    <Content Include="WebSiteTheme\images\collection\fashion-2\1.jpg" />
+    <Content Include="WebSiteTheme\images\collection\fashion-2\2.jpg" />
+    <Content Include="WebSiteTheme\images\collection\fashion-2\3.jpg" />
+    <Content Include="WebSiteTheme\images\collection\fashion-3\1.jpg" />
+    <Content Include="WebSiteTheme\images\collection\fashion-3\2.jpg" />
+    <Content Include="WebSiteTheme\images\collection\fashion-3\3.jpg" />
+    <Content Include="WebSiteTheme\images\collection\fashion-3\4.jpg" />
+    <Content Include="WebSiteTheme\images\collection\home-1.jpg" />
+    <Content Include="WebSiteTheme\images\collection\home-2.jpg" />
+    <Content Include="WebSiteTheme\images\collection\home-3.jpg" />
+    <Content Include="WebSiteTheme\images\collection\home-4.jpg" />
+    <Content Include="WebSiteTheme\images\collection\home-5.jpg" />
+    <Content Include="WebSiteTheme\images\collection\jewelry\1.jpg" />
+    <Content Include="WebSiteTheme\images\collection\jewelry\2.jpg" />
+    <Content Include="WebSiteTheme\images\collection\jewelry\3.jpg" />
+    <Content Include="WebSiteTheme\images\collection\jewelry\4.jpg" />
+    <Content Include="WebSiteTheme\images\collection\product-grid\1.jpg" />
+    <Content Include="WebSiteTheme\images\collection\product-grid\2.jpg" />
+    <Content Include="WebSiteTheme\images\flag\china.svg" />
+    <Content Include="WebSiteTheme\images\flag\japan.svg" />
+    <Content Include="WebSiteTheme\images\flag\singapore.svg" />
+    <Content Include="WebSiteTheme\images\flag\usa.svg" />
+    <Content Include="WebSiteTheme\images\home-jewelry\campaign.png" />
+    <Content Include="WebSiteTheme\images\logo-3.png" />
+    <Content Include="WebSiteTheme\images\logo-4.png" />
+    <Content Include="WebSiteTheme\images\logo-jewelry.png" />
+    <Content Include="WebSiteTheme\images\logo.png" />
+    <Content Include="WebSiteTheme\images\marker.png" />
+    <Content Include="WebSiteTheme\images\offers\fashion-3.jpg" />
+    <Content Include="WebSiteTheme\images\offers\home-offer-1.jpg" />
+    <Content Include="WebSiteTheme\images\offers\offer-jewelry.jpg" />
+    <Content Include="WebSiteTheme\images\partner\1.png" />
+    <Content Include="WebSiteTheme\images\partner\2.png" />
+    <Content Include="WebSiteTheme\images\partner\3.png" />
+    <Content Include="WebSiteTheme\images\partner\4.png" />
+    <Content Include="WebSiteTheme\images\partner\5.png" />
+    <Content Include="WebSiteTheme\images\partner\partner-2\1.jpg" />
+    <Content Include="WebSiteTheme\images\partner\partner-2\2.jpg" />
+    <Content Include="WebSiteTheme\images\partner\partner-2\3.jpg" />
+    <Content Include="WebSiteTheme\images\partner\partner-2\4.jpg" />
+    <Content Include="WebSiteTheme\images\partner\partner-2\5.jpg" />
+    <Content Include="WebSiteTheme\images\partner\partner-2\6.jpg" />
+    <Content Include="WebSiteTheme\images\payment-method\master-card.png" />
+    <Content Include="WebSiteTheme\images\payment-method\paypal.png" />
+    <Content Include="WebSiteTheme\images\payment-method\visa.png" />
+    <Content Include="WebSiteTheme\images\payment\01.png" />
+    <Content Include="WebSiteTheme\images\payment\1.png" />
+    <Content Include="WebSiteTheme\images\payment\2.png" />
+    <Content Include="WebSiteTheme\images\payment\3.png" />
+    <Content Include="WebSiteTheme\images\payment\4.png" />
+    <Content Include="WebSiteTheme\images\payment\5.png" />
+    <Content Include="WebSiteTheme\images\product\fashion-1.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-2.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-2\1.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-2\2.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-2\3.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-2\4.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-2\5.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-2\6.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-2\7.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-2\8.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-3.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-4.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-5.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-6.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-7.jpg" />
+    <Content Include="WebSiteTheme\images\product\fashion-8.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\1.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\10.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\11.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\12.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\13.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\14.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\15.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\16.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\17.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\18.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\19.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\2.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\20.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\3.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\4.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\5.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\6.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\7.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\8.jpg" />
+    <Content Include="WebSiteTheme\images\product\jewelry\9.jpg" />
+    <Content Include="WebSiteTheme\images\shoe-detail\1.jpg" />
+    <Content Include="WebSiteTheme\images\shoe-detail\2.jpg" />
+    <Content Include="WebSiteTheme\images\shoe-detail\3.jpg" />
+    <Content Include="WebSiteTheme\images\shopping-cart\1.jpg" />
+    <Content Include="WebSiteTheme\images\shopping-cart\2.jpg" />
+    <Content Include="WebSiteTheme\images\shopping-cart\3.jpg" />
+    <Content Include="WebSiteTheme\images\slider\slider-1.jpg" />
+    <Content Include="WebSiteTheme\images\slider\slider-2.jpg" />
+    <Content Include="WebSiteTheme\images\slider\slider-3.jpg" />
+    <Content Include="WebSiteTheme\images\slider\slider-4.jpg" />
+    <Content Include="WebSiteTheme\images\slider\slider-5.jpg" />
+    <Content Include="WebSiteTheme\images\slider\slider-6.jpg" />
+    <Content Include="WebSiteTheme\images\slider\slider-7.jpg" />
+    <Content Include="WebSiteTheme\images\slider\slider-8.jpg" />
+    <Content Include="WebSiteTheme\images\subscribe.jpg" />
+    <Content Include="WebSiteTheme\images\user\1.jpg" />
+    <Content Include="WebSiteTheme\images\user\2.jpg" />
+    <Content Include="WebSiteTheme\images\user\3.jpg" />
+    <Content Include="WebSiteTheme\images\user\4.jpg" />
+    <Content Include="WebSiteTheme\images\user\5.jpg" />
+    <Content Include="WebSiteTheme\js\main.js" />
+    <Content Include="WebSiteTheme\js\slider-1.js" />
+    <Content Include="WebSiteTheme\js\slider-2.js" />
+    <Content Include="WebSiteTheme\js\slider-3.js" />
+    <Content Include="WebSiteTheme\plugins\bootstrap-select\dist\css\bootstrap-select.min.css" />
+    <Content Include="WebSiteTheme\plugins\bootstrap-select\dist\js\bootstrap-select.min.js" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\js\npm.js" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\images\large\image1.jpg" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\images\large\image2.jpg" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\images\large\image3.jpg" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\images\large\image4.jpg" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\images\small\image1.png" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\images\small\image2.png" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\images\small\image3.png" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\images\small\image4.png" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\images\thumb\image1.jpg" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\images\thumb\image2.jpg" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\images\thumb\image3.jpg" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\images\thumb\image4.jpg" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\images\window-positions.png" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\jquery.elevateZoom-3.0.8.min.js" />
+    <Content Include="WebSiteTheme\plugins\elevatezoom\jquery.elevatezoom.js" />
+    <Content Include="WebSiteTheme\plugins\font-awesome\css\font-awesome.css" />
+    <Content Include="WebSiteTheme\plugins\font-awesome\css\font-awesome.min.css" />
+    <Content Include="WebSiteTheme\plugins\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="WebSiteTheme\plugins\gmap3.min.js" />
+    <Content Include="WebSiteTheme\plugins\imagesloaded.pkgd.js" />
+    <Content Include="WebSiteTheme\plugins\isotope.pkgd.min.js" />
+    <Content Include="WebSiteTheme\plugins\jquery-bar-rating\dist\jquery.barrating.min.js" />
+    <Content Include="WebSiteTheme\plugins\jquery-bar-rating\dist\themes\bars-1to10.css" />
+    <Content Include="WebSiteTheme\plugins\jquery-bar-rating\dist\themes\bars-horizontal.css" />
+    <Content Include="WebSiteTheme\plugins\jquery-bar-rating\dist\themes\bars-movie.css" />
+    <Content Include="WebSiteTheme\plugins\jquery-bar-rating\dist\themes\bars-pill.css" />
+    <Content Include="WebSiteTheme\plugins\jquery-bar-rating\dist\themes\bars-reversed.css" />
+    <Content Include="WebSiteTheme\plugins\jquery-bar-rating\dist\themes\bars-square.css" />
+    <Content Include="WebSiteTheme\plugins\jquery-bar-rating\dist\themes\bootstrap-stars.css" />
+    <Content Include="WebSiteTheme\plugins\jquery-bar-rating\dist\themes\css-stars.css" />
+    <Content Include="WebSiteTheme\plugins\jquery-bar-rating\dist\themes\fontawesome-stars-o.css" />
+    <Content Include="WebSiteTheme\plugins\jquery-bar-rating\dist\themes\fontawesome-stars.css" />
+    <Content Include="WebSiteTheme\plugins\jquery.countTo.js" />
+    <Content Include="WebSiteTheme\plugins\jquery.matchHeight-min.js" />
+    <Content Include="WebSiteTheme\plugins\jquery.sticky-sidebar.min.js" />
+    <Content Include="WebSiteTheme\plugins\jquery.waypoints.min.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\dist\jquery.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\dist\jquery.min.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\ajax.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\ajax\jsonp.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\ajax\load.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\ajax\parseJSON.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\ajax\parseXML.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\ajax\script.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\ajax\var\nonce.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\ajax\var\rquery.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\ajax\xhr.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\attributes.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\attributes\attr.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\attributes\classes.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\attributes\prop.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\attributes\support.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\attributes\val.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\callbacks.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\core.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\core\access.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\core\init.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\core\parseHTML.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\core\ready.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\core\var\rsingleTag.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\css.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\css\addGetHookIf.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\css\curCSS.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\css\defaultDisplay.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\css\hiddenVisibleSelectors.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\css\support.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\css\swap.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\css\var\cssExpand.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\css\var\isHidden.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\css\var\rmargin.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\css\var\rnumnonpx.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\data.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\data\accepts.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\data\support.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\deferred.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\deprecated.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\dimensions.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\effects.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\effects\animatedSelector.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\effects\support.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\effects\Tween.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\event.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\event\ajax.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\event\alias.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\event\support.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\exports\amd.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\exports\global.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\intro.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\jquery.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\manipulation.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\manipulation\support.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\manipulation\var\rcheckableType.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\manipulation\_evalUrl.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\offset.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\outro.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\queue.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\queue\delay.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\selector-sizzle.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\selector.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\serialize.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\sizzle\dist\sizzle.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\sizzle\dist\sizzle.min.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\support.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\traversing.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\traversing\findFilter.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\traversing\var\rneedsContext.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\var\class2type.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\var\concat.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\var\deletedIds.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\var\hasOwn.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\var\indexOf.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\var\pnum.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\var\push.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\var\rnotwhite.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\var\slice.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\var\strundefined.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\var\support.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\var\toString.js" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\wrap.js" />
+    <Content Include="WebSiteTheme\plugins\masonry.pkgd.min.js" />
+    <Content Include="WebSiteTheme\plugins\overflow-text.js" />
+    <Content Include="WebSiteTheme\plugins\owl-carousel\assets\owl.carousel.css" />
+    <Content Include="WebSiteTheme\plugins\owl-carousel\owl.carousel.min.js" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\001-customer-service.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\001-delivery-truck.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\001-right-arrow.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\002-connection.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\002-left-arrow.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\002-money-1.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\back.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\combined-shape-5206.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\combined-shape-5279.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\combined-shape-5284.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\group-4.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\heart.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\magnifying-glass.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\mail.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\next - Copy.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\next.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\notify.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\profile.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon-svg\shopping-cart.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon\demo-files\demo.css" />
+    <Content Include="WebSiteTheme\plugins\ps-icon\demo-files\demo.js" />
+    <Content Include="WebSiteTheme\plugins\ps-icon\demo.html" />
+    <Content Include="WebSiteTheme\plugins\ps-icon\fonts\ps-icon.svg" />
+    <Content Include="WebSiteTheme\plugins\ps-icon\Read Me.txt" />
+    <Content Include="WebSiteTheme\plugins\ps-icon\style.css" />
+    <Content Include="WebSiteTheme\plugins\ResizeSensor.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\coloredbg.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\gridtile.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\gridtile_3x3.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\gridtile_3x3_white.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\gridtile_white.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\loader.gif" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\sources\fb.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\sources\fr.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\sources\ig.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\sources\post.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\sources\revolution_slide1.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\sources\revolution_slide2.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\sources\tw.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\sources\vm.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\sources\wc.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\sources\yt.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\svg\index.php" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\closedhand.cur" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\index.php" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\layers.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\ares.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\custom.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\dione.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\erinyen.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\gyges.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\hades.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\hebe.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\hephaistos.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\hermes.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\hesperiden.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\metis.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\persephone.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\uranus.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation-skins\zeus.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\navigation.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\openhand.cur" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\settings-source.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\settings.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\tp-color-picker.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\font-awesome\css\font-awesome.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\font-awesome\css\font-awesome.min.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\font-awesome\index.php" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\index.php" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\pe-icon-7-stroke\css\helper.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\pe-icon-7-stroke\css\index.php" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\pe-icon-7-stroke\css\pe-icon-7-stroke.css" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\pe-icon-7-stroke\fonts\index.php" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.svg" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\pe-icon-7-stroke\index.php" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\revicons\index.php" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\revicons\revicons.svg" />
+    <Content Include="WebSiteTheme\plugins\revolution\images\tpcolorpicker\arrow_down.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\images\tpcolorpicker\arrow_up.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\images\tpcolorpicker\check.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\images\tpcolorpicker\check_reverse.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\images\tpcolorpicker\check_small.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\images\tpcolorpicker\delete.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\images\tpcolorpicker\exit.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\images\tpcolorpicker\point_bottom.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\images\tpcolorpicker\point_top.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\images\tpcolorpicker\save.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\images\tpcolorpicker\trans_tile.png" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\index.php" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\revolution.extension.actions.min.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\revolution.extension.carousel.min.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\revolution.extension.kenburn.min.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\revolution.extension.layeranimation.min.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\revolution.extension.migration.min.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\revolution.extension.navigation.min.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\revolution.extension.parallax.min.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\revolution.extension.slideanims.min.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\revolution.extension.video.min.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\source\index.php" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\source\revolution.extension.actions.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\source\revolution.extension.carousel.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\source\revolution.extension.kenburn.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\source\revolution.extension.layeranimation.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\source\revolution.extension.migration.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\source\revolution.extension.navigation.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\source\revolution.extension.parallax.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\source\revolution.extension.slideanims.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\source\revolution.extension.video.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\index.php" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\jquery.themepunch.enablelog.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\jquery.themepunch.revolution.min.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\jquery.themepunch.tools.min.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\source\index.php" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\source\jquery.themepunch.enablelog.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\source\jquery.themepunch.revolution.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\source\jquery.themepunch.tools.min.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\source\tp-color-picker.js" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\tp-color-picker.min.js" />
+    <Content Include="WebSiteTheme\plugins\slick\slick\ajax-loader.gif" />
+    <Content Include="WebSiteTheme\plugins\slick\slick\fonts\slick.svg" />
+    <Content Include="WebSiteTheme\plugins\slick\slick\slick.css" />
+    <Content Include="WebSiteTheme\plugins\slick\slick\slick.js" />
+    <Content Include="WebSiteTheme\plugins\slick\slick\slick.min.js" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\siteuser\profile.less" />
+    <None Include="Properties\Settings.settings" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Login1\Login1.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\OTP.cshtml" />
+    <Content Include="Views\Address\AddAddress.cshtml" />
+    <Content Include="Views\Address\AddressesList.cshtml" />
+    <Content Include="Views\Address\Index.cshtml" />
+    <Content Include="Views\Blank\Index.cshtml" />
+    <Content Include="Views\ChangePassword\Index.cshtml" />
+    <Content Include="Views\ChangePassword\WebHomeChangePassword.cshtml" />
+    <Content Include="Views\Checkout\Index.cshtml" />
+    <Content Include="Views\Checkout\OrderSuccessful.cshtml" />
+    <Content Include="Views\ContactUs\Index.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard\MyBusiness.cshtml" />
+    <Content Include="Views\Dashboard\PersonalProfile.cshtml" />
+    <Content Include="Views\Dashboard\Product.cshtml" />
+    <Content Include="Views\Dashboard\ProductDetail.cshtml" />
+    <Content Include="Views\ForgetPassword\Index.cshtml" />
+    <Content Include="Views\Interest\index.cshtml" />
+    <Content Include="Views\Login\Register.cshtml" />
+    <Content Include="Views\Login\ResetPasword.cshtml" />
+    <Content Include="Views\Login\WebResetPassword.cshtml" />
+    <Content Include="Views\Login\GetStart.cshtml" />
+    <Content Include="Views\ProductCatWise\Index.cshtml" />
+    <Content Include="Views\ProductCatWise\PageCountingPartialView.cshtml" />
+    <Content Include="Views\ProductCatWise\PartialCatwiseProductPrice.cshtml" />
+    <Content Include="Views\ProductCatWise\PartialCatwiseProductValue.cshtml" />
+    <Content Include="Views\Products\Product.cshtml" />
+    <Content Include="Views\Products\ProductList.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Quotes\Index.cshtml" />
+    <Content Include="Views\Registeration\Index.cshtml" />
+    <Content Include="Views\Shared\_AddAddress.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_LayoutRegisteration.cshtml" />
+    <Content Include="Views\Shared\_OTP.cshtml" />
+    <Content Include="Views\Shared\_Pagination.cshtml" />
+    <Content Include="Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Views\Shared\_VisitorFooter.cshtml" />
+    <Content Include="Views\Shared\_VisitorHeader.cshtml" />
+    <Content Include="Views\Shared\_VisitorLayout.cshtml" />
+    <Content Include="Views\Shared\_WebQuickView.cshtml" />
+    <Content Include="Views\Shared\_WebsiteFooter.cshtml" />
+    <Content Include="Views\Shared\_WebsiteHeader.cshtml" />
+    <Content Include="Views\Shared\_WebsiteLayout.cshtml" />
+    <Content Include="Views\Shared\_WebSiteSidebar.cshtml" />
+    <Content Include="Views\ViewCart\ViewCart.cshtml" />
+    <Content Include="Views\WebCompare\Index.cshtml" />
+    <Content Include="Views\WebContactUs\Index.cshtml" />
+    <Content Include="Views\WebHome\Index.cshtml" />
+    <Content Include="Views\WebHome\MyOrders.cshtml" />
+    <Content Include="Views\WebHome\OrderDetails.cshtml" />
+    <Content Include="Views\WebHome\ProductDetail.cshtml" />
+    <Content Include="Views\WebHome\SearchBar.cshtml" />
+    <Content Include="Views\WebHome\WishList.cshtml" />
+    <Content Include="Views\WebLogin\Index.cshtml" />
+    <Content Include="Views\WebsiteForgetPassword\Index.cshtml" />
+    <Content Include="WebSiteTheme\css\style.css.map" />
+    <Content Include="WebSiteTheme\js\main.js.map" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="WebSiteTheme\plugins\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="WebSiteTheme\plugins\font-awesome\css\font-awesome.css.map" />
+    <Content Include="WebSiteTheme\plugins\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="WebSiteTheme\plugins\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="WebSiteTheme\plugins\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="WebSiteTheme\plugins\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="WebSiteTheme\plugins\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="WebSiteTheme\plugins\jquery\dist\jquery.min.map" />
+    <Content Include="WebSiteTheme\plugins\jquery\src\sizzle\dist\sizzle.min.map" />
+    <Content Include="WebSiteTheme\plugins\ps-icon.zip" />
+    <Content Include="WebSiteTheme\plugins\ps-icon\fonts\ps-icon.eot" />
+    <Content Include="WebSiteTheme\plugins\ps-icon\fonts\ps-icon.ttf" />
+    <Content Include="WebSiteTheme\plugins\ps-icon\fonts\ps-icon.woff" />
+    <Content Include="WebSiteTheme\plugins\ps-icon\selection.json" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\.DS_Store" />
+    <Content Include="WebSiteTheme\plugins\revolution\assets\svg\svg.zip" />
+    <Content Include="WebSiteTheme\plugins\revolution\css\.DS_Store" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\.DS_Store" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\font-awesome\.DS_Store" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\pe-icon-7-stroke\.DS_Store" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.eot" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.ttf" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.woff" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\revicons\revicons.eot" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\revicons\revicons.ttf" />
+    <Content Include="WebSiteTheme\plugins\revolution\fonts\revicons\revicons.woff" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\.DS_Store" />
+    <Content Include="WebSiteTheme\plugins\revolution\js\extensions\.DS_Store" />
+    <Content Include="WebSiteTheme\plugins\slick\slick\fonts\slick.eot" />
+    <Content Include="WebSiteTheme\plugins\slick\slick\fonts\slick.ttf" />
+    <Content Include="WebSiteTheme\plugins\slick\slick\fonts\slick.woff" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53693</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53693/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,34 @@
+﻿@model PrivateSquareWeb.Models.LoginModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@using (Html.BeginForm("ForgetPassword", "ForgetPassword", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <p class="text-center private-squares-heading">private<span class="pvt-sq-col">squares</span> helps to connect and share with the people in your life.</p>
+        <div class="col-md-7 pull-left"><img src="~/theme/img/login-img.jpg" class="img-full" /></div>
+        <div class="col-md-5 pull-left image-padding">
+            <div class="signin-box pull-right">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", placeholder = "Enter Email Id" })
+                    @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
+                </div><!-- form-group -->
+
+                <div class="form-group">
+                    <p style="color:red">
+                        @ViewBag.ResponseMessage
+                    </p>
+                    <input type="submit" value="Submit" class="btn btn-block btn-sign-in" />
+                    <a href="/Login/Index">Login</a>
+                </div><!-- form-group -->
+
+            </div>
+        </div>
+    </div>
+}
+
+
