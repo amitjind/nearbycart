@@ -50,8 +50,8 @@ namespace PrivateSquareWeb.Controllers.Website
 			ViewBag.NumberOfPages = SearchProductList.Count / 10;
 			ViewBag.LowerLimit = 1;
 			ViewBag.NumberOfPages = 5;
-			var ProductCategory = ProductCatList.Where(x => x.Id.Equals(Id));
-			ViewBag.ProductCatList = EncodedCategories.Where(x =>x.ParentCatId==ProductCategory.Single().ParentCatId);
+            var ProductCategory = ProductCatList.Where(x => x.Id.Equals(Id));         
+            ViewBag.ProductCatList = EncodedCategories.Where(x =>x.ParentCatId==ProductCategory.Single().ParentCatId);
 			objmodel.CategoryName = ProductCategory.Single().Name;
 			return View(objmodel);
 		}

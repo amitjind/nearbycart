@@ -29,15 +29,15 @@
 <body class="ps-loading">
 
     <header>
+        <div id="headerDiv">
+            @{
 
-        @{
 
 
+                Html.RenderAction("HeaderValue", "WebsiteHeader");
 
-            Html.RenderAction("HeaderValue", "WebsiteHeader");
-
-        }
-
+            }
+        </div>
     </header>
 
     <div>

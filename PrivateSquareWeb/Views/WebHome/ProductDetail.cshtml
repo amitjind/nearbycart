@@ -95,7 +95,7 @@
 <script>
     //this add to cart call in web site Product Details page
     var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
-    
+        debugger
         var salePrice = SellingPrice;
         var discountPrice = DiscountPrice;
         var ProductId = Id;
@@ -123,7 +123,7 @@
                 TotalAmount: TotalAmount
             },
             success: function (result) {
-
+                debugger
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
 
                 swal(" ", "Product Added to the Cart", "success");

@@ -81,17 +81,22 @@
                         <img src="~/WebSiteTheme/images/product/fashion-1.jpg" alt="">
 
                     }
-                }  
+                }
+                @*<ul class="ps-product__actions">
+
+                    <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
+                    <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
+                </ul>*@
                 <ul class="ps-product__actions">
-               
-                    <li><a href="#" title="Favorite"><i class="ps-icon-heart" onclick="AddToWishlist(@Users.Id)"></i></a></li>
+                    <li><a href="javascript:void();" onclick="AddToCartCatWise('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage','@Users.ProductCatId')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
+                    <li><a href="javascript:void();" title="Favorite"> onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
                 </ul>
             </div>
             <div class="ps-product__content">
                 <a class="ps-product__title" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))">@Users.ProductName</a>
                 <p class="ps-product__price">
                    ₹@Users.DiscountPrice
-                </p><a class="ps-product__cart" onclick="AddToCartCatWise('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage','@Users.ProductCatId')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a>
+                </p>
             </div>
         </div>
     </div>

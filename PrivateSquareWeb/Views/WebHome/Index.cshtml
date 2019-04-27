@@ -7,7 +7,7 @@
 <script type="text/javascript">
     //this is a Customer home page
     var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
-        
+        debugger
         var salePrice = SellingPrice;
         var discountPrice = DiscountPrice;
         var ProductId = Id;
@@ -34,11 +34,13 @@
                 TotalAmount: TotalAmount
             },
             success: function (result) {
-               
+                debugger
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
-
+                @*$("#headerDiv").load('@Url.Action("~/Views/Shared/_WebsiteHeader.cshtml")');*@
+                @*$("#headerDiv").load('@Url.Action("~/Views/Shared/_WebsiteHeader.cshtml")');*@
+                 @*$("#headerDiv").load('@Url.Action("../../WebHome/Index")');*@
                 swal(" ", "Product Added to the Cart", "success");
-            },          
+            },
             error: function (error) {
                 console.log(error);
             }

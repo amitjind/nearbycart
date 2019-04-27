@@ -10,7 +10,7 @@
 <script type="text/javascript">
     //this is Product cata wise product show page & add cart ()
     var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
-
+        debugger
         var salePrice = SellingPrice;
         var discountPrice = DiscountPrice;
         var ProductId = Id;
@@ -175,10 +175,10 @@
                     <ul class="ps-list--checked">
                         @foreach (var Cat in ViewBag.ProductCatList)
                         {
-                            <li class="@(ViewBag.SearchCatId==Cat.EncodedId ? "current":"")"><a href="/ProductCatWise/Index/@Cat.EncodedId">@Cat.Name </a></li>
+                            <li class="@(ViewBag.SearchCatId==Cat.EncodedId ? "current":"")"><a href="/ProductCatWise/Index/@Cat.EncodedId">@Cat.Name  </a></li>
 
                         }
-                       
+
                     </ul>
                 </div>
             </aside>
