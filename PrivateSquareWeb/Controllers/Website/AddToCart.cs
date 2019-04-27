@@ -26,6 +26,7 @@ namespace PrivateSquareWeb.Controllers.Website
                 // var jsonList = JsonConvert.SerializeObject(CookiesListAddtoCart);
                 var jsonList = JsonConvert.SerializeObject(ListuniqueValues);
                 Services.SetCookie(httpContext, "addtocart", _JwtTokenManager.GenerateToken(jsonList));
+
                 return Json(jsonList);
             }
             else

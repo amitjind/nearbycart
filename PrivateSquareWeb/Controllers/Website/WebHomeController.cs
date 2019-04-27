@@ -11,114 +11,134 @@ namespace PrivateSquareWeb.Controllers.Website
     [HandleError]
 
     public class WebHomeController : Controller
-	{
-		JwtTokenManager _JwtTokenManager = new JwtTokenManager();
-		static List<ProductImages> EditProductImageList;
-		static List<ProductModel> ListAllProduct;
+    {
+        JwtTokenManager _JwtTokenManager = new JwtTokenManager();
+        static List<ProductImages> EditProductImageList;
+        static List<ProductModel> ListAllProduct;
 
-		// GET: WebHome
+        // GET: WebHome
 
-		[OutputCache(Duration = 60)]
-		public ActionResult Index()
-		{
-			if (ListAllProduct==null) {
-				ListAllProduct = CommonFile.GetProduct();
-			}
-			var PopularProducts= CommonFile.GetPopularProduct(0);
-			ViewBag.PopularProducts = PopularProducts;
-			ViewBag.FirstCategory = PopularProducts.Where(x => x.ParentCatId == long.Parse((Constant.ParentCategories[0]).ToString())).Take(Constant.NumberOfProductsInFrontPage);
-			ViewBag.SecondCategory = PopularProducts.Where(x => x.ParentCatId == Constant.ParentCategories[1]).Take(Constant.NumberOfProductsInFrontPage);
-			ViewBag.ThirdCategory = PopularProducts.Where(x => x.ParentCatId == Constant.ParentCategories[2]).Take(Constant.NumberOfProductsInFrontPage);
-			ViewBag.FourthCategory = PopularProducts.Where(x => x.ParentCatId == Constant.ParentCategories[3]).Take(Constant.NumberOfProductsInFrontPage);
-			ViewBag.FifthCategory = PopularProducts.Where(x => x.ParentCatId == Constant.ParentCategories[4]).Take(Constant.NumberOfProductsInFrontPage);
-			//ViewBag.FirstCategory = (CommonFile.GetPopularProduct(Constant.ParentCategories[0])).Take(Constant.NumberOfProductsInFrontPage);
-			//ViewBag.SecondCategory = (CommonFile.GetPopularProduct(Constant.ParentCategories[1])).Take(Constant.NumberOfProductsInFrontPage);
-			//ViewBag.ThirdCategory = (CommonFile.GetPopularProduct(Constant.ParentCategories[2])).Take(Constant.NumberOfProductsInFrontPage);
-			//ViewBag.FourthCategory = (CommonFile.GetPopularProduct(Constant.ParentCategories[3])).Take(Constant.NumberOfProductsInFrontPage);
-			//ViewBag.FifthCategory = (CommonFile.GetPopularProduct(Constant.ParentCategories[4])).Take(Constant.NumberOfProductsInFrontPage);
-			ViewBag.ProductCatList = CommonFile.GetProductCategory(null);
-			return View();
+        [OutputCache(Duration = 60)]
+        public ActionResult Index()
+        {
+            if (ListAllProduct == null) {
+                ListAllProduct = CommonFile.GetProduct();
+            }
+            var PopularProducts = CommonFile.GetPopularProduct(0);
+            ViewBag.PopularProducts = PopularProducts;
+            ViewBag.FirstCategory = PopularProducts.Where(x => x.ParentCatId == long.Parse((Constant.ParentCategories[0]).ToString())).Take(Constant.NumberOfProductsInFrontPage);
+            ViewBag.SecondCategory = PopularProducts.Where(x => x.ParentCatId == Constant.ParentCategories[1]).Take(Constant.NumberOfProductsInFrontPage);
+            ViewBag.ThirdCategory = PopularProducts.Where(x => x.ParentCatId == Constant.ParentCategories[2]).Take(Constant.NumberOfProductsInFrontPage);
+            ViewBag.FourthCategory = PopularProducts.Where(x => x.ParentCatId == Constant.ParentCategories[3]).Take(Constant.NumberOfProductsInFrontPage);
+            ViewBag.FifthCategory = PopularProducts.Where(x => x.ParentCatId == Constant.ParentCategories[4]).Take(Constant.NumberOfProductsInFrontPage);
+            //ViewBag.FirstCategory = (CommonFile.GetPopularProduct(Constant.ParentCategories[0])).Take(Constant.NumberOfProductsInFrontPage);
+            //ViewBag.SecondCategory = (CommonFile.GetPopularProduct(Constant.ParentCategories[1])).Take(Constant.NumberOfProductsInFrontPage);
+            //ViewBag.ThirdCategory = (CommonFile.GetPopularProduct(Constant.ParentCategories[2])).Take(Constant.NumberOfProductsInFrontPage);
+            //ViewBag.FourthCategory = (CommonFile.GetPopularProduct(Constant.ParentCategories[3])).Take(Constant.NumberOfProductsInFrontPage);
+            //ViewBag.FifthCategory = (CommonFile.GetPopularProduct(Constant.ParentCategories[4])).Take(Constant.NumberOfProductsInFrontPage);
+            ViewBag.ProductCatList = CommonFile.GetProductCategory(null);
+            return View();
 
-		}
+        }
 
-		public ActionResult ProductDetail(string Id)
-		{
-			long id = Convert.ToInt64(CommonFile.Decode(Id));
-			List<ProductModel> Product = GetProduct(id);
-			ProductModel objModel = new ProductModel();
-			if (Product != null && Product.Count() > 0)
-			{
-				objModel.Id = id;
-				objModel.ProductName = Product[0].ProductName;
-				objModel.ProductCatId = Product[0].ProductCatId;
-				objModel.ProductImage = Product[0].ProductImage;
-				objModel.SellingPrice = Product[0].SellingPrice;
-				objModel.DiscountPrice = Product[0].DiscountPrice;
-				objModel.BusinessId = Product[0].BusinessId;
-				objModel.UserId = Product[0].UserId;
-				objModel.Description = Product[0].Description;
-				objModel.VendorName = Product[0].VendorName;
-				objModel.ProductImages = Product[0].ProductImages;
+        public ActionResult ProductDetail(string Id)
+        {
+            long id=0;
+            try
+            {
+                id = Convert.ToInt64(CommonFile.Decode(Id));
+                List<ProductModel> Product = GetProduct(id);
+                ProductModel objModel = new ProductModel();
+                if (Product != null && Product.Count() > 0)
+                {
+                    objModel.Id = id;
+                    objModel.ProductName = Product[0].ProductName;
+                    objModel.ProductCatId = Product[0].ProductCatId;
+                    objModel.ProductImage = Product[0].ProductImage;
+                    objModel.SellingPrice = Product[0].SellingPrice;
+                    objModel.DiscountPrice = Product[0].DiscountPrice;
+                    objModel.BusinessId = Product[0].BusinessId;
+                    objModel.UserId = Product[0].UserId;
+                    objModel.Description = Product[0].Description;
+                    objModel.VendorName = Product[0].VendorName;
+                    objModel.ProductImages = Product[0].ProductImages;
 
-				List<ProductImages> ListProductImages = new List<ProductImages>();
-				if (!String.IsNullOrEmpty(objModel.ProductImages))
-				{
-					String[] ProductImages = objModel.ProductImages.Split(',');
-					ListProductImages = GetSelectedProductImages(ProductImages, objModel.ProductImage);
-					EditProductImageList = ListProductImages;
-					ViewBag.ProductImages = ListProductImages;
-				}
-				else
-				{
-					ViewBag.ProductImages = ListProductImages;
-				}
-			}
-			ViewBag.SimilarProductList = ListAllProduct.Where(x => x.ProductCatId == objModel.ProductCatId).ToList();       //ViewBag for showing similar products in the Product Detail Page
-			return View(objModel);
-		}
-		private List<ProductImages> GetSelectedProductImages(String[] ProductImages, String DefaultImage)
-		{
-			List<ProductImages> ListProductImages = new List<ProductImages>();
+                    List<ProductImages> ListProductImages = new List<ProductImages>();
+                    if (!String.IsNullOrEmpty(objModel.ProductImages))
+                    {
+                        String[] ProductImages = objModel.ProductImages.Split(',');
+                        ListProductImages = GetSelectedProductImages(ProductImages, objModel.ProductImage);
+                        EditProductImageList = ListProductImages;
+                        ViewBag.ProductImages = ListProductImages;
+                    }
+                    else
+                    {
+                        ViewBag.ProductImages = ListProductImages;
+                    }
+                }
+                ViewBag.SimilarProductList = ListAllProduct.Where(x => x.ProductCatId == objModel.ProductCatId).ToList();       //ViewBag for showing similar products in the Product Detail Page
+                return View(objModel);
+            }
+            catch (Exception ex)
+            {
+                return View("PageNotFound", "Eror");
+            }
+        
+        }
+        private List<ProductImages> GetSelectedProductImages(String[] ProductImages, String DefaultImage)
+        {
+            List<ProductImages> ListProductImages = new List<ProductImages>();
 
 
-			for (int i = 0; i < ProductImages.Length; i++)
-			{
-				ProductImages objProductImage = new ProductImages();
-				objProductImage.Name = ProductImages[i];
-				if (objProductImage.Name.Equals(DefaultImage))
-				{
-					objProductImage.IsSelected = true;
-				}
-				else
-				{
-					objProductImage.IsSelected = false;
-				}
-				ListProductImages.Add(objProductImage);
+            for (int i = 0; i < ProductImages.Length; i++)
+            {
+                ProductImages objProductImage = new ProductImages();
+                objProductImage.Name = ProductImages[i];
+                if (objProductImage.Name.Equals(DefaultImage))
+                {
+                    objProductImage.IsSelected = true;
+                }
+                else
+                {
+                    objProductImage.IsSelected = false;
+                }
+                ListProductImages.Add(objProductImage);
 
-			}
-			return ListProductImages;
-		}
+            }
+            return ListProductImages;
+        }
 
-		public List<ProductModel> GetProduct(long Id)
-		{
-			var GetProduct = new List<ProductModel>();
-			ProductModel objProduct = new ProductModel();
-			objProduct.Id = Id;
-			LoginModel MdUser = Services.GetLoginUser(this.ControllerContext.HttpContext, _JwtTokenManager);
-			var _request = JsonConvert.SerializeObject(objProduct);
-			ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetProductDetail, _request);
-			GetProduct = JsonConvert.DeserializeObject<List<ProductModel>>(ObjResponse.Response);
-			return GetProduct;
+        public List<ProductModel> GetProduct(long Id)
+        {
+            var GetProduct = new List<ProductModel>();
+            ProductModel objProduct = new ProductModel();
+            objProduct.Id = Id;
+            LoginModel MdUser = Services.GetLoginUser(this.ControllerContext.HttpContext, _JwtTokenManager);
+            var _request = JsonConvert.SerializeObject(objProduct);
+            ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetProductDetail, _request);
+            GetProduct = JsonConvert.DeserializeObject<List<ProductModel>>(ObjResponse.Response);
+            return GetProduct;
 
-		}
+        }
 
-		public JsonResult AddToCart(AddToCartModel objmodel)
-		{
-			AddToCart objAddToCart = new AddToCart();
-			return objAddToCart.AddToCartFun(objmodel, this.ControllerContext.HttpContext);
 
-		}
-		public JsonResult RemoveQtyToCart(AddToCartModel objmodel)
+        public JsonResult AddToCart(AddToCartModel objmodel)
+        {
+            AddToCart objAddToCart = new AddToCart();
+
+
+            return objAddToCart.AddToCartFun(objmodel, this.ControllerContext.HttpContext);
+
+        }
+        [HttpPost]
+        
+        public JsonResult AddToCartTojquery(AddToCartModel objmodel)
+        {
+            AddToCart objAddToCart = new AddToCart();            
+           JsonResult json= objAddToCart.AddToCartFun(objmodel, this.ControllerContext.HttpContext);           
+            return json;
+        }
+        public JsonResult RemoveQtyToCart(AddToCartModel objmodel)
 		{
 			AddToCart objAddToCart = new AddToCart();
 			return objAddToCart.RemoveQtyToCartFun(objmodel, this.ControllerContext.HttpContext);
@@ -326,7 +346,7 @@ namespace PrivateSquareWeb.Controllers.Website
             decimal TotalAmount=0;
             foreach (var orders in Orderdetails)
             {
-                TotalAmount = + orders.Amount+(TotalAmount);                
+                TotalAmount = + (orders.Amount*Convert.ToInt32(orders.Quantity))+(TotalAmount);                
             }               
             ViewBag.TotalAmount = TotalAmount;
             ViewBag.Orderdetails = Orderdetails;

@@ -138,14 +138,11 @@
 
                     @Html.DropDownListFor(m => m.ParentCatId, ViewBag.ParentCategories as SelectList, "All Categories", new { @class = "ps-select selectpicker col-lg-4 pull-left"})
                     <div class="col-lg-8 pull-left">
-
                       
 
                         @Html.TextBoxFor(m => m.SearchBarText, new { @class = "form-control", placeholder = "Search Product…", value = "TxtSearch", id = "TxtSearch" })
                       
-                        <button class="search-top"><i class="ps-icon-search"></i></button>
-
-                     
+                        <button class="search-top"><i class="ps-icon-search"></i></button>                    
 
                     </div>
                 }
@@ -153,7 +150,6 @@
             </div>
             <div class="right">
                 <div class="menu-toggle"><span></span></div>
-
                 <div class="ps-cart" id="Cartcontent">
                     <div id="CartCount">
                         <a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
@@ -161,13 +157,9 @@
                     <div class="ps-cart__listing">
 
                         <div class="ps-cart__content">
-
                             <div id="CartList">
-
                                 @{ int index = 0;
-
                                     foreach (var item in ViewBag.AddToCart)
-
                                     {
 
                                         <div class="ps-cart-item">
@@ -175,13 +167,9 @@
                                             <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
 
                                             <div class="ps-cart-item__thumbnail">
-
                                                 <a href="/WebHome/ProductDetail/@item.ProductId"></a>
-
-                                                <img src="~/DocImg/@item.ImageName" alt="">
-
+                                                <img src="~/DocImg/@item.ImageName" alt="Image">
                                             </div>
-
                                             <div class="ps-cart-item__content">
 
                                                 <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
@@ -189,23 +177,16 @@
                                                 <p><span>Quantity:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
 
                                             </div>
-
                                         </div>
-
                                     }
-
                                 }
 
                             </div>
-
                         </div>
 
                         <div class="ps-cart__total" id="CartTotal">
-
                             <p>Number of items:<span>@Model.CartItemCount</span></p>
-
                             <p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>
-
                         </div>
 
                         <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>

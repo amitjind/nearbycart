@@ -26,7 +26,7 @@
                 Amount: Amount,
                 Discount: discountPrice,
                 TotalAmount: TotalAmount
-            },
+            },  
             success: function (result) {
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
                 swal(" ", "Product Added to the Cart", "success");
@@ -81,9 +81,7 @@
                         <img src="~/WebSiteTheme/images/product/fashion-1.jpg" alt="">
 
                     }
-                }
-               
-                @*<div class="ps-badge ps-badge--sale-off"><span>-@off%</span></div>*@
+                }  
                 <ul class="ps-product__actions">
                
                     <li><a href="#" title="Favorite"><i class="ps-icon-heart" onclick="AddToWishlist(@Users.Id)"></i></a></li>

@@ -8,7 +8,7 @@
 }
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
-
+    //this is Product cata wise product show page & add cart ()
     var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
 
         var salePrice = SellingPrice;
@@ -205,7 +205,9 @@
 
 
 
+    <div id="loader">
 
+    </div>
 
 
     <div class="slim-mainpanel">
@@ -309,6 +311,7 @@
 @*//Below is the script for fetching previous pages in the pagination bar of the  Categorywise Product Page*@
 <script>
     var previouspages = function (id, searchresultcount, lowerlimit, numberofpages) {
+
         if (id == 0) { return false; }
         $.ajax({
             url: "../../ProductCatWise/PreviousPages",
