@@ -3,7 +3,7 @@
     var PlaceOrder = function () {
         var radioAddressBtns = document.getElementsByName("rdoAddress");
         var AddressId = 0;
-        
+
 
 
 
@@ -25,8 +25,9 @@
             if (AddressId == 0) {
                 swal("Please Select Shipping Address");
                 return;
-            }}
-        
+            }
+        }
+
 
         $.ajax({
             url: "../../Checkout/PlaceOrder",
@@ -39,7 +40,7 @@
                 //console.log(result);
                 var response = JSON.parse(result);
                 //alert(response[0].Response)
-                //if (response[0].Response == "Order Saved") 
+                //if (response[0].Response == "Order Saved")
                 swal(" ", response[0].Response, "success");
                 {
                     window.location.href = "/WebHome/MyOrders";
@@ -57,13 +58,13 @@
     Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
 }
 
-@using (Html.BeginForm("AddressesList", "Checkout", FormMethod.Post, new { enctype = "multipart/form-data",id="AddressForm"}))
-
+@using (Html.BeginForm("AddressesList", "Checkout", FormMethod.Post, new { enctype = "multipart/form-data", id = "AddressForm" }))
 {
     @Html.AntiForgeryToken()
     <div class="ps-hero">
         <div class="container">
-            <h3>Checkout</h3>           
+            <h3>Checkout</h3>
+            <p>Page Checkout</p>
         </div>
     </div>
     <div class="ps-checkout pt-40 pb-40">
@@ -73,7 +74,7 @@
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
                         <div class="ps-checkout__billing" id="pickupdetails" style="display:none">
                             <h4> Pick this order from Jai Maa Departmental store</h4>
-                            <img src="" alt="Store image"/>
+                            <img src="" alt="Store image" />
                         </div>
                         <div class="ps-checkout__billing">
                             <table class="table">
@@ -93,25 +94,35 @@
                                             foreach (var item in ViewBag.UserAddress)
                                             {
 
-                                            <tr>
-                                                <td>
-                                                    <input type="radio" name="rdoAddress" id="rdoAddress[]" value="@item.Id" />
-                                                  
-                                                    <p>@item.Type</p>
-                                                    <h4 class="card-title">@item.Name</h4>
-                                                    <p class="card-text">
-                                                        @item.Address, @item.CityName, @item.StateName
-                                                    </p>
-                                                    <p class="card-text">
-                                                        @item.Landmark @item.Mobile @item.AlternatePhone @item.Pincode
-                                                    </p>
-                                                </td>
-                                                @*<td>Delete</td>*@
-                                            </tr>
-                                                    index++;
-                                                }
+                                                <tr>
+                                                    <td>
+                                                        <input type="radio" name="rdoAddress" id="rdoAddress[]" value="@item.Id" />
+
+                                                        <p>@item.Type</p>
+                                                        <h4 class="card-title">@item.Name</h4>
+                                                        <p class="card-text">
+                                                            @item.Address.Replace("$^", " "), @item.CityName, @item.StateName
+                                                        </p>
+                                                        <p class="card-text">
+                                                            @item.Landmark @item.Mobile @item.AlternatePhone @item.Pincode
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <a href="~/Checkout/DeleteAddress?id=@item.Id">
+                                                            Delete
+                                                        </a>
+                                                        <p>
+                                                            @*<a href="~/Checkout/DeleteAddress?id=@item.Id">*@
+                                                                <a onclick="EditAddress(@item.Id)">
+                                                                 Edit
+                                                            </a>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                index++;
                                             }
                                         }
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -134,9 +145,9 @@
                                                 </div>
                                                 <div class="box-shadow-bc pd-40 addresses min-height" style="display:none" id="addnewaddress">
 
-                                                    <label class="section-sub-title mg-t-20  mg-b-20">Create new address</label>
+                                                    <label id="MsgOfAddress" class="section-sub-title mg-t-20  mg-b-20" >Create new address</label>
 
-                                                    <div class="row">
+                                                    <div class="row" id="Addressform">
 
                                                         <div class="col-lg-8">
 
@@ -148,10 +159,11 @@
 
                                                                         <label class="form-control-label">Name: <span class="tx-danger">*</span></label>
 
+                                                                        @*@Html.HiddenFor(m => m.Id)
+                                                                        @Html.HiddenFor(m => m.UserId)*@
 
-
-                                                                        @Html.HiddenFor(m => m.Id)
-
+                                                                        @Html.HiddenFor(m => m.UserId, new { @class = "form-control", @autocomplete = "off" })
+                                                                        @Html.HiddenFor(m => m.Id, new { @class = "form-control", @autocomplete = "off" })
                                                                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Enter Name", @autocomplete = "off" })
                                                                         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                                                                         <span class="field-validation-error text-danger" id="SpanForName"></span>
@@ -174,7 +186,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div style="display:none">
-                                                                    @Html.TextBoxFor(m=>m.Address,new {id="CompleteAddress" })
+                                                                    @Html.TextBoxFor(m => m.Address, new { id = "CompleteAddress" })
                                                                 </div>
                                                                 <div class="col-lg-6">
 
@@ -241,8 +253,6 @@
 
                                                                         <label class="form-control-label">Landmark: <span class="tx-danger"></span></label>
 
-
-
                                                                         @Html.TextBoxFor(m => m.Landmark, new { @class = "form-control", @placeholder = "Landmark", @autocomplete = "off" })
                                                                         @Html.ValidationMessageFor(model => model.Landmark, "", new { @class = "text-danger" })
 
@@ -256,20 +266,18 @@
 
                                                                         <label class="form-control-label">Alternate phone: <span class="tx-danger"></span></label>
 
-
-
                                                                         @Html.TextBoxFor(m => m.AlternatePhone, new { @class = "form-control", @placeholder = "Alternate phone", @autocomplete = "off" })
                                                                         @Html.ValidationMessageFor(model => model.AlternatePhone, "", new { @class = "text-danger" })
 
                                                                     </div>
 
                                                                 </div><!-- col-6 -->
-
                                                                 <div class="col-lg-12">
 
-                                                                    <a href="~/ViewCart/ViewCart" class="btn cancel-button mg-r-10">CANCEL</a>
+                                                                    <a onclick="cancel()" class="btn cancel-button mg-r-10">CANCEL</a>
 
-                                                                    <input type="button" class="btn save-button" onclick="AddAddress()" value="SAVE" />
+                                                                    <input type="button" class="btn save-button" onclick="AddAddress()" id="SAVE" value="SAVE" />
+                                                                    @*<input type="button" class="btn save-button" onclick="AddAddress()" value="update" />*@
 
                                                                 </div>
 
@@ -343,7 +351,7 @@
                             </div>
                             <footer>
                                 <h3>Payment Method</h3>
-                              
+
                                 <div class="form-group cheque">
                                     <div class="ps-radio ps-radio--small">
 
@@ -363,7 +371,7 @@
 
                                 </div>
                                 <div class="form-group paypal">
-                                
+
                                     @{
                                         if (ViewBag.TotalAmount == 0)
                                         {
@@ -412,7 +420,13 @@
     var addnewaddress = function () {
         $('#addnewaddress').toggle("slide");
         $('#addaddresslink').toggle("slide");
+        //alert('addnewaddress');
+        //cancel();
+        document.getElementById("SAVE").value = "save";
+
     }
+
+    
 </script>
 <script>
     var showpromocode = function () {
@@ -420,7 +434,73 @@
     }
 </script>
 <script>
+    var EditAddress = function (id) {
+        //alert('editadress');
+        document.getElementById("SAVE").value = "UPDATE";
+        document.getElementById("MsgOfAddress").innerHTML= "Edit Address";
+        document.getElementById("addnewaddress").style.display = "block";
+        document.getElementById("addaddresslink").style.display = "none";
+        $.ajax({
+            url: "../../Checkout/GetAddress",
+            type: "POST",
+            data: {
+                "id": id
+            },
+            success: function (result) {
+                console.log(result);
+                var data = JSON.parse(result);
+                if ((data)) {
+                    //addnewaddress();
+                    var Address = data[0].Address.split("$^");
+                    var pincode = (data[0].Pincode).replace("    ", "");
+                    debugger
+                    document.getElementById("Name").value = (data[0].Name);
+                    document.getElementById("AddressLine1").value = (Address[0]);
+                    document.getElementById("AddressLine2").value = (Address[1]);
+                    document.getElementById("Mobile").value = (data[0].Mobile);
+                    document.getElementById("Pincode").value = (pincode);
+                    document.getElementById("LocalityTextBox").value = (data[0].Locality);
+                    document.getElementById("CityId").value = (data[0].CityId); 
+                    document.getElementById("AlternatePhone").value = (data[0].AlternatePhone); 
+                    document.getElementById("Landmark").value = (data[0].Landmark); 
+                    document.getElementById("Id").value = (data[0].Id); 
+                    document.getElementById("UserId").value = (data[0].UserId);
+               }
+                else {
+               
+                }
+            }
+        });
+
+    }
+
+    var cancel = function () {
+        //alert('cancel');
+      
+        document.getElementById("Name").value ="";
+        document.getElementById("AddressLine1").value ="";
+        document.getElementById("AddressLine2").value = "";
+        document.getElementById("Mobile").value = "";
+        document.getElementById("Pincode").value = "";
+        document.getElementById("LocalityTextBox").value = "";
+        document.getElementById("CityId").value = "";
+        document.getElementById("AlternatePhone").value = "";
+        document.getElementById("Landmark").value = "";
+        document.getElementById("Id").value = "";
+        document.getElementById("UserId").value = "";
+        //if (true) {
+            document.getElementById('addnewaddress').style.display = "none";
+            document.getElementById('addaddresslink').style.display = "block";
+            document.getElementById("SAVE").value = "save";
     
+            document.getElementById("MsgOfAddress").innerHTML = "ADD Address";
+        //} 
+      
+        
+    }
+</script>
+<script>
+
     var GetCoupon = function () {
         var CouponCode = document.getElementById("promocodetext").value;
         $.ajax({
@@ -430,7 +510,7 @@
                 "CouponCode": CouponCode
             },
             success: function (result) {
-                
+
                 if (isNaN(result)) { }          //Checking whether TotalAmount is a number or not (NaN means - Not a number)
                 else {
                     if (result < 0)             //It means amount is less than 500
@@ -457,11 +537,11 @@
                         $('.couponresponse').html(CouponCode+' Coupon applied successfully');
                         $('.ps-form--icon').toggle("slide");
                     }
-                    
 
-                    console.log(result);
+
+                    //console.log(result);
                 }
-                
+
 
 
             }
@@ -479,69 +559,86 @@
     }
     var codchecked = function () {
         $('.ps-checkout__billing').show("slide");
-        
+
         $('#pickupdetails').hide("slide");
     }
 </script>
 <script>
     var AddAddress = function () {
-        var ErrorOccured = false;
+        //alert('AddAddress');
+        debugger
+        var ErrorOccured = null;
         if ($.trim($("#LocalityTextBox").val()) == '') {
             $("#SpanForLocality").html("Please mention locality");
-            ErrorOccured = true;
+            ErrorOccured += 'LocalityTextBox null';
         } else {
             $("#SpanForLocality").html("");
-            ErrorOccured = false;
+            //ErrorOccured = false;
         }
         if ($.trim($("#Name").val()) == '') {
             $("#SpanForName").html("Please mention Name");
-            ErrorOccured = true;
+            ErrorOccured += 'Name null';
         }
         else {
             $("#SpanForName").html("");
-            ErrorOccured = false;
+            //ErrorOccured = false;
         }
         if ($.trim($("#Mobile").val()) == '') {
             $("#SpanForPhone").html("Please mention Mobile Number");
-            ErrorOccured = true;
+            ErrorOccured += 'Mobile null';
+        }
+        else if ($.trim($("#Mobile").val()).length!=10) {
+            $("#SpanForPhone").html("Please Enter 10 Digit Mobile Number");
+            //ErrorOccured = false;
+
         }
         else {
             $("#SpanForPhone").html("");
-            ErrorOccured = false;
+            //ErrorOccured = false;
         }
+        
         if ($.trim($("#Pincode").val()) == '' || $.trim($("#Pincode").val()).length != 6) {
-            $("#SpanForPincode").html("Invalid PIN/ZIP Code");
-            ErrorOccured = true;
+            debugger
+            if ($.trim($("#Pincode").val()).length > 6) {
+                $("#SpanForPincode").html("Only 6 digits Pin");
+                ErrorOccured += 'Pin Code not in 6 digit';
+            }
+            else {
+                $("#SpanForPincode").html("Please enter 6 digits Pin");
+                ErrorOccured += 'pin code null';
+            }
+         
         }
         else {
             $("#SpanForPincode").html("");
-            ErrorOccured = false;
+            //ErrorOccured = false;
         }
         if ($("#CityId").val() === "") {
             $("#SpanForCity").html("Please select a city");
-            ErrorOccured = true;
+            ErrorOccured += 'city null';
         }
         else {
             $("#SpanForCity").html("");
-            ErrorOccured = false;
+            //ErrorOccured = false;
         }
         if ($("#AddressLine1").val() == "") {
             $("#SpanForAddressLine1").html("Address cannot be empty");
-            ErrorOccured = true;
+            //ErrorOccured += 'adress null';
         }
         else {
             $("#SpanForAddressLine1").html("");
-            ErrorOccured = false;
+            //ErrorOccured = false;
         }
-        if (ErrorOccured == false) {
+        if (ErrorOccured==null ) {
             //var CompleteAddress = $("AddressLine1").val() + $("AddressLine2").val();
             var x = $("#CompleteAddress").val($("AddressLine1").val());
             console.log($("#AddressLine1").val() + $("#AddressLine2").val());
-            $("#CompleteAddress").val($("#AddressLine1").val() +" "+$("#AddressLine2").val());
+            $("#CompleteAddress").val($("#AddressLine1").val() + "$^" + $("#AddressLine2").val());
 
             //var AddresstoLog = null;
-          
-            $("#AddressForm").submit();
+
+            var respons = $("#AddressForm").submit();
         }
+
     }
 </script>
