@@ -220,15 +220,18 @@
     sortdropdown.onchange = function () {
         if (this.selectedIndex !== 0) {
             var sortorder = this.value;
-            pageindexcounter = 1;
+
+            pageindexcounter = @ViewBag.ToProductsCount;
+            var pagecounter = pageindexcounter / 12;
+
             var productcatid = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
             $.ajax({
                 url: "../../ProductCatWise/Sortby",
                 type: "POST",
                 data: {
-                    "PageIndex": pageindexcounter,
-                    "productcatid": productcatid,
                     "sortorder": sortorder,
+                    "PageIndex": pagecounter,
+                    "productcatid": productcatid
 
                 },
                 success: function (result) {

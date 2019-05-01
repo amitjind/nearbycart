@@ -137,9 +137,10 @@ namespace PrivateSquareWeb.Controllers.Website
 			return SearchProductList;
 		}
 
-		public ActionResult Sortby(int sortorder, int pageindex, long? productcatid)
+		public ActionResult Sortby(int sortorder, int pageindex, string productcatid)
 		{
-			ProductModel objModel = new ProductModel();
+            long? Id = Convert.ToInt64(CommonFile.Decode(productcatid));
+            ProductModel objModel = new ProductModel();
 			string SortOrder = "";
 			switch (sortorder)
 			{
@@ -157,8 +158,8 @@ namespace PrivateSquareWeb.Controllers.Website
 					break;
 			}
 
-			var sortedproducts = CommonFile.GetSortedProducts(SortOrder, pageindex, productcatid);
-			var ProductList = ListAllProduct.Where(x => x.ProductCatId == productcatid).ToList();
+			var sortedproducts = CommonFile.GetSortedProducts(SortOrder, pageindex, Id);
+			var ProductList = ListAllProduct.Where(x => x.ProductCatId == Id).ToList();
 
 			ViewBag.UsersProduct = sortedproducts.Take(Constant.NumberOfProducts);
 			ViewBag.SearchCatId = productcatid;
