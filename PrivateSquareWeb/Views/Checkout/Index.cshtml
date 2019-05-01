@@ -420,10 +420,19 @@
     var addnewaddress = function () {
         $('#addnewaddress').toggle("slide");
         $('#addaddresslink').toggle("slide");
-        //alert('addnewaddress');
-        //cancel();
         document.getElementById("SAVE").value = "save";
 
+        document.getElementById("Name").value = "";
+        document.getElementById("AddressLine1").value = "";
+        document.getElementById("AddressLine2").value = "";
+        document.getElementById("Mobile").value = "";
+        document.getElementById("Pincode").value = "";
+        document.getElementById("LocalityTextBox").value = "";
+        document.getElementById("CityId").value = "";
+        document.getElementById("AlternatePhone").value = "";
+        document.getElementById("Landmark").value = "";
+        document.getElementById("Id").value = "";
+        document.getElementById("UserId").value = "";
     }
 
     
@@ -453,7 +462,6 @@
                     //addnewaddress();
                     var Address = data[0].Address.split("$^");
                     var pincode = (data[0].Pincode).replace("    ", "");
-                    debugger
                     document.getElementById("Name").value = (data[0].Name);
                     document.getElementById("AddressLine1").value = (Address[0]);
                     document.getElementById("AddressLine2").value = (Address[1]);
