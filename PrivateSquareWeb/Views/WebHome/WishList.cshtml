@@ -6,7 +6,16 @@
                 ViewBag.Title = "WishList";
                 Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
 }
+@*<script>
+	window.history.forward();
+	window.onload = function () {
+		window.history.forward();
+	};
 
+	window.onunload = function () {
+		null;
+	};
+</script>*@
 <script type="text/javascript">
     var DeleteWishlistItem = function (ProductId) {
 
@@ -56,10 +65,10 @@
                 <tbody>
                     @foreach (var products in ViewBag.Wishlist)
                     {
-                    <tr>
+                    <tr>                       
                         <td><a class="ps-product--compare" href="~/Webhome/ProductDetail/@products.ProductId"><img class="mr-15" src="~/DocImg/@products.ProductImage" alt="">@products.ProductName</a></td>
                         <td>₹ @products.DiscountPrice</td>
-                        <td><a class="ps-product-link" href="~/Webhome/ProductDetail/@products.ProductId">View Product</a></td>
+                        <td><a class="ps-product-link" href="~/Webhome/ProductDetail/@(Constant.EncodeNumber(int.Parse((products.ProductId).ToString())))">View Product</a></td>
                         <td>
                             <div class="ps-remove" onclick="DeleteWishlistItem(@products.ProductId)"></div>
                         </td>

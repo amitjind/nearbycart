@@ -85,6 +85,7 @@ namespace PrivateSquareWeb.Controllers
             return View("WebHomeChangePassword");
         }
         [HttpPost]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult WebHomeChangePassword(LoginModel loginModel)
         {
             if (ModelState.IsValid)

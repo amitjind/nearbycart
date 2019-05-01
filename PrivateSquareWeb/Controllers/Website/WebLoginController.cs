@@ -18,9 +18,29 @@ namespace PrivateSquareWeb.Controllers.Website
             Services.RemoveCookie(this.ControllerContext.HttpContext, "webusr");
             return View();
         }
+        //public JsonResult Logout()
+        //{
+        //    bool result=false;
+        //    try
+        //    {
+        //        Services.RemoveCookie(this.ControllerContext.HttpContext, "webusr");
+        //        Session.Abandon();
+
+        //         //RedirectToAction("Index", "WebLogin");
+        //        return Json(result, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch
+        //    {
+        //        //RedirectToAction("Index", "WebLogin");
+        //        return Json(result, JsonRequestBehavior.AllowGet);
+        //    }
+
+        //}
         public ActionResult Logout()
         {
             Services.RemoveCookie(this.ControllerContext.HttpContext, "webusr");
+            Session.Abandon();
+
             return RedirectToAction("Index", "WebLogin");
             //return View();
         }
@@ -216,6 +236,7 @@ namespace PrivateSquareWeb.Controllers.Website
         }
 
         [HttpPost]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public JsonResult ForgetPassword(string emailId)
         {
 

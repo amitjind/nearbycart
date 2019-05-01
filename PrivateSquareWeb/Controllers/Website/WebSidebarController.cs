@@ -11,7 +11,8 @@ namespace PrivateSquareWeb.Controllers.Website
     public class WebSidebarController : Controller
 
     {
-       
+        JwtTokenManager _JwtTokenManager = new JwtTokenManager();
+
         // GET: WebSidebar
         public ActionResult Index()
         {
@@ -108,6 +109,36 @@ namespace PrivateSquareWeb.Controllers.Website
             ViewBag.ProdCatList42 = ProductListMdel;
             return PartialView("~/Views/Shared/_WebSiteSidebar.cshtml");
         }
-       
+        //public PartialViewResult HeaderValue(HeaderPartialModel objmodel1)
+        //{
+        //    HeaderPartialModel objModel = new HeaderPartialModel();
+        //    LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
+        //    List<AddToCartModel> ListAddToCart = Services.GetMyCart(this.ControllerContext.HttpContext, _JwtTokenManager);
+
+        //    objModel.UserName = MdUser.Name;
+        //    objModel.UserId = Convert.ToInt64(MdUser.Id);
+        //    objModel.ProfileImg = MdUser.ProfileImg;
+        //    objModel.CartItemCount = ListAddToCart.Count();
+        //    ViewBag.AddToCart = ListAddToCart;
+        //    ViewBag.TotalAmount = GetTotalAmount(ListAddToCart);
+        //    var parentcategories = CommonFile.GetProductCategory(0);
+
+        //    ViewBag.ParentCategories = new SelectList(parentcategories, "Id", "Name");
+        //    objModel.ParentCatId = objmodel1.ParentCatId;
+        //    return PartialView("~/Views/Shared/_WebSiteSidebar.cshtml", objModel);
+        //}
+        //public JsonResult RemoveToCart(int index)
+        //{
+        //    AddToCart objAddToCart = new AddToCart();
+        //    return objAddToCart.RemoveCart(index, this.ControllerContext.HttpContext);
+
+        //}
+
+        //public decimal GetTotalAmount(List<AddToCartModel> ListCart)
+        //{
+        //    AddToCart objAddToCart = new AddToCart();
+        //    return objAddToCart.GetTotalAmount(ListCart);
+        //}
+
     }
 }

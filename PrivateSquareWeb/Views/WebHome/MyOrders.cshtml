@@ -3,7 +3,47 @@
 @{
     ViewBag.Title = "MyOrders";
     Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
+   
 }
+
+@{
+
+    if (Request.Cookies.Get("webusr") == null)
+    {
+        Response.Write("Plz Log in");
+        Response.Redirect("../../WebLogin/Index");
+    }
+
+    if (ViewBag.MyOrders == null)
+    {
+        Response.Redirect("../../WebLogin/Index");
+       @*<script>
+        debugger
+        //window.history.forward();
+        window.onload = function () {
+
+                window.history.forward();
+
+        };
+
+        window.onunload = function () {
+            if (ViewBag.MyOrders == null)
+            {
+                window.history.forward();
+            }
+            else {
+
+            }
+            //null;
+        };
+    </script>*@
+        //Response.Redirect("~/WebLogin/Index");
+    }
+    else { }
+}
+}
+
+
 <div class="ps-hero">
     <div class="container">
         <h3>My orders</h3>

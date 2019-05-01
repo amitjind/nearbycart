@@ -166,8 +166,13 @@
 
             </div>
         </div>
+		<div>
+			@{
+			Html.RenderAction("WebSiteSidebar", "WebSidebar");
+			}
+		</div>
         <aside class="ps-sidebar" data-mh="product-page">
-            <aside class="ps-widget--sidebar ps-widget--category">
+            @*<aside class="ps-widget--sidebar ps-widget--category">
                 <div class="ps-widget__header">
                     <h3>Categories</h3>
                 </div>
@@ -181,7 +186,7 @@
 
                     </ul>
                 </div>
-            </aside>
+            </aside>*@
 
             <aside class="ps-widget--sidebar ps-widget--filter ">
                 <div class="ps-widget__header">
@@ -202,13 +207,7 @@
 
         </aside>
     </main>
-
-
-
-    <div id="loader">
-
-    </div>
-
+   
 
     <div class="slim-mainpanel">
 

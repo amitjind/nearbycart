@@ -13,7 +13,9 @@ namespace PrivateSquareWeb.Controllers.Website
 	{
 		static List<ProductModel> ListAllProduct;
 		JwtTokenManager _JwtTokenManager = new JwtTokenManager();
-		public ActionResult Index(string id)
+
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public ActionResult Index(string id)
 		{
 			long? Id = Convert.ToInt64(CommonFile.Decode(id));
 			Services.SetCookie(this.ControllerContext.HttpContext, "ProductCatId", id.ToString());

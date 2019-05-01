@@ -16,6 +16,7 @@ namespace PrivateSquareWeb.Controllers.Website
         {
             return View();
         }
+        
         public PartialViewResult HeaderValue(HeaderPartialModel objmodel1)
         {
             HeaderPartialModel objModel = new HeaderPartialModel();
@@ -26,8 +27,11 @@ namespace PrivateSquareWeb.Controllers.Website
             objModel.UserId = Convert.ToInt64(MdUser.Id);
             objModel.ProfileImg = MdUser.ProfileImg;
             objModel.CartItemCount = ListAddToCart.Count();
+
             ViewBag.AddToCart = ListAddToCart;
+
             ViewBag.TotalAmount = GetTotalAmount(ListAddToCart);
+
             var parentcategories = CommonFile.GetProductCategory(0);
 
             ViewBag.ParentCategories = new SelectList(parentcategories, "Id", "Name");

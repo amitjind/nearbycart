@@ -197,8 +197,8 @@
                 @foreach (var Users in ViewBag.SimilarProductList)
                 {
                     <div class="ps-product--fashion">
-                        <div class="ps-product__thumbnail">
-                            <a class="ps-product__overlay" href="/WebHome/ProductDetail/@Users.Id"></a><img class="lazy" src="~/DocImg/@Users.ProductImage" alt="">
+                        <div class="ps-product__thumbnail">                           
+                            <a class="ps-product__overlay" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))"></a><img class="lazy" src="~/DocImg/@Users.ProductImage" alt="">
                             @{
                                 string off = (100 - Math.Round((@Users.DiscountPrice / @Users.SellingPrice) * 100)).ToString();
                             }

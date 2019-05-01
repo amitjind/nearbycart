@@ -18,7 +18,7 @@ namespace PrivateSquareWeb.Controllers.Website
 
         // GET: WebHome
 
-        [OutputCache(Duration = 60)]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Index()
         {
             if (ListAllProduct == null) {
@@ -41,6 +41,7 @@ namespace PrivateSquareWeb.Controllers.Website
 
         }
 
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult ProductDetail(string Id)
         {
             long id=0;
@@ -172,14 +173,20 @@ namespace PrivateSquareWeb.Controllers.Website
 
 		}
 
-		public ActionResult WishList(ProductModel objmodel)
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public ActionResult WishList(ProductModel objmodel)
 		{
 			LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
 			if (MdUser.Id != 0)
 			{
 				objmodel.UserId = Convert.ToInt64(MdUser.Id);
 			}
-			else { return JavaScript("window.swal('Please Login to access wishlist');"); }
+			else
+            {
+                //return JavaScript("window.swal('Please Login to access wishlist');");
+                return RedirectToAction("Index", "WebLogin");
+            }
+
 			var _request = JsonConvert.SerializeObject(objmodel);
 			ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetWishlist, _request);
 			var ProductWishlist = JsonConvert.DeserializeObject<List<ProductModel>>(ObjResponse.Response);
@@ -268,7 +275,9 @@ namespace PrivateSquareWeb.Controllers.Website
 			{
 				var SearchList = ListAllProduct.Where(x => x.ProductName.ToUpper().Contains(objModel.SearchBarText.ToString().ToUpper())).ToList();
 				ViewBag.UsersProduct = SearchList.Take(Constant.NumberOfProducts);
-				if (SearchList.Count == 0) { ViewBag.NoResultFound = "No Result Found"; }
+                ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
+
+                if (SearchList.Count == 0) { ViewBag.NoResultFound = "No Result Found"; }
 				else { ViewBag.NoResultFound = ""; }
 				//ViewBag.PopularProducts = CommonFile.GetPopularProduct();
 				ViewBag.SearchResultCount = SearchList.Count;
@@ -304,14 +313,20 @@ namespace PrivateSquareWeb.Controllers.Website
 			//ViewBag.SearchResultCount = SearchList1.Count;
 			return View();
 		}
-		public ActionResult MyOrders(SaleOrderModel objmodel)
+
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public ActionResult MyOrders(SaleOrderModel objmodel)
 		{
 			LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
 			if (MdUser.Id != 0)
 			{
 				objmodel.UserId = Convert.ToInt64(MdUser.Id);
 			}
-			else { return JavaScript("window.alert('Please Log-In');"); }
+			else
+            {
+                //return JavaScript("window.alert('Please Log-In');");
+                return RedirectToAction("Index", "WebLogin");
+            }
 			var _request = JsonConvert.SerializeObject(objmodel);
 			ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetOrders, _request);
 			var Orders = JsonConvert.DeserializeObject<List<SaleOrderModel>>(ObjResponse.Response);
@@ -328,31 +343,39 @@ namespace PrivateSquareWeb.Controllers.Website
 			return View(objmodel);
 		}
 
-		public ActionResult OrderDetails(string Id)
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public ActionResult OrderDetails(string Id)
 		{
 			long id = Convert.ToInt64(CommonFile.Decode(Id));
 			SaleOrderModel objmodel = new SaleOrderModel();
 			LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
-			if (MdUser.Id != 0)
-			{
-				objmodel.UserId = Convert.ToInt64(MdUser.Id);
-			}
-			objmodel.SaleOrderId = id;
-			objmodel.Id = id;
-			var _request = JsonConvert.SerializeObject(objmodel);
-			ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetOrders, _request);
-			var Orderdetails = JsonConvert.DeserializeObject<List<SaleOrderModel>>(ObjResponse.Response);
-
-            decimal TotalAmount=0;
-            foreach (var orders in Orderdetails)
+            if (MdUser.EmailId != null)
             {
-                TotalAmount = + (orders.Amount*Convert.ToInt32(orders.Quantity))+(TotalAmount);                
-            }               
-            ViewBag.TotalAmount = TotalAmount;
-            ViewBag.Orderdetails = Orderdetails;
-            
+                if (MdUser.Id != 0)
+                {
+                    objmodel.UserId = Convert.ToInt64(MdUser.Id);
+                }
+                objmodel.SaleOrderId = id;
+                objmodel.Id = id;
+                var _request = JsonConvert.SerializeObject(objmodel);
+                ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetOrders, _request);
+                var Orderdetails = JsonConvert.DeserializeObject<List<SaleOrderModel>>(ObjResponse.Response);
 
-            return View(objmodel);
+                decimal TotalAmount = 0;
+                foreach (var orders in Orderdetails)
+                {
+                    TotalAmount = +(orders.Amount * Convert.ToInt32(orders.Quantity)) + (TotalAmount);
+                }
+                ViewBag.TotalAmount = TotalAmount;
+                ViewBag.Orderdetails = Orderdetails;
+
+
+                return View(objmodel);
+            }
+            else
+            {
+                return RedirectToAction("Index", "WebLogin");
+            }
 		}
 
 		public ActionResult NextPage(string Id)
