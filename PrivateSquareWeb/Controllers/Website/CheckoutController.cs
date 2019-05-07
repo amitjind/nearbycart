@@ -166,6 +166,7 @@ namespace PrivateSquareWeb.Controllers.Website
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
             AddToCart objAddToCart = new AddToCart();
             ViewBag.LoginEmail = MdUser.EmailId;
+            ViewBag.RegisterType = MdUser.RegisterType;
             ViewBag.ItemCount = objAddToCart.GetItemCount(this.ControllerContext.HttpContext);
             ViewBag.TotalAmount = objAddToCart.GetTotalAmountCheckOut(this.ControllerContext.HttpContext);
             if (ViewBag.TotalAmount < Constant.MinimumAmountForFreeDelivery)
@@ -190,7 +191,7 @@ namespace PrivateSquareWeb.Controllers.Website
             SaleOrderModel objModel = new SaleOrderModel();
             List<AddToCartModel> ListAddToCart = Services.GetMyCart(this.ControllerContext.HttpContext, _JwtTokenManager);
 
-            objModel = GetSaleOrderValues(ListAddToCart);
+            objModel = GetSaleOrderValues(ListAddToCart, PaymentMode);
             objModel.Operation = "insert";
             objModel.PaymentMode = PaymentMode;
             objModel.UserId = MdUser.Id;
@@ -206,7 +207,7 @@ namespace PrivateSquareWeb.Controllers.Website
             return Json(Response);
         }
 
-        private SaleOrderModel GetSaleOrderValues(List<AddToCartModel> ListCart)
+        private SaleOrderModel GetSaleOrderValues(List<AddToCartModel> ListCart, string PaymentMode)
         {
             decimal TotalAmount = 0;
             decimal TotalDiscount = 0;
@@ -216,7 +217,10 @@ namespace PrivateSquareWeb.Controllers.Website
                 TotalDiscount += ListCart[i].Discount;
             }
             SaleOrderModel objModel = new SaleOrderModel();
-            if (TotalAmount <= 500) { TotalAmount += 50; }
+            if (PaymentMode != "Pick Up Order")
+            {
+                if (TotalAmount <= 500) { TotalAmount += 50; }
+            }
             objModel.TotalAmount = TotalAmount;
             objModel.TotalDiscount = TotalDiscount;
             objModel.XmlSaleOrderDetail = ListToXml(ListCart);

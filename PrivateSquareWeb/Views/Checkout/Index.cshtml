@@ -27,7 +27,11 @@
                 return;
             }
         }
-
+     if (@ViewBag.RegisterType=="UNV")
+        {
+            swal("Please Verified Your Account First");
+            return;
+        }
 
         $.ajax({
             url: "../../Checkout/PlaceOrder",

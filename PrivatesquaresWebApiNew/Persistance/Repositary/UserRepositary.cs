@@ -133,7 +133,7 @@ namespace PrivatesquaresWebApiNew.Persistance.Repositary
         }
         public RegisterNewUser_Result RegisterNewUser(LoginModel objModel)
         {
-            return Context.RegisterNewUser(objModel.Name, objModel.EmailId, objModel.Mobile, objModel.Password, objModel.RegisterType).FirstOrDefault();
+            return Context.RegisterNewUser(objModel.Name, objModel.EmailId, objModel.Mobile, objModel.Password, objModel.RegisterType, objModel.Otp).FirstOrDefault();
         }
 
         public RegisterUser_Result RegisterUser(UserRegisterModel ObjModel)
@@ -284,6 +284,11 @@ namespace PrivatesquaresWebApiNew.Persistance.Repositary
         {
             return Context.GetChildCategory(objModel.ProductCatId).ToList();
         }
+
+        public VerifyEmailWithOTP_Result VerifyEmailWithOTP(LoginModel objModel)
+        {
+            return Context.VerifyEmailWithOTP(objModel.Id,objModel.Otp).FirstOrDefault();
+        }
     }
 
     public interface IUserRepositary : IGenericRepository<EWT_PSQNEWEntities>
@@ -345,6 +350,7 @@ namespace PrivatesquaresWebApiNew.Persistance.Repositary
         SaveCouponHistory_Result SaveCouponHistory(CouponModel objModel);
         IsParentCategory_Result IsParentCategory(ProductModel objModel);
         IEnumerable<GetChildCategory_Result> GetChildCategory(ProductModel objModel);
+        VerifyEmailWithOTP_Result VerifyEmailWithOTP(LoginModel objModel);
     }
 
 }

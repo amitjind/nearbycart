@@ -25,6 +25,7 @@ namespace PrivateSquareWeb.Models
         public string ConfirmNewPassword { get; set; }
         public string RegisterType { get; set; }
         public string Operation { get; set; }
+        public string Otp { get; set; }
 
     }
 }

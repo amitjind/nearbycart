@@ -367,6 +367,12 @@ namespace PrivatesquaresWebApiNew.Services
             var _result = _instance.GetChildCategory(objModel);
             return new ResponseModel() { Response = JsonConvert.SerializeObject(_result), Success = true };
         }
+
+        public ResponseModel VerifyEmailWithOTP(LoginModel objModel)
+        {
+            var _result = _instance.VerifyEmailWithOTP(objModel);
+            return new ResponseModel() { Response = JsonConvert.SerializeObject(_result), Success = true };
+        }
     }
     public interface IUserServices
     {
@@ -425,6 +431,8 @@ namespace PrivatesquaresWebApiNew.Services
         ResponseModel SaveCouponHistory(CouponModel objModel);
         ResponseModel IsParentCategory(ProductModel objModel);
         ResponseModel GetChildCategory(ProductModel objModel);
+
+        ResponseModel VerifyEmailWithOTP(LoginModel objModel);
         #region Commented Code For Sample Code
         //ResponseModel RegisterUser(UserModel userModel);
 

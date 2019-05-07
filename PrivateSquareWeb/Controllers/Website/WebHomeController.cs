@@ -330,15 +330,18 @@ namespace PrivateSquareWeb.Controllers.Website
 			var _request = JsonConvert.SerializeObject(objmodel);
 			ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetOrders, _request);
 			var Orders = JsonConvert.DeserializeObject<List<SaleOrderModel>>(ObjResponse.Response);
-           
-			foreach (var orders in Orders)
-			{
 
-				DateTime date = orders.OrderDate;
-				TimeSpan time = new TimeSpan(12, 30, 00);
-				orders.OrderDate = orders.OrderDate.Add(time);
-               
-			}           
+            foreach (var orders in Orders)
+            {
+                TimeSpan time = new TimeSpan(12, 30, 00);
+                DateTime date = orders.OrderDate.Add(time);
+
+                var b = date.ToString("dd-MM-yyyy hh:mm tt");
+
+                orders.OrderDatestring = b;
+
+
+            }
             ViewBag.MyOrders = Orders;
 			return View(objmodel);
 		}

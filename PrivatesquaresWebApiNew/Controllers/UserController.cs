@@ -853,5 +853,16 @@ namespace PrivatesquaresWebApiNew.Controllers
             var sendJson = Json(sendResponse);
             return sendJson;
         }
+        [Route("api/User/VerifyEmailWithOTP")]
+        [HttpPost]
+        public IHttpActionResult VerifyEmailWithOTP(RequestModel requestModel)
+        {
+
+            var data = requestModel.Data;
+            LoginModel objLoginModel = JsonConvert.DeserializeObject<LoginModel>(data);
+            var sendResponse = new ResponseModel() { Response = JsonConvert.SerializeObject(userServices.VerifyEmailWithOTP(objLoginModel)), Success = true };
+            var sendJson = Json(sendResponse);
+            return sendJson;
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model PrivateSquareWeb.Models.HeaderPartialModel 
+﻿@model PrivateSquareWeb.Models.HeaderPartialModel
 
 <script type="text/javascript">
     var DeleteItem = function (index) {
@@ -12,7 +12,7 @@
         $.ajax({
             url: "../../WebsiteHeader/RemoveToCart",
             type: "POST",
-         
+
             data: {
                 index: index
             },
@@ -26,7 +26,7 @@
                 var TotalAmount = 0;
                 for (var i = 0; i < JsonResponse.length; i++) {
 
-                   
+
                     ProductName = JsonResponse[i].ProductName;
                     Qty = JsonResponse[i].Qty;
                     TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
@@ -52,21 +52,57 @@
                         "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
 
                 }
-              
+
                 divCart.innerHTML = CartString;
                 divCartTotal.innerHTML = CartTotal;
                 $("#CartCount").load(location.href + ' #CartCount');
-              
+
             },
             error: function (error) {
                 console.log(error);
             }
         });
-    }   
+    }
 
 
 </script>
+<script type="text/javascript">
+    var Logout = function () {
+        debugger
+        $.ajax({
+            url: "../../WebLogin/Logout",
+            type: "Get",
+            success: function (result) {
+                if (result == true) {
+                    //window.history.forward();
+                    window.onload = function () {
+                        window.history.forward();
+                    };
+                    window.onunload = function () {
+                        if (ViewBag.MyOrders == null) {
+                            window.history.forward();
+                        }
+                        else {
 
+                        }
+                        //null;
+                    };
+                    Response.Redirect("../../WebLogin/Index");
+                }
+
+                else {
+
+                }
+            },
+            error: function (error) {
+                //console.log('error');
+            }
+
+        })
+
+
+    }
+</script>
 
 
 <div class="header--sidebar"></div>
@@ -82,15 +118,28 @@
                         <div class="header__actions">
                             @{ if (@Model.UserId != 0)
 
-                                {                                    
+                                {
                                     <div class="btn-group ps-dropdown">
-                                        <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.UserName<i class="fa fa-angle-down"></i></a>
+                                         @{
+                                            if (Model.RegisterType != "UNV")
+                                            {
+
+                                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.UserName<i class="fa fa-angle-down"></i></a>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">[Unverified]</button>
+                                                @*<a href="#" style="color:red">[Unverified]</a>*@
+                                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.UserName<i class="fa fa-angle-down"></i></a>
+                                            }
+                                        }
 
                                         <ul class="dropdown-menu dropdown-content">
 
                                             <li><a href="~/WebHome/MyOrders">My Orders</a></li>
                                             <li><a href="~/WebHome/WishList">My Wishlist</a></li>
                                             <li><a href="~/ChangePassword/WebIndex">Change Password</a></li>
+                                            @*<li><a onclick="Logout()">Log Out</a></li>*@
                                             <li><a href="/WebLogin/Logout">Log Out</a></li>
 
 
@@ -134,15 +183,15 @@
 
                 @using (Html.BeginForm("SearchBar", "WebHome", FormMethod.Post, new { @class = "" }))
                 {
-               
+
 
                     @*@Html.DropDownListFor(m => m.ParentCatId, ViewBag.ParentCategories as SelectList, "All Categories", new { @class = "ps-select selectpicker col-lg-4 pull-left"})*@
                     <div class="col-lg-8 pull-left">
-                      
+
 
                         @Html.TextBoxFor(m => m.SearchBarText, new { @class = "form-control", placeholder = "Search Product…", value = "TxtSearch", id = "TxtSearch" })
-                      
-                        <button class="search-top"><i class="ps-icon-search"></i></button>                    
+
+                        <button class="search-top"><i class="ps-icon-search"></i></button>
 
                     </div>
                 }
@@ -152,7 +201,18 @@
                 <div class="menu-toggle"><span></span></div>
                 <div class="ps-cart" id="Cartcontent">
                     <div id="CartCount">
-                        <a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
+                        @{
+
+                            if (Model.CartItemCount != 0)
+                            {
+                                <a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
+                            }
+                            else
+                            {
+                                <a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>
+                            }
+                        }
+
                     </div>
                     <div class="ps-cart__listing">
 
@@ -185,21 +245,108 @@
                         </div>
 
                         <div class="ps-cart__total" id="CartTotal">
-                            <p>Number of items:<span>@Model.CartItemCount</span></p>
-                            <p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>
+                            @{
+
+                                if (Model.CartItemCount != 0)
+                                {
+                                    <p>Number of items:<span>@Model.CartItemCount</span></p>
+                                            <p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>
+                                }
+                                else
+                                {
+                                    <p>YOUR SHOPPING BAG IS EMPTY</p>
+                                }
+                            }
                         </div>
+                        @{
 
-                        <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>
-
+                            if (Model.CartItemCount != 0)
+                            {
+                                <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>
+                            }
+                        }
                     </div>
 
                 </div>
+
+
+
 
 
             </div>
         </div>
     </nav>
 </header>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Confirm OTP</h4>
+            </div>
+            <div class="modal-body">
+                <input id="otpText" type="text" placeholder="ENTER YOUR OTP " />
+                <label id="otplabel" style="color:red"></label>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="otp()">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    var otp = function () {
+
+        var otp = document.getElementById('otpText').value;
+        if (otp == "") {
+            otplabel.innerText = "Otp Required";
+            return;
+
+        }
+
+
+        $.ajax({
+            url: "../../WebLogin/Otp",
+            type: "POST",
+
+            data: {
+
+                "Otp":otp,
+                "userid":@Model.UserId
+            },
+            success: function (result)
+            {
+                debugger
+                //var returnedData = JSON.parse(result.Response.innerText);
+                console.log(JSON.parse(result));
+                var response = JSON.parse(result);
+                console.log(response.Id);
+                if (response.Id == 1)
+                {
+
+                    otplabel.innerText = "YOUR ACCOUNT VERIFIED";
+                    //$("#myModal").hide();
+                    window.location.reload();
+                }
+                else {
+                    otplabel.innerText = "Otp Not matched";
+                    //$("#myModal").modal.show();
+                    return;
+                }
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+
 
 
 

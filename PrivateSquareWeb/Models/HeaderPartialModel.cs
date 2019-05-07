@@ -13,5 +13,6 @@ namespace PrivateSquareWeb.Models
         public int CartItemCount { get; set; } = 0;
         public string SearchBarText { get; set; }
         public long ParentCatId { get; set; }
+        public string RegisterType { get; set; }
     }
 }

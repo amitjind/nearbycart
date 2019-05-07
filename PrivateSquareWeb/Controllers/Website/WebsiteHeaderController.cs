@@ -27,6 +27,7 @@ namespace PrivateSquareWeb.Controllers.Website
             objModel.UserId = Convert.ToInt64(MdUser.Id);
             objModel.ProfileImg = MdUser.ProfileImg;
             objModel.CartItemCount = ListAddToCart.Count();
+            objModel.RegisterType = MdUser.RegisterType;
 
             ViewBag.AddToCart = ListAddToCart;
 

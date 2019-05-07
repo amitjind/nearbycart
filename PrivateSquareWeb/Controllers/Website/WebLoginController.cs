@@ -4,6 +4,7 @@ using PrivateSquareWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,24 +19,41 @@ namespace PrivateSquareWeb.Controllers.Website
             Services.RemoveCookie(this.ControllerContext.HttpContext, "webusr");
             return View();
         }
-        //public JsonResult Logout()
-        //{
-        //    bool result=false;
-        //    try
-        //    {
-        //        Services.RemoveCookie(this.ControllerContext.HttpContext, "webusr");
-        //        Session.Abandon();
+        [HttpPost]
 
-        //         //RedirectToAction("Index", "WebLogin");
-        //        return Json(result, JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch
-        //    {
-        //        //RedirectToAction("Index", "WebLogin");
-        //        return Json(result, JsonRequestBehavior.AllowGet);
-        //    }
+        public JsonResult Otp(string Otp, long userid)
+        {
+            int result = 1;
+            var ReturnjsonString = string.Empty;
 
-        //}
+            LoginModel ObjLoginModel = new LoginModel();
+            ObjLoginModel.Otp = Otp;
+            ObjLoginModel.Id = userid;
+            var _request = JsonConvert.SerializeObject(ObjLoginModel);
+            ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiVerifyEmailWithOTP, _request);
+            ResponseModel ObjResponse1 = JsonConvert.DeserializeObject<ResponseModel>(ObjResponse.Response);
+            if (ObjResponse1.Response == "WRONG OTP")
+            {
+                result = 0;
+                ReturnjsonString = "{\"Id\":\"" + result + "\"}";
+            }
+            else
+            {
+                LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
+                MdUser.RegisterType = "web";
+
+                var jsonString = "{\"Id\":\"" + MdUser.Id + "\",\"Name\":\"" + MdUser.Name + "\",\"ProfileImg\":\"" + MdUser.ProfileImg + "\",\"EmailId\":\"" + MdUser.EmailId + "\",\"Mobile\":\"" + MdUser.Mobile + "\",\"RegisterType\":\"" + MdUser.RegisterType + "\"}";
+                Services.SetCookie(this.ControllerContext.HttpContext, "webusr", _JwtTokenManager.GenerateToken(jsonString.ToString()));
+                result = 1;
+                ReturnjsonString = "{\"Id\":\"" + result + "\"}";
+            }
+
+            //return Json(result, JsonRequestBehavior.AllowGet);
+            ReturnjsonString = "{\"Id\":\"" + result + "\"}";
+            return Json(ReturnjsonString);
+
+
+        }
         public ActionResult Logout()
         {
             Services.RemoveCookie(this.ControllerContext.HttpContext, "webusr");
@@ -47,6 +65,8 @@ namespace PrivateSquareWeb.Controllers.Website
         [HttpPost]
         public ActionResult LoginUser(LoginModel ObjModel)
         {
+
+
             //var abc = ObjModel.EmailId;
             ObjModel.EmailId = (ObjModel.EmailId).Replace(" ", "");
             if (string.IsNullOrWhiteSpace(ObjModel.EmailId))
@@ -108,7 +128,9 @@ namespace PrivateSquareWeb.Controllers.Website
             {
                 string[] ArrResponse = VarResponse.Split(',');
 
-                var jsonString = "{\"Id\":\"" + ArrResponse[0] + "\",\"Name\":\"" + ArrResponse[1] + "\",\"ProfileImg\":\"" + ArrResponse[2] + "\",\"EmailId\":\"" + ArrResponse[3] + "\",\"Mobile\":\"" + ArrResponse[4] + "\"}";
+                //var jsonString = "{\"Id\":\"" + ArrResponse[0] + "\",\"Name\":\"" + ArrResponse[1] + "\",\"ProfileImg\":\"" + ArrResponse[2] + "\",\"EmailId\":\"" + ArrResponse[3] + "\",\"Mobile\":\"" + ArrResponse[4] + "\,\"RegisterType\":\"" + ArrResponse[5] + "\"}";
+                var jsonString = "{\"Id\":\"" + ArrResponse[0] + "\",\"Name\":\"" + ArrResponse[1] + "\",\"ProfileImg\":\"" + ArrResponse[2] + "\",\"EmailId\":\"" + ArrResponse[3] + "\",\"Mobile\":\"" + ArrResponse[4] + "\",\"RegisterType\":\"" + ArrResponse[5] + "\"}";
+
                 Services.SetCookie(this.ControllerContext.HttpContext, "webusr", _JwtTokenManager.GenerateToken(jsonString.ToString()));
 
 
@@ -191,10 +213,31 @@ namespace PrivateSquareWeb.Controllers.Website
 
             }
 
-            ObjModel.RegisterType = "web";
+            ObjModel.RegisterType = "UNV";
             string PasswordEncripy = CommonFile.EncodePasswordMd5(ObjModel.Password);
+            string sub = "WELLCOME";
 
+            StringBuilder builder = new StringBuilder();
+            Random random = new Random();
+            int otp = 0;
+
+            for (int i = 0; i < 4; i++)
+            {
+
+                otp = random.Next(0, 9);
+                builder.Append(otp);
+            }
+
+            string Body = "WELLCOME TO NEAR BY CART" + "</br>" + "<h1> '" + builder + "' </h1>";
             ObjModel.Password = PasswordEncripy;
+            ObjModel.Otp = builder.ToString();
+
+
+
+
+
+
+
 
             var _request = _JwtTokenManager.GenerateToken(JsonConvert.SerializeObject(ObjModel));
             ResponseModel ObjResponse = CommonFile.GetApiResponseJWT(Constant.ApiRegisterUser, _request);
@@ -206,16 +249,29 @@ namespace PrivateSquareWeb.Controllers.Website
             }
             else
             {
-                string[] ArrResponse = varResponse.Split(',');
+                if (CommonFile.SendMailContact(ObjModel.EmailId, sub, ObjModel.EmailId, string.Empty, Body) == 1)
+                {
+                    string[] ArrResponse = varResponse.Split(',');
 
-                // var jsonString = "{\"Id\":\"" + ArrResponse[0] + "\",\"Name\":\"" + ArrResponse[1] + "\",\"ProfileImg\":\"" + ArrResponse[2] + "\"}";
+                    // var jsonString = "{\"Id\":\"" + ArrResponse[0] + "\",\"Name\":\"" + ArrResponse[1] + "\",\"ProfileImg\":\"" + ArrResponse[2] + "\"}";
+                    var jsonString = "{\"Id\":\"" + ArrResponse[0] + "\",\"Name\":\"" + ArrResponse[1] + "\",\"ProfileImg\":\"" + ArrResponse[2] + "\",\"EmailId\":\"" + ArrResponse[3] + "\",\"Mobile\":\"" + ArrResponse[4] + "\",\"RegisterType\":\"" + ObjModel.RegisterType + "\"}";
+                    //var jsonString = "{\"Id\":\"" + ArrResponse[0] + "\",\"Name\":\"" + ArrResponse[1] + "\",\"ProfileImg\":\"" + ArrResponse[2] + "\",\"EmailId\":\"" + ArrResponse[3] + "\",\"Mobile\":\"" + ArrResponse[4] + "\"}";
 
-                var jsonString = "{\"Id\":\"" + ArrResponse[0] + "\",\"Name\":\"" + ArrResponse[1] + "\",\"ProfileImg\":\"" + ArrResponse[2] + "\",\"EmailId\":\"" + ArrResponse[3] + "\",\"Mobile\":\"" + ArrResponse[4] + "\"}";
-
-                Services.SetCookie(this.ControllerContext.HttpContext, "webusr", _JwtTokenManager.GenerateToken(jsonString.ToString()));
-                Response = "[{\"Response\":\"" + "Home" + "\"}]"; ;
+                    Services.SetCookie(this.ControllerContext.HttpContext, "webusr", _JwtTokenManager.GenerateToken(jsonString.ToString()));
+                    Response = "[{\"Response\":\"" + "Home" + "\"}]"; ;
+                }
+                //else
+                //{
+                //    //hare i want to delete the register email id
+                //    Response = "[{\"Response\":\"" + ObjResponse1.Response + "\"}]";
+                //    //Response = ("EMAIL IS NOT VALID");
+                //}
             }
             return Json(Response);
+
+
+
+
             /******************************************************************/
             #region Using Json
             /*    var _request = JsonConvert.SerializeObject(ObjModel);

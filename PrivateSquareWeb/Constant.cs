@@ -57,7 +57,8 @@ namespace PrivateSquareWeb
 		public const string ApiSaveCouponHistory = "User/SaveCouponHistory";
 		public const string ApiIsParentCategory = "User/IsParentCategory";
 		public const string ApiGetChildCategory = "User/GetChildCategory";
-		public const int NumberOfProducts = 12;
+        public const string ApiVerifyEmailWithOTP = "User/VerifyEmailWithOTP";//For Account verified @Gobind
+        public const int NumberOfProducts = 12;
 		public const int NumberOfProductsInFrontPage = 4;
 		public static int[] ParentCategories =new int[] { 36, 37, 38, 39, 41, 42 };
 		public const int MinimumAmountForFreeDelivery = 500;
