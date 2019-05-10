@@ -29,7 +29,10 @@
             },  
             success: function (result) {
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
-                swal(" ", "Product Added to the Cart", "success");
+                //swal(" ", "Product Added to the Cart", "success");
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+                    swal(" ", "Product Added to the Side Cart", "success");
+                })
             },
             error: function (error) {
                 console.log(error);

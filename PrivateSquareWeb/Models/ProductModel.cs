@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PrivateSquareWeb.Models
 {
@@ -27,11 +23,15 @@ namespace PrivateSquareWeb.Models
         public string ProductImages { get; set; }
         public string VendorName { get; set; }
         public string Operation { get; set; }
-        //public int SearchResultCount { get; set; }
+      
         //Below are the properties for pagination
         public long SearchResultCount { get; set; } = 0;
         public long LowerLimit { get; set; } = 0;
         public long NumberOfPages { get; set; } = 0;
         public string CategoryName { get; set; }
+
+        //below is the field added for fetching the ItemCount on the sidebar cart
+
+        public int CartItemCount { get; set; } = 0;
     }
 }

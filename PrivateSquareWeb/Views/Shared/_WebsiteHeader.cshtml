@@ -74,7 +74,6 @@
             type: "Get",
             success: function (result) {
                 if (result == true) {
-                    //window.history.forward();
                     window.onload = function () {
                         window.history.forward();
                     };
@@ -85,7 +84,6 @@
                         else {
 
                         }
-                        //null;
                     };
                     Response.Redirect("../../WebLogin/Index");
                 }
@@ -120,7 +118,7 @@
 
                                 {
                                     <div class="btn-group ps-dropdown">
-                                         @{
+                                        @{
                                             if (Model.RegisterType != "UNV")
                                             {
 
@@ -129,44 +127,22 @@
                                             else
                                             {
                                                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">[Unverified]</button>
-                                                @*<a href="#" style="color:red">[Unverified]</a>*@
                                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.UserName<i class="fa fa-angle-down"></i></a>
                                             }
                                         }
-
                                         <ul class="dropdown-menu dropdown-content">
-
                                             <li><a href="~/WebHome/MyOrders">My Orders</a></li>
                                             <li><a href="~/WebHome/WishList">My Wishlist</a></li>
                                             <li><a href="~/ChangePassword/WebIndex">Change Password</a></li>
-                                            @*<li><a onclick="Logout()">Log Out</a></li>*@
                                             <li><a href="/WebLogin/Logout">Log Out</a></li>
-
-
-
                                         </ul>
-
-
-
                                     </div>
-
-
-
-
-
-                                }
-
-                                else if (@Model.UserId == 0)
-
-                                {
-
-                                    <a href="/WebLogin/Index">Login & Regiser</a>
-
-                                }
-
+                                            }
+                                            else if (@Model.UserId == 0)
+                                            {
+                                                <a href="/WebLogin/Index">Login & Regiser</a>
+                                            }
                             }
-
-
                         </div>
                     </div>
                 </div>
@@ -183,26 +159,17 @@
 
                 @using (Html.BeginForm("SearchBar", "WebHome", FormMethod.Post, new { @class = "" }))
                 {
-
-
-                    @*@Html.DropDownListFor(m => m.ParentCatId, ViewBag.ParentCategories as SelectList, "All Categories", new { @class = "ps-select selectpicker col-lg-4 pull-left"})*@
                     <div class="col-lg-8 pull-left">
-
-
                         @Html.TextBoxFor(m => m.SearchBarText, new { @class = "form-control", placeholder = "Search Product…", value = "TxtSearch", id = "TxtSearch" })
-
                         <button class="search-top"><i class="ps-icon-search"></i></button>
-
                     </div>
                 }
-
             </div>
             <div class="right">
                 <div class="menu-toggle"><span></span></div>
                 <div class="ps-cart" id="Cartcontent">
                     <div id="CartCount">
                         @{
-
                             if (Model.CartItemCount != 0)
                             {
                                 <a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
@@ -250,7 +217,7 @@
                                 if (Model.CartItemCount != 0)
                                 {
                                     <p>Number of items:<span>@Model.CartItemCount</span></p>
-                                            <p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>
+                                    <p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>
                                 }
                                 else
                                 {
@@ -284,7 +251,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Confirm OTP</h4>
+                <h4 class="modal-title">Please enter the OTP sent your Email to verify your account</h4>
             </div>
             <div class="modal-body">
                 <input id="otpText" type="text" placeholder="ENTER YOUR OTP " />

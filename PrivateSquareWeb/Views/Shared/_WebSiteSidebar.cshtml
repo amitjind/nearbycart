@@ -6,168 +6,148 @@
 </style>
 
 @model PrivateSquareWeb.Models.ProductModel
-@*@model PrivateSquareWeb.Models.HeaderPartialModel*@ 
-@*<link href="~/theme/css/slim.css" rel="stylesheet" />*@
+
 <aside class="ps-sidebar" data-mh="product-page">
     <aside class="ps-widget--sidebar ps-widget--category">
         <div class="ps-widget__header">
             <h3>Category</h3>
         </div>
-
-        <div class="ps-widget__content">
-            <ul class="ps-list--checked">
-                @{
-                    foreach (var Cat in ViewBag.ProductCatList)
-                    {
-                        if (Cat.ParentCatId == 0)
+        
+            <div class="ps-widget__content">
+                <ul class="ps-list--checked">
+                    @{
+                        foreach (var Cat in ViewBag.ProductCatList)
                         {
-                           
+                            if (Cat.ParentCatId == 0)
+                            {
+
                                 <li><a href="javascript:void()" data-toggle="collapse" data-target="#subcategories@(Cat.Id)">@Cat.Name </a></li>
-                          
 
-                        }
-                        <li>
-                            <div id="subcategories@(Cat.Id)" class="collapse ContainSpace">
-                                @{ if (Cat.Id == 36)
-                                    {
-                                        foreach (var item in ViewBag.ProdCatList36)
-                                        {
 
-                                            <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
-                                        }
-                                    }
-                                    if (Cat.Id == 37)
-                                    {
-                                        foreach (var item in ViewBag.ProdCatList37)
+                            }
+                            <li>
+                                <div id="subcategories@(Cat.Id)" class="collapse ContainSpace">
+                                    @{ if (Cat.Id == 36)
                                         {
-                                            <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
-                                        }
-                                    }
-                                    if (Cat.Id == 38)
-                                    {
-                                        foreach (var item in ViewBag.ProdCatList38)
-                                        {
-                                            <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
-                                        }
-                                    }
-                                    if (Cat.Id == 39)
-                                    {
-                                        foreach (var item in ViewBag.ProdCatList39)
-                                        {
-                                            <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
-                                        }
-                                    }
-                                    if (Cat.Id == 41)
-                                    {
-                                        foreach (var item in ViewBag.ProdCatList41)
-                                        {
-                                            <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
-                                        }
-                                    }
-                                    if (Cat.Id == 42)
-                                    {
-                                        foreach (var item in ViewBag.ProdCatList42)
-                                        {
-                                            <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
-                                        }
-                                    }
-                                }
+                                            foreach (var item in ViewBag.ProdCatList36)
+                                            {
 
+                                                <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
+                                            }
+                                        }
+                                        if (Cat.Id == 37)
+                                        {
+                                            foreach (var item in ViewBag.ProdCatList37)
+                                            {
+                                                <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
+                                            }
+                                        }
+                                        if (Cat.Id == 38)
+                                        {
+                                            foreach (var item in ViewBag.ProdCatList38)
+                                            {
+                                                <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
+                                            }
+                                        }
+                                        if (Cat.Id == 39)
+                                        {
+                                            foreach (var item in ViewBag.ProdCatList39)
+                                            {
+                                                <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
+                                            }
+                                        }
+                                        if (Cat.Id == 41)
+                                        {
+                                            foreach (var item in ViewBag.ProdCatList41)
+                                            {
+                                                <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
+                                            }
+                                        }
+                                        if (Cat.Id == 42)
+                                        {
+                                            foreach (var item in ViewBag.ProdCatList42)
+                                            {
+                                                <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
+                                            }
+                                        }
+                                    }
+
+                                </div>
+                            </li>
+                                        }
+                    }
+
+                </ul>
+            </div>
+
+        <div id="refreshThisDivWhenProductIsAddedToCart">
+            <h3>Your Cart</h3>
+            <div id="CartList">
+                @{ int index = 0;
+                    foreach (var item in ViewBag.AddToCart)
+                    {
+
+                        <div class="ps-cart-item">
+
+                            <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
+
+                            <div class="ps-cart-item__thumbnail">
+                                <a href="/WebHome/ProductDetail/@item.ProductId"></a>
+                                <img src="~/DocImg/@item.ImageName" alt="Image">
                             </div>
-                        </li>
+                            <div class="ps-cart-item__content">
+
+                                <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
+
+                                <p><span>Quantity:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
+                                @*<a href="javascript:void();" class="minus" value="remove one" onclick="RemoveToCartFromSideBar('@item.ProductId','@item.ProductName','@item.ImageName','@item.Price','@item.Amount','@index')"><span>-</span> </a>*@
+                                <a href="javascript:void();" class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span>+</span> </a>
+                                
+                            </div>
+                        </div>
+                        index++;
                     }
                 }
 
-            </ul>
+            </div>
+
+
+            <div id="CartTotal">
+                @{
+
+                    if (Model.CartItemCount != 0)
+                    {
+                        <p>Number of items:<span>@Model.CartItemCount</span></p>
+                        <p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>
+                    }
+                    else
+                    {
+                        <p>YOUR SHOPPING BAG IS EMPTY</p>
+                    }
+                }
+            </div>
+            @{
+
+                if (Model.CartItemCount != 0)
+                {
+                    <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>
+                }
+            }
         </div>
-		@*<div class="right">
-			<div class="menu-toggle"><span></span></div>
-			<div class="ps-cart" id="Cartcontent">
-				<div id="CartCount">
-					<a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
-				</div>
-				<div class="ps-cart__listing">
-
-					<div class="ps-cart__content">
-						<div id="CartList">
-							@{ int index = 0;
-								foreach (var item in ViewBag.AddToCart)
-								{
-
-									<div class="ps-cart-item">
-
-										<a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
-
-										<div class="ps-cart-item__thumbnail">
-											<a href="/WebHome/ProductDetail/@item.ProductId"></a>
-											<img src="~/DocImg/@item.ImageName" alt="Image">
-										</div>
-										<div class="ps-cart-item__content">
-
-											<a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
-
-											<p><span>Quantity:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
-
-										</div>
-									</div>
-								}
-							}
-
-						</div>
-					</div>
-
-					<div class="ps-cart__total" id="CartTotal">
-						<p>Number of items:<span>@Model.CartItemCount</span></p>
-						<p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>
-					</div>
-
-					<div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>
-
-				</div>
-
-			</div>
-
-
-		</div>*@
-
     </aside>
+
+
+
+
 
 </aside>
 <div>
-	@*<div class="ps-cart__content">
-		<div id="CartList">
-			@{ int index = 0;
-				foreach (var item in ViewBag.AddToCart)
-				{
 
-					<div class="ps-cart-item">
+    <div class="ps-cart__total" id="CartTotal">
 
-						<a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
+    </div>
 
-						<div class="ps-cart-item__thumbnail">
-							<a href="/WebHome/ProductDetail/@item.ProductId"></a>
-							<img src="~/DocImg/@item.ImageName" alt="Image">
-						</div>
-						<div class="ps-cart-item__content">
 
-							<a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
-
-							<p><span>Quantity:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
-
-						</div>
-					</div>
-				}
-			}
-
-		</div>
-	</div>*@
-
-	<div class="ps-cart__total" id="CartTotal">
-		@*<p>Number of items:<span>@Model.CartItemCount</span></p>
-		<p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>*@
-	</div>
-
-	@*<div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>*@
 
 
 
