@@ -8,14 +8,14 @@ using System.Web.Mvc;
 
 namespace PrivateSquareWeb.Controllers.Website
 {
-    [HandleError]
+	[HandleError]
 	public class ProductCatWiseController : Controller
 	{
 		static List<ProductModel> ListAllProduct;
 		JwtTokenManager _JwtTokenManager = new JwtTokenManager();
 
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        public ActionResult Index(string id)
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+		public ActionResult Index(string id)
 		{
 			long? Id = Convert.ToInt64(CommonFile.Decode(id));
 			Services.SetCookie(this.ControllerContext.HttpContext, "ProductCatId", id.ToString());
@@ -52,8 +52,8 @@ namespace PrivateSquareWeb.Controllers.Website
 			ViewBag.NumberOfPages = SearchProductList.Count / 10;
 			ViewBag.LowerLimit = 1;
 			ViewBag.NumberOfPages = 5;
-            var ProductCategory = ProductCatList.Where(x => x.Id.Equals(Id));         
-            ViewBag.ProductCatList = EncodedCategories.Where(x =>x.ParentCatId==ProductCategory.Single().ParentCatId);
+			var ProductCategory = ProductCatList.Where(x => x.Id.Equals(Id));         
+			ViewBag.ProductCatList = EncodedCategories.Where(x =>x.ParentCatId==ProductCategory.Single().ParentCatId);
 			objmodel.CategoryName = ProductCategory.Single().Name;
 			return View(objmodel);
 		}
@@ -114,16 +114,16 @@ namespace PrivateSquareWeb.Controllers.Website
 		}
 		public PartialViewResult PartialCatwiseProductPrice(decimal Price, String CategoryId)
 		{
-            long id = Convert.ToInt64(CommonFile.Decode(CategoryId));
-            ProductModel objModel = new ProductModel();
-            objModel.ProductCatId = id;
-            var SearchProductList = SearchPriceRange(Price.ToString(), id);
+			long id = Convert.ToInt64(CommonFile.Decode(CategoryId));
+			ProductModel objModel = new ProductModel();
+			objModel.ProductCatId = id;
+			var SearchProductList = SearchPriceRange(Price.ToString(), id);
 
-            ViewBag.UsersProduct = SearchProductList.Take(Constant.NumberOfProducts);
-            var ProductCatList = CommonFile.GetProductCategory(id);
+			ViewBag.UsersProduct = SearchProductList.Take(Constant.NumberOfProducts);
+			var ProductCatList = CommonFile.GetProductCategory(id);
 
-            ViewBag.ProductCatList = ProductCatList;
-            return PartialView("~/Views/ProductCatWise/PartialCatwiseProductPrice.cshtml", objModel);
+			ViewBag.ProductCatList = ProductCatList;
+			return PartialView("~/Views/ProductCatWise/PartialCatwiseProductPrice.cshtml", objModel);
 		}
 		private List<ProductModel> SearchProduct(string ProductName)
 		{
@@ -139,8 +139,8 @@ namespace PrivateSquareWeb.Controllers.Website
 
 		public ActionResult Sortby(int sortorder, int pageindex, string productcatid)
 		{
-            long? Id = Convert.ToInt64(CommonFile.Decode(productcatid));
-            ProductModel objModel = new ProductModel();
+			long? Id = Convert.ToInt64(CommonFile.Decode(productcatid));
+			ProductModel objModel = new ProductModel();
 			string SortOrder = "";
 			switch (sortorder)
 			{
@@ -223,7 +223,7 @@ namespace PrivateSquareWeb.Controllers.Website
 					{
 						SearchProductList = ListAllProduct.Where(x => x.ProductCatId == long.Parse(CommonFile.Decode(ProductCatId))).ToList();
 					}
-					else { SearchProductList = ListAllProduct.Where(x => x.ParentCatId == long.Parse(ProductCatId)).ToList(); }
+					else { SearchProductList = ListAllProduct.Where(x => x.ParentCatId == long.Parse(CommonFile.Decode(ProductCatId))).ToList(); }
 					ViewBag.UsersProduct = SearchProductList.Skip((pageindex - 1) * Constant.NumberOfProducts).Take(Constant.NumberOfProducts);
 					ViewBag.SearchResultCount = SearchProductList.Count;
 					if ((ViewBag.SearchResultCount / Constant.NumberOfProducts) < (pageindex + 4))

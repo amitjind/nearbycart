@@ -6,6 +6,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
     var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
+        $("body").removeClass("loaded");
         var salePrice = SellingPrice;
         var discountPrice = DiscountPrice;
         var ProductId = Id;
@@ -38,6 +39,7 @@
                     //swal(" ", "Product Added to the Cart", "success");
                 });
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+                    $(".ps-loading").addClass("loaded");
                     swal(" ", "Product Added to the Side Cart", "success");
                 })
                 
@@ -171,7 +173,7 @@
                     </div>
                 </div>
                 <div class="nearCart_header col-lg-12">
-                    <h2>Beauty & Personal care</h2><a class="ps-product-link pull-right" href="/ProductCatWise/Index/@Constant.EncodeNumber(Constant.ParentCategories[0])">View More</a>
+                    <h2>Beauty & Personal care</h2><a class="ps-product-link pull-right" href="~/ProductCatWise/Index/@Constant.EncodeNumber(Constant.ParentCategories[0])">View More</a>
                 </div>
                 <div class="ps-section__content">
                     @foreach (var Users in ViewBag.FirstCategory)
@@ -504,43 +506,7 @@
     }
 </script>
 
-<script>
-    var AddToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount) {
 
-        var discountPrice = 0;
-        var ProductId = Id;
-        var ProductNamevar = "" + ProductName + "";
-        var Qty = 1;
-        var ImageName = ProductImage;
-
-        var TotalAmount = 0;
-        console.log('ProductId' + ProductId);
-        $.ajax({
-            url: "../../WebHome/AddToCart",
-            type: "POST",
-            data: {
-                ProductId: ProductId,
-                ProductName: ProductNamevar,
-                Qty: Qty,
-                ImageName: ImageName,
-                Price: Price,
-                Amount: Amount,
-                Discount: discountPrice,
-                TotalAmount: TotalAmount
-            },
-            success: function (result) {
-
-                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
-                    swal(" ", "One more added !", "success");
-                })
-                
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-    }
-</script>
 
 <script>
     var RemoveToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount, index) {
@@ -581,5 +547,9 @@
                 console.log(error);
             }
         });
-    }
+        }
+
+
+    //for loader
+    
 </script>

@@ -9,79 +9,46 @@
 
 <aside class="ps-sidebar" data-mh="product-page">
     <aside class="ps-widget--sidebar ps-widget--category">
-        <div class="ps-widget__header">
+        <div class="ps-widget__header cate_back">
             <h3>Category</h3>
         </div>
-        
-            <div class="ps-widget__content">
-                <ul class="ps-list--checked">
-                    @{
-                        foreach (var Cat in ViewBag.ProductCatList)
+
+        <div class="ps-widget__content">
+            <ul class="ps-list--checked-1">
+                @{
+                    foreach (var Cat in ViewBag.ProductCatList)
+                    {
+                        if (Cat.ParentCatId == 0)
                         {
-                            if (Cat.ParentCatId == 0)
-                            {
 
-                                <li><a href="javascript:void()" data-toggle="collapse" data-target="#subcategories@(Cat.Id)">@Cat.Name </a></li>
+                                <li class="nbc-main-category">
+
+                                   <a href="javascript:void()" data-toggle="collapse" data-target="#subcategories@(Cat.Id)" class="cate-main-list">@Cat.Name </a>
+                                    <ul class="ps-list--checked-1 sub_cate" style="padding-left: 10px;" id="sidebarsubcategories">
+                                        @foreach (var subcat in ViewBag.ProductCatList)
+                                        {
+                                            if (subcat.ParentCatId == Cat.Id)
+                                            {
+                                                <li><a href="~/ProductCatWise/Index/@Constant.EncodeNumber(int.Parse((subcat.Id).ToString()))"> @subcat.Name </a></li>
 
 
-                            }
-                            <li>
-                                <div id="subcategories@(Cat.Id)" class="collapse ContainSpace">
-                                    @{ if (Cat.Id == 36)
-                                        {
-                                            foreach (var item in ViewBag.ProdCatList36)
-                                            {
-
-                                                <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
                                             }
                                         }
-                                        if (Cat.Id == 37)
-                                        {
-                                            foreach (var item in ViewBag.ProdCatList37)
-                                            {
-                                                <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
-                                            }
-                                        }
-                                        if (Cat.Id == 38)
-                                        {
-                                            foreach (var item in ViewBag.ProdCatList38)
-                                            {
-                                                <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
-                                            }
-                                        }
-                                        if (Cat.Id == 39)
-                                        {
-                                            foreach (var item in ViewBag.ProdCatList39)
-                                            {
-                                                <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
-                                            }
-                                        }
-                                        if (Cat.Id == 41)
-                                        {
-                                            foreach (var item in ViewBag.ProdCatList41)
-                                            {
-                                                <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
-                                            }
-                                        }
-                                        if (Cat.Id == 42)
-                                        {
-                                            foreach (var item in ViewBag.ProdCatList42)
-                                            {
-                                                <ul><li><a href="~/ProductCatWise/Index/@item.EncodedId"> @item.Name</a></li></ul>
-                                            }
-                                        }
-                                    }
-
-                                </div>
-                            </li>
-                                        }
+                                    </ul>
+                                </li>
+                        }
                     }
 
-                </ul>
-            </div>
-
-        <div id="refreshThisDivWhenProductIsAddedToCart">
+                }
+            </ul>
+        </div>
+    </aside>
+    <aside class="ps-widget--sidebar ps-widget--category">
+        <div class="ps-widget__header cate_back">
             <h3>Your Cart</h3>
+        </div>
+        <div id="refreshThisDivWhenProductIsAddedToCart">
+
             <div id="CartList">
                 @{ int index = 0;
                     foreach (var item in ViewBag.AddToCart)
@@ -99,10 +66,10 @@
 
                                 <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
 
-                                <p><span>Quantity:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
+                                <p><span>Qty:<i> @item.Qty</i> </span><span>Total:<i>₹ @item.Amount</i></span></p>
                                 @*<a href="javascript:void();" class="minus" value="remove one" onclick="RemoveToCartFromSideBar('@item.ProductId','@item.ProductName','@item.ImageName','@item.Price','@item.Amount','@index')"><span>-</span> </a>*@
                                 <a href="javascript:void();" class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span>+</span> </a>
-                                
+
                             </div>
                         </div>
                         index++;
@@ -117,8 +84,8 @@
 
                     if (Model.CartItemCount != 0)
                     {
-                        <p>Number of items:<span>@Model.CartItemCount</span></p>
-                        <p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>
+                        <p>Number of items: <span>@Model.CartItemCount</span></p>
+                        <p>Item Total: <span>₹ @ViewBag.TotalAmount</span></p>
                     }
                     else
                     {
@@ -130,25 +97,64 @@
 
                 if (Model.CartItemCount != 0)
                 {
-                    <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>
+                    <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out</a></div>
                 }
             }
         </div>
     </aside>
-
-
-
-
-
 </aside>
-<div>
 
-    <div class="ps-cart__total" id="CartTotal">
+<script>
+var acc = document.getElementsByClassName("cate-main-list");
+var i;
 
-    </div>
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var cate_sub = this.nextElementSibling;
+    if (cate_sub.style.maxHeight){
+      cate_sub.style.maxHeight = null;
+    } else {
+      cate_sub.style.maxHeight = cate_sub.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+<script>
+    var AddToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount) {
+        $("body").removeClass("loaded");
+        var discountPrice = 0;
+        var ProductId = Id;
+        var ProductNamevar = "" + ProductName + "";
+        var Qty = 1;
+        var ImageName = ProductImage;
 
+        var TotalAmount = 0;
+        console.log('ProductId' + ProductId);
+        $.ajax({
+            url: "../../WebHome/AddToCart",
+            type: "POST",
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductNamevar,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result) {
 
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+                    $("body").addClass("loaded");
+                    swal(" ", "One more added !", "success");
+                })
 
-
-
-</div>
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
