@@ -191,7 +191,8 @@ namespace PrivateSquareWeb.Controllers.Website
 			ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetWishlist, _request);
 			var ProductWishlist = JsonConvert.DeserializeObject<List<ProductModel>>(ObjResponse.Response);
 			ViewBag.Wishlist = ProductWishlist;
-			return View(objmodel);
+            ViewBag.WishlistCount = ProductWishlist.Count;
+            return View(objmodel);
 		}
 
 		public ActionResult AddToWishlist(AddToCartModel objmodel)

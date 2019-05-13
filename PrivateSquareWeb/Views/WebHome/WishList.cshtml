@@ -1,21 +1,12 @@
 ﻿@model PrivateSquareWeb.Models.ProductModel
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "WishList";
-                Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
+    ViewBag.Title = "WishList";
+    Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
 }
-@*<script>
-	window.history.forward();
-	window.onload = function () {
-		window.history.forward();
-	};
 
-	window.onunload = function () {
-		null;
-	};
-</script>*@
 <script type="text/javascript">
     var DeleteWishlistItem = function (ProductId) {
 
@@ -52,31 +43,41 @@
 <div class="ps-content pt-80 pb-80" id="wishlistproducts">
     <div class="ps-container">
         <div class="table-responsive">
-            <table class="table ps-table ps-table--whishlist">
-                <thead>
-                    <tr>
-                        <th>All Products</th>
-                        <th>Price</th>
-                        <th>View</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                
-                <tbody>
-                    @foreach (var products in ViewBag.Wishlist)
-                    {
-                    <tr>                       
-                        <td><a class="ps-product--compare" href="~/Webhome/ProductDetail/@products.ProductId"><img class="mr-15" src="~/DocImg/@products.ProductImage" alt="">@products.ProductName</a></td>
-                        <td>₹ @products.DiscountPrice</td>
-                        <td><a class="ps-product-link" href="~/Webhome/ProductDetail/@(Constant.EncodeNumber(int.Parse((products.ProductId).ToString())))">View Product</a></td>
-                        <td>
-                            <div class="ps-remove" onclick="DeleteWishlistItem(@products.ProductId)"></div>
-                        </td>
-                    </tr>
-                    }
-                 
-                </tbody>
-            </table>
+            @{
+                if (ViewBag.WishlistCount != 0)
+                {
+                    <table class="table ps-table ps-table--whishlist">
+                        <thead>
+                            <tr>
+                                <th>All Products</th>
+                                <th>Price</th>
+                                <th>View</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var products in ViewBag.Wishlist)
+                            {
+                                <tr>
+                                    <td><a class="ps-product--compare" href="~/Webhome/ProductDetail/@products.ProductId"><img class="mr-15" src="~/DocImg/@products.ProductImage" alt="">@products.ProductName</a></td>
+                                    <td>₹ @products.DiscountPrice</td>
+                                    <td><a class="ps-product-link" href="~/Webhome/ProductDetail/@(Constant.EncodeNumber(int.Parse((products.ProductId).ToString())))">View Product</a></td>
+                                    <td>
+                                        <div class="ps-remove" onclick="DeleteWishlistItem(@products.ProductId)"></div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>YOUR WISHLIST BAG IS EMPTY</p>
+                }
+            }
+
         </div>
     </div>
 </div>
