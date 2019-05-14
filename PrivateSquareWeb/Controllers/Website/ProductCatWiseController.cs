@@ -54,7 +54,15 @@ namespace PrivateSquareWeb.Controllers.Website
 			ViewBag.NumberOfPages = 5;
 			var ProductCategory = ProductCatList.Where(x => x.Id.Equals(Id));         
 			ViewBag.ProductCatList = EncodedCategories.Where(x =>x.ParentCatId==ProductCategory.Single().ParentCatId);
-			objmodel.CategoryName = ProductCategory.Single().Name;
+            if (!CommonFile.IsParentCategory(Id))
+            {
+                objmodel.ParentCatId = ProductCategory.Single().ParentCatId;
+            }
+            else
+            {
+                objmodel.ParentCatId = ProductCategory.Single().Id;
+            }
+            objmodel.CategoryName = ProductCategory.Single().Name;
 			return View(objmodel);
 		}
 		public ActionResult ProcessForm(FormCollection frm, string submit)
@@ -87,7 +95,6 @@ namespace PrivateSquareWeb.Controllers.Website
 			Services.SetCookie(this.ControllerContext.HttpContext, "ProductCatWiseCatId", jsonString1.ToString());
 			ProductModel objModel = new ProductModel();
 			List<ProductModel> SearchProductList = new List<ProductModel>();
-			//objModel.ProductCatId = id;
 			if (Id == null)
 			{
 				SearchProductList = ListAllProduct;

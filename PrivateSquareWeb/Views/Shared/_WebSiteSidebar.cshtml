@@ -21,21 +21,19 @@
                         if (Cat.ParentCatId == 0)
                         {
 
-                                <li class="nbc-main-category">
+                            <li class="nbc-main-category">
 
-                                   <a href="javascript:void()" data-toggle="collapse" data-target="#subcategories@(Cat.Id)" class="cate-main-list">@Cat.Name </a>
-                                    <ul class="ps-list--checked-1 sub_cate" style="padding-left: 10px;" id="sidebarsubcategories">
-                                        @foreach (var subcat in ViewBag.ProductCatList)
+                                <a id="@Cat.Id" href="javascript:void()" data-toggle="collapse" data-target="#subcategories@(Cat.Id)" class="cate-main-list">@Cat.Name </a>
+                                <ul class="ps-list--checked-1 sub_cate" style="padding-left: 10px;" id="sidebarsubcategories">
+                                    @foreach (var subcat in ViewBag.ProductCatList)
+                                    {
+                                        if (subcat.ParentCatId == Cat.Id)
                                         {
-                                            if (subcat.ParentCatId == Cat.Id)
-                                            {
-                                                <li><a href="~/ProductCatWise/Index/@Constant.EncodeNumber(int.Parse((subcat.Id).ToString()))"> @subcat.Name </a></li>
-
-
-                                            }
+                                            <li><a id="@subcat.Id" href="~/ProductCatWise/Index/@Constant.EncodeNumber(int.Parse((subcat.Id).ToString()))"> @subcat.Name </a></li>
                                         }
-                                    </ul>
-                                </li>
+                                    }
+                                </ul>
+                            </li>
                         }
                     }
 
@@ -67,7 +65,7 @@
                                 <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
 
                                 <p><span>Qty:<i> @item.Qty</i> </span><span>Total:<i>₹ @item.Amount</i></span></p>
-                                @*<a href="javascript:void();" class="minus" value="remove one" onclick="RemoveToCartFromSideBar('@item.ProductId','@item.ProductName','@item.ImageName','@item.Price','@item.Amount','@index')"><span>-</span> </a>*@
+
                                 <a href="javascript:void();" class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span>+</span> </a>
 
                             </div>
@@ -105,20 +103,20 @@
 </aside>
 
 <script>
-var acc = document.getElementsByClassName("cate-main-list");
-var i;
+    var acc = document.getElementsByClassName("cate-main-list");
+    var i;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var cate_sub = this.nextElementSibling;
-    if (cate_sub.style.maxHeight){
-      cate_sub.style.maxHeight = null;
-    } else {
-      cate_sub.style.maxHeight = cate_sub.scrollHeight + "px";
-    } 
-  });
-}
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var cate_sub = this.nextElementSibling;
+            if (cate_sub.style.maxHeight) {
+                cate_sub.style.maxHeight = null;
+            } else {
+                cate_sub.style.maxHeight = cate_sub.scrollHeight + "px";
+            }
+        });
+    }
 </script>
 <script>
     var AddToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount) {

@@ -84,7 +84,7 @@
 
     <div class="ps-hero">
         <div class="container">
-            <h3>@Model.CategoryName</h3>
+            <h3 id="CategoryHeading">@Model.CategoryName</h3>
         </div>
     </div>
     <main class="ps-main ps-products-listing">
@@ -348,4 +348,11 @@
         $("#" + id + "").addClass("active");
 
     }
-</script>          
+</script>
+<script>
+    window.onload = function ()
+    {
+        $("#@Model.ParentCatId")[0].click();
+
+    }
+</script>    

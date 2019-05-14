@@ -51,9 +51,11 @@
             data: { ProductId: ProductId },
             success: function (result) {
                 if (result == "Please Login to access wishlist") {
+                    $("body").addClass("loaded");
                     swal(result);
                 }
                 else if (result == "Product Exists") {
+                    $("body").addClass("loaded");
                     swal("Product already added to the Wishlist");
                 }
                 else {
