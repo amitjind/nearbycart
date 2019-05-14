@@ -64,8 +64,8 @@
 
                                 <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
 
-                                <p><span>Qty:<i> @item.Qty</i> </span><span>Total:<i>₹ @item.Amount</i></span></p>
-
+                                <p><span class="SpanForQuantity">Qty:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
+                                <a href="javascript:void()" class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span>-</span></a>
                                 <a href="javascript:void();" class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span>+</span> </a>
 
                             </div>
@@ -128,7 +128,7 @@
         var ImageName = ProductImage;
 
         var TotalAmount = 0;
-        console.log('ProductId' + ProductId);
+        
         $.ajax({
             url: "../../WebHome/AddToCart",
             type: "POST",
@@ -144,11 +144,56 @@
             },
             success: function (result) {
 
+                $("#Cartcontent").load(location.href + ' #Cartcontent');
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
                     $("body").addClass("loaded");
                     swal(" ", "One more added !", "success");
                 })
 
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+<script>
+     var RemoveToSideCart = function (Id, ProductName, ProductImage, Price, Amount, index) {
+         var QtyTxt = $(".SpanForQuantity").html();
+        if (QtyTxt == "Qty:<i> 1</i>") {
+            swal('Quantity cannot be less than 1');
+            return;
+        }
+         $("body").removeClass("loaded");
+        var discountPrice = 0;
+        var ProductId = Id;
+        var ProductNameVar = "" + ProductName + "";
+        var Qty = 1;
+        var ImageName = ProductImage;
+
+
+        var TotalAmount = 0;
+       
+        $.ajax({
+            url: "../../WebHome/RemoveQtyToCart",
+            type: "POST",
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductNameVar,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result)
+            {
+                $("#Cartcontent").load(location.href + ' #Cartcontent');
+                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+                    $(".ps-loading").addClass("loaded");
+                    swal(" ", "Quantity removed !", "success");
+                })
             },
             error: function (error) {
                 console.log(error);

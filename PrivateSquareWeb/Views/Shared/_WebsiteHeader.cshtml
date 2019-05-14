@@ -8,7 +8,7 @@
         var CartString = "";
         var CartTotal = "";
 
-
+        $(".ps-loading").addClass("loaded");
         $.ajax({
             url: "../../WebsiteHeader/RemoveToCart",
             type: "POST",
@@ -18,8 +18,7 @@
             },
             success: function (result) {
                 var JsonResponse = JSON.parse(result);
-                console.log(JsonResponse);
-                console.log(JsonResponse.length);
+                
                 var ProductName = "";
                 var Qty = "";
                 var ImageName = "";
@@ -56,7 +55,7 @@
                 divCart.innerHTML = CartString;
                 divCartTotal.innerHTML = CartTotal;
                 $("#CartCount").load(location.href + ' #CartCount');
-
+                $("body").addClass("loaded");
             },
             error: function (error) {
                 console.log(error);
@@ -68,7 +67,7 @@
 </script>
 <script type="text/javascript">
     var Logout = function () {
-        debugger
+      
         $.ajax({
             url: "../../WebLogin/Logout",
             type: "Get",
@@ -137,11 +136,11 @@
                                             <li><a href="/WebLogin/Logout">Log Out</a></li>
                                         </ul>
                                     </div>
-                                            }
-                                            else if (@Model.UserId == 0)
-                                            {
-                                                <a href="/WebLogin/Index">Login & Regiser</a>
-                                            }
+                                }
+                                else if (@Model.UserId == 0)
+                                {
+                                    <a href="/WebLogin/Index">Login & Regiser</a>
+                                }
                             }
                         </div>
                     </div>
