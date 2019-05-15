@@ -14,11 +14,14 @@ namespace PrivateSquareWeb.Models
         public long UserId { get; set; }
         [Required(ErrorMessage = "Name can't  be empty")]
         public string Name { get; set; }
+
         [Required(ErrorMessage = "Mobile No. can't  be empty")]
         [MinLength(10, ErrorMessage = "Enter 10 Digit Mobile Number")]
+        [MaxLength(10,ErrorMessage = "Enter 10 Digit Mobile Number")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Mobile must be numeric")]
         public string Mobile { get; set; }
-        [Required(ErrorMessage = "Pincode cannot be empty")]
+
+        //[Required(ErrorMessage = "Pincode cannot be empty")]
         [MinLength(6, ErrorMessage = "Please enter 6 digits Pin")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Must be numeric")]
         public string Pincode { get; set; }
@@ -29,6 +32,10 @@ namespace PrivateSquareWeb.Models
         public long StateId { get; set; }
         public string StateName { get; set; } = "";
         public string Landmark { get; set; }
+
+        //[MinLength(10, ErrorMessage = "Enter 10 Digit Mobile Number")]
+        //[MaxLength(10, ErrorMessage = "Enter 10 Digit Mobile Number")]
+        //[RegularExpression("^[0-9]*$", ErrorMessage = "Mobile must be numeric")]
         public string AlternatePhone { get; set; }
         public string Type { get; set; }
         public string ProfileImg { get; set; }

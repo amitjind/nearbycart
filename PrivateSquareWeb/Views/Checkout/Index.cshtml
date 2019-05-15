@@ -489,24 +489,36 @@
 
     var cancel = function () {
         //alert('cancel');
-
-        document.getElementById("Name").value = "";
-        document.getElementById("AddressLine1").value = "";
-        document.getElementById("AddressLine2").value = "";
-        document.getElementById("Mobile").value = "";
-        document.getElementById("Pincode").value = "";
-        document.getElementById("LocalityTextBox").value = "";
-        document.getElementById("CityId").value = "";
-        document.getElementById("AlternatePhone").value = "";
-        document.getElementById("Landmark").value = "";
-        document.getElementById("Id").value = "";
-        document.getElementById("UserId").value = "";
+        debugger
+        //document.getElementById("Name").value = "";
+        //document.getElementById("AddressLine1").value = "";
+        //document.getElementById("AddressLine2").value = "";
+        //document.getElementById("Mobile").value = "";
+        //document.getElementById("Pincode").value = "";
+        //document.getElementById("LocalityTextBox").value = "";
+        //document.getElementById("CityId").value = "";
+        //document.getElementById("AlternatePhone").value = "";
+        //document.getElementById("Landmark").value = "";
+        //document.getElementById("Id").value = "";
+        //document.getElementById("UserId").value = "";
+        document.getElementById("Name").innerHTML = "";
+        document.getElementById("AddressLine1").innerHTML = "";
+        document.getElementById("AddressLine2").innerHTML = "";
+        document.getElementById("Mobile").innerHTML = "";
+        document.getElementById("Pincode").innerHTML = "";
+        document.getElementById("LocalityTextBox").innerHTML = "";
+        document.getElementById("CityId").innerHTML = "";
+        
+        document.getElementById("Landmark").innerHTML = "";
+        document.getElementById("Id").innerHTML = "";
+        document.getElementById("UserId").innerHTML = "";
         //if (true) {
+        document.getElementById("SAVE").value = "save";
+        document.getElementById("MsgOfAddress").innerHTML = "ADD Address";
+
         document.getElementById('addnewaddress').style.display = "none";
         document.getElementById('addaddresslink').style.display = "block";
-        document.getElementById("SAVE").value = "save";
-
-        document.getElementById("MsgOfAddress").innerHTML = "ADD Address";
+        return;
         //}
 
 

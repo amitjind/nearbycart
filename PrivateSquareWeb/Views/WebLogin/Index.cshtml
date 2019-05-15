@@ -156,7 +156,41 @@
                 }
             });
         }
+    }   
+    function checkLoginvalidation() {
+        debugger
+        var ErrorOccured = null;
+        var email = document.getElementById('EmailId').value;
+        if (email == '')
+        {
+            document.getElementById("valEmail").innerText = "Email Required";
+            ErrorOccured = "Email Required";
+        }
+        else {
+            /*ErrorOccured = "";*/
+            document.getElementById("valEmail").innerText = "";
+        }
+
+        var email = document.getElementById('Password').value;
+        if (email == '')
+        {
+            document.getElementById("valPassword").innerText = "Password Required";
+            ErrorOccured = "Password Required";
+        }
+        else {
+            /*ErrorOccured = "";*/
+            document.getElementById("valPassword").innerText = "";
+        }
+
+        if (ErrorOccured == null)
+        {
+            var respons = $("#LoginUserValid").submit();
+        }
+        else { return ; }
+
     }
+
+
 
 
 </script>
@@ -172,7 +206,7 @@
 
     }
 </script>
-@using (Html.BeginForm("LoginUser", "WebLogin", FormMethod.Post))
+@using (Html.BeginForm("LoginUser", "WebLogin", FormMethod.Post, new { lasturl = ViewBag.lasturl, enctype = "multipart/form-data", id = "LoginUserValid" }))
 {
     @Html.AntiForgeryToken()
     <div class="ps-hero">
@@ -208,7 +242,7 @@
 
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter Password" })
 
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", id = "valPassword" })
 
                     <div class=" forget-password">
 
@@ -221,12 +255,9 @@
                     <p style="color:red;"> @ViewBag.ResponseMassege</p>
 
                 </div><!-- form-group -->
-
-
-
-
-
-                <input type="submit" class="ps-btn pl-60 pr-60" value="Login">
+                @*@ViewBag.lasturl*@
+                @*<input type="submit" class="ps-btn pl-60 pr-60" value="Login">*@
+                <input type="button" class="ps-btn pl-60 pr-60" value="Login" onclick="checkLoginvalidation()">
 
 
 
@@ -328,4 +359,5 @@
     $(".right").offset().right;
 
 </script>
+
 
