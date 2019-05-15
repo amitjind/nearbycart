@@ -206,8 +206,9 @@
 
     }
 </script>
-@using (Html.BeginForm("LoginUser", "WebLogin", FormMethod.Post, new { lasturl = ViewBag.lasturl, enctype = "multipart/form-data", id = "LoginUserValid" }))
+@using (Html.BeginForm("LoginUser", "WebLogin", new { lasturl = ViewBag.lasturl } , FormMethod.Post, new {  enctype = "multipart/form-data", id = "LoginUserValid" }))
 {
+    
     @Html.AntiForgeryToken()
     <div class="ps-hero">
 
@@ -257,6 +258,10 @@
                 </div><!-- form-group -->
                 @*@ViewBag.lasturl*@
                 @*<input type="submit" class="ps-btn pl-60 pr-60" value="Login">*@
+
+
+
+                @*@ViewBag.lasturl*@
                 <input type="button" class="ps-btn pl-60 pr-60" value="Login" onclick="checkLoginvalidation()">
 
 

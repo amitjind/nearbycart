@@ -17,6 +17,7 @@ namespace PrivateSquareWeb.Controllers.Website
         public ActionResult Index(string url)
         {
             Services.RemoveCookie(this.ControllerContext.HttpContext, "webusr");
+            @ViewBag.lasturl = url;
             return View();
         }
         [HttpPost]
@@ -54,20 +55,30 @@ namespace PrivateSquareWeb.Controllers.Website
 
 
         }
-        public ActionResult Logout()
+        public ActionResult Logout(string url)
         {
             Services.RemoveCookie(this.ControllerContext.HttpContext, "webusr");
             Session.Abandon();
 
-            return RedirectToAction("Index", "WebLogin");
+            if (url != string.Empty)
+            {
+                System.Uri uri = new Uri(url);
+                string uriWithoutScheme = uri.PathAndQuery + uri.Fragment;
+                return this.Redirect(uriWithoutScheme);
+            }
+            else
+            {
+                return RedirectToAction("Index", "WebLogin");
+            }
+
+            //return RedirectToAction("Index", "WebLogin");
             //return View();
         }
+
         [HttpPost]
-        public ActionResult LoginUser(LoginModel ObjModel)
+        public ActionResult LoginUser(string lasturl, LoginModel ObjModel)
         {
-
-
-            //var abc = ObjModel.EmailId;
+            ViewBag.lasturl = lasturl;
             ObjModel.EmailId = (ObjModel.EmailId).Replace(" ", "");
             if (string.IsNullOrWhiteSpace(ObjModel.EmailId))
             {
@@ -117,6 +128,7 @@ namespace PrivateSquareWeb.Controllers.Website
             if (VarResponse.Equals("Email/Password is Incorrect"))
             {
                 ViewBag.Response = "Email/Password is Incorrect";
+
                 return View("Index", ObjModel);
             }
             else if (VarResponse.Equals("Phone/Password is Incorrect"))
@@ -138,7 +150,18 @@ namespace PrivateSquareWeb.Controllers.Website
                 //Services.SetCookie(this.ControllerContext.HttpContext, "usrName", ArrResponse[1]);
                 //Services.SetCookie(this.ControllerContext.HttpContext, "usrImg", ArrResponse[2]);
                 //ViewBag.LoginMessage = "Login Success";
-                return RedirectToAction("Index", "WebHome");
+                
+                if (lasturl != string.Empty)
+                {
+                    System.Uri uri = new Uri(lasturl);
+                    string uriWithoutScheme = uri.PathAndQuery + uri.Fragment;
+                    return this.Redirect(uriWithoutScheme);
+                }
+                else
+                {
+                   return RedirectToAction("Index", "WebHome");
+                }
+
             }
             //  String Response = "[{\"Response\":\"" + ObjResponse1.Response + "\"}]";
             // return Json(Response);

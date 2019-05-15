@@ -133,7 +133,7 @@
                                             <li><a href="~/WebHome/MyOrders">My Orders</a></li>
                                             <li><a href="~/WebHome/WishList">My Wishlist</a></li>
                                             <li><a href="~/ChangePassword/WebIndex">Change Password</a></li>
-                                            <li><a href="/WebLogin/Logout">Log Out</a></li>
+                                            <li><a href="/WebLogin/Logout?url=@Request.Url.AbsoluteUri.ToString()">Log Out</a></li>
                                         </ul>
                                     </div>
                                 }
