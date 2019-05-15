@@ -55,7 +55,7 @@
         });
     }
     function SignUp() {
-
+        debugger
         var email = document.getElementById('emailIdRegister').value;
         var newemail = email.trim();
         email = newemail;
@@ -85,6 +85,9 @@
 
             document.getElementById("valNameRegister").innerText = "";
         }
+
+
+
         if (email == '') {
             document.getElementById("valemailIdRegister").innerText = "Email/Mobile Required";
             return;
@@ -97,11 +100,19 @@
                     document.getElementById("valemailIdRegister").innerText = "Use 10 Digit Number.";
                     return;
                 }
+                else
+                {
+                    document.getElementById("valemailIdRegister").innerText = "";
+                }
             }
             else {
                 if (!email.match(mailformat)) {
                     document.getElementById("valemailIdRegister").innerText = "Incorrect Email or Phone Number";
                     return;
+                }
+                else
+                {
+                    document.getElementById("valemailIdRegister").innerText = "";
                 }
             }
         }

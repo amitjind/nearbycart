@@ -60,18 +60,24 @@ namespace PrivateSquareWeb.Controllers.Website
             Services.RemoveCookie(this.ControllerContext.HttpContext, "webusr");
             Session.Abandon();
 
-            if (url != string.Empty)
-            {
-                System.Uri uri = new Uri(url);
-                string uriWithoutScheme = uri.PathAndQuery + uri.Fragment;
-                return this.Redirect(uriWithoutScheme);
-            }
-            else
-            {
-                return RedirectToAction("Index", "WebLogin");
-            }
+            //LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
+            //if (MdUser.EmailId != null)
+            //{
+            //    string uriWithoutScheme = string.Empty;
+            //    if (url != string.Empty)
+            //    {
+            //        System.Uri uri = new Uri(url);
+            //        uriWithoutScheme = uri.PathAndQuery + uri.Fragment;
+                   
+            //    }
+            //    return this.Redirect(uriWithoutScheme);
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index", "WebLogin");
+            //}
 
-            //return RedirectToAction("Index", "WebLogin");
+            return RedirectToAction("Index", "WebLogin");
             //return View();
         }
 
@@ -151,7 +157,7 @@ namespace PrivateSquareWeb.Controllers.Website
                 //Services.SetCookie(this.ControllerContext.HttpContext, "usrImg", ArrResponse[2]);
                 //ViewBag.LoginMessage = "Login Success";
                 
-                if (lasturl != string.Empty)
+                if (lasturl != null)
                 {
                     System.Uri uri = new Uri(lasturl);
                     string uriWithoutScheme = uri.PathAndQuery + uri.Fragment;
