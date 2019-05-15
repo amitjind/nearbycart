@@ -139,7 +139,10 @@
                                 }
                                 else if (@Model.UserId == 0)
                                 {
-                                    <a href="/WebLogin/Index">Login & Regiser</a>
+
+                                    @*<a onclick="Sendurl()">Login & Regiser</a>*@
+
+                                    <a href="/WebLogin/Index?url=@Request.Url.AbsoluteUri.ToString()">Login & Regiser</a>
                                 }
                             }
                         </div>
@@ -312,7 +315,23 @@
         });
     }
 </script>
+<script>
+    var Sendurl = function () {
+        debugger
+        var productcatid = location.pathname.toString();
+        $.ajax({
+            url: "../../WebLogin/Index",
+            //type: "POST",
 
+            data: {
+
+                "url": productcatid
+
+            }
+
+        });
+    }
+</script>
 
 
 

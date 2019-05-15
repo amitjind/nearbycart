@@ -14,7 +14,7 @@ namespace PrivateSquareWeb.Controllers.Website
     {
         JwtTokenManager _JwtTokenManager = new JwtTokenManager();
         // GET: WebLogin
-        public ActionResult Index()
+        public ActionResult Index(string url)
         {
             Services.RemoveCookie(this.ControllerContext.HttpContext, "webusr");
             return View();

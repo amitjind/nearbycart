@@ -64,10 +64,14 @@
 
                                 <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
 
-                                <p><span class="SpanForQuantity">Qty:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
-                                <a href="javascript:void()" class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span>-</span></a>
-                                <a href="javascript:void();" class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span>+</span> </a>
-
+                                <p>
+                                    <span class="SpanForQuantity+@item.ProductId">
+                                        Qty:
+                                        <a href="javascript:void()" class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span>    -</span></a>
+                                        <i> <input id="@("SidebarTxtQty"+item.ProductId)" name="@("SidebarTxtQty"+index)" type="text" value="@item.Qty" readonly style="width:28px;text-align:center"></i>
+                                        <a href="javascript:void();" class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span>+</span> </a>
+                                    </span><span>Total:<i>₹ @item.Amount</i></span>
+                                </p>
                             </div>
                         </div>
                         index++;
@@ -128,7 +132,7 @@
         var ImageName = ProductImage;
 
         var TotalAmount = 0;
-        
+
         $.ajax({
             url: "../../WebHome/AddToCart",
             type: "POST",
@@ -158,13 +162,14 @@
     }
 </script>
 <script>
-     var RemoveToSideCart = function (Id, ProductName, ProductImage, Price, Amount, index) {
-         var QtyTxt = $(".SpanForQuantity").html();
-        if (QtyTxt == "Qty:<i> 1</i>") {
+    var RemoveToSideCart = function (Id, ProductName, ProductImage, Price, Amount, index) {
+        var QtyTxt = $("#SidebarTxtQty" + Id).val();
+
+        if (QtyTxt == "1") {
             swal('Quantity cannot be less than 1');
             return;
         }
-         $("body").removeClass("loaded");
+        $("body").removeClass("loaded");
         var discountPrice = 0;
         var ProductId = Id;
         var ProductNameVar = "" + ProductName + "";
@@ -173,7 +178,7 @@
 
 
         var TotalAmount = 0;
-       
+
         $.ajax({
             url: "../../WebHome/RemoveQtyToCart",
             type: "POST",
@@ -187,10 +192,9 @@
                 Discount: discountPrice,
                 TotalAmount: TotalAmount
             },
-            success: function (result)
-            {
+            success: function (result) {
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
-                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
                     $(".ps-loading").addClass("loaded");
                     swal(" ", "Quantity removed !", "success");
                 })
