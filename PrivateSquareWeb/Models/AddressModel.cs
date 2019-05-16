@@ -12,20 +12,24 @@ namespace PrivateSquareWeb.Models
         public long? Id { get; set; }
         public string Address { get; set; }
         public long UserId { get; set; }
-        [Required(ErrorMessage = "Name can't  be empty")]
+
+        //[Required(ErrorMessage = "Name can't  be empty")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Mobile No. can't  be empty")]
-        [MinLength(10, ErrorMessage = "Enter 10 Digit Mobile Number")]
-        [MaxLength(10,ErrorMessage = "Enter 10 Digit Mobile Number")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Mobile must be numeric")]
+        //[Required(ErrorMessage = "Mobile No. can't  be empty")]
+        //[MinLength(10, ErrorMessage = "Enter 10 Digit Mobile Number")]
+        //[MaxLength(10,ErrorMessage = "Enter 10 Digit Mobile Number")]
+        //[RegularExpression("^[0-9]*$", ErrorMessage = "Mobile must be numeric")]
         public string Mobile { get; set; }
 
         //[Required(ErrorMessage = "Pincode cannot be empty")]
-        [MinLength(6, ErrorMessage = "Please enter 6 digits Pin")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Must be numeric")]
+
+
+        //[MinLength(6, ErrorMessage = "Please enter 6 digits Pin")]
+        //[RegularExpression("^[0-9]*$", ErrorMessage = "Must be numeric")]
         public string Pincode { get; set; }
-        [Required(ErrorMessage = "Please enter locality")]
+
+        //[Required(ErrorMessage = "Please enter locality")]
         public string Locality { get; set; }
         public long CityId { get; set; }
         public string CityName { get; set; }

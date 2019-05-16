@@ -81,11 +81,11 @@
                         </div>
                         <div class="ps-checkout__billing">
                             <table class="table">
-                                
+
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase"><b>Address</b></th>
-                                        <th>@ViewBag.LoginEmail</th>                                       
+                                        <th>@ViewBag.LoginEmail</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -109,7 +109,7 @@
                                                             @item.Landmark<br /> @item.Mobile<br /> @item.Pincode<br /> @item.AlternatePhone
                                                         </p>
                                                         <p class="card-text">
-                                                           
+
                                                         </p>
                                                     </td>
                                                     <td style="vertical-align:bottom">
@@ -117,8 +117,9 @@
                                                             Delete
                                                         </a>
                                                         <p>
-                                                            @*<a href="~/Checkout/DeleteAddress?id=@item.Id">*@
-                                                            <a  onclick="EditAddress(@item.Id)">
+                                                            @*<a href="~/Checkout/DeleteAddress?id=@item.Id">
+                                                            *@
+                                                            <a onclick="EditAddress(@item.Id)">
                                                                 Edit
                                                             </a>
                                                         </p>
@@ -165,7 +166,7 @@
                                                                         <label class="form-control-label">Name: <span class="tx-danger">*</span></label>
 
                                                                         @*@Html.HiddenFor(m => m.Id)
-                @Html.HiddenFor(m => m.UserId)*@
+                                                                            @Html.HiddenFor(m => m.UserId)*@
 
                                                                         @Html.HiddenFor(m => m.UserId, new { @class = "form-control", @autocomplete = "off" })
                                                                         @Html.HiddenFor(m => m.Id, new { @class = "form-control", @autocomplete = "off" })
@@ -258,7 +259,7 @@
 
                                                                         <label class="form-control-label">Phone Number: <span class="tx-danger">*</span></label>
 
-                                                                        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @placeholder = "10-digit number", @autocomplete = "off" })
+                                                                        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @placeholder = "10-digit number", @autocomplete = "off", @Type = "number", @maxlength ="10" })
                                                                         @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
                                                                         <span class="field-validation-error text-danger" id="SpanForPhone"></span>
 
@@ -267,20 +268,20 @@
                                                                 </div><!-- col-6 -->
                                                                 @*<div class="col-lg-6">
 
-                                                                    <div class="form-group">
+                                                                        <div class="form-group">
 
-                                                                        <label class="form-control-label">Alternate phone: <span class="tx-danger"></span></label>
+                                                                            <label class="form-control-label">Alternate phone: <span class="tx-danger"></span></label>
 
-                                                                        @Html.TextBoxFor(m => m.AlternatePhone, new { @class = "form-control", @placeholder = "Alternate phone", @autocomplete = "off" })
-                                                                        @Html.ValidationMessageFor(model => model.AlternatePhone, "", new { @class = "text-danger" })
+                                                                            @Html.TextBoxFor(m => m.AlternatePhone, new { @class = "form-control", @placeholder = "Alternate phone", @autocomplete = "off" })
+                                                                            @Html.ValidationMessageFor(model => model.AlternatePhone, "", new { @class = "text-danger" })
 
-                                                                    </div>
+                                                                        </div>
 
-                                                                </div>*@<!-- col-6 -->
+                                                                    </div>*@<!-- col-6 -->
                                                                 <div class="col-lg-12">
 
                                                                     <a onclick="cancel()" class="btn cancel-button mg-r-10">CANCEL</a>
-                                                                   
+
                                                                     <input type="button" class="btn save-button" onclick="AddAddress()" id="SAVE" value="SAVE" />
                                                                     @*<input type="button" class="btn save-button" onclick="AddAddress()" value="update" />*@
 
@@ -508,7 +509,7 @@
         document.getElementById("Pincode").innerHTML = "";
         document.getElementById("LocalityTextBox").innerHTML = "";
         document.getElementById("CityId").innerHTML = "";
-        
+
         document.getElementById("Landmark").innerHTML = "";
         document.getElementById("Id").innerHTML = "";
         document.getElementById("UserId").innerHTML = "";
@@ -598,7 +599,7 @@
             $("#SpanForLocality").html("Please mention locality");
             ErrorOccured += 'LocalityTextBox null';
         } else {
-            $("#SpanForLocality").html("");           
+            $("#SpanForLocality").html("");
         }
 
 
@@ -607,7 +608,7 @@
             ErrorOccured += 'Name null';
         }
         else {
-            $("#SpanForName").html("");           
+            $("#SpanForName").html("");
         }
 
 
@@ -666,9 +667,37 @@
 
             //var AddresstoLog = null;
 
+            //document.getElementById("Name").innerHTML = "";
+            //document.getElementById("AddressLine1").innerHTML = "";
+            //document.getElementById("AddressLine2").innerHTML = "";
+            //document.getElementById("Mobile").innerHTML = "";
+            //document.getElementById("Pincode").innerHTML = "";
+            //document.getElementById("LocalityTextBox").innerHTML = "";
+            //document.getElementById("CityId").innerHTML = "";
+            //document.getElementById("Landmark").innerHTML = "";
+
             var respons = $("#AddressForm").submit();
         }
         else { return; }
 
+    }
+</script>
+<script type="text/javascript">
+    @*@onkeypress = "MyPhoneValidationMethod"*@
+    function MyPhoneValidationMethod()
+    {
+        debugger
+        if ($.trim($("#Mobile").val()).length != 10) {
+            $("#SpanForPhone").html("Please Enter 10 Digit Mobile Num");
+            return;
+        }
+        else { $("#SpanForPhone").html("") }
+        //if ($.trim($("#Mobile").val()).length == 10) {
+        //{
+        //        $("#SpanForPhone").html("Mobile no not more then 10 Digit");
+
+        //}
+
+      
     }
 </script>

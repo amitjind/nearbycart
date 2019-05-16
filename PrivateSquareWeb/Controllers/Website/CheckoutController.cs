@@ -11,7 +11,7 @@ namespace PrivateSquareWeb.Controllers.Website
 {
     public class CheckoutController : Controller
     {
-        HttpContextBase httpContext ;
+        HttpContextBase httpContext;
         JwtTokenManager _JwtTokenManager = new JwtTokenManager();
         // GET: Checkout
         public ActionResult Index()
@@ -35,23 +35,23 @@ namespace PrivateSquareWeb.Controllers.Website
             var _request = JsonConvert.SerializeObject(objmodel);
             ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetUserAddress, _request);
             GetUserAddressList = JsonConvert.DeserializeObject<List<AddressModel>>(ObjResponse.Response);
-            
+
             return GetUserAddressList;
 
         }
         [HttpPost]
-        public  JsonResult GetAddress(long ?id)
+        public JsonResult GetAddress(long? id)
         {
             var GetUserAddressList = new List<AddressModel>();
-         
+
             AddressModel objmodel = new AddressModel();
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
             if (MdUser.Id != 0)
                 objmodel.UserId = Convert.ToInt64(MdUser.Id);
-                 objmodel.Id = id;
+            objmodel.Id = id;
             var _request = JsonConvert.SerializeObject(objmodel);
             ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetUserAddress, _request);
-            
+
             return Json(ObjResponse.Response);
 
         }
@@ -69,8 +69,6 @@ namespace PrivateSquareWeb.Controllers.Website
             ListUserAddress = GetUserAddress();
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
             ObjModel.UserId = MdUser.Id;
-
-            //if (ModelState.IsValid)
 
             if (ObjModel.Id == null)
                 ObjModel.Id = 0;
@@ -103,62 +101,69 @@ namespace PrivateSquareWeb.Controllers.Website
                 return "1";
             }
 
-            //else
-            //{
-            //    PreRequiestCheckout();
-            //}
+
             PreRequiestCheckout();
             return "null";
         }
 
+        
         [HttpPost]
         public ActionResult AddressesList(AddressModel ObjModel)
         {
             List<AddressModel> ListUserAddress;
             ListUserAddress = GetUserAddress();
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
-            ObjModel.UserId = MdUser.Id; 
+            ObjModel.UserId = MdUser.Id;
+           
 
-            //if (ModelState.IsValid)
-            
-                if (ObjModel.Id == null)
-                    ObjModel.Id = 0;
-                if (MdUser.Id != 0)
-                {
-                    ObjModel.UserId = Convert.ToInt64(MdUser.Id);
-                }
-                if (ObjModel.Id != 0)
-                {
-                    ObjModel.Operation = "update";
-                }
-                else
-                {
-                    ObjModel.Operation = "insert";
-                }
-                var _request = JsonConvert.SerializeObject(ObjModel);
-                ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiSaveAddress, _request);
-                if (String.IsNullOrWhiteSpace(ObjResponse.Response))
+            if (ObjModel.Id == null)
+                ObjModel.Id = 0;
+            if (MdUser.Id != 0)
+            {
+                ObjModel.UserId = Convert.ToInt64(MdUser.Id);
+            }
+            if (ObjModel.Id != 0)
+            {
+                ObjModel.Operation = "update";
+            }
+            else
+            {
+                ObjModel.Operation = "insert";
+            }
+            var _request = JsonConvert.SerializeObject(ObjModel);
+            ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiSaveAddress, _request);
 
-                {
-                    @ViewBag.ResponseMessage = "Error ! Unable to Submit Address";
-                    PreRequiestCheckout();
-                    return View("AddAddress", ObjModel);
-                }
+            if (String.IsNullOrWhiteSpace(ObjResponse.Response))
+            {
+                @ViewBag.ResponseMessage = "Error ! Unable to Submit Address";
+                PreRequiestCheckout();
+                return View("AddAddress", ObjModel);
+            }
 
-                if (ObjResponse.Response.Equals("Save Address"))
-                {
-                    ViewBag.UserAddress = ListUserAddress;
-                    PreRequiestCheckout();
+            if (ObjResponse.Response.Equals("Save Address"))
+            {
+                ViewBag.UserAddress = ListUserAddress;
+                PreRequiestCheckout();
+
                 AddressModel ObjModelnew = new AddressModel();
-                    return View("Index", ObjModelnew);
-                }
-            
+                ObjModel = null;
+                return RedirectToAction("Index", "Checkout", ObjModel);
+
+                //return View("Index", ObjModelnew);                
+                //return View("../Checkout/Index", ObjModelnew);
+            }
+            else
+            {
+                ObjModel = null;
+                return RedirectToAction("Index", "Checkout", ObjModel);
+            }
+
             //else
             //{
             //    PreRequiestCheckout();
             //}
-            PreRequiestCheckout();
-            return View("Index", ObjModel);
+            //PreRequiestCheckout();
+            //return View("Index", ObjModel);
         }
         private void PreRequiestCheckout()
         {
@@ -352,9 +357,9 @@ namespace PrivateSquareWeb.Controllers.Website
         {
             return View();
         }
-        public ActionResult DeleteAddress(int ? id)
+        public ActionResult DeleteAddress(int? id)
         {
-            
+
             AddressModel objModel = new AddressModel();
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
             objModel.UserId = MdUser.Id;
@@ -362,7 +367,7 @@ namespace PrivateSquareWeb.Controllers.Website
             objModel.Operation = "delete";
             var _request = JsonConvert.SerializeObject(objModel);
             ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiSaveAddress, _request);
-            return RedirectToAction ("index");
+            return RedirectToAction("index");
         }
     }
 }

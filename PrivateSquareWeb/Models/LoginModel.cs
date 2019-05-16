@@ -9,6 +9,7 @@ namespace PrivateSquareWeb.Models
     public class LoginModel
     {
         public long Id { get; set; } = 0;
+        [Required(ErrorMessage = "Please Enter your Email Id")]
         public string EmailId { get; set; }
         [Required(ErrorMessage = "Please Enter your password")]
         public string Password { get; set; }
