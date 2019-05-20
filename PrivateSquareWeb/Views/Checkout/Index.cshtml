@@ -47,7 +47,7 @@
                 //if (response[0].Response == "Order Saved")
                 swal(" ", response[0].Response, "success");
                 {
-                    window.location.href = "/WebHome/MyOrders";
+                    window.location.href = "/Checkout/OrderSuccessful";
                 }
 
 
@@ -72,218 +72,266 @@
     </div>
     <div class="ps-checkout pt-40 pb-40">
         <div class="ps-container">
-            <form class="ps-form--checkout" action="do_action" method="post">
-                <div class="row">
-                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
-                        <div class="ps-checkout__billing" id="pickupdetails" style="display:none">
-                            <h4> Pick this order from Jai Maa Departmental store</h4>
-                            <img src="" alt="Store image" />
-                        </div>
-                        <div class="ps-checkout__billing">
-                            <table class="table">
+            
+            <div id="refreshThisDivWhenProductIsAddedToCart">
+                <div class="col-md-8">
+               
+                    <div id="CartList" class="ps-cart-listing">
+                        <table class="table ps-cart__table product_list_img">
+                            <thead>
+                                <tr>
+                                    <th width="350">All Products</th>
+                                    <th>QUANTITY</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int index = 0;
+                                    foreach (var item in ViewBag.AddToCart)
+                                    {
 
-                                <thead>
-                                    <tr>
-                                        <th class="text-uppercase"><b>Address</b></th>
-                                        <th>@ViewBag.LoginEmail</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td></td></tr>
+                                <tr>
+                                    <td>  <a href="/WebHome/ProductDetail/@item.ProductId" class="ps-product--compare"><img src="~/DocImg/@item.ImageName" alt="Image" class="ps-product--compare place_order_img">@item.ProductName</a></td>
 
+                                    <td>
+                                        <div id="@item.ProductId" class="lds-ellipsis n_loader"><div></div><div></div><div></div><div></div></div>
+                                        <div class="form-group--number SpanForQuantity+@item.ProductId">
 
-                                    @{int index = 0;
-                                        if (ViewBag.UserAddress != null)
-                                        {
-                                            foreach (var item in ViewBag.UserAddress)
-                                            {
+                                            <button class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span> - </span></button>
+                                            <input id="@("SidebarTxtQty"+item.ProductId)" name="@("SidebarTxtQty"+index)" type="text" value="@item.Qty" readonly class="form-control ng_cart_int">
+                                            <button class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span> + </span> </button>
 
-                                                <tr>
-                                                    <td>
-                                                        <input type="radio" name="rdoAddress" id="rdoAddress[]" value="@item.Id" />
+                                        </div>
+                                    </td>
+                                    <td> <span>Total: ₹ @item.Amount </span></td>
+                                    <td> <a class="ps-cart-item__close ps-remove" onclick="DeleteItem(@index)"></a></td>
 
-                                                        <p>@item.Type</p>
-                                                        <h4 class="card-title">@item.Name</h4>
-                                                        <p class="card-text">
-                                                            @item.Address.Replace("$^", " "), @item.CityName, @item.StateName<br />
-                                                            @item.Landmark<br /> @item.Mobile<br /> @item.Pincode<br /> @item.AlternatePhone
-                                                        </p>
-                                                        <p class="card-text">
-
-                                                        </p>
-                                                    </td>
-                                                    <td style="vertical-align:bottom">
-                                                        <a href="~/Checkout/DeleteAddress?id=@item.Id">
-                                                            Delete
-                                                        </a>
-                                                        <p>
-                                                            @*<a href="~/Checkout/DeleteAddress?id=@item.Id">
-                                                            *@
-                                                            <a onclick="EditAddress(@item.Id)">
-                                                                Edit
-                                                            </a>
-                                                        </p>
-                                                    </td>
-                                                </tr>
-                                                index++;
-                                            }
-                                        }
+                                </tr>
+                                        index++;
                                     }
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="ps-checkout__billing">
-                            <div class="container">
-
-                                <div>
-
-                                    <div class="form-layout">
-
-                                        <div class="row">
-
-                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                }
 
 
+                            </tbody>
+                        </table>
 
-                                            <div class="col-sm-6 col-md-9">
-                                                <div id="addaddresslink">
-                                                    <a class="ps-btn ps-btn-wdth-100" onclick="addnewaddress()">Add New Address</a>
-                                                </div>
-                                                <div class="box-shadow-bc pd-40 addresses min-height" style="display:none" id="addnewaddress">
 
-                                                    <label id="MsgOfAddress" class="section-sub-title mg-t-20  mg-b-20">Create new address</label>
+                    </div>
+                    <form class="ps-form--checkout" action="do_action" method="post">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="ps-checkout__billing-1" id="pickupdetails" style="display:none">
+                                    <h4> Pick this order from Jai Maa Departmental store</h4>
+                                    <img src="" alt="Store image" />
+                                </div>
+                                <div class="ps-checkout__billing-1 ps-cart-listing">
+                                    <table class="table ps-cart__table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-uppercase"><b>Address</b></th>
+                                                <th class="text-right">@ViewBag.LoginEmail</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                                    <div class="row" id="Addressform">
+                                            @{int indexer = 0;
+                                                if (ViewBag.UserAddress != null)
+                                                {
+                                                    foreach (var item in ViewBag.UserAddress)
+                                                    {
 
-                                                        <div class="col-lg-8">
+                                                        <tr>
+                                                            <td>
 
-                                                            <div class="row">
+                                                                
 
-                                                                <div class="col-lg-6">
+                                                                <p>@item.Type</p>
+                                                                <h4 class="card-title"><span><input type="radio" name="rdoAddress" id="rdoAddress[]" value="@item.Id" /></span> @item.Name</h4>
+                                                                <p class="card-text">
+                                                                    @item.Address.Replace("$^", " "), @item.CityName, @item.StateName<br />
+                                                                    @item.Landmark<br /> @item.Mobile<br /> @item.Pincode<br /> @item.AlternatePhone
+                                                                </p>
+                                                                <p class="card-text">
 
-                                                                    <div class="form-group">
+                                                                </p>
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group--number-address pull-right">
+                                                                    <a href="~/Checkout/DeleteAddress?id=@item.Id" class="">
+                                                                        Delete
+                                                                    </a>
 
-                                                                        <label class="form-control-label">Name: <span class="tx-danger">*</span></label>
+                                                                    @*<a href="~/Checkout/DeleteAddress?id=@item.Id">*@
+                                                                    <a href="javascript:void(0);" onclick="EditAddress(@item.Id)">
+                                                                        Edit
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        indexer++;
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="ps-checkout__billing">
+                                    <div class="container">
 
-                                                                        @*@Html.HiddenFor(m => m.Id)
-                                                                            @Html.HiddenFor(m => m.UserId)*@
+                                        <div>
 
-                                                                        @Html.HiddenFor(m => m.UserId, new { @class = "form-control", @autocomplete = "off" })
-                                                                        @Html.HiddenFor(m => m.Id, new { @class = "form-control", @autocomplete = "off" })
-                                                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Enter Name", @autocomplete = "off" })
-                                                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                                                                        <span class="field-validation-error text-danger" id="SpanForName"></span>
+                                            <div class="form-layout">
 
-                                                                    </div>
+                                                <div class="row">
 
-                                                                </div><!-- col-6 -->
-                                                                <div class="col-lg-6">
-                                                                    <div class="form-group">
-                                                                        <label class="form-control-label">Address Line 1 : <span class="tx-danger">*</span></label>
-                                                                        <input type="text" class="form-control" id="AddressLine1" placeholder="Line 1" autocomplete="off" />
-                                                                        <span class="field-validation-error text-danger" id="SpanForAddressLine1"></span>
-                                                                    </div>
+                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <div id="addaddresslink">
+                                                            <a class="ps-btn ps-btn-wdth-100" onclick="addnewaddress()">Add New Address</a>
+                                                        </div>
+                                                        <div class="box-shadow-bc pd-40 addresses min-height" style="display:none" id="addnewaddress">
+
+                                                            <label id="MsgOfAddress" class="section-sub-title mg-t-20  mg-b-20">Create new address</label>
+
+                                                            <div class="row" id="Addressform">
+
+                                                                <div class="col-lg-8">
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-lg-6">
+
+                                                                            <div class="form-group">
+
+                                                                                <label class="form-control-label">Name: <span class="tx-danger">*</span></label>
+
+                                                                                @*@Html.HiddenFor(m => m.Id)
+                                                                    @Html.HiddenFor(m => m.UserId)*@
+
+                                                                                @Html.HiddenFor(m => m.UserId, new { @class = "form-control", @autocomplete = "off" })
+                                                                                @Html.HiddenFor(m => m.Id, new { @class = "form-control", @autocomplete = "off" })
+                                                                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Enter Name", @autocomplete = "off" })
+                                                                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                                                                <span class="field-validation-error text-danger" id="SpanForName"></span>
+
+                                                                            </div>
+
+                                                                        </div><!-- col-6 -->
+                                                                        <div class="col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <label class="form-control-label">Address Line 1 : <span class="tx-danger">*</span></label>
+                                                                                <input type="text" class="form-control" id="AddressLine1" placeholder="Line 1" autocomplete="off" />
+                                                                                <span class="field-validation-error text-danger" id="SpanForAddressLine1"></span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <label class="form-control-label">Address Line 2 :</label>
+                                                                                <input type="text" class="form-control" id="AddressLine2" placeholder="Line 2 optional" autocomplete="off" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div style="display:none">
+                                                                            @Html.TextBoxFor(m => m.Address, new { id = "CompleteAddress" })
+                                                                        </div>
+
+
+                                                                        <div class="col-lg-6">
+
+                                                                            <div class="form-group">
+
+                                                                                <label class="form-control-label">Pincode: <span class="tx-danger">*</span></label>
+
+
+
+                                                                                @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @placeholder = "Pincode optional", @autocomplete = "off" })
+                                                                                @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
+                                                                                <span class="field-validation-error text-danger" id="SpanForPincode"></span>
+
+                                                                            </div>
+
+                                                                        </div><!-- col-6 -->
+
+                                                                        <div class="col-lg-6">
+
+                                                                            <div class="form-group">
+
+                                                                                <label class="form-control-label">Locality: <span class="tx-danger">*</span></label>
+
+                                                                                @Html.TextBoxFor(m => m.Locality, new { @class = "form-control", @placeholder = "Locality", @autocomplete = "off", id = "LocalityTextBox" })
+                                                                                @Html.ValidationMessageFor(model => model.Locality, "", new { @class = "text-danger" })
+                                                                                <span class="field-validation-error text-danger" id="SpanForLocality"></span>
+
+                                                                            </div>
+
+                                                                        </div><!-- col-6 -->
+                                                                        <!-- col-6 -->
+
+                                                                        <div class="col-lg-6">
+
+                                                                            <div class="form-group">
+
+                                                                                <label class="form-control-label">City: <span class="tx-danger">*</span></label>
+
+                                                                                @Html.DropDownListFor(m => m.CityId, ViewBag.CityList as SelectList, "--Select--", new { @class = "form-control select2-show-search" })
+                                                                                @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+                                                                                <span class="field-validation-error text-danger" id="SpanForCity"></span>
+
+                                                                            </div>
+
+                                                                        </div><!-- col-6 -->
+
+                                                                        <div class="col-lg-6">
+
+                                                                            <div class="form-group">
+
+                                                                                <label class="form-control-label">Landmark: <span class="tx-danger"></span></label>
+
+                                                                                @Html.TextBoxFor(m => m.Landmark, new { @class = "form-control", @placeholder = "Landmark", @autocomplete = "off" })
+                                                                                @Html.ValidationMessageFor(model => model.Landmark, "", new { @class = "text-danger" })
+
+                                                                            </div>
+
+                                                                        </div><!-- col-6 -->
+                                                                        <div class="col-lg-6">
+
+                                                                            <div class="form-group">
+
+                                                                                <label class="form-control-label">Phone Number: <span class="tx-danger">*</span></label>
+                                                                                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @maxlength = "10", @placeholder = "10-digit number", @autocomplete = "off", @Type = "number", @onblur = "onlyNumbers(this);" })
+                                                                                @*@Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @placeholder = "10-digit number", @autocomplete = "off" })*@
+                                                                                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                                                                                <span class="field-validation-error text-danger" id="SpanForPhone"></span>
+
+                                                                            </div>
+
+                                                                        </div><!-- col-6 -->
+                                                                        @*<div class="col-lg-6">
+
+                                                                <div class="form-group">
+
+                                                                    <label class="form-control-label">Alternate phone: <span class="tx-danger"></span></label>
+
+                                                                    @Html.TextBoxFor(m => m.AlternatePhone, new { @class = "form-control", @placeholder = "Alternate phone", @autocomplete = "off" })
+                                                                    @Html.ValidationMessageFor(model => model.AlternatePhone, "", new { @class = "text-danger" })
+
                                                                 </div>
 
-                                                                <div class="col-lg-6">
-                                                                    <div class="form-group">
-                                                                        <label class="form-control-label">Address Line 2 :</label>
-                                                                        <input type="text" class="form-control" id="AddressLine2" placeholder="Line 2 optional" autocomplete="off" />
-                                                                    </div>
-                                                                </div>
-                                                                <div style="display:none">
-                                                                    @Html.TextBoxFor(m => m.Address, new { id = "CompleteAddress" })
-                                                                </div>
+                                                            </div>*@<!-- col-6 -->
+                                                                        <div class="col-lg-12">
 
+                                                                            <a onclick="cancel()" class="btn cancel-button mg-r-10">CANCEL</a>
 
-                                                                <div class="col-lg-6">
-
-                                                                    <div class="form-group">
-
-                                                                        <label class="form-control-label">Pincode: <span class="tx-danger">*</span></label>
-
-
-
-                                                                        @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @placeholder = "Pincode optional", @autocomplete = "off" })
-                                                                        @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
-                                                                        <span class="field-validation-error text-danger" id="SpanForPincode"></span>
-
-                                                                    </div>
-
-                                                                </div><!-- col-6 -->
-
-                                                                <div class="col-lg-6">
-
-                                                                    <div class="form-group">
-
-                                                                        <label class="form-control-label">Locality: <span class="tx-danger">*</span></label>
-
-                                                                        @Html.TextBoxFor(m => m.Locality, new { @class = "form-control", @placeholder = "Locality", @autocomplete = "off", id = "LocalityTextBox" })
-                                                                        @Html.ValidationMessageFor(model => model.Locality, "", new { @class = "text-danger" })
-                                                                        <span class="field-validation-error text-danger" id="SpanForLocality"></span>
-
-                                                                    </div>
-
-                                                                </div><!-- col-6 -->
-                                                                <!-- col-6 -->
-
-                                                                <div class="col-lg-6">
-
-                                                                    <div class="form-group">
-
-                                                                        <label class="form-control-label">City: <span class="tx-danger">*</span></label>
-
-                                                                        @Html.DropDownListFor(m => m.CityId, ViewBag.CityList as SelectList, "--Select--", new { @class = "form-control select2-show-search" })
-                                                                        @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
-                                                                        <span class="field-validation-error text-danger" id="SpanForCity"></span>
-
-                                                                    </div>
-
-                                                                </div><!-- col-6 -->
-
-                                                                <div class="col-lg-6">
-
-                                                                    <div class="form-group">
-
-                                                                        <label class="form-control-label">Landmark: <span class="tx-danger"></span></label>
-
-                                                                        @Html.TextBoxFor(m => m.Landmark, new { @class = "form-control", @placeholder = "Landmark", @autocomplete = "off" })
-                                                                        @Html.ValidationMessageFor(model => model.Landmark, "", new { @class = "text-danger" })
-
-                                                                    </div>
-
-                                                                </div><!-- col-6 -->
-                                                                <div class="col-lg-6">
-
-                                                                    <div class="form-group">
-
-                                                                        <label class="form-control-label">Phone Number: <span class="tx-danger">*</span></label>
-
-                                                                        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @placeholder = "10-digit number", @autocomplete = "off", @Type = "number", @maxlength ="10" })
-                                                                        @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
-                                                                        <span class="field-validation-error text-danger" id="SpanForPhone"></span>
-
-                                                                    </div>
-
-                                                                </div><!-- col-6 -->
-                                                                @*<div class="col-lg-6">
-
-                                                                        <div class="form-group">
-
-                                                                            <label class="form-control-label">Alternate phone: <span class="tx-danger"></span></label>
-
-                                                                            @Html.TextBoxFor(m => m.AlternatePhone, new { @class = "form-control", @placeholder = "Alternate phone", @autocomplete = "off" })
-                                                                            @Html.ValidationMessageFor(model => model.AlternatePhone, "", new { @class = "text-danger" })
+                                                                            <input type="button" class="btn save-button" onclick="AddAddress()" id="SAVE" value="SAVE" />
+                                                                            @*<input type="button" class="btn save-button" onclick="AddAddress()" value="update" />*@
 
                                                                         </div>
 
-                                                                    </div>*@<!-- col-6 -->
-                                                                <div class="col-lg-12">
-
-                                                                    <a onclick="cancel()" class="btn cancel-button mg-r-10">CANCEL</a>
-
-                                                                    <input type="button" class="btn save-button" onclick="AddAddress()" id="SAVE" value="SAVE" />
-                                                                    @*<input type="button" class="btn save-button" onclick="AddAddress()" value="update" />*@
+                                                                    </div>
 
                                                                 </div>
 
@@ -300,125 +348,128 @@
                                         </div>
 
                                     </div>
-
                                 </div>
+                            </div>
 
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <div class="ps-checkout__order">
+                        <header>
+                            <h3>Your Order</h3>
+                        </header>
+                        <div class="content" id="CheckOutDiv">
+                            <table class="table ps-checkout__products">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase">Product</th>
+                                        <th class="text-uppercase">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td> Price(@ViewBag.ItemCount)=@ViewBag.TotalAmount</td>
+                                        <td class="totalamount">@ViewBag.TotalAmount</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Delivery Charges</td>
+                                        <td class="replacedeliverycharges">₹@ViewBag.ShippingCharges</td>
+                                    </tr>
+                                    <tr id="coupondiscount" style="display:none">
+                                        <td>Coupon Discount</td>
+                                        <td class="coupondiscount"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Order Total</td>
+                                        <td class="totalamountaftercharges">₹@ViewBag.TotalAmountAfterCharges</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>  </td>
+                                        <td>
+                                            <a onclick="showpromocode()" class="float-right" id="promocode">Apply Promo Code</a>
+                                            <label class="couponresponse">@ViewBag.CouponResponse</label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group">
+                                <div class="ps-form--icon" style="display:none">
+                                    <i class="fa fa-angle-right"></i>
+                                    <input class="form-control" type="text" placeholder="Apply Promo Code" id="promocodetext">
+                                    <input type="button" class="ps-btn ps-btn--fullwidth" id="SubmitPromoCode" onclick="GetCoupon()" value="APPLY" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
-                        <div class="ps-checkout__order">
-                            <header>
-                                <h3>Your Order</h3>
-                            </header>
-                            <div class="content" id="CheckOutDiv">
-                                <table class="table ps-checkout__products">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-uppercase">Product</th>
-                                            <th class="text-uppercase">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                        <footer>
+                            <h3>Payment Method</h3>
 
-                                        <tr>
-                                            <td> Price(@ViewBag.ItemCount)=@ViewBag.TotalAmount</td>
-                                            <td class="totalamount">@ViewBag.TotalAmount</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Delivery Charges</td>
-                                            <td class="replacedeliverycharges">₹@ViewBag.ShippingCharges</td>
-                                        </tr>
-                                        <tr id="coupondiscount" style="display:none">
-                                            <td>Coupon Discount</td>
-                                            <td class="coupondiscount"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Order Total</td>
-                                            <td class="totalamountaftercharges">₹@ViewBag.TotalAmountAfterCharges</td>
-                                        </tr>
+                            <div class="form-group cheque">
+                                <div class="ps-radio ps-radio--small">
 
-                                        <tr>
-                                            <td>  </td>
-                                            <td>
-                                                <a onclick="showpromocode()" class="float-right" id="promocode">Apply Promo Code</a>
-                                                <label class="couponresponse">@ViewBag.CouponResponse</label>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="form-group">
-                                    <div class="ps-form--icon" style="display:none">
-                                        <i class="fa fa-angle-right"></i>
-                                        <input class="form-control" type="text" placeholder="Apply Promo Code" id="promocodetext">
-                                        <input type="button" class="ps-btn ps-btn--fullwidth" id="SubmitPromoCode" onclick="GetCoupon()" value="APPLY" />
-                                    </div>
+
+                                    <input class="form-control" type="radio" id="rdoPaymentMode3" name="rdoPaymentMode" value="Pick Up Order" onclick="pickupchecked()">
+                                    <label for="rdoPaymentMode3">Pick Up Order</label>
                                 </div>
+
                             </div>
-                            <footer>
-                                <h3>Payment Method</h3>
-
-                                <div class="form-group cheque">
-                                    <div class="ps-radio ps-radio--small">
+                            <div class="form-group cheque">
+                                <div class="ps-radio ps-radio--small">
 
 
-                                        <input class="form-control" type="radio" id="rdoPaymentMode3" name="rdoPaymentMode" value="Pick Up Order" onclick="pickupchecked()">
-                                        <label for="rdoPaymentMode3">Pick Up Order</label>
-                                    </div>
-
+                                    <input class="form-control" type="radio" id="rdoPaymentMode5" name="rdoPaymentMode" checked value="COD" onclick="codchecked()">
+                                    <label for="rdoPaymentMode5">Cash on delivery</label>
                                 </div>
-                                <div class="form-group cheque">
-                                    <div class="ps-radio ps-radio--small">
 
+                            </div>
+                            <div class="form-group paypal">
 
-                                        <input class="form-control" type="radio" id="rdoPaymentMode5" name="rdoPaymentMode" checked value="COD" onclick="codchecked()">
-                                        <label for="rdoPaymentMode5">Cash on delivery</label>
-                                    </div>
-
-                                </div>
-                                <div class="form-group paypal">
-
-                                    @{
-                                        if (ViewBag.TotalAmount == 0)
-                                        {
-                                            <input type="button" disabled class="ps-btn ps-btn--fullwidth" value="No Items to Place Order">
-                                        }
-                                        else
-                                        {
-                                            <input type="button" class="ps-btn ps-btn--fullwidth" onclick="PlaceOrder()" value="Place Order">
-                                        }
+                                @{
+                                    if (ViewBag.TotalAmount == 0)
+                                    {
+                                        <input type="button" disabled class="ps-btn ps-btn--fullwidth" value="No Items to Place Order">
                                     }
-
-                                </div>
-
-                            </footer>
-                        </div>
-                        <div class="ps-shipping">
-                            @{
-                                if (ViewBag.ShippingCharges == 0)
-                                {
-                                    <h3>FREE SHIPPING</h3>
-                                    <p>
-                                        YOUR ORDER QUALIFIES FOR FREE SHIPPING.
-                                        <br>Shop for 500  or more for free shipping on every order, every time.
-                                    </p>
+                                    else
+                                    {
+                                        <input type="button" class="ps-btn ps-btn--fullwidth" onclick="PlaceOrder()" value="Place Order">
+                                    }
                                 }
-                                else
-                                {
-                                    <h3>FREE SHIPPING</h3>
-                                    <p>
-                                        ADD ITEMS WORTH 500 OR MORE TO QUALIFY FOR FREE SHIPPING.
-                                        <br>Shop for 500  or more for free shipping on every order, every time.
-                                    </p>
-                                }
+
+                            </div>
+
+                        </footer>
+                    </div>
+                    <div class="ps-shipping">
+                        @{
+                            if (ViewBag.ShippingCharges == 0)
+                            {
+                                <h3>FREE SHIPPING</h3>
+                                <p>
+                                    YOUR ORDER QUALIFIES FOR FREE SHIPPING.
+                                    <br>Shop for 500  or more for free shipping on every order, every time.
+                                </p>
                             }
+                            else
+                            {
+                                <h3>FREE SHIPPING</h3>
+                                <p>
+                                    ADD ITEMS WORTH 500 OR MORE TO QUALIFY FOR FREE SHIPPING.
+                                    <br>Shop for 500  or more for free shipping on every order, every time.
+                                </p>
+                            }
+                        }
 
-                        </div>
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12">
+              
+                </div>
+            </div>
     </div>
+        </div>
 
 }
 
@@ -489,19 +540,7 @@
     }
 
     var cancel = function () {
-        //alert('cancel');
-        debugger
-        //document.getElementById("Name").value = "";
-        //document.getElementById("AddressLine1").value = "";
-        //document.getElementById("AddressLine2").value = "";
-        //document.getElementById("Mobile").value = "";
-        //document.getElementById("Pincode").value = "";
-        //document.getElementById("LocalityTextBox").value = "";
-        //document.getElementById("CityId").value = "";
-        //document.getElementById("AlternatePhone").value = "";
-        //document.getElementById("Landmark").value = "";
-        //document.getElementById("Id").value = "";
-        //document.getElementById("UserId").value = "";
+
         document.getElementById("Name").innerHTML = "";
         document.getElementById("AddressLine1").innerHTML = "";
         document.getElementById("AddressLine2").innerHTML = "";
@@ -667,37 +706,173 @@
 
             //var AddresstoLog = null;
 
-            //document.getElementById("Name").innerHTML = "";
-            //document.getElementById("AddressLine1").innerHTML = "";
-            //document.getElementById("AddressLine2").innerHTML = "";
-            //document.getElementById("Mobile").innerHTML = "";
-            //document.getElementById("Pincode").innerHTML = "";
-            //document.getElementById("LocalityTextBox").innerHTML = "";
-            //document.getElementById("CityId").innerHTML = "";
-            //document.getElementById("Landmark").innerHTML = "";
-
             var respons = $("#AddressForm").submit();
         }
         else { return; }
 
     }
 </script>
+<script>
+    var AddToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount) {
+        $('#' + Id).show();
+        var discountPrice = 0;
+        var ProductId = Id;
+        var ProductNamevar = "" + ProductName + "";
+        var Qty = 1;
+        var ImageName = ProductImage;
+
+        var TotalAmount = 0;
+
+        $.ajax({
+            url: "../../WebHome/AddToCart",
+            type: "POST",
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductNamevar,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result) {
+
+                $("#Cartcontent").load(location.href + ' #Cartcontent');
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+                    $('#' + Id).hide();
+                    swal(" ", "One more added !", "success");
+                })
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+<script>
+    var RemoveToSideCart = function (Id, ProductName, ProductImage, Price, Amount, index) {
+        $('#' + Id).show();
+
+        if (QtyTxt == "1") {
+            swal('Quantity cannot be less than 1');
+            return;
+        }
+        $("body").removeClass("loaded");
+        var discountPrice = 0;
+        var ProductId = Id;
+        var ProductNameVar = "" + ProductName + "";
+        var Qty = 1;
+        var ImageName = ProductImage;
+
+
+        var TotalAmount = 0;
+
+        $.ajax({
+            url: "../../WebHome/RemoveQtyToCart",
+            type: "POST",
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductNameVar,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result) {
+                $("#Cartcontent").load(location.href + ' #Cartcontent');
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+                    $('#' + Id).hide();
+                    swal(" ", "Quantity removed !", "success");
+                })
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
 <script type="text/javascript">
-    @*@onkeypress = "MyPhoneValidationMethod"*@
-    function MyPhoneValidationMethod()
-    {
+    var DeleteItem = function (index) {
+
+        var divCart = document.getElementById('CartList');
+        var divCartTotal = document.getElementById('CartTotal');
+        var CartString = "";
+        var CartTotal = "";
+
+        $("body").removeClass("loaded");
+        $.ajax({
+            url: "../../WebsiteHeader/RemoveToCart",
+            type: "POST",
+
+            data: {
+                index: index
+            },
+            success: function (result) {
+                var JsonResponse = JSON.parse(result);
+                console.log(JsonResponse);
+                console.log(JsonResponse.length);
+                var ProductName = "";
+                var Qty = "";
+                var ImageName = "";
+                var TotalAmount = 0;
+                for (var i = 0; i < JsonResponse.length; i++) {
+
+
+                    ProductName = JsonResponse[i].ProductName;
+                    Qty = JsonResponse[i].Qty;
+                    TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
+                    ImageName = JsonResponse[i].ImageName;
+                    console.log('~/DocImg/' + ImageName);
+                    CartString = CartString + '<div class="ps-cart-item"><a class="ps-cart-item__close" onclick="DeleteItem(' + i + ')"></a>' +
+                        '<div class="ps-cart-item__thumbnail">' +
+                        '<a href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '"></a>' +
+                        '<img src="../../DocImg/' + ImageName + '" alt="">' +
+                        '</div>' +
+                        '<div class="ps-cart-item__content">' +
+                        '<a class="ps-cart-item__title" href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '">' + JsonResponse[i].ProductName + '</a>' +
+                        '<p><span>Quantity:<i>' + JsonResponse[i].Qty + '</i></span><span>Total:<i>₹ ' + JsonResponse[i].Amount + '</i></span></p></div>' +
+                        '</div>';
+                }
+                if (JsonResponse.length == null || JsonResponse.length == 0) {
+
+                }
+                if (JsonResponse.length > 0) {
+
+
+                    CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
+                        "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
+
+                }
+
+                divCart.innerHTML = CartString;
+                divCartTotal.innerHTML = CartTotal;
+                // $("#CartCount").load(location.href + ' #CartCount');
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+                    $("#Cartcontent").load(location.href + ' #Cartcontent');
+                    $("body").addClass("loaded");
+                    swal(" ", "Product removed", "success");
+                })
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+
+</script>
+<script type="text/javascript">
+    function onlyNumbers() {
         debugger
         if ($.trim($("#Mobile").val()).length != 10) {
             $("#SpanForPhone").html("Please Enter 10 Digit Mobile Num");
             return;
         }
         else { $("#SpanForPhone").html("") }
-        //if ($.trim($("#Mobile").val()).length == 10) {
-        //{
-        //        $("#SpanForPhone").html("Mobile no not more then 10 Digit");
-
-        //}
-
-      
     }
 </script>

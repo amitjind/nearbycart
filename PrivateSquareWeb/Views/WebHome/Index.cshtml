@@ -35,8 +35,7 @@
             success: function (result) {
                 //$("#Cartcontent").load(location.href + ' #Cartcontent');
                 $("#Cartcontent").load(location.href + ' #Cartcontent', function () {
-                    //swal("Load was performed.");
-                    //swal(" ", "Product Added to the Cart", "success");
+                    
                 });
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
                     $(".ps-loading").addClass("loaded");
@@ -149,12 +148,12 @@
 
 <div class="ps-hero pd-sm"></div>
 <main class="ps-main ps-products-listing pd-23">
-
+    @{
+    Html.RenderAction("WebSiteSidebar", "WebSidebar");
+    }
     @using (Html.BeginForm("ProcessForm", "WebHome", FormMethod.Post))
     {
-        {
-            Html.RenderAction("WebSiteSidebar", "WebSidebar");
-        }
+
 
         <div class="ps-content" data-mh="product-page">
             <div class="ps-product-group" data-item="5">
@@ -242,7 +241,7 @@
 
                                         }
                                     }
-                                  
+
                                     @*<div class="ps-badge ps-badge--sale-off"><span>-@off%</span></div>*@
 
                                     <ul class="ps-product__actions">
@@ -293,7 +292,7 @@
 
                                         }
                                     }
-                                 
+
                                     @*<div class="ps-badge ps-badge--sale-off"><span>-@off%</span></div>*@
 
                                     <ul class="ps-product__actions">
@@ -343,7 +342,7 @@
 
                                         }
                                     }
-                                 
+
                                     @*<div class="ps-badge ps-badge--sale-off"><span>-@off%</span></div>*@
 
                                     <ul class="ps-product__actions">
@@ -393,7 +392,7 @@
 
                                         }
                                     }
-                                  
+
                                     @*<div class="ps-badge ps-badge--sale-off"><span>-@off%</span></div>*@
 
                                     <ul class="ps-product__actions">
@@ -406,7 +405,7 @@
                                 <div class="ps-product__content">
                                     <a class="ps-product__title" href="/WebHome/ProductDetail/@Users.Id">@Users.ProductName</a>
                                     <p class="ps-product__price">
-                                      ₹@Users.DiscountPrice
+                                        ₹@Users.DiscountPrice
                                     </p>
                                 </div>
                             </div>
@@ -419,7 +418,7 @@
         </div>
 
         <div class="ps-content" data-mh="product-page">
-           
+
         </div>
         <div class="clearfix"></div>
         <div class="ps-section mt-100 pb-30">

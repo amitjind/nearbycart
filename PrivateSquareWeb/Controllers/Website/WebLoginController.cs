@@ -55,7 +55,8 @@ namespace PrivateSquareWeb.Controllers.Website
 
 
         }
-        public ActionResult Logout(string url)
+        //public ActionResult Logout(string url)
+        public ActionResult Logout()
         {
             Services.RemoveCookie(this.ControllerContext.HttpContext, "webusr");
             Session.Abandon();
@@ -207,10 +208,9 @@ namespace PrivateSquareWeb.Controllers.Website
         }
 
         [HttpPost]
-        public JsonResult RegisterUser(LoginModel ObjModel)
+        public JsonResult RegisterUser(string lasturl, LoginModel ObjModel)
         {
             String Response = "";
-
             string res;
             long a;
             string myStr = ObjModel.EmailId;
@@ -229,7 +229,6 @@ namespace PrivateSquareWeb.Controllers.Website
             }
             else
             {
-
                 bool IsValidEmail = CommonFile.ValidateEmailIsValid(ObjModel.EmailId);
                 if (!IsValidEmail)
                 {
@@ -237,9 +236,7 @@ namespace PrivateSquareWeb.Controllers.Website
                     Response = "[{\"Response\":\"" + "Email Incorrect" + "\"}]";
                     return Json(Response);
                 }
-
                 ObjModel.Mobile = null;
-
             }
 
             ObjModel.RegisterType = "UNV";
@@ -261,13 +258,6 @@ namespace PrivateSquareWeb.Controllers.Website
             ObjModel.Password = PasswordEncripy;
             ObjModel.Otp = builder.ToString();
 
-
-
-
-
-
-
-
             var _request = _JwtTokenManager.GenerateToken(JsonConvert.SerializeObject(ObjModel));
             ResponseModel ObjResponse = CommonFile.GetApiResponseJWT(Constant.ApiRegisterUser, _request);
             ResponseModel ObjResponse1 = JsonConvert.DeserializeObject<ResponseModel>(ObjResponse.Response);
@@ -282,42 +272,29 @@ namespace PrivateSquareWeb.Controllers.Website
                 {
                     string[] ArrResponse = varResponse.Split(',');
 
-                    // var jsonString = "{\"Id\":\"" + ArrResponse[0] + "\",\"Name\":\"" + ArrResponse[1] + "\",\"ProfileImg\":\"" + ArrResponse[2] + "\"}";
+
                     var jsonString = "{\"Id\":\"" + ArrResponse[0] + "\",\"Name\":\"" + ArrResponse[1] + "\",\"ProfileImg\":\"" + ArrResponse[2] + "\",\"EmailId\":\"" + ArrResponse[3] + "\",\"Mobile\":\"" + ArrResponse[4] + "\",\"RegisterType\":\"" + ObjModel.RegisterType + "\"}";
-                    //var jsonString = "{\"Id\":\"" + ArrResponse[0] + "\",\"Name\":\"" + ArrResponse[1] + "\",\"ProfileImg\":\"" + ArrResponse[2] + "\",\"EmailId\":\"" + ArrResponse[3] + "\",\"Mobile\":\"" + ArrResponse[4] + "\"}";
+
 
                     Services.SetCookie(this.ControllerContext.HttpContext, "webusr", _JwtTokenManager.GenerateToken(jsonString.ToString()));
-                    Response = "[{\"Response\":\"" + "Home" + "\"}]"; ;
+
+                    try
+                    {
+                        if (lasturl != null)
+                        {
+                            System.Uri uri = new Uri(lasturl);
+                            string uriWithoutScheme = uri.PathAndQuery + uri.Fragment;
+                            //return this.Redirect(uriWithoutScheme);
+                            Response = "[{\"Response\":\"" + uriWithoutScheme + "\"}]"; ;
+                        }
+                    }
+                    catch
+                    {
+                        Response = "[{\"Response\":\"" + "/WebHome/Index" + "\"}]"; ;
+                    }
                 }
-                //else
-                //{
-                //    //hare i want to delete the register email id
-                //    Response = "[{\"Response\":\"" + ObjResponse1.Response + "\"}]";
-                //    //Response = ("EMAIL IS NOT VALID");
-                //}
             }
             return Json(Response);
-
-
-
-
-            /******************************************************************/
-            #region Using Json
-            /*    var _request = JsonConvert.SerializeObject(ObjModel);
-            ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiRegisterUser, _request);
-            if (String.IsNullOrWhiteSpace(ObjResponse.Response))
-            {
-              //  return View("Index", ObjModel);
-
-            }
-            var objResponse = ObjResponse.Response;
-            ResponseModel ObjResponse1 = JsonConvert.DeserializeObject<ResponseModel>(ObjResponse.Response);
-            ViewBag.RegisterMessage = ObjResponse1.Response;
-            String Response = "[{\"Response\":\"" + ObjResponse1.Response + "\"}]";
-    */
-            #endregion
-
-
         }
 
         [HttpPost]

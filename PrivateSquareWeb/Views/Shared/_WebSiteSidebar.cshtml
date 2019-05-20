@@ -52,28 +52,26 @@
                     foreach (var item in ViewBag.AddToCart)
                     {
 
-                        <div class="ps-cart-item">
+                <div class="ps-cart-item">
 
-                            <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
+                    <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
 
-                            <div class="ps-cart-item__thumbnail">
-                                <a href="/WebHome/ProductDetail/@item.ProductId"></a>
-                                <img src="~/DocImg/@item.ImageName" alt="Image">
-                            </div>
-                            <div class="ps-cart-item__content">
-
-                                <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
-
-                                <p>
-                                    <span class="SpanForQuantity+@item.ProductId">
-                                        Qty:
-                                        <a href="javascript:void()" class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span>    -</span></a>
-                                        <i> <input id="@("SidebarTxtQty"+item.ProductId)" name="@("SidebarTxtQty"+index)" type="text" value="@item.Qty" readonly style="width:28px;text-align:center"></i>
-                                        <a href="javascript:void();" class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span>+</span> </a>
-                                    </span><span>Total:<i>₹ @item.Amount</i></span>
-                                </p>
-                            </div>
-                        </div>
+                    <div class="ps-cart-item__thumbnail">
+                        <a href="/WebHome/ProductDetail/@item.ProductId"></a>
+                        <img src="~/DocImg/@item.ImageName" alt="Image">
+                    </div>
+                    <div class="ps-cart-item__content">
+                        <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
+                    </div>
+                    <div class="ntotal_cart form-group--number">
+                        <div class="pull-left SpanForQuantity+@item.ProductId">
+                            <div id="@item.ProductId" class="lds-ellipsis n_loader"><div></div><div></div><div></div><div></div></div>
+           <button class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span>    - </span></button>
+                      <input id="@("SidebarTxtQty"+item.ProductId)" name="@("SidebarTxtQty"+index)" class="iten_set" type="text" value="@item.Qty" readonly>
+                            <button class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span> + </span> </button>
+                        </div><div class="ml-10 pull-left mt-5">Total:<i>₹ @item.Amount</i></div>
+                    </div>
+                </div>
                         index++;
                     }
                 }
@@ -112,7 +110,7 @@
 
     for (i = 0; i < acc.length; i++) {
         acc[i].addEventListener("click", function () {
-            this.classList.toggle("active");
+            this.classList.toggle("active_li");
             var cate_sub = this.nextElementSibling;
             if (cate_sub.style.maxHeight) {
                 cate_sub.style.maxHeight = null;
@@ -122,9 +120,11 @@
         });
     }
 </script>
-<script>
+<script  type="text/javascript">
     var AddToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount) {
-        $("body").removeClass("loaded");
+  
+     $('#'+Id).show();
+       
         var discountPrice = 0;
         var ProductId = Id;
         var ProductNamevar = "" + ProductName + "";
@@ -147,10 +147,10 @@
                 TotalAmount: TotalAmount
             },
             success: function (result) {
-
-                $("#Cartcontent").load(location.href + ' #Cartcontent');
+            
+                //$("#Cartcontent").load(location.href + ' #Cartcontent');
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
-                    $("body").addClass("loaded");
+                    $('#' + Id).hide();
                     swal(" ", "One more added !", "success");
                 })
 
@@ -161,15 +161,18 @@
         });
     }
 </script>
+
 <script>
     var RemoveToSideCart = function (Id, ProductName, ProductImage, Price, Amount, index) {
-        var QtyTxt = $("#SidebarTxtQty" + Id).val();
+        $('#'+Id).show();
+       
 
+        var QtyTxt = $("#SidebarTxtQty" + Id).val();
         if (QtyTxt == "1") {
             swal('Quantity cannot be less than 1');
             return;
         }
-        $("body").removeClass("loaded");
+        //$("body").removeClass("loaded");
         var discountPrice = 0;
         var ProductId = Id;
         var ProductNameVar = "" + ProductName + "";
@@ -193,11 +196,11 @@
                 TotalAmount: TotalAmount
             },
             success: function (result) {
-                $("#Cartcontent").load(location.href + ' #Cartcontent');
-                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
-                    $(".ps-loading").addClass("loaded");
-                    swal(" ", "Quantity removed !", "success");
-                })
+                       
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart')
+                $('#' + Id).hide();
+                swal(" ", "Quantity removed !", "success");
+                return;
             },
             error: function (error) {
                 console.log(error);

@@ -8,7 +8,6 @@ namespace PrivateSquareWeb.Models
 {
     public class AddressModel
     {
-
         public long? Id { get; set; }
         public string Address { get; set; }
         public long UserId { get; set; }
@@ -44,5 +43,11 @@ namespace PrivateSquareWeb.Models
         public string Type { get; set; }
         public string ProfileImg { get; set; }
         public string Operation { get; set; }
+        public int CartItemCount { get; set; } = 0;
+
+
+
+      
+
     }
 }

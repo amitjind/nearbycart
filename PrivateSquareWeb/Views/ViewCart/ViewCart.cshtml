@@ -166,7 +166,7 @@
 <div class="ps-hero">
     <div class="container">
         <h3>YOUR CART</h3>
-        
+
     </div>
 </div>
 <div class="ps-content pt-80 pb-80">
@@ -185,9 +185,7 @@
                         }
                     </tr>
                 </thead>
-                <tbody>
-                    <div id="CartList">
-
+                <tbody id="CartList" class="product_list_img">
                         @{ int index = 0;
                             if (ViewBag.AddToCart.Count == 0)
                             { <h1>Your Cart Is Empty !</h1>}
@@ -206,13 +204,13 @@
                                         <td>
                                             <div class="form-group--number">
                                                 <button class="minus" onclick="RemoveToCartViewCart('@item.ProductId','@item.ProductName','@item.ImageName','@item.Price','@item.Amount','@index')"><span>-</span></button>
-                                                <input class="form-control" id="@("TxtQty"+index)" name="@("TxtQty"+index)" type="text" value="@item.Qty" readonly>
+                                                <input class="form-control ng_cart_int" id="@("TxtQty"+index)" name="@("TxtQty"+index)" type="text" value="@item.Qty" readonly>
                                                 <button class="plus" onclick="AddToCartViewCart('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span>+</span></button>
                                             </div>
                                         </td>
                                         <td>₹ @item.Amount</td>
                                         <td>
-                                            <div><input class="ps-remove" value="X" type="button" onclick="DeleteItemView(@index)" /></div>
+                                            <div><a href="javascript:void(0);" class="ps-remove" onclick="DeleteItemView(@index)"></a></div>
                                         </td>
                                     </tr>
 
@@ -222,7 +220,6 @@
                                 }
                             }
                         }
-                    </div>
 
                 </tbody>
             </table>

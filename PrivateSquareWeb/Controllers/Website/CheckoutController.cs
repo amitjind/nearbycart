@@ -4,14 +4,14 @@ using PrivateSquareWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Web;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace PrivateSquareWeb.Controllers.Website
 {
     public class CheckoutController : Controller
     {
-        HttpContextBase httpContext;
+        //HttpContextBase httpContext ;
         JwtTokenManager _JwtTokenManager = new JwtTokenManager();
         // GET: Checkout
         public ActionResult Index()
@@ -23,7 +23,8 @@ namespace PrivateSquareWeb.Controllers.Website
             {
                 PreRequiestCheckout();
             }
-            return View();
+
+            return View(BindCartItems());
         }
         public List<AddressModel> GetUserAddress()
         {
@@ -70,6 +71,8 @@ namespace PrivateSquareWeb.Controllers.Website
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
             ObjModel.UserId = MdUser.Id;
 
+            //if (ModelState.IsValid)
+
             if (ObjModel.Id == null)
                 ObjModel.Id = 0;
             if (MdUser.Id != 0)
@@ -101,16 +104,19 @@ namespace PrivateSquareWeb.Controllers.Website
                 return "1";
             }
 
-
+            //else
+            //{
+            //    PreRequiestCheckout();
+            //}
             PreRequiestCheckout();
             return "null";
         }
 
-        
         [HttpPost]
         public ActionResult AddressesList(AddressModel ObjModel)
         {
-            List<AddressModel> ListUserAddress;
+            //////////////////////////////////////////////////////////
+             List<AddressModel> ListUserAddress;
             ListUserAddress = GetUserAddress();
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
             ObjModel.UserId = MdUser.Id;
@@ -147,24 +153,67 @@ namespace PrivateSquareWeb.Controllers.Website
 
                 AddressModel ObjModelnew = new AddressModel();
                 ObjModel = null;
+                BindCartItems();
                 return RedirectToAction("Index", "Checkout", ObjModel);
-
-                //return View("Index", ObjModelnew);                
-                //return View("../Checkout/Index", ObjModelnew);
             }
             else
             {
                 ObjModel = null;
+                BindCartItems();
                 return RedirectToAction("Index", "Checkout", ObjModel);
             }
 
+
+
+
+            //////////////////////////////////////////////////////
+            //List<AddressModel> ListUserAddress;
+            //ListUserAddress = GetUserAddress();
+            //LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
+            //ObjModel.UserId = MdUser.Id;
+
+            ////if (ModelState.IsValid)
+
+            //if (ObjModel.Id == null)
+            //    ObjModel.Id = 0;
+            //if (MdUser.Id != 0)
+            //{
+            //    ObjModel.UserId = Convert.ToInt64(MdUser.Id);
+            //}
+            //if (ObjModel.Id != 0)
+            //{
+            //    ObjModel.Operation = "update";
+            //}
             //else
             //{
-            //    PreRequiestCheckout();
+            //    ObjModel.Operation = "insert";
             //}
+            //var _request = JsonConvert.SerializeObject(ObjModel);
+            //ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiSaveAddress, _request);
+            //if (String.IsNullOrWhiteSpace(ObjResponse.Response))
+
+            //{
+            //    @ViewBag.ResponseMessage = "Error ! Unable to Submit Address";
+            //    PreRequiestCheckout();
+            //    return View("AddAddress", ObjModel);
+            //}
+
+            //if (ObjResponse.Response.Equals("Save Address"))
+            //{
+            //    ViewBag.UserAddress = ListUserAddress;
+            //    PreRequiestCheckout();
+            //    AddressModel ObjModelnew = new AddressModel();
+            //    return View("Index", ObjModelnew);
+            //}
+
+            ////else
+            ////{
+            ////    PreRequiestCheckout();
+            ////}
             //PreRequiestCheckout();
             //return View("Index", ObjModel);
         }
+
         private void PreRequiestCheckout()
         {
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
@@ -355,7 +404,13 @@ namespace PrivateSquareWeb.Controllers.Website
         }
         public ActionResult OrderSuccessful()
         {
-            return View();
+            //return RedirectToAction("Index", "WebHome");
+            LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
+            if (MdUser.Id == 0)
+            {
+                return RedirectToAction("Index", "WebHome");
+            }
+            return View(GetLastPlacedOrder());
         }
         public ActionResult DeleteAddress(int? id)
         {
@@ -368,6 +423,40 @@ namespace PrivateSquareWeb.Controllers.Website
             var _request = JsonConvert.SerializeObject(objModel);
             ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiSaveAddress, _request);
             return RedirectToAction("index");
+        }
+
+        public AddressModel BindCartItems()
+        {
+            AddressModel objModel = new AddressModel();
+            var ProductCatList = CommonFile.GetProductCategory(null);
+            ViewBag.ProductCatList = ProductCatList;
+            List<AddToCartModel> ListAddToCart = Services.GetMyCart(this.ControllerContext.HttpContext, _JwtTokenManager);
+            ViewBag.AddToCart = ListAddToCart;
+            objModel.CartItemCount = ListAddToCart.Count();
+            ViewBag.TotalAmount = GetTotalAmount(ListAddToCart);
+            return objModel;
+        }
+
+        public decimal GetTotalAmount(List<AddToCartModel> ListCart)
+        {
+            AddToCart objAddToCart = new AddToCart();
+            return objAddToCart.GetTotalAmount(ListCart);
+        }
+
+        public SaleOrderModel GetLastPlacedOrder()
+        {
+            LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
+            SaleOrderModel objmodel = new SaleOrderModel();
+            objmodel.UserId = MdUser.Id;
+            var _request = JsonConvert.SerializeObject(objmodel);
+            ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetOrders, _request);
+            var Orders = JsonConvert.DeserializeObject<List<SaleOrderModel>>(ObjResponse.Response);
+            objmodel.OrderNo = Orders.First().OrderNo;
+            objmodel.SaleOrderId = Orders.First().Id;
+            var _secondrequest = JsonConvert.SerializeObject(objmodel);
+            ResponseModel ObjSecondResponse = CommonFile.GetApiResponse(Constant.ApiGetOrders, _secondrequest);
+            ViewBag.OrderDetails = JsonConvert.DeserializeObject<List<SaleOrderModel>>(ObjSecondResponse.Response);
+            return objmodel;
         }
     }
 }

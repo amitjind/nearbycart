@@ -54,7 +54,7 @@
             }
         });
     }
-    function SignUp() {
+    function SignUp(lasturl) {
         debugger
         var email = document.getElementById('emailIdRegister').value;
         var newemail = email.trim();
@@ -161,7 +161,8 @@
                         return;
                     }
                     else {
-                        window.location.href = "/WebHome/Index";
+                        //window.location.href = "/WebHome/Index";
+                        window.location.href = response;
 
                     }
                 }
@@ -327,7 +328,7 @@
 
                 <p style="color:red;" id="RegisMess"> @ViewBag.RegisterMessage</p>
 
-                <input type="button" value="Sign Up" class="ps-btn pl-60 pr-60" onclick="SignUp()" />
+                <input type="button" value="Sign Up" class="ps-btn pl-60 pr-60" onclick="SignUp('@ViewBag.lasturl')" />
 
 
 

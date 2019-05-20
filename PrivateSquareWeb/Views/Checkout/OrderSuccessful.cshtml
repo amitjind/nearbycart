@@ -1,9 +1,24 @@
-﻿@model PrivateSquareWeb.Models.AddressModel
+﻿@model PrivateSquareWeb.Models.SaleOrderModel
 
 @{
     ViewBag.Title = "OrderSuccessful";
     Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
 }
+<div class="ps-hero">
+    <h1>CONGRATULATIONS !</h1>
+</div>
+<div class="container mt-50 mb-50 text-center">
+    <h2>YOUR ORDER HAS BEEN PLACED</h2>
+    <h3>The order number is  -<span class="order-color"> @Model.OrderNo </span></h3>
 
-<h2>Order Successful</h2>
-<a href="~/WebHome/Index" class="ps-btn-wdth-100">Home</a>
+    @*<p>Here are your Order's Details: </p>*@
+    @*@foreach(var product in ViewBag.OrderDetails)
+        {
+           <div>@product.ProductName</div>
+           <div><img class="lazy" style="max-width:20%" src="~/DocImg/@product.ProductImage"/></div>
+           <br />
+        }*@
+    @*<a href="~/WebHome/Index" class="ps-btn-wdth-100"><p>Home</p></a>*@
+    <a href="~/WebHome/MyOrders" class="ps-btn ps-btn-wdth-100 mt-15"> View your Orders</a>
+    <p style="padding:15px; font-size:20px;">You will receive an email with tracking information once your goods have shipped.</p>
+</div>
