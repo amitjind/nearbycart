@@ -55,7 +55,7 @@
         });
     }
     function SignUp(lasturl) {
-        debugger
+        $("body").removeClass("loaded");
         var email = document.getElementById('emailIdRegister').value;
         var newemail = email.trim();
         email = newemail;
@@ -165,6 +165,7 @@
                         window.location.href = response;
 
                     }
+                    $(".ps-loading").addClass("loaded");
                 }
             });
         }

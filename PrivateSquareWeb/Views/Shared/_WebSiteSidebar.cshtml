@@ -170,6 +170,7 @@
         var QtyTxt = $("#SidebarTxtQty" + Id).val();
         if (QtyTxt == "1") {
             swal('Quantity cannot be less than 1');
+            $('#' + Id).hide();
             return;
         }
         //$("body").removeClass("loaded");
