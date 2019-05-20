@@ -78,9 +78,11 @@
 </script>
 <script type="text/javascript">
     var DeleteItem = function (index) {
-
+        $("body").removeClass("loaded");
         var divCart = document.getElementById('CartList');
         var divCartTotal = document.getElementById('CartTotal');
+        var updateCartItemCount = document.getElementById('UpdateCartItemCount');
+        var Blankdiv = document.getElementById('CheckoutDiv');
         var CartString = "";
         var CartTotal = "";
 
@@ -119,31 +121,33 @@
                         '</div>';
                 }
                 if (JsonResponse.length == null || JsonResponse.length == 0) {
-
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
+                    //divCartTotal.innerHTML = '< p > YOUR SHOPPING BAG IS EMPTY</p >';
+                   
+                    Blankdiv.innerHTML = "YOUR SHOPPING BAG IS EMPTY";
                 }
                 if (JsonResponse.length > 0) {
 
 
                     CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
                         "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
-
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
+                    
                 }
 
                 divCart.innerHTML = CartString;
                 divCartTotal.innerHTML = CartTotal;
-               // $("#CartCount").load(location.href + ' #CartCount');
+                
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+                    $(".ps-loading").addClass("loaded");
                     swal(" ", "Product removed", "success");
                 })
-
             },
             error: function (error) {
                 console.log(error);
             }
         });
     }
-
-
 </script>
 
 <div class="ps-hero pd-sm"></div>
@@ -153,8 +157,6 @@
     }
     @using (Html.BeginForm("ProcessForm", "WebHome", FormMethod.Post))
     {
-
-
     <div class="ps-content" data-mh="product-page">
         <div class="ps-product-group" data-item="5">
             <div class="ps-product-group__header">
@@ -437,8 +439,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="ps-section--features">
             <div class="ps-container">
                 <div class="row">
@@ -488,9 +488,6 @@
         $("#" + id + "").addClass("current");
     }
 </script>
-
-
-
 <script>
     var RemoveToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount, index) {
         var QtyTxt = document.getElementById('TxtQty' + index).value;
@@ -530,9 +527,5 @@
                 console.log(error);
             }
         });
-        }
-
-
-    //for loader
-    
+        }    
 </script>

@@ -2,13 +2,14 @@
 
 <script type="text/javascript">
     var DeleteItem = function (index) {
+        $(".ps-loading").addClass("loaded");
 
         var divCart = document.getElementById('CartList');
         var divCartTotal = document.getElementById('CartTotal');
+        var updateCartItemCount = document.getElementById('UpdateCartItemCount');
         var CartString = "";
         var CartTotal = "";
 
-        $(".ps-loading").addClass("loaded");
         $.ajax({
             url: "../../WebsiteHeader/RemoveToCart",
             type: "POST",
@@ -18,7 +19,7 @@
             },
             success: function (result) {
                 var JsonResponse = JSON.parse(result);
-                
+
                 var ProductName = "";
                 var Qty = "";
                 var ImageName = "";
@@ -49,7 +50,7 @@
 
                     CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
                         "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
-
+                    
                 }
 
                 divCart.innerHTML = CartString;
@@ -67,7 +68,7 @@
 </script>
 <script type="text/javascript">
     var Logout = function () {
-      
+
         $.ajax({
             url: "../../WebLogin/Logout",
             type: "Get",
@@ -128,16 +129,16 @@
                                                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">[Unverified]</button>
                                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     @Model.UserName  <img src="~/WebSiteTheme/images/angle-arrow-down.svg" width="10" />
-                                                                                            </a>
+                                                </a>
                                             }
                                         }
-                                                <ul class="dropdown-menu dropdown-content nag_l">
-                                                    <li><a href="~/WebHome/MyOrders">My Orders</a></li>
-                                                    <li><a href="~/WebHome/WishList">My Wishlist</a></li>
-                                                    <li><a href="~/ChangePassword/WebIndex">Change Password</a></li>
-                                                    <li><a href="/WebLogin/Logout">Log Out</a></li>
-                                                    @*<li><a href="/WebLogin/Logout?url=@Request.Url.AbsoluteUri.ToString()">Log Out</a></li>*@
-                                                </ul>
+                                        <ul class="dropdown-menu dropdown-content nag_l">
+                                            <li><a href="~/WebHome/MyOrders">My Orders</a></li>
+                                            <li><a href="~/WebHome/WishList">My Wishlist</a></li>
+                                            <li><a href="~/ChangePassword/WebIndex">Change Password</a></li>
+                                            <li><a href="/WebLogin/Logout">Log Out</a></li>
+                                            @*<li><a href="/WebLogin/Logout?url=@Request.Url.AbsoluteUri.ToString()">Log Out</a></li>*@
+                                        </ul>
                                     </div>
                                 }
                                 else if (@Model.UserId == 0)
@@ -177,7 +178,10 @@
                         @{
                             if (Model.CartItemCount != 0)
                             {
-                                <a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
+                                <div id="UpdateCartItemCount">
+                                    <a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
+                                </div>
+
                             }
                             else
                             {
@@ -230,14 +234,20 @@
                                 }
                             }
                         </div>
-                        @{
+                        <div id="CheckoutDiv">
+                            @{
 
-                            if (Model.CartItemCount != 0)
-                            {
-                                <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>
+                                if (Model.CartItemCount != 0)
+                                {
+                                    <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>
+                                }
+                                else
+                                {
+
+                                }
                             }
-                        }
-                    </div>
+                        </div>
+                        </div>
 
                 </div>
 
