@@ -10,10 +10,8 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
     //this is Product cata wise product show page & add cart ()
-    var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
-        //$("#n_loader+" + Id).show();
-        //$("body").removeClass("loaded");
-
+    var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {  
+        $("body").removeClass("loaded");
         var salePrice = SellingPrice;
         var discountPrice = DiscountPrice;
         var ProductId = Id;
@@ -40,12 +38,11 @@
                 TotalAmount: TotalAmount
             },
             success: function (result) {
-                //$("#n_loader+" + Id).hide();
 
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
                 swal(" ", "Product Added to the Cart", "success");
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
-                    //$(".ps-loading").addClass("loaded");
+                    $(".ps-loading").addClass("loaded");
                     swal(" ", "Product Added to Cart", "success");
                 })
             },
@@ -86,8 +83,6 @@
 
 @using (Html.BeginForm("ProcessForm", "ProductCatWise", FormMethod.Post))
 {
-
-
     <div class="ps-hero">
         <div class="container">
             <h3 id="CategoryHeading">@Model.CategoryName</h3>
@@ -185,11 +180,11 @@
         <aside class="ps-sidebar" data-mh="product-page">
 
 
-            <aside class="ps-widget--sidebar ps-widget--filter ">
+            @*<aside class="ps-widget--sidebar ps-widget--filter ">
                 <div class="ps-widget__header">
                     <h3>Price Filter</h3>
                 </div>
-                @*<div class="ps-widget__content">
+                <div class="ps-widget__content">
                         <div class="ac-slider" data-default-min="300" data-default-max="2000" data-max="3450" data-step="50" data-unit="$"></div>
                         <p class="ac-slider__meta">Price:<span class="ac-slider__value ac-slider__min"> 10</span>-<span class="ac-slider__value ac-slider__max">10000</span></p>
 
@@ -199,18 +194,18 @@
 
                         <input type="submit" id="BtnPriceRange" name="submit" onclick="ProductPriceWise()" value="PriceRange" style="display:none;" />
 
-                    </div>*@
+                    </div>
 
-            </aside>
+            </aside>*@
 
         </aside>
 
     </main>
 
-    <p class="budget">What is your budget?</p>
+    @*<p class="budget">What is your budget?</p>
     <label for="range">
         <input type="range" name="range" id="range" min="0" max="300" step="5" value="175" />
-    </label>
+    </label>*@
     <output for="range" class="output"></output>
     <div class="slim-mainpanel">
         @*<div class="price-range-block">
@@ -232,7 +227,8 @@
 <script>
 	var pageindexcounter;
 	var sortdropdown = document.getElementById("sortby");
-	sortdropdown.onchange = function () {
+    sortdropdown.onchange = function () {
+        $("body").removeClass("loaded");
 		if (this.selectedIndex !== 0) {
 			var sortorder = this.value;
 
@@ -251,7 +247,8 @@
 				},
 				success: function (result) {
 					$("#DivItemBind").html(result);
-					pageindexcounter++;
+                    pageindexcounter++;
+                    $(".ps-loading").addClass("loaded");
 				}
 			});
 

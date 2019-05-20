@@ -4,6 +4,7 @@
 <script type="text/javascript">
 
     var AddToCartCatWise = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage, ProductCatId) {
+        $("body").removeClass("loaded");
         var salePrice = SellingPrice;
         var discountPrice = DiscountPrice;
         var ProductId = Id;
@@ -31,6 +32,7 @@
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
                 //swal(" ", "Product Added to the Cart", "success");
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+                    $(".ps-loading").addClass("loaded");
                     swal(" ", "Product Added to the Side Cart", "success");
                 })
             },
