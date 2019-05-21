@@ -33,10 +33,11 @@
                 TotalAmount: TotalAmount
             },
             success: function (result) {
+               
                 //$("#Cartcontent").load(location.href + ' #Cartcontent');
                 $("#Cartcontent").load(location.href + ' #Cartcontent', function () {
                     
-                });
+                });                
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
                     $(".ps-loading").addClass("loaded");
                     swal(" ", "Product Added to the Side Cart", "success");
@@ -122,9 +123,9 @@
                 }
                 if (JsonResponse.length == null || JsonResponse.length == 0) {
                     updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
-                    //divCartTotal.innerHTML = '< p > YOUR SHOPPING BAG IS EMPTY</p >';
+                    divCartTotal.innerHTML = '<div class="ps-cart__total" >< p > YOUR SHOPPING BAG IS EMPTY</p ></div>';
                    
-                    Blankdiv.innerHTML = "YOUR SHOPPING BAG IS EMPTY";
+                    Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';
                 }
                 if (JsonResponse.length > 0) {
 

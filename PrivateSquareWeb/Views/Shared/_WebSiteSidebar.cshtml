@@ -45,61 +45,62 @@
         <div class="ps-widget__header cate_back">
             <h3>Your Cart</h3>
         </div>
-        <div id="refreshThisDivWhenProductIsAddedToCart">
+        <div id="refreshThisDivWhenProductIsAddedToCart" class="nag_add_cart">
 
             <div id="CartList">
                 @{ int index = 0;
                     foreach (var item in ViewBag.AddToCart)
                     {
 
-                <div class="ps-cart-item">
+                        <div class="ps-cart-item">
 
-                    <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
+                            <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
 
-                    <div class="ps-cart-item__thumbnail">
-                        <a href="/WebHome/ProductDetail/@item.ProductId"></a>
-                        <img src="~/DocImg/@item.ImageName" alt="Image">
-                    </div>
-                    <div class="ps-cart-item__content">
-                        <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
-                    </div>
-                    <div class="ntotal_cart form-group--number">
-                        <div class="pull-left SpanForQuantity+@item.ProductId">
-                            <div id="@item.ProductId" class="lds-ellipsis n_loader"><div></div><div></div><div></div><div></div></div>
-           <button class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span>    - </span></button>
-                      <input id="@("SidebarTxtQty"+item.ProductId)" name="@("SidebarTxtQty"+index)" class="iten_set" type="text" value="@item.Qty" readonly>
-                            <button class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span> + </span> </button>
-                        </div><div class="ml-10 pull-left mt-5">Total:<i>₹ @item.Amount</i></div>
-                    </div>
-                </div>
+                            <div class="ps-cart-item__thumbnail">
+                                <a href="/WebHome/ProductDetail/@item.ProductId"></a>
+                                <img src="~/DocImg/@item.ImageName" alt="Image">
+                            </div>
+                            <div class="ps-cart-item__content">
+                                <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
+                            </div>
+                            <div class="ntotal_cart form-group--number">
+                                <div class="pull-left SpanForQuantity+@item.ProductId">
+                                    <div id="@item.ProductId" class="lds-ellipsis n_loader"><div></div><div></div><div></div><div></div></div>
+                                    <button class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span>    - </span></button>
+                                    <input id="@("SidebarTxtQty"+item.ProductId)" name="@("SidebarTxtQty"+index)" class="iten_set" type="text" value="@item.Qty" readonly>
+                                    <button class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span> + </span> </button>
+                                </div><div class="ml-10 pull-left mt-5">Total:<i>₹ @item.Amount</i></div>
+                            </div>
+                        </div>
                         index++;
                     }
                 }
 
             </div>
 
+            <div class="fix_add_cart">
+                <div id="CartTotal">
+                    @{
 
-            <div id="CartTotal">
+                        if (Model.CartItemCount != 0)
+                        {
+                            <p>Number of items: <span>@Model.CartItemCount</span></p>
+                            <p>Item Total: <span>₹ @ViewBag.TotalAmount</span></p>
+                        }
+                        else
+                        {
+                            <p>YOUR SHOPPING BAG IS EMPTY</p>
+                        }
+                    }
+                </div>
                 @{
 
                     if (Model.CartItemCount != 0)
                     {
-                        <p>Number of items: <span>@Model.CartItemCount</span></p>
-                        <p>Item Total: <span>₹ @ViewBag.TotalAmount</span></p>
-                    }
-                    else
-                    {
-                        <p>YOUR SHOPPING BAG IS EMPTY</p>
+                        <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out</a></div>
                     }
                 }
             </div>
-            @{
-
-                if (Model.CartItemCount != 0)
-                {
-                    <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out</a></div>
-                }
-            }
         </div>
     </aside>
 </aside>
@@ -149,6 +150,9 @@
             success: function (result) {
             
                 //$("#Cartcontent").load(location.href + ' #Cartcontent');
+                $("#refreshThisDivWhenProductIsAddedToCart_50").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart_50', function () {
+                    //alert("Check");
+                })
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
                     $('#' + Id).hide();
                     swal(" ", "One more added !", "success");

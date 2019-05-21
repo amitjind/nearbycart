@@ -287,10 +287,14 @@ namespace PrivateSquareWeb.Controllers.Website
                             //return this.Redirect(uriWithoutScheme);
                             Response = "[{\"Response\":\"" + uriWithoutScheme + "\"}]"; ;
                         }
+                        else
+                        {
+                            Response = "[{\"Response\":\"" + "/WebHome/Index" + "\"}]";
+                        }
                     }
                     catch
                     {
-                        Response = "[{\"Response\":\"" + "/WebHome/Index" + "\"}]"; ;
+                        Response = "[{\"Response\":\"" + "/WebHome/Index" + "\"}]"; 
                     }
                 }
             }

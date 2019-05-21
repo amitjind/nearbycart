@@ -55,7 +55,7 @@
         });
     }
     function SignUp(lasturl) {
-        $("body").removeClass("loaded");
+       
         var email = document.getElementById('emailIdRegister').value;
         var newemail = email.trim();
         email = newemail;
@@ -69,15 +69,17 @@
 
         if (name == '') {
             document.getElementById("valNameRegister").innerText = "Name Required";
+            //$(".ps-loading").addClass("loaded");
             return;
         } else if (!name.match(letters)) {
             document.getElementById("valNameRegister").innerText = "Please input alphabet characters only.";
+            //$(".ps-loading").addClass("loaded");
             return;
         }
         else if (name.length < 3) {
 
             document.getElementById("valNameRegister").innerText = "Name must be at least 3 letters long.";
-
+            //$(".ps-loading").addClass("loaded");
             return;
 
         }
@@ -90,6 +92,7 @@
 
         if (email == '') {
             document.getElementById("valemailIdRegister").innerText = "Email/Mobile Required";
+            //$(".ps-loading").addClass("loaded");
             return;
 
         }
@@ -98,6 +101,7 @@
                 //var newemail = email.trim();
                 if (!newemail.match(mobilenumber)) {
                     document.getElementById("valemailIdRegister").innerText = "Use 10 Digit Number.";
+                    //$(".ps-loading").addClass("loaded");
                     return;
                 }
                 else
@@ -108,6 +112,7 @@
             else {
                 if (!email.match(mailformat)) {
                     document.getElementById("valemailIdRegister").innerText = "Incorrect Email or Phone Number";
+                    //$(".ps-loading").addClass("loaded");
                     return;
                 }
                 else
@@ -121,10 +126,12 @@
         }
         if (password == '') {
             document.getElementById("valpasswordRegister").innerText = "Password Required";
+            //$(".ps-loading").addClass("loaded");
             return;
         }
         else if (password.length < 6) {
             document.getElementById("valpasswordRegister").innerText = "Password must be at least 6 characters long.";
+            //$(".ps-loading").addClass("loaded");
             return;
         }
         else {
@@ -133,7 +140,7 @@
 
 
         {
-
+            $("body").removeClass("loaded");
             $.ajax({
                 url: "../../WebLogin/RegisterUser",
                 type: "POST",
@@ -143,6 +150,7 @@
                     "Name": name
                 },
                 success: function (result) {
+                    $(".ps-loading").addClass("loaded");
                     var data = JSON.parse(result);
                     var response = data[0].Response;
                     var matchString = "USER EXISTS";
@@ -151,27 +159,31 @@
                         p.innerText = data[0].Response;
                         document.getElementById("valemailIdRegister").innerText = "";
                         document.getElementById("valemailIdRegister").innerText = "";
+                        //$(".ps-loading").addClass("loaded");
                     }
                     else if (response == "Email Incorrect") {
                         document.getElementById("valemailIdRegister").innerText = "Email Incorrect";
+                      /*  $(".ps-loading").addClass("loaded")*/;
                         return;
                     }
                     else if (response == "Mobile Number Incorrect") {
                         document.getElementById("valemailIdRegister").innerText = "Mobile Number Incorrect";
+                        //$(".ps-loading").addClass("loaded");
                         return;
                     }
                     else {
+                        
+                        //$(".ps-loading").addClass("loaded");
                         //window.location.href = "/WebHome/Index";
                         window.location.href = response;
 
                     }
-                    $(".ps-loading").addClass("loaded");
+                    
                 }
             });
         }
     }   
-    function checkLoginvalidation() {
-        debugger
+    function checkLoginvalidation() {       
         var ErrorOccured = null;
         var email = document.getElementById('EmailId').value;
         if (email == '')

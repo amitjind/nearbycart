@@ -3973,14 +3973,15 @@ main.ps-main {
   z-index: 1000000; }
 
 .ps-loading:before {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  transition: all 1s ease; }
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    transition: all 1s ease;
+}
 
 .ps-loading:after {
   top: 50%;
@@ -7291,4 +7292,12 @@ html .bg--parallax {
     color: #ffa927; font-weight:bold;}
 .ui-slider-control.horizontal {
     width: 100%;
+}
+.nag_add_cart #CartList {
+    max-height: 428px;
+    overflow-y: scroll;
+}
+.nag_add_cartheader #CartList2 {
+    max-height: 428px;
+    overflow-y: scroll;
 }
