@@ -35,9 +35,8 @@
             success: function (result) {
                
                 //$("#Cartcontent").load(location.href + ' #Cartcontent');
-                $("#Cartcontent").load(location.href + ' #Cartcontent', function () {
-                    
-                });                
+                $("#Cartcontent").load(location.href + ' #Cartcontent');
+                
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
                     $(".ps-loading").addClass("loaded");
                     swal(" ", "Product Added to the Side Cart", "success");

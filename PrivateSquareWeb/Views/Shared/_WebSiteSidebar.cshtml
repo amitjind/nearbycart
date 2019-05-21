@@ -121,11 +121,11 @@
         });
     }
 </script>
-<script  type="text/javascript">
+<script>
     var AddToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount) {
-  
-     $('#'+Id).show();
        
+        $('#' + Id).show();
+
         var discountPrice = 0;
         var ProductId = Id;
         var ProductNamevar = "" + ProductName + "";
@@ -135,6 +135,7 @@
         var TotalAmount = 0;
 
         $.ajax({
+            
             url: "../../WebHome/AddToCart",
             type: "POST",
             data: {
@@ -148,11 +149,10 @@
                 TotalAmount: TotalAmount
             },
             success: function (result) {
-            
+               
                 //$("#Cartcontent").load(location.href + ' #Cartcontent');
-                $("#refreshThisDivWhenProductIsAddedToCart_50").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart_50', function () {
-                    //alert("Check");
-                })
+                $("#refreshThisDivWhenProductIsAddedToCart_50").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart_50');
+            
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
                     $('#' + Id).hide();
                     swal(" ", "One more added !", "success");
@@ -160,6 +160,7 @@
 
             },
             error: function (error) {
+               
                 console.log(error);
             }
         });
@@ -201,11 +202,12 @@
                 TotalAmount: TotalAmount
             },
             success: function (result) {
-                       
+                $("#refreshThisDivWhenProductIsAddedToCart_50").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart_50');
+                 
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart')
                 $('#' + Id).hide();
-                swal(" ", "Quantity removed !", "success");
-                return;
+                swal(" ", "Quantity removed !", "success");               
+                
             },
             error: function (error) {
                 console.log(error);

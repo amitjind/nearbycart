@@ -40,7 +40,79 @@
             success: function (result) {
 
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
                 swal(" ", "Product Added to the Cart", "success");
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+    var DeleteItem = function (index) {
+        $("body").removeClass("loaded");
+        var divCart = document.getElementById('CartList');
+        var divCartTotal = document.getElementById('CartTotal');
+        var updateCartItemCount = document.getElementById('UpdateCartItemCount');
+        var Blankdiv = document.getElementById('CheckoutDiv');
+        var CartString = "";
+        var CartTotal = "";
+
+
+        $.ajax({
+            url: "../../WebsiteHeader/RemoveToCart",
+            type: "POST",
+
+            data: {
+                index: index
+            },
+            success: function (result) {
+                var JsonResponse = JSON.parse(result);
+                console.log(JsonResponse);
+                console.log(JsonResponse.length);
+                var ProductName = "";
+                var Qty = "";
+                var ImageName = "";
+                var TotalAmount = 0;
+                for (var i = 0; i < JsonResponse.length; i++) {
+
+
+                    ProductName = JsonResponse[i].ProductName;
+                    Qty = JsonResponse[i].Qty;
+                    TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
+                    ImageName = JsonResponse[i].ImageName;
+                    console.log('~/DocImg/' + ImageName);
+                    CartString = CartString + '<div class="ps-cart-item"><a class="ps-cart-item__close" onclick="DeleteItem(' + i + ')"></a>' +
+                        '<div class="ps-cart-item__thumbnail">' +
+                        '<a href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '"></a>' +
+                        '<img src="../../DocImg/' + ImageName + '" alt="">' +
+                        '</div>' +
+                        '<div class="ps-cart-item__content">' +
+                        '<a class="ps-cart-item__title" href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '">' + JsonResponse[i].ProductName + '</a>' +
+                        '<p><span>Quantity:<i>' + JsonResponse[i].Qty + '</i></span><span>Total:<i>₹ ' + JsonResponse[i].Amount + '</i></span></p></div>' +
+                        '</div>';
+                }
+                if (JsonResponse.length == null || JsonResponse.length == 0) {
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
+                    divCartTotal.innerHTML = '<div class="ps-cart__total" >< p > YOUR SHOPPING BAG IS EMPTY</p ></div>';
+
+                    Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';
+                }
+                if (JsonResponse.length > 0) {
+
+
+                    CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
+                        "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
+
+                }
+
+                divCart.innerHTML = CartString;
+                divCartTotal.innerHTML = CartTotal;
+
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+                    $(".ps-loading").addClass("loaded");
+                    swal(" ", "Product removed", "success");
+                })
             },
             error: function (error) {
                 console.log(error);
@@ -83,13 +155,18 @@
 
         </div>
     </div>
+    @{
+    Html.RenderAction("WebSiteSidebar", "WebSidebar");
+
+    }
     @using (Html.BeginForm("SearchBar", "WebHome", FormMethod.Post))
     {
+        //{
+        //    Html.RenderAction("WebSiteSidebar", "WebSidebar");
 
-        {
-            Html.RenderAction("WebSiteSidebar", "WebSidebar");
+        //}
 
-        }
+
         <div class="ps-content" data-mh="product-page">
             <div class="ps-product-group no-sidebar pt-40" data-item="4">
                 <div class="ps-product-group__header">
@@ -135,9 +212,9 @@
 
                                     @*<ul class="ps-product__actions">
 
-                                        <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
-                                        <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
-                                    </ul>*@
+                                            <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
+                                            <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
+                                        </ul>*@
                                     <ul class="ps-product__actions">
                                         <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
                                         <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>

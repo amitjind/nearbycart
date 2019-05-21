@@ -1,68 +1,75 @@
 ﻿@model PrivateSquareWeb.Models.HeaderPartialModel
 
 <script type="text/javascript">
-    var DeleteItem = function (index) {
-        $(".ps-loading").addClass("loaded");
+    //var DeleteItem = function (index) {
+    //    $(".ps-loading").addClass("loaded");
 
-        var divCart = document.getElementById('CartList');
-        var divCartTotal = document.getElementById('CartTotal');
-        var updateCartItemCount = document.getElementById('UpdateCartItemCount');
-        var CartString = "";
-        var CartTotal = "";
+    //    var divCart = document.getElementById('CartList');
+    //    var divCartTotal = document.getElementById('CartTotal');
+    //    var updateCartItemCount = document.getElementById('UpdateCartItemCount');
+    //    var CartString = "";
+    //    var CartTotal = "";
 
-        $.ajax({
-            url: "../../WebsiteHeader/RemoveToCart",
-            type: "POST",
+    //    $.ajax({
+    //        url: "../../WebsiteHeader/RemoveToCart",
+    //        type: "POST",
 
-            data: {
-                index: index
-            },
-            success: function (result) {
-                var JsonResponse = JSON.parse(result);
+    //        data: {
+    //            index: index
+    //        },
+    //        success: function (result) {
+    //            var JsonResponse = JSON.parse(result);
 
-                var ProductName = "";
-                var Qty = "";
-                var ImageName = "";
-                var TotalAmount = 0;
-                for (var i = 0; i < JsonResponse.length; i++) {
-
-
-                    ProductName = JsonResponse[i].ProductName;
-                    Qty = JsonResponse[i].Qty;
-                    TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
-                    ImageName = JsonResponse[i].ImageName;
-                    console.log('~/DocImg/' + ImageName);
-                    CartString = CartString + '<div class="ps-cart-item"><a class="ps-cart-item__close" onclick="DeleteItem(' + i + ')"></a>' +
-                        '<div class="ps-cart-item__thumbnail">' +
-                        '<a href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '"></a>' +
-                        '<img src="../../DocImg/' + ImageName + '" alt="">' +
-                        '</div>' +
-                        '<div class="ps-cart-item__content">' +
-                        '<a class="ps-cart-item__title" href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '">' + JsonResponse[i].ProductName + '</a>' +
-                        '<p><span>Quantity:<i>' + JsonResponse[i].Qty + '</i></span><span>Total:<i>₹ ' + JsonResponse[i].Amount + '</i></span></p></div>' +
-                        '</div>';
-                }
-                if (JsonResponse.length == null || JsonResponse.length == 0) {
-
-                }
-                if (JsonResponse.length > 0) {
+    //            var ProductName = "";
+    //            var Qty = "";
+    //            var ImageName = "";
+    //            var TotalAmount = 0;
+    //            for (var i = 0; i < JsonResponse.length; i++) {
 
 
-                    CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
-                        "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
-                    
-                }
+    //                ProductName = JsonResponse[i].ProductName;
+    //                Qty = JsonResponse[i].Qty;
+    //                TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
+    //                ImageName = JsonResponse[i].ImageName;
+    //                console.log('~/DocImg/' + ImageName);
+    //                CartString = CartString + '<div class="ps-cart-item"><a class="ps-cart-item__close" onclick="DeleteItem(' + i + ')"></a>' +
+    //                    '<div class="ps-cart-item__thumbnail">' +
+    //                    '<a href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '"></a>' +
+    //                    '<img src="../../DocImg/' + ImageName + '" alt="">' +
+    //                    '</div>' +
+    //                    '<div class="ps-cart-item__content">' +
+    //                    '<a class="ps-cart-item__title" href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '">' + JsonResponse[i].ProductName + '</a>' +
+    //                    '<p><span>Quantity:<i>' + JsonResponse[i].Qty + '</i></span><span>Total:<i>₹ ' + JsonResponse[i].Amount + '</i></span></p></div>' +
+    //                    '</div>';
+    //            }
+    //            if (JsonResponse.length == null || JsonResponse.length == 0) {
+    //                updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
+    //                divCartTotal.innerHTML = '<div class="ps-cart__total" >< p > YOUR SHOPPING BAG IS EMPTY</p ></div>';
 
-                divCart.innerHTML = CartString;
-                divCartTotal.innerHTML = CartTotal;
-                $("#CartCount").load(location.href + ' #CartCount');
-                $("body").addClass("loaded");
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-    }
+    //                Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';
+    //            }
+    //            if (JsonResponse.length > 0) {
+
+
+    //                CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
+    //                    "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
+    //                updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
+
+    //            }
+
+    //            divCart.innerHTML = CartString;
+    //            divCartTotal.innerHTML = CartTotal;
+
+    //            $("#CartCount").load(location.href + ' #CartCount');
+    //            $("body").addClass("loaded");
+
+
+    //        },
+    //        error: function (error) {
+    //            console.log(error);
+    //        }
+    //    });
+    //}
 
 
 </script>
