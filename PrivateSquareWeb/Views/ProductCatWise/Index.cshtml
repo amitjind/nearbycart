@@ -179,7 +179,7 @@
             </div>
         </div>
 
-        <aside class="ps-sidebar" data-mh="product-page">
+        @*<aside class="ps-sidebar" data-mh="product-page">*@
 
             @*This html required in later*@
             @*<aside class="ps-widget--sidebar ps-widget--filter ">
@@ -200,13 +200,15 @@
 
                 </aside>*@
 
-        </aside>
+        @*</aside>*@
     }
-    <div>
-        @{
-            Html.RenderAction("WebSiteSidebar", "WebSidebar");
-        }
-    </div>
+        <div>
+            @*<aside class="ps-sidebar" data-mh="product-page">*@
+                @{
+                    Html.RenderAction("WebSiteSidebar", "WebSidebar");
+                }
+            @*</aside>*@
+        </div>
 </main>
 
 @*<div>
