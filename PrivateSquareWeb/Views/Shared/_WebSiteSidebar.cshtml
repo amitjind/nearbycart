@@ -60,8 +60,8 @@
                                 <a href="/WebHome/ProductDetail/@item.ProductId"></a>
                                 <img src="~/DocImg/@item.ImageName" alt="Image">
                             </div>
-                            <div class="ps-cart-item__content">
-                                <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
+                            <div class="ps-cart-item__content">                                
+                                <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"> @item.ProductName</a>
                             </div>
                             <div class="ntotal_cart form-group--number">
                                 <div class="pull-left SpanForQuantity+@item.ProductId">

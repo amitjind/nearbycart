@@ -214,8 +214,8 @@
                                                     <img src="~/DocImg/@item.ImageName" alt="Image">
                                                 </div>
                                                 <div class="ps-cart-item__content">
-
-                                                    <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>
+                                                    <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"> @item.ProductName</a>
+                                                    @*<a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>*@
 
                                                     <p><span>Quantity:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
 
