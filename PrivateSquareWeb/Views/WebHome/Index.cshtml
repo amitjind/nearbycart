@@ -6,7 +6,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
     var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
-        $("body").removeClass("loaded");
+       
         var salePrice = SellingPrice;
         var discountPrice = DiscountPrice;
         var ProductId = Id;
@@ -17,7 +17,7 @@
         var Amount = Number(Price) * Number(Qty);
 
         var TotalAmount = 0;
-
+        $("body").removeClass("loaded");
         $.ajax({
             url: "../../WebHome/AddToCart",
             type: "POST",
@@ -32,16 +32,20 @@
                 Discount: discountPrice,
                 TotalAmount: TotalAmount
             },
-            success: function (result) {
-               
-                //$("#Cartcontent").load(location.href + ' #Cartcontent');
+            success: function (result) {  
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
                 
-                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
-                    $(".ps-loading").addClass("loaded");
-                    swal(" ", "Product Added to the Side Cart", "success");
-                })
-                
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
+                    
+              
+                setTimeout(
+                    function () {
+                        $(".ps-loading").addClass("loaded");
+                        swal(" ", "Product Added to the Side Cart", "success");
+                    }, 2000
+                );
+               
+                    
             },
             error: function (error) {
                 console.log(error);
@@ -78,7 +82,7 @@
 </script>
 <script type="text/javascript">
     var DeleteItem = function (index) {
-        $("body").removeClass("loaded");
+       
         var divCart = document.getElementById('CartList');
         var divCartTotal = document.getElementById('CartTotal');
         var updateCartItemCount = document.getElementById('UpdateCartItemCount');
@@ -86,7 +90,7 @@
         var CartString = "";
         var CartTotal = "";
 
-
+        $("body").removeClass("loaded");
         $.ajax({
             url: "../../WebsiteHeader/RemoveToCart",
             type: "POST",
@@ -138,10 +142,15 @@
                 divCart.innerHTML = CartString;
                 divCartTotal.innerHTML = CartTotal;
                 
-                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
-                    $(".ps-loading").addClass("loaded");
-                    swal(" ", "Product removed", "success");
-                })
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
+                    
+               
+                setTimeout(
+                    function () {
+                        $(".ps-loading").addClass("loaded");
+                        swal(" ", "Product removed", "success");
+                    }, 2000
+                );
             },
             error: function (error) {
                 console.log(error);
@@ -489,43 +498,43 @@
     }
 </script>
 <script>
-    var RemoveToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount, index) {
-        var QtyTxt = document.getElementById('TxtQty' + index).value;
-        console.log('Qty==' + QtyTxt);
-        if (QtyTxt <= 1) {
-            swal('Quantity cannot be less than 1');
-            return;
-        }
+    //var RemoveToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount, index) {
+    //    var QtyTxt = document.getElementById('TxtQty' + index).value;
+    //    console.log('Qty==' + QtyTxt);
+    //    if (QtyTxt <= 1) {
+    //        swal('Quantity cannot be less than 1');
+    //        return;
+    //    }
 
-        var discountPrice = 0;
-        var ProductId = Id;
-        var ProductNameVar = "" + ProductName + "";
-        var Qty = 1;
-        var ImageName = ProductImage;
+    //    var discountPrice = 0;
+    //    var ProductId = Id;
+    //    var ProductNameVar = "" + ProductName + "";
+    //    var Qty = 1;
+    //    var ImageName = ProductImage;
 
 
-        var TotalAmount = 0;
-        console.log('ProductId' + ProductId);
-        $.ajax({
-            url: "../../WebHome/RemoveQtyToCart",
-            type: "POST",
-            data: {
-                ProductId: ProductId,
-                ProductName: ProductNameVar,
-                Qty: Qty,
-                ImageName: ImageName,
-                Price: Price,
-                Amount: Amount,
-                Discount: discountPrice,
-                TotalAmount: TotalAmount
-            },
-            success: function (result) {
+    //    var TotalAmount = 0;
+    //    console.log('ProductId' + ProductId);
+    //    $.ajax({
+    //        url: "../../WebHome/RemoveQtyToCart",
+    //        type: "POST",
+    //        data: {
+    //            ProductId: ProductId,
+    //            ProductName: ProductNameVar,
+    //            Qty: Qty,
+    //            ImageName: ImageName,
+    //            Price: Price,
+    //            Amount: Amount,
+    //            Discount: discountPrice,
+    //            TotalAmount: TotalAmount
+    //        },
+    //        success: function (result) {
 
-                $("#cartlisting").load(location.href + ' #cartlisting');
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-        }    
+    //            $("#cartlisting").load(location.href + ' #cartlisting');
+    //        },
+    //        error: function (error) {
+    //            console.log(error);
+    //        }
+    //    });
+    //    }    
 </script>

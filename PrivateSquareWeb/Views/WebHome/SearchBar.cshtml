@@ -22,7 +22,7 @@
         var Amount = Number(Price) * Number(Qty);
 
         var TotalAmount = 0;
-       
+        $("body").removeClass("loaded");
         $.ajax({
             url: "../../WebHome/AddToCart",
             type: "POST",
@@ -41,6 +41,7 @@
 
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
+                $(".ps-loading").addClass("loaded");
                 swal(" ", "Product Added to the Cart", "success");
             },
             error: function (error) {
@@ -49,7 +50,7 @@
         });
     }
     var DeleteItem = function (index) {
-        $("body").removeClass("loaded");
+       
         var divCart = document.getElementById('CartList');
         var divCartTotal = document.getElementById('CartTotal');
         var updateCartItemCount = document.getElementById('UpdateCartItemCount');
@@ -57,7 +58,7 @@
         var CartString = "";
         var CartTotal = "";
 
-
+        $("body").removeClass("loaded");
         $.ajax({
             url: "../../WebsiteHeader/RemoveToCart",
             type: "POST",

@@ -12,47 +12,47 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
     //this is Product cata wise product show page & add cart ()
-    var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
+    //var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
        
-        var salePrice = SellingPrice;
-        var discountPrice = DiscountPrice;
-        var ProductId = Id;
-        var ProductName = "" + ProductName + "";
-        var Qty = 1;
-        var ImageName = ProductImage;
-        var Price = discountPrice; /*Number((Number(salePrice) - Number(discountPrice)));*/
-        var Amount = Number(Price) * Number(Qty);
-        var TotalAmount = 0;
+    //    var salePrice = SellingPrice;
+    //    var discountPrice = DiscountPrice;
+    //    var ProductId = Id;
+    //    var ProductName = "" + ProductName + "";
+    //    var Qty = 1;
+    //    var ImageName = ProductImage;
+    //    var Price = discountPrice; /*Number((Number(salePrice) - Number(discountPrice)));*/
+    //    var Amount = Number(Price) * Number(Qty);
+    //    var TotalAmount = 0;
 
-        $("body").removeClass("loaded");
-        $.ajax({
-            url: "../../WebHome/AddToCart",
-            type: "POST",
+    //    $("body").removeClass("loaded");
+    //    $.ajax({
+    //        url: "../../WebHome/AddToCart",
+    //        type: "POST",
 
-            data: {
-                ProductId: ProductId,
-                ProductName: ProductName,
-                Qty: Qty,
-                ImageName: ImageName,
-                Price: Price,
-                Amount: Amount,
-                Discount: discountPrice,
-                TotalAmount: TotalAmount
-            },
-            success: function (result) {
+    //        data: {
+    //            ProductId: ProductId,
+    //            ProductName: ProductName,
+    //            Qty: Qty,
+    //            ImageName: ImageName,
+    //            Price: Price,
+    //            Amount: Amount,
+    //            Discount: discountPrice,
+    //            TotalAmount: TotalAmount
+    //        },
+    //        success: function (result) {
 
-                $("#Cartcontent").load(location.href + ' #Cartcontent');
-                swal(" ", "Product Added to the Cart", "success");
-                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
-                    $(".ps-loading").addClass("loaded");
-                    swal(" ", "Product Added to Cart", "success");
-                })
-            },
-            error: function (error) {
+    //            $("#Cartcontent").load(location.href + ' #Cartcontent');
+    //            swal(" ", "Product Added to the Cart", "success");
+    //            $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+    //                $(".ps-loading").addClass("loaded");
+    //                swal(" ", "Product Added to Cart222222", "success");
+    //            })
+    //        },
+    //        error: function (error) {
 
-            }
-        });
-    }
+    //        }
+    //    });
+    //}
 </script>
 <script type="text/javascript">
     function showvalue(s) {
@@ -80,11 +80,6 @@
         });
     }
 </script>
-
-
-
-
-    
 <main class="ps-main ps-products-listing">
     <div class="ps-hero">
         <div class="container">
