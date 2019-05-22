@@ -212,7 +212,7 @@
                             </div>
 
                             <div class="ps-product__content">
-                                <a class="ps-product__title" href="/WebHome/ProductDetail/@Users.Id">@Users.ProductName</a>
+                                <a class="ps-product__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))">@Users.ProductName</a>
                                 <p class="ps-product__price">
                                     ₹@Users.DiscountPrice
                                 </p>
@@ -355,7 +355,7 @@
                             </div>
 
                             <div class="ps-product__content">
-                                <a class="ps-product__title" href="/WebHome/ProductDetail/@Users.Id">@Users.ProductName</a>
+                                <a class="ps-product__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))">@Users.ProductName</a>
                                 <p class="ps-product__price">
                                     ₹@Users.DiscountPrice
                                 </p>
@@ -402,7 +402,7 @@
                             </div>
 
                             <div class="ps-product__content">
-                                <a class="ps-product__title" href="/WebHome/ProductDetail/@Users.Id">@Users.ProductName</a>
+                                <a class="ps-product__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))">@Users.ProductName</a>
                                 <p class="ps-product__price">
                                     ₹@Users.DiscountPrice
                                 </p>
@@ -437,7 +437,7 @@
                                     </ul>
                                 </div>
                                 <div class="ps-product__content">
-                                    <a class="ps-product__title" href="product-detail.html">@Users.ProductName</a>
+                                    <a class="ps-product__title"  href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))">@Users.ProductName</a>
                                     <p class="ps-product__price">
                                         ₹@Users.DiscountPrice
                                     </p>

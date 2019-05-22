@@ -235,13 +235,22 @@
                     }
                     <h1>@ViewBag.NoResultFound</h1>
                 </div>
-                <div class="ps-product-group__footer">
+                <div class="ps-product-group__footer" id="paginationfooter">
                     <div class="ps-pagination mb-50">
                         <ul class="pagination">
                             @if ((ViewBag.SearchResultCount / Constant.NumberOfProducts) > 1)
                             {
                                 var n = ViewBag.LowerLimit;
-                                <li><a href="~/WebHome/PreviousPages/@(Constant.EncodeNumber(ViewBag.LowerLimit-1))" onclick="return ActivatePageNumber(@(ViewBag.LowerLimit-1))"><i class="fa fa-angle-left"></i></a></li>
+                            <li>
+                                <a href="~/ProductCatWise/PreviousPages/@(ViewBag.LowerLimit - 1)">
+                                    <img src="~/WebSiteTheme/images/back.svg" width="15" />
+                                </a>
+
+                                <a href="~/WebHome/PreviousPages/@(Constant.EncodeNumber(ViewBag.LowerLimit-1))"
+                                   onclick="return ActivatePageNumber(@(ViewBag.LowerLimit-1))">
+                                    <i class="fa fa-angle-left"></i>
+                                </a>
+                            </li>
                                 do
                                 {
                                     <li id="@n"><a href="~/WebHome/NextPage/@(Constant.EncodeNumber(n))" onclick="return ActivatePageNumber(@n)">@n</a></li>

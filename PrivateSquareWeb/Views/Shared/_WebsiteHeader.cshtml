@@ -299,7 +299,6 @@
 
         }
 
-
         $.ajax({
             url: "../../WebLogin/Otp",
             type: "POST",
@@ -310,22 +309,19 @@
                 "userid":@Model.UserId
             },
             success: function (result)
-            {
-                debugger
-                //var returnedData = JSON.parse(result.Response.innerText);
+            {               
                 console.log(JSON.parse(result));
                 var response = JSON.parse(result);
                 console.log(response.Id);
                 if (response.Id == 1)
                 {
 
-                    otplabel.innerText = "YOUR ACCOUNT VERIFIED";
-                    //$("#myModal").hide();
+                    otplabel.innerText = "YOUR ACCOUNT VERIFIED";                    
                     window.location.reload();
                 }
                 else {
                     otplabel.innerText = "Otp Not matched";
-                    //$("#myModal").modal.show();
+                   
                     return;
                 }
 

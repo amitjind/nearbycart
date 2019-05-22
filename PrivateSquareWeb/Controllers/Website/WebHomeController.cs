@@ -256,7 +256,8 @@ namespace PrivateSquareWeb.Controllers.Website
 				if (objModel.ParentCatId == 0)
 				{
 					ViewBag.UsersProduct = ListAllProduct.Take(Constant.NumberOfProducts);
-					ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
+                    ViewBag.ProductsFrom = 1;
+                    ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
 					ViewBag.SearchResultCount = ListAllProduct.Count;
 					ViewBag.NumberOfPages = 5;
 					var jsonString1 = "{\"ParentCatId\":\"" + objModel.ParentCatId + "\",\"SearchBarText\":\"" + objModel.SearchBarText + "\"}";
@@ -275,7 +276,8 @@ namespace PrivateSquareWeb.Controllers.Website
 			if (objModel.ParentCatId == 0)
 			{
 				var SearchList = ListAllProduct.Where(x => x.ProductName.ToUpper().Contains(objModel.SearchBarText.ToString().ToUpper())).ToList();
-				ViewBag.UsersProduct = SearchList.Take(Constant.NumberOfProducts);
+                ViewBag.ProductsFrom = 1;
+                ViewBag.UsersProduct = SearchList.Take(Constant.NumberOfProducts);
                 ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
 
                 if (SearchList.Count == 0) { ViewBag.NoResultFound = "No Result Found"; }

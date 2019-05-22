@@ -202,7 +202,7 @@
                             @{
                                 string off = (100 - Math.Round((@Users.DiscountPrice / @Users.SellingPrice) * 100)).ToString();
                             }
-                            <div class="ps-badge ps-badge--sale-off"><span>-@off%</span></div>
+                            @*<div class="ps-badge ps-badge--sale-off"><span>-@off%</span></div>*@
                             <ul class="ps-product__actions">
                                 <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
                                 <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>

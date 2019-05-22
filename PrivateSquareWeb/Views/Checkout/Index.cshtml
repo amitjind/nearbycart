@@ -55,6 +55,176 @@
         });
     }
 </script>
+<script>
+    var AddToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount) {
+
+        var discountPrice = 0;
+        var ProductId = Id;
+        var ProductNamevar = "" + ProductName + "";
+        var Qty = 1;
+        var ImageName = ProductImage;
+
+        var TotalAmount = 0;
+        $('#' + Id).show();
+        $.ajax({
+            url: "../../WebHome/AddToCart",
+            type: "POST",
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductNamevar,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result) {
+
+                $("#Cartcontent").load(location.href + ' #Cartcontent');               
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
+                
+                setTimeout(
+                    function () {
+                        $('#' + Id).hide();
+                        swal(" ", "One more added !", "success");
+                    }, 2000
+                );
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+<script>
+    var RemoveToSideCart = function (Id, ProductName, ProductImage, Price, Amount, index) {
+       
+        var QtyTxt = $("#SidebarTxtQty" + Id).val();
+        if (QtyTxt == "1") {
+            swal('Quantity cannot be less than 1');
+            return;
+        }       
+        var discountPrice = 0;
+        var ProductId = Id;
+        var ProductNameVar = "" + ProductName + "";
+        var Qty = 1;
+        var ImageName = ProductImage;
+        var TotalAmount = 0;
+
+        $('#' + Id).show();
+        $.ajax({
+            url: "../../WebHome/RemoveQtyToCart",
+            type: "POST",
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductNameVar,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result) {
+                $("#Cartcontent").load(location.href + ' #Cartcontent'); 
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
+
+                setTimeout(
+                    function () {
+                        $('#' + Id).hide();
+                        swal(" ", "Quantity removed !", "success");
+                    }, 2000
+                );
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    var DeleteItem = function (index) {
+
+        var divCart = document.getElementById('CartList');
+        var divCartTotal = document.getElementById('CartTotal');
+        var CartString = "";
+        var CartTotal = "";
+
+        $("body").removeClass("loaded");
+        $.ajax({
+            url: "../../WebsiteHeader/RemoveToCart",
+            type: "POST",
+
+            data: {
+                index: index
+            },
+            success: function (result) {
+                var JsonResponse = JSON.parse(result);
+                console.log(JsonResponse);
+                console.log(JsonResponse.length);
+                var ProductName = "";
+                var Qty = "";
+                var ImageName = "";
+                var TotalAmount = 0;
+                for (var i = 0; i < JsonResponse.length; i++) {
+
+
+                    ProductName = JsonResponse[i].ProductName;
+                    Qty = JsonResponse[i].Qty;
+                    TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
+                    ImageName = JsonResponse[i].ImageName;
+                    console.log('~/DocImg/' + ImageName);
+                    CartString = CartString + '<div class="ps-cart-item"><a class="ps-cart-item__close" onclick="DeleteItem(' + i + ')"></a>' +
+                        '<div class="ps-cart-item__thumbnail">' +
+                        '<a href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '"></a>' +
+                        '<img src="../../DocImg/' + ImageName + '" alt="">' +
+                        '</div>' +
+                        '<div class="ps-cart-item__content">' +
+                        '<a class="ps-cart-item__title" href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '">' + JsonResponse[i].ProductName + '</a>' +
+                        '<p><span>Quantity:<i>' + JsonResponse[i].Qty + '</i></span><span>Total:<i>₹ ' + JsonResponse[i].Amount + '</i></span></p></div>' +
+                        '</div>';
+                }
+                if (JsonResponse.length == null || JsonResponse.length == 0) {
+
+                }
+                if (JsonResponse.length > 0) {
+
+
+                    CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
+                        "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
+
+                }
+
+                divCart.innerHTML = CartString;
+                divCartTotal.innerHTML = CartTotal;
+                // $("#CartCount").load(location.href + ' #CartCount');
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+                    $("#Cartcontent").load(location.href + ' #Cartcontent');
+                    $("body").addClass("loaded");
+                    swal(" ", "Product removed", "success");
+                })
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+
+</script>
+<script type="text/javascript">
+    function onlyNumbers() {
+        debugger
+        if ($.trim($("#Mobile").val()).length != 10) {
+            $("#SpanForPhone").html("Please Enter 10 Digit Mobile Num");
+            return;
+        }
+        else { $("#SpanForPhone").html("") }
+    }
+</script>
 
 @model PrivateSquareWeb.Models.AddressModel
 @{
@@ -72,49 +242,64 @@
     </div>
     <div class="ps-checkout pt-40 pb-40">
         <div class="ps-container">
-            
+
             <div id="refreshThisDivWhenProductIsAddedToCart">
                 <div class="col-md-8">
-               
+
                     <div id="CartList" class="ps-cart-listing">
-                        <table class="table ps-cart__table product_list_img">
-                            <thead>
-                                <tr>
-                                    <th width="350">All Products</th>
-                                    <th>QUANTITY</th>
-                                    <th>Total</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @{ int index = 0;
-                                    foreach (var item in ViewBag.AddToCart)
-                                    {
-
-                                <tr>
-                                    <td>  <a href="/WebHome/ProductDetail/@item.ProductId" class="ps-product--compare"><img src="~/DocImg/@item.ImageName" alt="Image" class="ps-product--compare place_order_img">@item.ProductName</a></td>
-
-                                    <td>
-                                        <div id="@item.ProductId" class="lds-ellipsis n_loader"><div></div><div></div><div></div><div></div></div>
-                                        <div class="form-group--number SpanForQuantity+@item.ProductId">
-
-                                            <button class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span> - </span></button>
-                                            <input id="@("SidebarTxtQty"+item.ProductId)" name="@("SidebarTxtQty"+index)" type="text" value="@item.Qty" readonly class="form-control ng_cart_int">
-                                            <button class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span> + </span> </button>
-
-                                        </div>
-                                    </td>
-                                    <td> <span>Total: ₹ @item.Amount </span></td>
-                                    <td> <a class="ps-cart-item__close ps-remove" onclick="DeleteItem(@index)"></a></td>
-
-                                </tr>
-                                        index++;
-                                    }
-                                }
+                        @{
+                            var productscount = ViewBag.AddToCart.Count;
+                            if (productscount != 0)
+                            {
 
 
-                            </tbody>
-                        </table>
+                                <table class="table ps-cart__table product_list_img">
+                                    <thead>
+                                        <tr>
+                                            <th width="350">All Products</th>
+                                            <th>QUANTITY</th>
+                                            <th>Total</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{ int index = 0;
+                                            foreach (var item in ViewBag.AddToCart)
+                                            {
+
+                                                <tr>
+                                                    <td>  <a href="/WebHome/ProductDetail/@item.ProductId" class="ps-product--compare"><img src="~/DocImg/@item.ImageName" alt="Image" class="ps-product--compare place_order_img">@item.ProductName</a></td>
+
+                                                    <td>
+                                                        <div id="@item.ProductId" class="lds-ellipsis n_loader"><div></div><div></div><div></div><div></div></div>
+                                                        <div class="form-group--number SpanForQuantity+@item.ProductId">
+
+                                                            <button class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'", @"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span> - </span></button>
+                                                            <input id="@("SidebarTxtQty" + item.ProductId)" name="@("SidebarTxtQty" + index)" type="text" value="@item.Qty" readonly class="form-control ng_cart_int">
+                                                            <button class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'", @"\'")','@item.ImageName','@item.Price','@item.Amount')"><span> + </span> </button>
+
+                                                        </div>
+                                                    </td>
+                                                    <td> <span>Total: ₹ @item.Amount </span></td>
+                                                    <td> <a class="ps-cart-item__close ps-remove" onclick="DeleteItem(@index)"></a></td>
+
+                                                </tr>
+                                                index++;
+                                            }
+                                        }
+
+
+                                    </tbody>
+                                </table>
+
+                            }
+                            else
+                            {
+
+                                <h1> Your cart is empty</h1><br />
+                            }
+                        }
+
 
 
                     </div>
@@ -144,7 +329,7 @@
                                                         <tr>
                                                             <td>
 
-                                                                
+
 
                                                                 <p>@item.Type</p>
                                                                 <h4 class="card-title"><span><input type="radio" name="rdoAddress" id="rdoAddress[]" value="@item.Id" /></span> @item.Name</h4>
@@ -210,7 +395,7 @@
                                                                                 <label class="form-control-label">Name: <span class="tx-danger">*</span></label>
 
                                                                                 @*@Html.HiddenFor(m => m.Id)
-                                                                    @Html.HiddenFor(m => m.UserId)*@
+                                                                                    @Html.HiddenFor(m => m.UserId)*@
 
                                                                                 @Html.HiddenFor(m => m.UserId, new { @class = "form-control", @autocomplete = "off" })
                                                                                 @Html.HiddenFor(m => m.Id, new { @class = "form-control", @autocomplete = "off" })
@@ -312,16 +497,16 @@
                                                                         </div><!-- col-6 -->
                                                                         @*<div class="col-lg-6">
 
-                                                                <div class="form-group">
+                                                                                <div class="form-group">
 
-                                                                    <label class="form-control-label">Alternate phone: <span class="tx-danger"></span></label>
+                                                                                    <label class="form-control-label">Alternate phone: <span class="tx-danger"></span></label>
 
-                                                                    @Html.TextBoxFor(m => m.AlternatePhone, new { @class = "form-control", @placeholder = "Alternate phone", @autocomplete = "off" })
-                                                                    @Html.ValidationMessageFor(model => model.AlternatePhone, "", new { @class = "text-danger" })
+                                                                                    @Html.TextBoxFor(m => m.AlternatePhone, new { @class = "form-control", @placeholder = "Alternate phone", @autocomplete = "off" })
+                                                                                    @Html.ValidationMessageFor(model => model.AlternatePhone, "", new { @class = "text-danger" })
 
-                                                                </div>
+                                                                                </div>
 
-                                                            </div>*@<!-- col-6 -->
+                                                                            </div>*@<!-- col-6 -->
                                                                         <div class="col-lg-12">
 
                                                                             <a onclick="cancel()" class="btn cancel-button mg-r-10">CANCEL</a>
@@ -465,11 +650,11 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-md-12">
-              
+
                 </div>
             </div>
-    </div>
         </div>
+    </div>
 
 }
 
@@ -710,169 +895,5 @@
         }
         else { return; }
 
-    }
-</script>
-<script>
-    var AddToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount) {
-        $('#' + Id).show();
-        var discountPrice = 0;
-        var ProductId = Id;
-        var ProductNamevar = "" + ProductName + "";
-        var Qty = 1;
-        var ImageName = ProductImage;
-
-        var TotalAmount = 0;
-
-        $.ajax({
-            url: "../../WebHome/AddToCart",
-            type: "POST",
-            data: {
-                ProductId: ProductId,
-                ProductName: ProductNamevar,
-                Qty: Qty,
-                ImageName: ImageName,
-                Price: Price,
-                Amount: Amount,
-                Discount: discountPrice,
-                TotalAmount: TotalAmount
-            },
-            success: function (result) {
-
-                $("#Cartcontent").load(location.href + ' #Cartcontent');
-                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
-                    $('#' + Id).hide();
-                    swal(" ", "One more added !", "success");
-                })
-
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-    }
-</script>
-<script>
-    var RemoveToSideCart = function (Id, ProductName, ProductImage, Price, Amount, index) {
-        $('#' + Id).show();
-
-        if (QtyTxt == "1") {
-            swal('Quantity cannot be less than 1');
-            return;
-        }
-        $("body").removeClass("loaded");
-        var discountPrice = 0;
-        var ProductId = Id;
-        var ProductNameVar = "" + ProductName + "";
-        var Qty = 1;
-        var ImageName = ProductImage;
-
-
-        var TotalAmount = 0;
-
-        $.ajax({
-            url: "../../WebHome/RemoveQtyToCart",
-            type: "POST",
-            data: {
-                ProductId: ProductId,
-                ProductName: ProductNameVar,
-                Qty: Qty,
-                ImageName: ImageName,
-                Price: Price,
-                Amount: Amount,
-                Discount: discountPrice,
-                TotalAmount: TotalAmount
-            },
-            success: function (result) {
-                $("#Cartcontent").load(location.href + ' #Cartcontent');
-                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
-                    $('#' + Id).hide();
-                    swal(" ", "Quantity removed !", "success");
-                })
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-    }
-</script>
-<script type="text/javascript">
-    var DeleteItem = function (index) {
-
-        var divCart = document.getElementById('CartList');
-        var divCartTotal = document.getElementById('CartTotal');
-        var CartString = "";
-        var CartTotal = "";
-
-        $("body").removeClass("loaded");
-        $.ajax({
-            url: "../../WebsiteHeader/RemoveToCart",
-            type: "POST",
-
-            data: {
-                index: index
-            },
-            success: function (result) {
-                var JsonResponse = JSON.parse(result);
-                console.log(JsonResponse);
-                console.log(JsonResponse.length);
-                var ProductName = "";
-                var Qty = "";
-                var ImageName = "";
-                var TotalAmount = 0;
-                for (var i = 0; i < JsonResponse.length; i++) {
-
-
-                    ProductName = JsonResponse[i].ProductName;
-                    Qty = JsonResponse[i].Qty;
-                    TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
-                    ImageName = JsonResponse[i].ImageName;
-                    console.log('~/DocImg/' + ImageName);
-                    CartString = CartString + '<div class="ps-cart-item"><a class="ps-cart-item__close" onclick="DeleteItem(' + i + ')"></a>' +
-                        '<div class="ps-cart-item__thumbnail">' +
-                        '<a href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '"></a>' +
-                        '<img src="../../DocImg/' + ImageName + '" alt="">' +
-                        '</div>' +
-                        '<div class="ps-cart-item__content">' +
-                        '<a class="ps-cart-item__title" href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '">' + JsonResponse[i].ProductName + '</a>' +
-                        '<p><span>Quantity:<i>' + JsonResponse[i].Qty + '</i></span><span>Total:<i>₹ ' + JsonResponse[i].Amount + '</i></span></p></div>' +
-                        '</div>';
-                }
-                if (JsonResponse.length == null || JsonResponse.length == 0) {
-
-                }
-                if (JsonResponse.length > 0) {
-
-
-                    CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
-                        "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
-
-                }
-
-                divCart.innerHTML = CartString;
-                divCartTotal.innerHTML = CartTotal;
-                // $("#CartCount").load(location.href + ' #CartCount');
-                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
-                    $("#Cartcontent").load(location.href + ' #Cartcontent');
-                    $("body").addClass("loaded");
-                    swal(" ", "Product removed", "success");
-                })
-
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-    }
-
-
-</script>
-<script type="text/javascript">
-    function onlyNumbers() {
-        debugger
-        if ($.trim($("#Mobile").val()).length != 10) {
-            $("#SpanForPhone").html("Please Enter 10 Digit Mobile Num");
-            return;
-        }
-        else { $("#SpanForPhone").html("") }
     }
 </script>
