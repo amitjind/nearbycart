@@ -379,6 +379,9 @@
     <Compile Include="Persistance\Data\UserProductList_Result.cs">
       <DependentUpon>Privatesquares.tt</DependentUpon>
     </Compile>
+    <Compile Include="Persistance\Data\VerifyEmailWithOTP_Result.cs">
+      <DependentUpon>Privatesquares.tt</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Repositary\GenericRepository.cs" />
     <Compile Include="Persistance\Repositary\UserRepositary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

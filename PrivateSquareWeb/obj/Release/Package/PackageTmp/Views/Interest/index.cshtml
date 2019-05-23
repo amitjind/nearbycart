@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Interest";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<script type="text/javascript">
+
+    var ArrayInterestId = [];
+    function GetSelectedInterest() {
+        var ddlInsCat = document.getElementById("DdlInterestCatwise");
+        var ddlText = ddlInsCat.options[ddlInsCat.selectedIndex].text;
+        var ddlValue = ddlInsCat.options[ddlInsCat.selectedIndex].value;
+        //var strSel = "The Value is: " + ddlInsCat.options[ddlInsCat.selectedIndex].value + " and text is: " +;
+
+        ArrayInterestId.push(ddlValue);
+        var sorted_arr = ArrayInterestId.slice().sort();
+        document.getElementById('TxtInterest').value = sorted_arr;
+        var strt = "<li>";
+        var end = "</li>";
+        var deleteBtn = ""; //'<input type="Button" onclick="DeleteInterest(' + ddlValue + ',' + sorted_arr + ')" value="X"/>';
+        var LiValue = strt + ddlText + deleteBtn + end;
+        $('#ulSelectInterest').append(LiValue);
+        //var results = [];
+        //var IsDuplicate = false;
+        //for (var i = 0; i < sorted_arr.length - 1; i++) {
+        //    if (sorted_arr[i] != InterestCatId) {
+        //        results.push(sorted_arr[i]);
+        //        sorted_arr.splice(i,1);
+        //    }
+        //}
+
+    }
+    function DeleteInterest(value) {
+        alert('Delete ' + value);
+        var sorted_arr = ArrayInterestId.slice().sort();
+        alert(sorted_arr.length);
+        for (var i = 0; i < sorted_arr.length; i++) {
+            alert("Array I  " + Number(sorted_arr[i]) + 'Value =' + Number(value));
+            if (Number(sorted_arr[i]) == Number(value)) {
+                alert('EnterIf');
+                sorted_arr = sorted_arr.splice(i, 1);
+                console.log(sorted_arr);
+            }
+        }
+        document.getElementById('TxtInterest').value = sorted_arr;
+    }
+    function GetCatwiseInterest() {
+        $('#DdlInterestCatwise').empty();
+        var InterestCatId = document.getElementById("InterestCategory").value;;
+        $.ajax({
+            url: "../../Interest/GetCateWiseInterest",
+            type: "POST",
+            data: {
+                CatId: InterestCatId
+
+            },
+            success: function (result) {
+                console.log(result);
+                var InterestCatwise = result;
+                // var resultlength = result.length;
+                var defaultV = new Option("--Select--", 0, true);
+                $('#DdlInterestCatwise').append(defaultV);
+                for (var i = 0; i < InterestCatwise.length; i++) {
+                    var opt = new Option(InterestCatwise[i].InterestName, InterestCatwise[i].InterestId);
+                    $('#DdlInterestCatwise').append(opt);
+                }
+                if (InterestCatwise.length == 0) {
+                    var defaultV = new Option("--No Data Found--", 0, true);
+                    $('#DdlInterestCatwise').append(defaultV);
+                }
+                //var resp = JSON.parse(result);
+
+            }
+        });
+    }
+
+    function SaveInterest() {
+        var InterestValue = document.getElementById('TxtInterest').value;
+        $.ajax({
+            url: "../../Interest/SaveInterest",
+            type: "POST",
+            data: {
+                InterestValue: InterestValue
+
+            },
+            success: function (result) {
+                console.log(result);
+                var InterestCatwise = result;
+                // var resultlength = result.length;
+                var defaultV = new Option("--Select--", 0, true);
+                $('#DdlInterestCatwise').append(defaultV);
+                for (var i = 0; i < InterestCatwise.length; i++) {
+                    var opt = new Option(InterestCatwise[i].InterestName, InterestCatwise[i].InterestId);
+                    $('#DdlInterestCatwise').append(opt);
+                }
+                if (InterestCatwise.length == 0) {
+                    var defaultV = new Option("--No Data Found--", 0, true);
+                    $('#DdlInterestCatwise').append(defaultV);
+                }
+                //var resp = JSON.parse(result);
+
+            }
+        });
+    }
+</script>
+@using (Html.BeginForm("SaveInsterest", "Interest", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="signin-wrapper">
+
+        <div class="signin-box signup">
+            <img src="~/theme/img/logo.png" alt="logo" class="logo-width">
+            <div class="ps-interests">
+                <h3 class="signin-title-primary">Interests</h3>
+                <h5 class="signin-title-secondary lh-4">It's free to signup and only takes a minute.</h5>
+                <div class="col-lg-12 mg-t-20 mg-lg-t-0 p-0">
+                    <select class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" id="InterestCategory" name="InterestCategory" onchange="GetCatwiseInterest()">
+
+                        <option label="Choose one" selected></option>
+                        @foreach (var Cat in ViewBag.InterestCategoryList)
+                        {
+                            <option value="@Cat.Value">@Cat.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-lg-12 mg-t-10 p-0">
+                    @*select2*@
+                    <select class="form-control " data-placeholder="Choose Insterst" multiple id="DdlInterestCatwise" name="DdlInterestCatwise"
+                            onchange="GetSelectedInterest()"></select>
+                </div><!-- col-4 -->
+                <div class="clearfix"></div>
+                <div><ul id="ulSelectInterest"></ul></div>
+                <div class="col-sm-12 p-0 mg-t-10">
+                    <input type="submit" class="btn btn-primary pull-right" id="next-2" value="Next" />
+                    <input type="hidden" name="TxtInterest" id="TxtInterest" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,196 @@
+﻿@model PrivateSquareWeb.Models.ProductModel
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+
+    var AddToCartCatWise = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage, ProductCatId) {
+        
+        var salePrice = SellingPrice;
+        var discountPrice = DiscountPrice;
+        var ProductId = Id;
+        var ProductName = "" + ProductName + "";
+        var Qty = 1;
+        var ImageName = ProductImage;
+        var Price = discountPrice; /*Number((Number(salePrice) - Number(discountPrice)));*/
+        var Amount = Number(Price) * Number(Qty);
+
+        var TotalAmount = 0;
+        $("body").removeClass("loaded");
+        $.ajax({
+            url: "../../WebHome/AddToCart",
+            type: "POST",
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductName,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result) {
+                $("#Cartcontent").load(location.href + ' #Cartcontent');                
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
+                    //$(".ps-loading").addClass("loaded");
+                    //swal(" ", "Product Added to the Side Cart111", "success");
+                setTimeout(
+                    function () {
+                        $(".ps-loading").addClass("loaded");
+                        swal(" ", "Product Added to the Side Cart", "success");
+                    }, 2000
+                );
+               
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    var DeleteItem = function (index) {
+
+        var divCart = document.getElementById('CartList');
+        var divCartTotal = document.getElementById('CartTotal');
+        var updateCartItemCount = document.getElementById('UpdateCartItemCount');
+        var Blankdiv = document.getElementById('CheckoutDiv');
+        var CartString = "";
+        var CartTotal = "";
+
+        $("body").removeClass("loaded");
+        $.ajax({
+            url: "../../WebsiteHeader/RemoveToCart",
+            type: "POST",
+
+            data: {
+                index: index
+            },
+            success: function (result) {
+                var JsonResponse = JSON.parse(result);
+                console.log(JsonResponse);
+                console.log(JsonResponse.length);
+                var ProductName = "";
+                var Qty = "";
+                var ImageName = "";
+                var TotalAmount = 0;
+                for (var i = 0; i < JsonResponse.length; i++) {
+
+
+                    ProductName = JsonResponse[i].ProductName;
+                    Qty = JsonResponse[i].Qty;
+                    TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
+                    ImageName = JsonResponse[i].ImageName;
+                    console.log('~/DocImg/' + ImageName);
+                    CartString = CartString + '<div class="ps-cart-item"><a class="ps-cart-item__close" onclick="DeleteItem(' + i + ')"></a>' +
+                        '<div class="ps-cart-item__thumbnail">' +
+                        '<a href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '"></a>' +
+                        '<img src="../../DocImg/' + ImageName + '" alt="">' +
+                        '</div>' +
+                        '<div class="ps-cart-item__content">' +
+                        '<a class="ps-cart-item__title" href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '">' + JsonResponse[i].ProductName + '</a>' +
+                        '<p><span>Quantity:<i>' + JsonResponse[i].Qty + '</i></span><span>Total:<i>₹ ' + JsonResponse[i].Amount + '</i></span></p></div>' +
+                        '</div>';
+                }
+                if (JsonResponse.length == null || JsonResponse.length == 0) {
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
+                    divCartTotal.innerHTML = '<div class="ps-cart__total" >< p > YOUR SHOPPING BAG IS EMPTY</p ></div>';
+
+                    Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';
+                }
+                if (JsonResponse.length > 0) {
+
+
+                    CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
+                        "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
+
+                }
+
+                divCart.innerHTML = CartString;
+                divCartTotal.innerHTML = CartTotal;
+
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
+                    //$(".ps-loading").addClass("loaded");
+                    //swal(" ", "Product removed", "success");
+                setTimeout(
+                    function () {
+                        $(".ps-loading").addClass("loaded");
+                        swal(" ", "Product removed", "success");
+                    }, 2000
+                );
+               
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    var AddToWishlist = function (Id) {
+        $("body").removeClass("loaded");
+        var ProductId = Id;
+        $.ajax({
+            url: "../../WebHome/AddToWishlist",
+            type: "POST",
+            data: { ProductId: ProductId },
+            success: function (result) {
+                if (result == "Please Login to access wishlist") {
+                    $("body").addClass("loaded");
+                    swal(result);
+                }
+                else if (result == "Product Exists") {
+                    $("body").addClass("loaded");
+                    swal("Product already added to the Wishlist");
+                }
+                else {
+                    $("body").addClass("loaded");
+                    swal(" ", result, "success");
+                }
+            },
+            error: function (error) {
+                console.log('error');
+            }
+
+        })
+
+    }
+</script>
+
+@foreach (var Users in ViewBag.UsersProduct)
+{
+    <div class="ps-product-wrap">
+        <div class="ps-product--fashion">
+            <div class="ps-product__thumbnail">
+                <a class="ps-product__overlay" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))"></a>
+                @{ if (@Users.ProductImage != null)
+                    {
+                        <img src="~/DocImg/@Users.ProductImage" alt="">
+                    }
+                    else
+                    {
+                        <img src="~/WebSiteTheme/images/product/fashion-1.jpg" alt="">
+
+                    }
+                }
+                @*<ul class="ps-product__actions">
+
+                        <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
+                        <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
+                    </ul>*@
+                <ul class="ps-product__actions">
+                    <li><a href="javascript:void();" onclick="AddToCartCatWise('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage','@Users.ProductCatId')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
+                    <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
+                </ul>
+            </div>
+            <div class="ps-product__content">
+                <a class="ps-product__title" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))">@Users.ProductName</a>
+                <p class="ps-product__price">
+                    ₹@Users.DiscountPrice
+                </p>
+            </div>
+        </div>
+    </div>
+}

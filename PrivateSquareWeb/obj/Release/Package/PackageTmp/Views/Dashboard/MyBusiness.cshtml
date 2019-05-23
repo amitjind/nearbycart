@@ -1,0 +1,173 @@
+﻿@model PrivateSquareWeb.Models.BusinessModel
+@{
+    ViewBag.Title = "MyBusiness";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    function BtnCancel() {
+
+        window.location.href = "/Home/MyBusinessList";
+    }
+</script>
+@using (Html.BeginForm("SaveBussiness", "Dashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="slim-mainpanel">
+        <div class="container">
+            <div class="slim-pageheader">
+                <ol class="breadcrumb slim-breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Business</li>
+                </ol>
+                <h6 class="slim-pagetitle">Business</h6>
+            </div>
+            <div class="section-wrapper">
+                <div class="form-layout">
+                    <div class="row">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                       
+                        <div class="col-sm-6 col-md-3">
+                            <img src="~/DocImg/@Model.BusinessLogo" class="img-fluid" alt="">
+                            <div class="col-lg-12 mg-t-21 p-0">
+                                <div class="custom-file">
+
+                                    <input type="file" title="search image" id="FileUploadImage" name="FileUploadImage" class="custom-file-input">
+                                    <label class="custom-file-label custom-file-label-inverse" for="customFile">Upload Business Logo</label>
+                                </div><!-- custom-file -->
+                            </div><!-- col -->
+                        </div>
+                        <div class="col-sm-6 col-md-9">
+                            <label class="section-title">Business Info</label>
+                            <hr />
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Business Name: <span class="tx-danger">*</span></label>
+                                        <div class="col-md-10">
+                                            @Html.HiddenFor(m => m.Id)
+                                            @Html.TextBoxFor(m => m.BusinessName, new { @class = "form-control", @placeholder = "Enter business name" })
+
+                                            @Html.ValidationMessageFor(model => model.BusinessName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+
+                                        <label class="form-control-label">Phone: <span class="tx-danger">*</span></label>
+
+                                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @placeholder = "Enter phone number" })
+
+                                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Email address: <span class="tx-danger">*</span></label>
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter email address" })
+
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- col-4 -->
+
+                                <div class="col-lg-4">
+                                    <div class="form-group mg-b-10-force">
+                                        <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
+                                        @Html.DropDownListFor(m => m.CountryId, ViewBag.CountryList as SelectList, "select Country", new { @class = "form-control select2-show-search" })
+
+                                        @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-lg-4" style="display:none;">
+                                    @*<div class="form-group">
+                        <label class="form-control-label">State: <span class="tx-danger">*</span></label>
+                        @Html.DropDownListFor(m => m.StateId, ViewBag.StateList as SelectList, new { @class = "form-control select2-show-search" })
+
+                        @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+                    </div>*@
+                                </div><!-- col-4 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">City: <span class="tx-danger">*</span></label>
+                                        @Html.DropDownListFor(m => m.CityId, ViewBag.CityList as SelectList, "Select City", new { @class = "form-control select2-show-search" })
+
+                                        @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Pin Code: </label>
+                                        @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @placeholder = "Enter Pin Code" })
+
+                                        @*<input class="form-control" type="text" name="Pincode" value="" placeholder="Enter Pin Code">*@
+                                    </div>
+                                </div><!-- col-4 -->
+
+                                <div class="col-lg-8">
+                                    <div class="form-group mg-b-10-force">
+                                        <label class="form-control-label">Location: </label>
+                                        @Html.TextBoxFor(m => m.Location, new { @class = "form-control", @placeholder = "Enter address" })
+
+
+                                    </div>
+                                </div><!-- col-8 -->
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 mg-t-21">
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Professional Category: <span class="tx-danger">*</span></label>
+                                        @Html.DropDownListFor(m => m.ProfessionalCatId, ViewBag.ProfessionList as SelectList, "Select Category", new { @class = "form-control select2-show-search" })
+
+                                        @Html.ValidationMessageFor(model => model.ProfessionalCatId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Professional Keywords: </label>
+                                        @*<input class="form-control" type="text" name="Keywords" value="" placeholder="Keywords">*@
+
+                                        @Html.TextBoxFor(m => m.ProfessionalKeyword, new { @class = "form-control", @placeholder = "Enter Keywords" })
+
+
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group mg-b-10-force">
+                                        <label class="form-control-label">Website: </label>
+                                        @Html.TextBoxFor(m => m.Website, new { @class = "form-control", @placeholder = "Enter WebSite Url" })
+
+
+                                    </div>
+                                </div><!-- col-8 -->
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Description: </label>
+                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @placeholder = "Enter description" })
+
+
+
+                                    </div>
+                                </div><!-- col-12 -->
+                            </div><!-- col-12 -->
+                        </div>
+
+                    </div><!-- row -->
+                    <p style="color:red;"> @ViewBag.ResponseMessage</p>
+                    <div class="form-layout-footer">
+                        <input type="submit" class="btn btn-primary bd-0" value="Save" />
+                        <input type="button" value="Cancel" onclick="BtnCancel()" class="btn btn-secondary bd-0" />
+                    </div><!-- form-layout-footer -->
+                </div><!-- form-layout -->
+            </div><!-- section-wrapper -->
+        </div>
+
+    </div>
+}

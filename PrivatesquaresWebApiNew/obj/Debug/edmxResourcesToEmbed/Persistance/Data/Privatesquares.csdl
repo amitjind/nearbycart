@@ -106,6 +106,7 @@
       <Parameter Name="Mobile" Mode="In" Type="String" />
       <Parameter Name="Password" Mode="In" Type="String" />
       <Parameter Name="RegisterType" Mode="In" Type="String" />
+      <Parameter Name="otp" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="RegisterUser" ReturnType="Collection(EWT_PSQNEWModel.RegisterUser_Result)">
       <Parameter Name="UserMobile" Mode="In" Type="String" />
@@ -249,6 +250,10 @@
     </FunctionImport>
     <FunctionImport Name="GetChildCategory" ReturnType="Collection(EWT_PSQNEWModel.GetChildCategory_Result)">
       <Parameter Name="ProductCatId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="VerifyEmailWithOTP" ReturnType="Collection(EWT_PSQNEWModel.VerifyEmailWithOTP_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="otp" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="AuthenticateLogin_Result">
@@ -632,5 +637,9 @@
   </ComplexType>
   <ComplexType Name="GetChildCategory_Result">
     <Property Type="Int64" Name="ProductCatId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="VerifyEmailWithOTP_Result">
+    <Property Type="String" Name="Response" Nullable="false" MaxLength="16" />
+    <Property Type="Boolean" Name="Success" Nullable="true" />
   </ComplexType>
 </Schema>

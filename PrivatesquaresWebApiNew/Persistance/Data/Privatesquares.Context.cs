@@ -348,7 +348,7 @@ namespace PrivatesquaresWebApiNew.Persistance.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LoginAuthenticate_Result>("LoginAuthenticate", mobileParameter, oTPParameter);
         }
     
-        public virtual ObjectResult<RegisterNewUser_Result> RegisterNewUser(string name, string email, string mobile, string password, string registerType)
+        public virtual ObjectResult<RegisterNewUser_Result> RegisterNewUser(string name, string email, string mobile, string password, string registerType, string otp)
         {
             var nameParameter = name != null ?
                 new ObjectParameter("Name", name) :
@@ -370,7 +370,11 @@ namespace PrivatesquaresWebApiNew.Persistance.Data
                 new ObjectParameter("RegisterType", registerType) :
                 new ObjectParameter("RegisterType", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RegisterNewUser_Result>("RegisterNewUser", nameParameter, emailParameter, mobileParameter, passwordParameter, registerTypeParameter);
+            var otpParameter = otp != null ?
+                new ObjectParameter("otp", otp) :
+                new ObjectParameter("otp", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RegisterNewUser_Result>("RegisterNewUser", nameParameter, emailParameter, mobileParameter, passwordParameter, registerTypeParameter, otpParameter);
         }
     
         public virtual ObjectResult<RegisterUser_Result> RegisterUser(string userMobile, string operation)
@@ -886,6 +890,19 @@ namespace PrivatesquaresWebApiNew.Persistance.Data
                 new ObjectParameter("ProductCatId", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetChildCategory_Result>("GetChildCategory", productCatIdParameter);
+        }
+    
+        public virtual ObjectResult<VerifyEmailWithOTP_Result> VerifyEmailWithOTP(Nullable<long> userId, string otp)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var otpParameter = otp != null ?
+                new ObjectParameter("otp", otp) :
+                new ObjectParameter("otp", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VerifyEmailWithOTP_Result>("VerifyEmailWithOTP", userIdParameter, otpParameter);
         }
     }
 }

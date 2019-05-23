@@ -1,0 +1,198 @@
+﻿@model PrivateSquareWeb.Models.AddressModel
+
+<script type="text/javascript">
+    function AddAddress() {
+        var Address = document.getElementById('Address');
+        var Name = document.getElementById('Name');
+        var Mobile = document.getElementById('Mobile');
+        var Pincode = document.getElementById('Pincode');
+        var Locality = document.getElementById('Locality');
+        var CityId = document.getElementById('CityId');
+        var StateId = document.getElementById('StateId');
+        var Landmark = document.getElementById('Landmark');
+        var AlternatePhone = document.getElementById('AlternatePhone');
+       // var Type = document.getElementById('Type');
+       
+
+
+        $.ajax({
+            url: "../../Address/AddressesListJson",
+            type: "POST",
+
+            data: {
+                "Address": Address, "Name": Name, "Mobile": Mobile, "Pincode": Pincode, "Locality": Locality,
+                "CityId": CityId, "StateId": StateId, "Landmark": Landmark, "AlternatePhone": AlternatePhone
+            },
+            success: function (result) {
+              
+               
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+<div class="container">
+
+    <div>
+
+        <div class="form-layout">
+
+            <div class="row">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+                <div class="col-sm-6 col-md-9">
+
+                    <div class="box-shadow-bc pd-40 addresses min-height">
+
+                        <label class="section-sub-title mg-t-20  mg-b-20">Create new address</label>
+
+                        <div class="row">
+
+                            <div class="col-lg-8">
+
+                                <div class="row">
+
+                                    <div class="col-lg-6">
+
+                                        <div class="form-group">
+
+                                            <label class="form-control-label">Name: <span class="tx-danger">*</span></label>
+
+                                            @*<input class="form-control" type="text" name="Name" value="" placeholder="Enter Name">*@
+
+                                            @Html.HiddenFor(m => m.Id)
+
+                                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Enter Name", @autocomplete = "off" })
+
+                                        </div>
+
+                                    </div><!-- col-6 -->
+
+                                    <div class="col-lg-6">
+
+                                        <div class="form-group">
+
+                                            <label class="form-control-label">Phone Number: <span class="tx-danger">*</span></label>
+
+                                            @*<input class="form-control" type="text" name="phonenumber" value="" placeholder="10-digit number">*@
+
+                                            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @placeholder = "10-digit number", @autocomplete = "off" })
+
+                                        </div>
+
+                                    </div><!-- col-6 -->
+
+                                    <div class="col-lg-6">
+
+                                        <div class="form-group">
+
+                                            <label class="form-control-label">Pincode: <span class="tx-danger">*</span></label>
+
+                                            @*<input class="form-control" type="text" name="Pincode" value="" placeholder="Pincode">*@
+
+                                            @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @placeholder = "Pincode", @autocomplete = "off" })
+
+                                        </div>
+
+                                    </div><!-- col-6 -->
+
+                                    <div class="col-lg-6">
+
+                                        <div class="form-group">
+
+                                            <label class="form-control-label">Locality: <span class="tx-danger">*</span></label>
+
+                                            @Html.TextBoxFor(m => m.Locality, new { @class = "form-control", @placeholder = "Locality", @autocomplete = "off" })
+
+                                        </div>
+
+                                    </div><!-- col-6 -->
+
+
+
+                                    <div class="col-lg-6">
+
+                                        <div class="form-group">
+
+                                            <label class="form-control-label">City: <span class="tx-danger">*</span></label>
+
+                                            @*<input class="form-control" type="text" name="City" value="" placeholder="City">*@
+
+                                            @Html.DropDownListFor(m => m.StateId, ViewBag.StateList as SelectList, "--Select--", new { @class = "form-control select2" })
+
+                                        </div>
+
+                                    </div><!-- col-6 -->
+
+                                    <div class="col-lg-6">
+
+                                        <div class="form-group">
+
+                                            <label class="form-control-label">State: <span class="tx-danger">*</span></label>
+
+                                            @*<input class="form-control" type="text" name="State" value="" placeholder="State">*@
+
+                                            @Html.DropDownListFor(m => m.CityId, ViewBag.CityList as SelectList, "--Select--", new { @class = "form-control select2-show-search" })
+
+                                        </div>
+
+                                    </div><!-- col-6 -->
+
+                                    <div class="col-lg-6">
+
+                                        <div class="form-group">
+
+                                            <label class="form-control-label">Landmark: <span class="tx-danger">*</span></label>
+
+                                            @*<input class="form-control" type="text" name="Landmark" value="" placeholder="Landmark">*@
+
+                                            @Html.TextBoxFor(m => m.Landmark, new { @class = "form-control", @placeholder = "Landmark", @autocomplete = "off" })
+
+                                        </div>
+
+                                    </div><!-- col-6 -->
+
+                                    <div class="col-lg-6">
+
+                                        <div class="form-group">
+
+                                            <label class="form-control-label">Alternate phone: <span class="tx-danger">*</span></label>
+
+                                            @*<input class="form-control" type="text" name="State" value="" placeholder="Alternate phone">*@
+
+                                            @Html.TextBoxFor(m => m.AlternatePhone, new { @class = "form-control", @placeholder = "Alternate phone", @autocomplete = "off" })
+
+                                        </div>
+
+                                    </div><!-- col-6 -->
+
+                                    <div class="col-lg-12">
+
+                                        <a href="~/Address/AddressesList" class="btn cancel-button mg-r-10">CANCEL</a>
+
+                                        <input type="submit" class="btn save-button" onclick="AddAddress()" value="SAVE" />
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

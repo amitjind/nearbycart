@@ -1,0 +1,86 @@
+﻿@model PrivateSquareWeb.Models.ProductModel
+
+
+<div class="ps-product--detail">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+            <div class="ps-product__thumbnail">
+                <div class="ps-product__preview">
+                    <div class="ps-product__variants">
+                        @{ int index1 = 0;
+                            foreach (var item in ViewBag.ProductImages)
+                            {
+                                <div class="item"><img src="~/DocImg/@item.Name" alt=""></div>
+
+                            }
+                        }
+                     
+                    </div>
+                </div>
+                <div class="ps-product__image">
+                    @{ int index2 = 0;
+                        foreach (var item in ViewBag.ProductImages)
+                        {
+
+
+                            <div class="item"><img class="zoom" src="~/DocImg/@item.Name" alt="" data-zoom-image="~/DocImg/@item.Name"></div>
+                        }
+                    }
+                  
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+            <div class="ps-product__info">
+                <div class="ps-product__rating">
+                    <select class="ps-rating">
+                        <option value="1">1</option>
+                        <option value="1">2</option>
+                        <option value="1">3</option>
+                        <option value="1">4</option>
+                        <option value="2">5</option>
+                    </select>
+                </div>
+                <h1>@Model.ProductName</h1>
+                <p class="ps-product__category"><a href="#">  Men shoes</a>,<a href="#">  Nike</a>,<a href="#">  Jordan</a></p>
+                <h3 class="ps-product__price"><span>£</span> @Model.DiscountPrice <del><span>£</span> @Model.SellingPrice</del></h3>
+                <div class="ps-product__short-desc">
+                    <p>The Nike Free RN 2017 Men's Running Shoe weighs less than previous versions and features an updated knit material…</p>
+                </div>
+                <div class="ps-product__block ps-product__style">
+                    <h4>CHOOSE YOUR COLOR</h4>
+                    <div class="ps-radio ps-radio--inline">
+                        <input class="form-control" type="radio" id="radio-0" name="type-1">
+                        <label for="radio-0"></label>
+                    </div>
+                    <div class="ps-radio ps-radio--inline ps-radio--color1">
+                        <input class="form-control" type="radio" id="radio1" name="type-1">
+                        <label for="radio1"></label>
+                    </div>
+                    <div class="ps-radio ps-radio--inline ps-radio--color2">
+                        <input class="form-control" type="radio" id="radio2" name="type-1">
+                        <label for="radio2"></label>
+                    </div>
+                    <div class="ps-radio ps-radio--inline ps-radio--color3">
+                        <input class="form-control" type="radio" id="radio3" name="type-1">
+                        <label for="radio3"></label>
+                    </div>
+                </div>
+                <div class="ps-product__block ps-product__size">
+                    <h4>CHOOSE SIZE & QUANTITY<a href="#">Size chart</a></h4>
+                    <select class="ps-select selectpicker" title="Select Size">
+                        <option value="6">7</option>
+                    </select>
+                    <div class="form-group ps-number">
+                        <input class="form-control" type="text" value="1"><span class="up"></span><span class="down"></span>
+                    </div>
+                </div>
+                <div class="ps-product__shopping">
+                    <a class="ps-btn" onclick="AddToCart('@Model.Id','@Model.ProductName','@Model.SellingPrice','@Model.DiscountPrice','@Model.ProductImage')">Order Now</a>
+                    <div class="ps-product__actions"><a class="mr-10" onclick="AddToWishlist(@Model.Id)"><i class="ps-icon-heart"></i></a><a href="compare.html" title="Compare"><i class="ps-icon-compare"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,462 @@
+﻿@model PrivateSquareWeb.Models.LoginModel
+
+@{
+    /**/
+
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
+}
+
+@Styles.Render("~/theme/css")
+<style>
+    .btntoLink {
+        font-family: "Verdana" sans-serif;
+        font-size: 1em;
+        text-align: left;
+        color: blue;
+        background: none;
+        margin: 0;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+<script type="text/javascript">
+    function validateEmail(email) {
+
+    }
+    function ForgetPassword() {
+        var email = document.getElementById('EmailId').value;
+        if (email == '') {
+            document.getElementById("valEmail").innerText = "Email Required";
+            return;
+        }
+        $.ajax({
+            url: "../../WebLogin/ForgetPassword",
+            type: "POST",
+            data: {
+                "emailId": email
+            },
+            success: function (result) {
+                console.log(JSON.parse(result));
+                var data = JSON.parse(result);
+                if (data[0].Response == '1') {
+                    alert('Please Check Inbox');
+                }
+                else if (data[0].Response == "Email Incorrect") {
+                    document.getElementById("valEmail").innerText = "Email Incorrect";
+                    return;
+                }
+                else if (data[0].Response == "Not Exist Email") {
+                    document.getElementById("valEmail").innerText = "Not Exist Email";
+                    return;
+                }
+            }
+        });
+    }
+    function SignUp(lasturl) {
+       
+        var email = document.getElementById('emailIdRegister').value;
+        var newemail = email.trim();
+        email = newemail;
+        //var newStr = email.replace(/(^\s+|\s+$)/, '');
+        var password = document.getElementById('passwordRegister').value;
+        var letters = /^[a-zA-Z]+(\s{0,1}[a-zA-Z ])*$/;
+        var mailformat = /^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        var name = document.getElementById('Name').value;
+        var mobilenumber = /^\d{10}$/;
+
+
+        if (name == '') {
+            document.getElementById("valNameRegister").innerText = "Name Required";
+            //$(".ps-loading").addClass("loaded");
+            return;
+        } else if (!name.match(letters)) {
+            document.getElementById("valNameRegister").innerText = "Please input alphabet characters only.";
+            //$(".ps-loading").addClass("loaded");
+            return;
+        }
+        else if (name.length < 3) {
+
+            document.getElementById("valNameRegister").innerText = "Name must be at least 3 letters long.";
+            //$(".ps-loading").addClass("loaded");
+            return;
+
+        }
+        else {
+
+            document.getElementById("valNameRegister").innerText = "";
+        }
+
+
+
+        if (email == '') {
+            document.getElementById("valemailIdRegister").innerText = "Email/Mobile Required";
+            //$(".ps-loading").addClass("loaded");
+            return;
+
+        }
+        else if (email != '') {
+            if (Number.isInteger(+email)) {
+                //var newemail = email.trim();
+                if (!newemail.match(mobilenumber)) {
+                    document.getElementById("valemailIdRegister").innerText = "Use 10 Digit Number.";
+                    //$(".ps-loading").addClass("loaded");
+                    return;
+                }
+                else
+                {
+                    document.getElementById("valemailIdRegister").innerText = "";
+                }
+            }
+            else {
+                if (!email.match(mailformat)) {
+                    document.getElementById("valemailIdRegister").innerText = "Incorrect Email or Phone Number";
+                    //$(".ps-loading").addClass("loaded");
+                    return;
+                }
+                else
+                {
+                    document.getElementById("valemailIdRegister").innerText = "";
+                }
+            }
+        }
+        else {
+            document.getElementById("valemailIdRegister").innerText = "";
+        }
+        if (password == '') {
+            document.getElementById("valpasswordRegister").innerText = "Password Required";
+            //$(".ps-loading").addClass("loaded");
+            return;
+        }
+        else if (password.length < 6) {
+            document.getElementById("valpasswordRegister").innerText = "Password must be at least 6 characters long.";
+            //$(".ps-loading").addClass("loaded");
+            return;
+        }
+        else {
+            document.getElementById("valpasswordRegister").innerText = "";
+        }
+
+
+        {
+            $("body").removeClass("loaded");
+            $.ajax({
+                url: "../../WebLogin/RegisterUser",
+                type: "POST",
+                data: {
+                    "EmailId": email,
+                    "Password": password,
+                    "Name": name
+                },
+                success: function (result) {
+                    $(".ps-loading").addClass("loaded");
+                    var data = JSON.parse(result);
+                    var response = data[0].Response;
+                    var matchString = "USER EXISTS";
+                    if (response == matchString.trim()) {
+                        var p = document.getElementById("RegisMess");
+                        p.innerText = data[0].Response;
+                        document.getElementById("valemailIdRegister").innerText = "";
+                        document.getElementById("valemailIdRegister").innerText = "";
+                        //$(".ps-loading").addClass("loaded");
+                    }
+                    else if (response == "Email Incorrect") {
+                        document.getElementById("valemailIdRegister").innerText = "Email Incorrect";
+                      /*  $(".ps-loading").addClass("loaded")*/;
+                        return;
+                    }
+                    else if (response == "Mobile Number Incorrect") {
+                        document.getElementById("valemailIdRegister").innerText = "Mobile Number Incorrect";
+                        //$(".ps-loading").addClass("loaded");
+                        return;
+                    }
+                    else {
+                        
+                        //$(".ps-loading").addClass("loaded");
+                        //window.location.href = "/WebHome/Index";
+                        window.location.href = response;
+
+                    }
+                    
+                }
+            });
+        }
+    }   
+    function checkLoginvalidation() {       
+        var ErrorOccured = null;
+        var email = document.getElementById('EmailId').value;
+        if (email == '')
+        {
+            document.getElementById("valEmail").innerText = "Email Required";
+            ErrorOccured = "Email Required";
+        }
+        else {
+            /*ErrorOccured = "";*/
+            document.getElementById("valEmail").innerText = "";
+        }
+
+        var email = document.getElementById('Password').value;
+        if (email == '')
+        {
+            document.getElementById("valPassword").innerText = "Password Required";
+            ErrorOccured = "Password Required";
+        }
+        else {
+            /*ErrorOccured = "";*/
+            document.getElementById("valPassword").innerText = "";
+        }
+
+        if (ErrorOccured == null)
+        {
+            var respons = $("#LoginUserValid").submit();
+        }
+        else { return ; }
+
+    }
+    var DeleteItem = function (index) {
+        //$("body").removeClass("loaded");
+        var divCart = document.getElementById('CartList');
+        var divCartTotal = document.getElementById('CartTotal');
+        var updateCartItemCount = document.getElementById('UpdateCartItemCount');
+        var Blankdiv = document.getElementById('CheckoutDiv');
+        var CartString = "";
+        var CartTotal = "";
+
+
+        $.ajax({
+            url: "../../WebsiteHeader/RemoveToCart",
+            type: "POST",
+
+            data: {
+                index: index
+            },
+            success: function (result) {
+                var JsonResponse = JSON.parse(result);
+                console.log(JsonResponse);
+                console.log(JsonResponse.length);
+                var ProductName = "";
+                var Qty = "";
+                var ImageName = "";
+                var TotalAmount = 0;
+                for (var i = 0; i < JsonResponse.length; i++) {
+
+
+                    ProductName = JsonResponse[i].ProductName;
+                    Qty = JsonResponse[i].Qty;
+                    TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
+                    ImageName = JsonResponse[i].ImageName;
+                    console.log('~/DocImg/' + ImageName);
+                    CartString = CartString + '<div class="ps-cart-item"><a class="ps-cart-item__close" onclick="DeleteItem(' + i + ')"></a>' +
+                        '<div class="ps-cart-item__thumbnail">' +
+                        '<a href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '"></a>' +
+                        '<img src="../../DocImg/' + ImageName + '" alt="">' +
+                        '</div>' +
+                        '<div class="ps-cart-item__content">' +
+                        '<a class="ps-cart-item__title" href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '">' + JsonResponse[i].ProductName + '</a>' +
+                        '<p><span>Quantity:<i>' + JsonResponse[i].Qty + '</i></span><span>Total:<i>₹ ' + JsonResponse[i].Amount + '</i></span></p></div>' +
+                        '</div>';
+                }
+                if (JsonResponse.length == null || JsonResponse.length == 0) {
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
+                    divCartTotal.innerHTML = '<div class="ps-cart__total" >< p > YOUR SHOPPING BAG IS EMPTY</p ></div>';
+
+                    Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';
+                }
+                if (JsonResponse.length > 0) {
+
+
+                    CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
+                        "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
+
+                }
+
+                divCart.innerHTML = CartString;
+                divCartTotal.innerHTML = CartTotal;
+
+                $("#refreshThisDivWhenProductIsAddedToCart_50").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart_50');
+                swal(" ", "Quantity removed !", "success"); 
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+
+
+
+</script>
+<script>
+
+    var HideSignIn = function () {
+
+        $("#SignIn").hide();
+    }
+
+    var HideSignUp = function () {
+        $("#SignIn").show();
+
+    }
+</script>
+@using (Html.BeginForm("LoginUser", "WebLogin", new { lasturl = ViewBag.lasturl } , FormMethod.Post, new {  enctype = "multipart/form-data", id = "LoginUserValid" }))
+{
+    
+    @Html.AntiForgeryToken()
+    <div class="ps-hero">
+
+        <div class="container">
+
+            <h3>Login & Registration</h3>
+
+            <p>NearByCart online shopping</p>
+
+        </div>
+
+    </div>
+
+    <div class="container mt-50 mb-45">
+
+        <div class="col-lg-6 col-lg-offset-3">
+
+            <div id="SignIn">
+
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+
+                    @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", placeholder = "Enter Email/Mobile" })
+
+                    @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger", id = "valEmail" })
+
+                </div><!-- form-group -->
+
+                <div class="form-group mg-b-50">
+
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter Password" })
+
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", id = "valPassword" })
+
+                    <div class=" forget-password">
+
+                        <a href="/WebsiteForgetPassword/Index">Forget Password</a>
+
+
+                        <p style="color:red;">  @ViewBag.Response</p>
+
+                    </div>
+                    <p style="color:red;"> @ViewBag.ResponseMassege</p>
+
+                </div><!-- form-group -->
+                @*@ViewBag.lasturl*@
+                @*<input type="submit" class="ps-btn pl-60 pr-60" value="Login">*@
+
+
+
+                @*@ViewBag.lasturl*@
+                <input type="button" class="ps-btn pl-60 pr-60" value="Login" onclick="checkLoginvalidation()">
+
+
+
+                @*/Login/Register*@
+
+
+
+                <p class="mg-b-0 text-center">Don't have an account? <a href="#" class="sign-up-col" id="step-2" onclick="HideSignIn()">Sign Up</a></p>
+
+
+
+            </div>
+
+
+
+            <div class="ps-step-two" style="display: none">
+
+                <h2 class="sign-up-heading text-center">Sign Up to Shop<br>from NearByCart</h2>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Full Name" })
+
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", id = "valNameRegister" })
+
+
+
+                </div><!-- form-group -->
+
+                <div class="form-group">
+
+                    @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", placeholder = "Email Id/Mobile", id = "emailIdRegister" })
+
+                    @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger", id = "valemailIdRegister" })
+
+
+
+                </div><!-- form-group  -->
+
+                <div class="form-group">
+
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", id = "passwordRegister" })
+
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", id = "valpasswordRegister" })
+
+
+
+                </div><!-- form-group -->
+
+                <p style="color:red;" id="RegisMess"> @ViewBag.RegisterMessage</p>
+
+                <input type="button" value="Sign Up" class="ps-btn pl-60 pr-60" onclick="SignUp('@ViewBag.lasturl')" />
+
+
+
+
+
+                <p class="mg-b-0 text-center">Have an account? <a href="#" class="pvt-sign-text" id="step-1" onclick="HideSignUp()">Sign In</a></p>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+}
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+<script>
+
+    $("#step-2").click(function () {
+
+        $(".ps-step-one").hide();
+
+        $(".ps-step-two").show();
+
+    });
+
+    $("#step-1").click(function () {
+
+        $(".ps-step-one").show();
+
+        $(".ps-step-two").hide();
+
+    });
+
+</script>
+<script type="text/javascript">
+    $(".search-frm").hide();
+    $(".right").offset().right;
+
+</script>
+
+

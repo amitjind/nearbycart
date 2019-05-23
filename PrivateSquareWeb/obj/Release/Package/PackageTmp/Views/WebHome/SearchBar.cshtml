@@ -1,0 +1,420 @@
+﻿@model PrivateSquareWeb.Models.ProductModel
+
+@{
+    /**/
+
+    ViewBag.Title = "SearchBar";
+    Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
+}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+   
+    var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
+
+
+        var salePrice = SellingPrice;
+        var discountPrice = DiscountPrice;
+        var ProductId = Id;
+        var ProductName = "" + ProductName + "";
+        var Qty = 1;
+        var ImageName = ProductImage;
+        var Price = discountPrice;
+        var Amount = Number(Price) * Number(Qty);
+
+        var TotalAmount = 0;
+        $("body").removeClass("loaded");
+        $.ajax({
+            url: "../../WebHome/AddToCart",
+            type: "POST",
+
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductName,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result) {
+
+                $("#Cartcontent").load(location.href + ' #Cartcontent');
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
+                $(".ps-loading").addClass("loaded");
+                swal(" ", "Product Added to the Cart", "success");
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+    var DeleteItem = function (index) {
+
+        var divCart = document.getElementById('CartList');
+        var divCartTotal = document.getElementById('CartTotal');
+        var updateCartItemCount = document.getElementById('UpdateCartItemCount');
+        var Blankdiv = document.getElementById('CheckoutDiv');
+        var CartString = "";
+        var CartTotal = "";
+
+        $("body").removeClass("loaded");
+        $.ajax({
+            url: "../../WebsiteHeader/RemoveToCart",
+            type: "POST",
+
+            data: {
+                index: index
+            },
+            success: function (result) {
+                var JsonResponse = JSON.parse(result);
+                console.log(JsonResponse);
+                console.log(JsonResponse.length);
+                var ProductName = "";
+                var Qty = "";
+                var ImageName = "";
+                var TotalAmount = 0;
+                for (var i = 0; i < JsonResponse.length; i++) {
+
+
+                    ProductName = JsonResponse[i].ProductName;
+                    Qty = JsonResponse[i].Qty;
+                    TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
+                    ImageName = JsonResponse[i].ImageName;
+                    console.log('~/DocImg/' + ImageName);
+                    CartString = CartString + '<div class="ps-cart-item"><a class="ps-cart-item__close" onclick="DeleteItem(' + i + ')"></a>' +
+                        '<div class="ps-cart-item__thumbnail">' +
+                        '<a href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '"></a>' +
+                        '<img src="../../DocImg/' + ImageName + '" alt="">' +
+                        '</div>' +
+                        '<div class="ps-cart-item__content">' +
+                        '<a class="ps-cart-item__title" href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '">' + JsonResponse[i].ProductName + '</a>' +
+                        '<p><span>Quantity:<i>' + JsonResponse[i].Qty + '</i></span><span>Total:<i>₹ ' + JsonResponse[i].Amount + '</i></span></p></div>' +
+                        '</div>';
+                }
+                if (JsonResponse.length == null || JsonResponse.length == 0) {
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
+                    divCartTotal.innerHTML = '<div class="ps-cart__total" >< p > YOUR SHOPPING BAG IS EMPTY</p ></div>';
+
+                    Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';
+                }
+                if (JsonResponse.length > 0) {
+
+
+                    CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
+                        "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
+
+                }
+
+                divCart.innerHTML = CartString;
+                divCartTotal.innerHTML = CartTotal;
+
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
+                    $(".ps-loading").addClass("loaded");
+                    swal(" ", "Product removed", "success");
+                })
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    var AddToWishlist = function (Id) {
+
+        var ProductId = Id;
+        $.ajax({
+            url: "../../WebHome/AddToWishlist",
+            type: "POST",
+            data: { ProductId: ProductId },
+            success: function (result) {
+                if (result == "Please Login to access wishlist") {
+                    swal(result);
+                }
+                else if (result == "Product Exists") {
+                    swal("Product already added to the Wishlist");
+                }
+                else {
+                    swal(" ", result, "success");
+                }
+            },
+            error: function (error) {
+                console.log('error');
+            }
+
+        })
+
+
+    }
+</script>
+
+<main class="ps-main ps-products-listing pd-23">
+    <div class="ps-hero">
+        <div class="container">
+            <h3>SEARCH RESULTS</h3>
+
+        </div>
+    </div>
+    @{
+        Html.RenderAction("WebSiteSidebar", "WebSidebar");
+
+    }
+    @using (Html.BeginForm("SearchBar", "WebHome", FormMethod.Post))
+    {
+        //{
+        //    Html.RenderAction("WebSiteSidebar", "WebSidebar");
+
+        //}
+
+
+        <div class="ps-content" data-mh="product-page">
+            <div class="ps-product-group no-sidebar pt-40" data-item="4">
+                <div class="ps-product-group__header">
+                    <div class="ps-filter">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 ">
+
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                                <div class="ps-filter__result">
+                                    @if (ViewBag.SearchResultCount >= Constant.NumberOfProducts)
+                                    {
+
+                                        <p>Showing @(ViewBag.ProductsFrom)–@((ViewBag.ProductsFrom) + ViewBag.ToProductsCount) of @ViewBag.SearchResultCount results</p>
+
+
+                                    }
+                                    else
+                                    {<p>Showing 1–@ViewBag.SearchResultCount of @ViewBag.SearchResultCount results</p>}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ps-product-group__content">
+                    @foreach (var Users in ViewBag.UsersProduct)
+                    {
+                        <div class="ps-product-group__action"></div>
+                        <div class="ps-product-wrap">
+                            <div class="ps-product--fashion">
+                                <div class="ps-product__thumbnail">
+                                    <a class="ps-product__overlay" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))"></a>
+                                    @{ if (@Users.ProductImage == null)
+                                        {
+                                            <img src="~/DocImg/deafult.png" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/DocImg/@Users.ProductImage" alt="">
+                                        }
+                                    }
+
+                                    @*<ul class="ps-product__actions">
+
+                                            <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
+                                            <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
+                                        </ul>*@
+                                    <ul class="ps-product__actions">
+                                        <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
+                                        <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="ps-product__content">
+                                    <a class="ps-product__title" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))">@Users.ProductName</a>
+                                    <p class="ps-product__price">
+                                        @Users.DiscountPrice
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    }
+                    <h1>@ViewBag.NoResultFound</h1>
+                </div>
+                <div class="ps-product-group__footer" onload="Pagenoactive()">
+                    <div class="ps-pagination mb-50">
+                        <ul class="pagination">
+                            @if ((ViewBag.SearchResultCount / Constant.NumberOfProducts) > 1)
+                            {
+                                var n = ViewBag.LowerLimit;
+                                var pagenoForactive=ViewBag.PageNoactive;
+                                <li>
+
+                                    <a href="~/WebHome/PreviousPages/@(Constant.EncodeNumber(ViewBag.LowerLimit-1))"
+                                       onclick="return ActivatePageNumber(@(ViewBag.LowerLimit-1))">
+                                        <img src="~/WebSiteTheme/images/back.svg" width="15" />
+                                    </a>
+                                </li>
+                                do
+                                {
+                                    if (pagenoForactive == n)
+                                    {
+                                        <li id="@n" class="active">
+                                            <a href="~/WebHome/NextPage/@(Constant.EncodeNumber(n))" onclick="return ActivatePageNumber(@n)">
+                                                @n
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li id="@n"><a href="~/WebHome/NextPage/@(Constant.EncodeNumber(n))" onclick="return ActivatePageNumber(@n)">@n</a></li>
+                                    }
+                                    n++;
+                                }
+
+                                while (n <= (ViewBag.NumberOfPages));
+                                if ((ViewBag.SearchResultCount / Constant.NumberOfProducts) > ViewBag.NumberOfPages)
+                                {
+                                    <li>
+                                        <a href="~/WebHome/MorePages/@(Constant.EncodeNumber(n))" onclick="return ActivatePageNumber(@n)">
+                                            <img src="~/WebSiteTheme/images/right-arrow.svg" width="15" />
+                                        </a>
+                                    </li>
+                                }
+
+                            }
+                            else
+                            {
+                                if (ViewBag.SearchResultCount < Constant.NumberOfProducts)
+                                {
+                                    @*<li class="active"><a href="#">1</a></li>*@
+                                }
+                                else
+                                {
+                                    if ((ViewBag.SearchResultCount % Constant.NumberOfProducts) != 0)
+                                    {
+
+                                        <li class="active"><a href="~/WebHome/NextPage/@Constant.EncodeNumber(1)">1</a></li>
+                                        <li><a href="~/WebHome/NextPage/@Constant.EncodeNumber(2)">2</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="active"><a href="#">1</a></li>
+                                    }
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</main>
+
+<div class="ps-section--features">
+    <div class="ps-container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                <div class="ps-iconbox">
+                    <header>
+                        <i class="ps-icon-delivery"></i>
+                        <h3>FREE SHIPPING</h3>
+                        <p>ON ORDER OVER ₹500</p>
+                    </header>
+                    <p>Want to track a package? Find tracking information and order details from Your Orders.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                <div class="ps-iconbox">
+                    <header>
+                        <i class="ps-icon-wallet"></i>
+                        <h3>100% MONEY BACK.</h3>
+                        <p>WITHIN 30 DAYS AFTER DELIVERY.</p>
+                    </header>
+                    <p>You may return most new, unopened items sold within 30 days of delivery for a full refund.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                <div class="ps-iconbox">
+                    <header>
+                        <i class="ps-icon-customer-service"></i>
+                        <h3>SUPPORT 24/7.</h3>
+                        <p>WE CAN HELP YOU ONLINE.</p>
+                    </header>
+                    <p>We offer a 24/7 customer hotline so you’re never alone if you have a question.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var ActivatePageNumber = function (id) {
+        //if (id == 0) { id = 1; }
+        //localStorage.setItem("PageNumber", id);
+        //debugger
+
+        var localstorageid = localStorage.getItem("PageNumber");
+        if (localstorageid == 0) {
+            localStorage.setItem("PageNumber", 1);
+            $(".active").removeClass("active");
+            $("#1").addClass("active");
+            return true;
+        }
+        else {
+            $(".active").removeClass("active");
+            $("#" + id + "").addClass("active");
+            return true;
+        }
+
+
+
+
+    }
+</script>
+@*<script>
+    debugger
+    window.alert("Hello");
+    window.onload = function () {
+        var id = localStorage.getItem("PageNumber");
+        var removefromlocalstorage = localStorage.setItem("PageNumber", -10);                 //sample value -10 -- put any value instead of -10
+        $(".active").removeClass("active");
+
+        if (id == -10) {
+            $("#1").addClass("active");
+
+        }
+
+        else { $("#" + id + "").addClass("active"); }
+    }
+</script>*@
+@*<script>
+    console.log("search bar ");
+    $(document).ready(function () {
+        alert('document ready');
+        var id = localStorage.getItem("PageNumber");
+        var removefromlocalstorage = localStorage.setItem("PageNumber", -10);                 //sample value -10 -- put any value instead of -10
+        $(".active").removeClass("active");
+
+        if (id == -10) {
+            $("#1").addClass("active");
+
+        }
+
+        else { $("#" + id + "").addClass("active"); }
+    });
+
+</script>*@
+<script>
+    var Pagenoactive = function () {
+    
+        alert("Pagenoactive");
+        var id = localStorage.getItem("PageNumber");
+        var removefromlocalstorage = localStorage.setItem("PageNumber", -10);                 //sample value -10 -- put any value instead of -10
+        $(".active").removeClass("active");
+
+        if (id == -10) {
+            $("#1").addClass("active");
+
+        }
+
+        else { $("#" + id + "").addClass("active"); }
+    }
+</script>

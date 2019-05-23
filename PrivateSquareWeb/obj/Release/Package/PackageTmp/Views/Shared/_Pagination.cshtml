@@ -1,0 +1,50 @@
+﻿@model PrivateSquareWeb.Models.ProductModel
+
+<div class="ps-pagination mb-50">
+    <ul class="pagination">
+        @if ((ViewBag.SearchResultCount / 10) > 1)
+        {
+            var n = ViewBag.LowerLimit;
+            @*<li><a href="javascript:void()" onclick="previouspages(@(ViewBag.LowerLimit-1))"><i class="fa fa-angle-left"></i></a></li>*@
+            <li><a href="javascript:void()" onclick="previouspages(@(ViewBag.LowerLimit-1))">
+                <img src="~/WebSiteTheme/images/back.svg" width="15" /></a>
+            </li>
+            do
+            {
+                <li id="@n"><a href="javascript:void()" onclick="nextpage(@n)">@n</a></li>
+                n++;
+            }
+            while (n <= (ViewBag.NumberOfPages));
+            if ((ViewBag.SearchResultCount / 12) > ViewBag.NumberOfPages)
+            {
+                <li>
+                    <a href="javascript:void()" onclick="morepages(@n)">
+                        <img src="~/WebSiteTheme/images/right-arrow.svg" width="15" />
+                     </a>
+                </li>
+            }
+        }
+        else
+        {
+            if (ViewBag.SearchResultCount < 10)
+            {
+                @*<li class="active"><a href="#">1</a></li>*@
+            }
+            else
+            {
+                if ((ViewBag.SearchResultCount % 10) != 0)
+                {
+                  
+                    <li class="active" id="pagenumber1"><a onclick="nextpage(1)">1</a></li>
+                    <li id="pagenumber2"><a onclick="nextpage(2)">2</a></li>
+                }
+                else
+                {
+                    <li class="active"><a href="#">1</a></li>
+                }
+            }
+        }
+    </ul>
+</div>
+
+

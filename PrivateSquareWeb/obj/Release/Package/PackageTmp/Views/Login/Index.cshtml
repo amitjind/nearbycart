@@ -1,0 +1,307 @@
+﻿@*@model PrivateSquareWeb.Models.UserRegisterModel*@
+@model PrivateSquareWeb.Models.LoginModel
+
+@{
+    /**/
+
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<!-- Vendor css -->
+@Styles.Render("~/theme/css")
+<style>
+    .btntoLink {
+        font-family: "Verdana" sans-serif;
+        font-size: 1em;
+        text-align: left;
+        color: blue;
+        background: none;
+        margin: 0;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+<script type="text/javascript">
+    function validateEmail(email) {
+
+    }
+    function ForgetPassword() {
+        var email = document.getElementById('EmailId').value;
+        if (email == '') {
+            document.getElementById("valEmail").innerText = "Email Required";
+            return;
+        }
+        $.ajax({
+            url: "../../Login/ForgetPassword",
+            type: "POST",
+            data: {
+                "emailId": email
+            },
+            success: function (result) {
+                console.log(JSON.parse(result));
+                var data = JSON.parse(result);
+                if (data[0].Response == '1') {
+                    alert('Please Check Inbox');
+                }
+                else if (data[0].Response == "Email Incorrect") {
+                    document.getElementById("valEmail").innerText = "Email Incorrect";
+                    return;
+                }
+                else if (data[0].Response == "Not Exist Email")
+                {
+                    document.getElementById("valEmail").innerText = "Not Exist Email";
+                    return;
+                }
+            }
+        });
+    }
+    function SignUp() {
+        //emailIdRegister,passwordRegister
+        var email = document.getElementById('emailIdRegister').value;
+        var password = document.getElementById('passwordRegister').value;
+
+        var name = document.getElementById('Name').value;
+        if (name == '') {
+            document.getElementById("valNameRegister").innerText = "Name Required";
+
+            //var p = document.getElementById("RegisMess");
+            //p.innerText = "Please Fill Email,Password,Name";
+            return;
+        }
+        else
+        {
+           
+            document.getElementById("valNameRegister").innerText = "";
+        }
+        if (email == '') {
+            document.getElementById("valemailIdRegister").innerText = "Email/Mobile Required";
+            return;
+
+        } else {
+            document.getElementById("valemailIdRegister").innerText = "";
+        }
+        if (password == '') {
+            document.getElementById("valpasswordRegister").innerText = "Password Required";
+            return;
+        } else {
+            document.getElementById("valpasswordRegister").innerText = "";
+        }
+
+        //else if (!validateEmail(email)) {
+        //    document.getElementById("valemailIdRegister").innerText = "Email Incorrect";
+        //    return;
+        //}
+    //    else
+        {
+
+            $.ajax({
+                url: "../../Login/RegisterUser",
+                type: "POST",
+                data: {
+                    "EmailId": email,
+                    "Password": password,
+                    "Name": name
+                },
+                success: function (result) {
+                    var data = JSON.parse(result);
+                    var response = data[0].Response;
+                    var matchString = "USER EXISTS";
+                    if (response == matchString.trim()) {
+                        var p = document.getElementById("RegisMess");
+                        p.innerText = data[0].Response;
+
+                    }
+                    else if (response == "Email Incorrect") {
+                        document.getElementById("valemailIdRegister").innerText = "Email Incorrect";
+                        return;
+                    }
+                    else if (response == "Mobile Number Incorrect")
+                    {
+                        document.getElementById("valemailIdRegister").innerText = "Mobile Number Incorrect";
+                        return;
+                    }
+                    else {
+                        window.location.href = "/Home/Index";
+
+                    }
+                }
+            });
+        }
+    }
+</script>
+
+@using (Html.BeginForm("LoginUser", "Login", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-lg-12 text-center header-login">
+        <a href="indexpage.html"><img src="~/theme/img/logo.png" alt="logo" class="logo-width"></a>
+    </div>
+    <div class="container">
+        <p class="text-center private-squares-heading">private<span class="pvt-sq-col">squares</span> helps to connect and share with the people in your life.</p>
+        <div class="col-md-7 pull-left"><img src="~/theme/img/login-img.jpg" class="img-full" /></div>
+        <div class="col-md-5 pull-left image-padding">
+            <div class="signin-box pull-right">
+                <div class="ps-step-one">
+                    <button class="btn btn-block btn-sign-in">Login with facebook</button>
+                    <h5 class="text-center login-or">OR</h5>
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", placeholder = "Enter Email/Mobile" })
+                        @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger", id = "valEmail" })
+                    </div><!-- form-group -->
+                    <div class="form-group mg-b-50">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter Password" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        <div class=" forget-password">
+                            <a href="/ForgetPassword/Index">Forget Password</a>
+                            @*<input type="button" onclick="ForgetPassword()" class="sign-up-col btntoLink" value="Forget Password" />*@
+                            <p style="color:red;">  @ViewBag.Response</p>
+                        </div>
+                        <!-- <h6 class="forget-password">Forget Password</h6> -->
+                    </div><!-- form-group -->
+
+                    <a href="page-profile.html">
+                        <input type="submit" class="btn btn-block btn-sign-in" value="Login">
+                    </a>
+                    @*/Login/Register*@
+
+                    <p class="mg-b-0 text-center">Don't have an account? <a href="#" class="sign-up-col" id="step-2">Sign Up</a></p>
+
+                </div>
+
+                <div class="ps-step-two" style="display: none">
+                    <h2 class="sign-up-heading text-center">Sign Up to Write Quotes and earn points <br>from Privatesquares</h2>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Full Name" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", id = "valNameRegister" })
+
+                    </div><!-- form-group -->
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", placeholder = "Email Id/Mobile", id = "emailIdRegister" })
+                        @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger", id = "valemailIdRegister" })
+
+                    </div><!-- form-group  -->
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", id = "passwordRegister" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", id = "valpasswordRegister" })
+
+                    </div><!-- form-group -->
+                    <p style="color:red;" id="RegisMess"> @ViewBag.RegisterMessage</p>
+                    <input type="button" value="Sign Up" class="btn btn-block btn-sign-in" onclick="SignUp()" />
+
+
+                    <p class="mg-b-0 text-center">Don't have an account? <a href="#" class="pvt-sign-text" id="step-1">Sign In</a></p>
+
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-lg-12 pvt-sq-list-footer pvt-sq-border text-center">
+            <ul>
+                <li><a href="#">ABOUT US</a></li>
+                <li><a href="/ContactUs/Index">Contact Us</a></li>
+                <li><a href="#">STORE</a></li>
+                <li><a href="#">CONNECTIONS</a></li>
+                <li><a href="#">PRIVACY</a></li>
+                <li><a href="#">SUPPORT</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+}
+@*<script src="../lib/jquery/js/jquery.js"></script>
+    <script src="../lib/popper.js/js/popper.js"></script>
+    <script src="../lib/bootstrap/js/bootstrap.js"></script>
+
+    <script src="../js/slim.js"></script>*@
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    $("#step-2").click(function () {
+        $(".ps-step-one").hide();
+        $(".ps-step-two").show();
+    });
+    $("#step-1").click(function () {
+        $(".ps-step-one").show();
+        $(".ps-step-two").hide();
+    });
+</script>
+
+
+
+<!--
+
+<div class="signin-wrapper">
+
+    <div class="signin-box signup">
+        <img src="~/Content/img/logo.png" alt="logo" class="logo-width">
+        <div class="ps-step-one">
+            <h3 class="signin-title-primary">Get Started!</h3>
+            <h5 class="signin-title-secondary lh-4">It's free to signup and only takes a minute.</h5>
+            <div class="row row-xs mg-b-10">
+               @* @Html.TextBoxFor(model => model.Mobile, new { class = "form-control", placeholder = "Mobile" })*@
+                <input type="hidden" name="txttype" id="txttype" value="L" />
+            </div><br />
+            <!-- row -->
+<!--                    <button class="btn btn-primary btn-block btn-signin" id="step-2"> Login</button>
+            <p class="mg-t-40 mg-b-0 tx-center">Don't have an account? click <a href="/Login/Register">Register</a> to Sign Up </p>
+
+
+            <div class="signup-separator"><span>or signup using</span></div>
+
+            <div class="tx-20 tx-center">
+                @*<input type="submit" value="FacebookLoginnn"/>*@
+                <input type="checkbox" id="ChkFacebook" name="ChkFacebook" >Facebook
+                @*@Html.ActionLink("FacebookLogin", "FacebookLogin", "Login", new { @class = "tx-primary mg-r-5" })*@
+                <a href="" class="tx-primary mg-r-5"><i class="fa fa-facebook"></i></a>
+                <a href="" class="tx-info mg-r-5"><i class="fa fa-twitter"></i></a>
+                <a href="" class="tx-danger mg-r-5"><i class="fa fa-google-plus"></i></a>
+                <a href="" class="tx-danger mg-r-5"><i class="fa fa-pinterest"></i></a>
+                <a href="" class="tx-inverse mg-r-5"><i class="fa fa-github"></i></a>
+                <a href="" class="tx-pink mg-r-5"><i class="fa fa-instagram"></i></a>
+            </div>
+
+
+        </div>
+        <div class="ps-step-two" style="display:none">
+            @{
+                // Html.RenderPartial("_OTP");
+            }
+
+            <!-- <p class="mg-t-40 mg-b-0">Already have an account? <a href="page-signin.html">Sign In</a></p> -->
+<!--</div>
+
+-->
+<!-- </div><!-- signin-box -->
+<!-- </div><!-- signin-wrapper -->
+@*<script src="~/theme/lib/jquery/js/jquery.js"></script>
+    <script src="~/theme/lib/popper.js/js/popper.js"></script>
+    <script src="~/theme/lib/bootstrap/js/bootstrap.js"></script>
+
+    <script src="~/theme/js/slim.js"></script>
+    <script>
+        $("#step-2").click(function () {
+            $(".ps-step-one").hide();
+            $(".ps-step-two").show();
+        });
+        $("#skip-2, #next-2").click(function () {
+            $(".ps-step-two").hide();
+            $(".ps-step-fifth").show();
+        });
+        $("#skip-3, #next-3").click(function () {
+            $(".ps-step-third").hide();
+            $(".ps-step-fourth").show();
+        });
+        $("#next-6").click(function () {
+            $(".ps-step-fifth").hide();
+            $(".ps-step-third").show();
+        });
+    </script>*@
+
+
+@*</body>
+    </html>*@
+

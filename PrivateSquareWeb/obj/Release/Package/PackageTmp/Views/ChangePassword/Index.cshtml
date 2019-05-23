@@ -1,0 +1,139 @@
+﻿@model PrivateSquareWeb.Models.LoginModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("ChangePassword", "ChangePassword", FormMethod.Post))
+
+{
+
+    @Html.AntiForgeryToken()
+    <div class="slim-mainpanel mg-t-40">
+        <div class="container">
+            <div>
+                <div class="form-layout">
+                    <div class="row">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="col-sm-6 col-md-3">
+                            @*<div class="box-shadow-bc">
+                                <div class="text-center mg-t-30">
+                                <img src="~/DocImg/@Model.ProfileImage" class="wd-100 rounded-circle" alt="">
+                                    <div class="col-lg-12 mg-t-21 p-0">
+                                        <h1 class="profile-title tx-17"> @Model.FirstName</h1>
+                                        <div class="custom-file">
+                                            <input type="file" title="search image" id="FileUploadImage" name="FileUploadImage" class="custom-file-input-1">
+                                            <a href="javascript:void(0);" class="link-button" for="customFile">Upload Profile Photo</a>
+                                        </div><!-- custom-file -->
+                                    </div>
+                                    </div>
+                                    <hr/>
+                                    <h1 class="profile-title tx-18 pd-l-30"> My account</h1>
+                                    <ul class="account-list">
+                                        <li class="active"><a href="#">Profile Information</a></li>
+                                        <li><a href="#">Manage Address</a></li>
+                                        <li><a href="#">Change Password</a></li>
+                                    </ul>
+                                </div><!-- col -->*@
+                            @{
+                                //Html.RenderPartial("_Header");
+                                Html.RenderAction("HeaderValue", "SidebarProfile");
+                            }
+                        </div>
+
+                        <div class="col-sm-6 col-md-9">
+                            <div class="box-shadow-bc pd-40">
+
+
+
+
+                                <div class="section-wrapper">
+
+                                    <div class="form-layout form-layout-4">
+
+                                        <div class="row">
+
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                            @*<label class="col-sm-3 form-control-label">Enter your Password: <span class="tx-danger">*</span></label>*@
+
+                                            <div class="col-sm-9">
+
+                                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Your Current Password" })
+
+                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", id = "valPassword" })
+
+                                            </div>
+
+                                        </div><!-- row -->
+
+                                        <div class="row mg-t-20">
+
+                                            @*<label class="col-sm-3 form-control-label">Enter your New Password: <span class="tx-danger">*</span></label>*@
+
+                                            <div class="col-sm-9 mg-t-10 mg-sm-t-0">
+
+                                                @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control", placeholder = "New Password" })
+
+                                                @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger", id = "valNewPassword" })
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row mg-t-20">
+
+                                            @*<label class="col-sm-3 form-control-label">Confirm Password: <span class="tx-danger">*</span></label>*@
+
+                                            <div class="col-sm-9 mg-t-10 mg-sm-t-0">
+
+                                                @Html.PasswordFor(m => m.ConfirmNewPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+
+                                                @Html.ValidationMessageFor(model => model.ConfirmNewPassword, "", new { @class = "text-danger", id = "valConfirmNewPassword" })
+
+                                            </div>
+
+                                        </div>
+
+                                        @*<div class="row mg-t-20">
+
+                                                <label class="col-sm-3 form-control-label">Message: <span class="tx-danger">*</span></label>
+
+                                                <div class="col-sm-9 mg-t-10 mg-sm-t-0">
+
+                                                    @Html.TextBoxFor(m => m.Message, new { @class = "form-control", placeholder = "Enter Message" })
+
+                                                </div>
+
+                                            </div>*@
+
+                                        <div class="row mg-t-30">
+                                            <p style="color:red;">@ViewBag.ResponseMessage</p>
+                                            <div class="col-sm-9 mg-l-auto">
+
+                                                <div class="form-layout-footer">
+                                                    <a href="/Home/Index" class="btn cancel-button mg-r-10">CANCEL</a>
+                                                    <input type="submit" class="btn save-button" value="SAVE" />
+
+                                                    
+
+                                                </div><!-- form-layout-footer -->
+
+                                            </div><!-- col-8 -->
+
+                                        </div>
+                                        <a href="/Login/Index" class="btn save-button">Login</a>
+                                    </div>
+
+                                </div><!--section wrapper-->
+
+                            </div><!--container -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

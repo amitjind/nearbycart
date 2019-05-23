@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\yogesh\Private Square\PrivateSquares2019\PrivatesquaresWebApiNew\Persistance\Data\Privatesquares.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\gobind\NearbyCart - 2 May,2019\NearbyCart\PrivatesquaresWebApiNew\Persistance\Data\Privatesquares.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

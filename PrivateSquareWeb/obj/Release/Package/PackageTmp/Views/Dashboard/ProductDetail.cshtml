@@ -1,0 +1,79 @@
+﻿@model PrivateSquareWeb.Models.ProductModel
+
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    var GetTotal = function ()
+    {
+        var salePrice =@Model.SellingPrice;
+        var discountPrice=@Model.DiscountPrice;
+        //console.log(salePrice);
+        var Qty = document.getElementById('TxtQty').value;
+        var LblTotal = document.getElementById('TotalAmount');
+        if (Qty.trim() == '' || Qty.trim() == null) {
+            alert('Minum 1 Qty Required');
+            return;
+        }
+        else
+        {
+            LblTotal.innerText = Number((Number(salePrice) - Number(discountPrice)) * Qty);
+        }
+    }
+</script>
+<div class="slim-mainpanel">
+    <div class="container">
+        <div class="manager-header">
+            <div class="slim-pageheader">
+                <ol class="breadcrumb slim-breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Contact Manager</li>
+                </ol>
+                <!-- <h6 class="slim-pagetitle">Contact Manager</h6> -->
+            </div><!-- slim-pageheader -->
+            <a id="contactNavicon" href="" class="contact-navicon"><i class="icon ion-navicon-round"></i></a>
+        </div><!-- manager-header -->
+
+        <div class="manager-wrapper">
+            <div class="manager-right">
+                <div class="search-box">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2" style="margin-top:50px;">
+                        @{ int index = 0;
+                            foreach (var item in ViewBag.ProductImages)
+                            {
+
+                                <div class="col-lg-12 pull-left text-center">
+                                    <img src="~/DocImg/@item.Name" id="@index" />
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="~/DocImg/@Model.ProductImage" />
+                    </div>
+                    <div class="col-sm-4">
+                        <h2>@Model.ProductName</h2>
+                        <b>Sale Price:- </b> $@Model.SellingPrice  <br />
+                        <b>Discount Price:-</b> $ @Model.DiscountPrice
+                        <div class="col-sm-12">
+                            @Model.Description
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <b>Qty:-</b> <input id="TxtQty" type="number" value="1" onblur="GetTotal()" />
+                        <b>Total:- $</b><label id="TotalAmount">@((Model.SellingPrice - Model.DiscountPrice) * 1) </label>
+                        <button id="BtnAddToCart">Add to cart</button>
+                        <button id="BtnBuy">Buy Now</button>
+                        <button id="BtnAddToCart">Add to wish list</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,226 @@
+﻿
+<style>
+    .ContainSpace {
+        margin-left: 25px;
+    }
+</style>
+
+@model PrivateSquareWeb.Models.ProductModel
+<script>
+    var AddToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount) {
+
+       
+
+        var discountPrice = 0;
+        var ProductId = Id;
+        var ProductNamevar = "" + ProductName + "";
+        var Qty = 1;
+        var ImageName = ProductImage;
+
+        var TotalAmount = 0;
+        $('#' + Id).show();
+        $.ajax({
+
+            url: "../../WebHome/AddToCart",
+            type: "POST",
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductNamevar,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result) {                
+                $("#refreshThisDivWhenProductIsAddedToCart_50").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart_50');
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
+                //$('#' + Id).hide();
+                //swal(" ", "One more added !", "success");
+                setTimeout(
+                    function () {
+                        $('#' + Id).hide();
+                        swal(" ", "One more added !", "success");
+                    }, 2000
+                );
+
+              
+
+            },
+            error: function (error) {
+
+                console.log(error);
+            }
+        });
+    }
+</script>
+
+<script>
+    var RemoveToSideCart = function (Id, ProductName, ProductImage, Price, Amount, index) {
+        $('#' + Id).show();
+
+
+        var QtyTxt = $("#SidebarTxtQty" + Id).val();
+        if (QtyTxt == "1") {
+            swal('Quantity cannot be less than 1');
+            $('#' + Id).hide();
+            return;
+        }
+        //$("body").removeClass("loaded");
+        var discountPrice = 0;
+        var ProductId = Id;
+        var ProductNameVar = "" + ProductName + "";
+        var Qty = 1;
+        var ImageName = ProductImage;
+
+
+        var TotalAmount = 0;
+
+        $.ajax({
+            url: "../../WebHome/RemoveQtyToCart",
+            type: "POST",
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductNameVar,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result) {
+                $("#refreshThisDivWhenProductIsAddedToCart_50").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart_50');
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
+                //$('#' + Id).hide();
+                //swal(" ", "Quantity removed !", "success");
+                setTimeout(
+                    function () {
+                        $('#' + Id).hide();
+                        swal(" ", "Quantity removed !", "success");
+                    }, 2000
+                );
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+
+<aside class="ps-sidebar" data-mh="product-page">
+    <aside class="ps-widget--sidebar ps-widget--category">
+        <div class="ps-widget__header cate_back">
+            <h3>Category</h3>
+        </div>
+
+        <div class="ps-widget__content">
+            <ul class="ps-list--checked-1">
+                @{
+                    foreach (var Cat in ViewBag.ProductCatList)
+                    {
+                        if (Cat.ParentCatId == 0)
+                        {
+
+                            <li class="nbc-main-category">
+
+                                <a id="@Cat.Id" href="javascript:void()" data-toggle="collapse" data-target="#subcategories@(Cat.Id)" class="cate-main-list">@Cat.Name </a>
+                                <ul class="ps-list--checked-1 sub_cate" style="padding-left: 10px;" id="sidebarsubcategories">
+                                    @foreach (var subcat in ViewBag.ProductCatList)
+                                    {
+                                        if (subcat.ParentCatId == Cat.Id)
+                                        {
+                                            <li><a id="@subcat.Id" href="~/ProductCatWise/Index/@Constant.EncodeNumber(int.Parse((subcat.Id).ToString()))"> @subcat.Name </a></li>
+                                        }
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    }
+
+                }
+            </ul>
+        </div>
+    </aside>
+    <aside class="ps-widget--sidebar ps-widget--category">
+        <div class="ps-widget__header cate_back">
+            <h3>Your Cart</h3>
+        </div>
+        <div id="refreshThisDivWhenProductIsAddedToCart" class="nag_add_cart">
+
+            <div id="CartList">
+                @{ int index = 0;
+                    foreach (var item in ViewBag.AddToCart)
+                    {
+
+                        <div class="ps-cart-item">
+
+                            <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
+
+                            <div class="ps-cart-item__thumbnail">
+                                <a href="/WebHome/ProductDetail/@item.ProductId"></a>
+                                <img src="~/DocImg/@item.ImageName" alt="Image">
+                            </div>
+                            <div class="ps-cart-item__content">
+                                <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"> @item.ProductName</a>
+                            </div>
+                            <div class="ntotal_cart form-group--number">
+                                <div class="pull-left SpanForQuantity+@item.ProductId">
+                                    <div id="@item.ProductId" class="lds-ellipsis n_loader"><div></div><div></div><div></div><div></div></div>
+                                    <button class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span>    - </span></button>
+                                    <input id="@("SidebarTxtQty"+item.ProductId)" name="@("SidebarTxtQty"+index)" class="iten_set" type="text" value="@item.Qty" readonly>
+                                    <button class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span> + </span> </button>
+                                </div><div class="ml-10 pull-left mt-5">Total:<i>₹ @item.Amount</i></div>
+                            </div>
+                        </div>
+                        index++;
+                    }
+                }
+
+            </div>
+
+            <div class="fix_add_cart">
+                <div id="CartTotal">
+                    @{
+
+                        if (Model.CartItemCount != 0)
+                        {
+                            <p>Number of items: <span>@Model.CartItemCount</span></p>
+                            <p>Item Total: <span>₹ @ViewBag.TotalAmount</span></p>
+                        }
+                        else
+                        {
+                            <p>YOUR SHOPPING BAG IS EMPTY</p>
+                        }
+                    }
+                </div>
+                @{
+
+                    if (Model.CartItemCount != 0)
+                    {
+                        <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out</a></div>
+                    }
+                }
+            </div>
+        </div>
+    </aside>
+</aside>
+
+<script>
+    var acc = document.getElementsByClassName("cate-main-list");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active_li");
+            var cate_sub = this.nextElementSibling;
+            if (cate_sub.style.maxHeight) {
+                cate_sub.style.maxHeight = null;
+            } else {
+                cate_sub.style.maxHeight = cate_sub.scrollHeight + "px";
+            }
+        });
+    }
+</script>

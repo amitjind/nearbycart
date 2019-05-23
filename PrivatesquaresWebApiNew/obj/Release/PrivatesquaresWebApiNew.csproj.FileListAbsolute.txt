@@ -87,3 +87,204 @@ E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\P
 E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\obj\Release\PrivatesquaresWebApiNew.csproj.CopyComplete
 E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\obj\Release\PrivatesquaresWebApiNew.dll
 E:\Puneet\EliteWebSoluction\PrivateSquares\PrivatesquaresNew\PrivatesquaresWeb\PrivatesquaresWebApiNew\obj\Release\PrivatesquaresWebApiNew.pdb
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.dll.config
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.pdb
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\csc.exe
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\csc.exe.config
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\csc.rsp
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\csi.exe
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\csi.exe.config
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\csi.rsp
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.Managed.Core.targets
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.AppContext.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Collections.Immutable.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Console.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Compression.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.IO.FileSystem.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Pipes.AccessControl.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Pipes.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Reflection.Metadata.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.AccessControl.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Claims.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Principal.Windows.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.ValueTuple.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XmlDocument.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XPath.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\vbc.exe
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\vbc.exe.config
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\vbc.rsp
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\VBCSCompiler.exe
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\VBCSCompiler.exe.config
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Antlr3.Runtime.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\EntityFramework.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\EntityFramework.SqlServer.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Logging.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Tokens.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.Web.Infrastructure.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Newtonsoft.Json.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Diagnostics.DiagnosticSource.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.IdentityModel.Tokens.Jwt.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Net.Http.Formatting.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Helpers.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Http.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Http.WebHost.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Mvc.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Optimization.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Razor.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Deployment.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.WebPages.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Razor.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\WebGrease.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\EntityFramework.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\EntityFramework.SqlServer.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.JsonWebTokens.pdb
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Logging.pdb
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Logging.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Tokens.pdb
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Tokens.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Diagnostics.DiagnosticSource.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.IdentityModel.Tokens.Jwt.pdb
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.IdentityModel.Tokens.Jwt.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Newtonsoft.Json.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Net.Http.Formatting.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Helpers.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Http.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Http.WebHost.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Mvc.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Optimization.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Razor.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.WebPages.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Deployment.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Razor.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Antlr3.Runtime.pdb
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\obj\Release\PrivatesquaresWebApiNew.dll
+E:\NearbyCart Backup-10 May,2019\NearbyCart\PrivatesquaresWebApiNew\obj\Release\PrivatesquaresWebApiNew.pdb
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.dll.config
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\PrivatesquaresWebApiNew.pdb
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\csc.exe
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\csc.exe.config
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\csc.rsp
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\csi.exe
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\csi.exe.config
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\csi.rsp
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.CSharp.Core.targets
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.Managed.Core.targets
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\Microsoft.VisualBasic.Core.targets
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.AppContext.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Collections.Immutable.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Console.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Diagnostics.StackTrace.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Compression.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.IO.FileSystem.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.IO.FileSystem.Primitives.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Pipes.AccessControl.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.IO.Pipes.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Reflection.Metadata.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.AccessControl.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Claims.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Encoding.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.Primitives.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Security.Principal.Windows.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Text.Encoding.CodePages.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.ValueTuple.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.ReaderWriter.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XmlDocument.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XPath.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\System.Xml.XPath.XDocument.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\vbc.exe
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\vbc.exe.config
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\vbc.rsp
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\VBCSCompiler.exe
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\roslyn\VBCSCompiler.exe.config
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Antlr3.Runtime.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\EntityFramework.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\EntityFramework.SqlServer.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Logging.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Tokens.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.Web.Infrastructure.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Newtonsoft.Json.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Diagnostics.DiagnosticSource.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.IdentityModel.Tokens.Jwt.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Net.Http.Formatting.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Helpers.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Http.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Http.WebHost.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Mvc.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Optimization.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Razor.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Deployment.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.WebPages.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Razor.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\WebGrease.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\EntityFramework.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\EntityFramework.SqlServer.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.JsonWebTokens.pdb
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Logging.pdb
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Logging.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Tokens.pdb
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.IdentityModel.Tokens.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Diagnostics.DiagnosticSource.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.IdentityModel.Tokens.Jwt.pdb
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.IdentityModel.Tokens.Jwt.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Newtonsoft.Json.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Net.Http.Formatting.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Helpers.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Http.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Http.WebHost.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Mvc.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Optimization.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.Razor.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.WebPages.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Deployment.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\System.Web.WebPages.Razor.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Antlr3.Runtime.pdb
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\obj\Release\PrivatesquaresWebApiNew.csprojAssemblyReference.cache
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\obj\Release\PrivatesquaresWebApiNew.csproj.CoreCompileInputs.cache
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\obj\Release\PrivatesquaresWebApiNew.csproj.CopyComplete
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\obj\Release\PrivatesquaresWebApiNew.dll
+S:\Projects\NearbyCart\May 10,2019\NearbyCart\PrivatesquaresWebApiNew\obj\Release\PrivatesquaresWebApiNew.pdb

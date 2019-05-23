@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PrivateSquareWeb.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ApiUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://192.168.1.150:2511/Api/{0}</Value>
-    </Setting>
     <Setting Name="AWS_ACCESS_KEY_ID" Type="System.String" Scope="Application">
       <Value Profile="(Default)">AKIAIB32UVMKXN37TKIA</Value>
     </Setting>
@@ -13,6 +10,9 @@
     </Setting>
     <Setting Name="AWS_SERVICE_URL" Type="System.String" Scope="Application">
       <Value Profile="(Default)">webservices.privatesquares.com</Value>
+    </Setting>
+    <Setting Name="ApiUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:58192/Api/{0}</Value>
     </Setting>
   </Settings>
 </SettingsFile>

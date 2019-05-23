@@ -1,0 +1,243 @@
+﻿@model PrivateSquareWeb.Models.AddToCartModel
+
+@{
+    /**/
+
+    ViewBag.Title = "ViewCart";
+    Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
+}
+<style>
+    .imageStyle {
+        width: 50px;
+        height: 50px;
+    }
+</style>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+    var DeleteItem = function (index) {
+        var divCart = document.getElementById('CartList');
+        var CartString = "";
+        $.ajax({
+            url: "../../ViewCart/RemoveToCart",
+            type: "POST",
+
+            data: {
+                index: index
+            },
+            success: function (result) {
+                var JsonResponse = JSON.parse(result);
+                console.log(JsonResponse);
+                console.log(JsonResponse.length);
+                var ProductName = "";
+                var Qty = "";
+                var Price = "";
+                var TotalAmount = 0;
+                for (var i = 0; i < JsonResponse.length; i++) {
+                    console.log(JsonResponse[i].ProductId);
+                    ProductName = JsonResponse[i].ProductName;
+                    Qty = JsonResponse[i].Qty;
+                    TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
+                    CartString = CartString + '<div class=\"row\">' +
+                        '<div class=\"col-sm-2\">' +
+                        '<img src=\"../../DocImg/' + JsonResponse[i].ImageName + '\" class=\"imageStyle\" />' +
+                        '</div>' +
+                        '<div class=\"col-sm-2\">' + ProductName + '</div>' +
+                        '<div class=\"col-sm-2\">' + Qty + '</div>' +
+                        '<div class=\"col-sm-2\">' + JsonResponse[i].Price + '</div>' +
+
+                        '<div class=\"col-sm-2\">' + JsonResponse[i].Amount + '</div>' +
+                        '<div class=\"col-sm-2\">' + '<input type="button" value="x" onclick="DeleteItem(' + i + ')" />' +
+                        '</div>' +
+                        '</div>';
+
+                    CartString = CartString = '<tr><td>' +
+                        '<a class="ps-product--compare" href="product-detail.html">' +
+                        '<img class="mr-15" src="../../DocImg/' + JsonResponse[i].ImageName + '" alt="">' + ProductName +
+                        '</a>' +
+                        '</td>' +
+                        '<td>' + JsonResponse[i].Price + '</td>' +
+                        '<td>' +
+                        '<div class="form-group--number">' +
+                        '<button class="minus"><span>-</span></button>' +
+                        '<input class="form-control" type="text" value="' + Qty + '">' +
+                        '<button class="plus"><span>+</span></button>' +
+                        '</div>' +
+                        '</td>' +
+                        '<td>$' + JsonResponse[i].Amount + '</td>' +
+                        '<td>' +
+                        '<div ><input class="ps-remove" value="X" type="button"  onclick="DeleteItem(' + i + ')" /></div>' +
+                        '</td>' +
+                        '</tr>';
+
+                }
+                if (JsonResponse.length == null || JsonResponse.length == 0) {
+
+                }
+                if (JsonResponse.length > 0) {
+
+                }
+                divCart.innerHTML = "";
+                //console.log(CartString);
+                divCart.innerHTML = CartString;
+                window.location.href = "/ViewCart/ViewCart";
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    var AddToCartViewCart = function (Id, ProductName, ProductImage, Price, Amount) {
+
+        var discountPrice = 0;
+        var ProductId = Id;
+        var ProductNamevar = "" + ProductName + "";
+        var Qty = 1;
+        var ImageName = ProductImage;
+
+        var TotalAmount = 0;
+        console.log('ProductId' + ProductId);
+        $.ajax({
+            url: "../../WebHome/AddToCart",
+            type: "POST",
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductNamevar,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result) {
+
+                $("#cartlisting").load(location.href + ' #cartlisting');
+                $("#refreshThisDivWhenProductIsAddedToCart_50").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart_50');
+                swal(" ", "One more added !", "success");
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+    var RemoveToCartViewCart = function (Id, ProductName, ProductImage, Price, Amount, index) {
+        var QtyTxt = document.getElementById('TxtQty' + index).value;
+        console.log('Qty==' + QtyTxt);
+        if (QtyTxt <= 1) {
+            swal('Quantity cannot be less than 1');
+            return;
+        }
+
+        var discountPrice = 0;
+        var ProductId = Id;
+        var ProductNameVar = "" + ProductName + "";
+        var Qty = 1;
+        var ImageName = ProductImage;
+
+
+        var TotalAmount = 0;
+        console.log('ProductId' + ProductId);
+        $.ajax({
+            url: "../../WebHome/RemoveQtyToCart",
+            type: "POST",
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductNameVar,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result) {
+
+                $("#cartlisting").load(location.href + ' #cartlisting');
+                $("#refreshThisDivWhenProductIsAddedToCart_50").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart_50');
+                swal(" ", "Quantity removed !", "success"); 
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+@Html.AntiForgeryToken()
+
+
+
+<div class="ps-hero">
+    <div class="container">
+        <h3>YOUR CART</h3>
+
+    </div>
+</div>
+<div class="ps-content pt-80 pb-80">
+    <div class="ps-container">
+        <div class="ps-cart-listing" id="cartlisting">
+            <table class="table ps-cart__table">
+                <thead>
+                    <tr>
+                        @if (ViewBag.AddToCart.Count != 0)
+                        {
+                            <th>All Products</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th></th>
+                        }
+                    </tr>
+                </thead>
+                <tbody id="CartList" class="product_list_img">
+                        @{ int index = 0;
+                            if (ViewBag.AddToCart.Count == 0)
+                            { <h1>Your Cart Is Empty !</h1>}
+                            else
+                            {
+                                foreach (var item in ViewBag.AddToCart)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            <a class="ps-product--compare" href="~/WebHome/ProductDetail/@item.ProductId">
+                                                <img class="mr-15" src="~/DocImg/@item.ImageName" alt="">  @item.ProductName
+                                            </a>
+                                        </td>
+                                        <td>₹ @item.Price</td>
+                                        <td>
+                                            <div class="form-group--number">
+                                                <button class="minus" onclick="RemoveToCartViewCart('@item.ProductId','@item.ProductName','@item.ImageName','@item.Price','@item.Amount','@index')"><span>-</span></button>
+                                                <input class="form-control ng_cart_int" id="@("TxtQty"+index)" name="@("TxtQty"+index)" type="text" value="@item.Qty" readonly>
+                                                <button class="plus" onclick="AddToCartViewCart('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span>+</span></button>
+                                            </div>
+                                        </td>
+                                        <td>₹ @item.Amount</td>
+                                        <td>
+                                            <div><a href="javascript:void(0);" class="ps-remove" onclick="DeleteItem(@index)"></a></div>
+                                        </td>
+                                    </tr>
+
+
+
+                                    index++;
+                                }
+                            }
+                        }
+
+                </tbody>
+            </table>
+            <div class="ps-cart__actions">
+                @if (ViewBag.AddToCart.Count != 0)
+                {
+                    <div class="ps-cart__promotion">
+
+                    </div>
+                    <div class="ps-cart__total">
+                        <h3>Total Price: <span> ₹ @ViewBag.TotalAmount </span></h3><a class="ps-btn" href="/Checkout/Index">Proceed to checkout</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -108,6 +108,7 @@
     <Parameter Name="Mobile" Type="varchar" Mode="In" />
     <Parameter Name="Password" Type="nvarchar" Mode="In" />
     <Parameter Name="RegisterType" Type="varchar" Mode="In" />
+    <Parameter Name="otp" Type="varchar" Mode="In" />
   </Function>
   <Function Name="RegisterUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
     <Parameter Name="UserMobile" Type="varchar" Mode="In" />
@@ -248,6 +249,10 @@
   </Function>
   <Function Name="UserProductList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
     <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="VerifyEmailWithOTP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="privatesquares">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="otp" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="EWT_PSQNEWModelStoreContainer" />
 </Schema>

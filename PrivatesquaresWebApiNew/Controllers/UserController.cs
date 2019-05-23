@@ -25,7 +25,7 @@ namespace PrivatesquaresWebApiNew.Controllers
         }
         [Route("api/User/Registeration")]
         [HttpPost]
-        // public IHttpActionResult Registeration(RequestModel requestModel)
+       
         public IHttpActionResult Registeration([FromBody] RequestModel requestModel)
         {
             // = JsonConvert.DeserializeObject<ApiRequestModel>(System.Web.HttpContext.Current.Request.Form["encrypted"].ToString());
@@ -64,7 +64,7 @@ namespace PrivatesquaresWebApiNew.Controllers
 
         [Route("api/User/SaveProfile")]
         [HttpPost]
-        // public IHttpActionResult Registeration(RequestModel requestModel)
+
         public IHttpActionResult SaveUserProfile(RequestModel requestModel)
         {
             #region Comment Code For DataSet To Json 
@@ -125,7 +125,7 @@ namespace PrivatesquaresWebApiNew.Controllers
         }
         [Route("api/User/SaveBusiness")]
         [HttpPost]
-        // public IHttpActionResult Registeration(RequestModel requestModel)
+
         public IHttpActionResult SaveBusiness(RequestModel requestModel)
         {
 
@@ -170,7 +170,7 @@ namespace PrivatesquaresWebApiNew.Controllers
 
         [Route("api/User/SaveProduct")]
         [HttpPost]
-        // public IHttpActionResult Registeration(RequestModel requestModel)
+        
         public IHttpActionResult SaveProduct(RequestModel requestModel)
         {
 

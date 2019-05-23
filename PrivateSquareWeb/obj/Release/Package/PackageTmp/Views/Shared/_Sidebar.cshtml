@@ -1,0 +1,57 @@
+﻿@model PrivateSquareWeb.Models.AddressModel
+
+<link href="~/theme/css/slim.css" rel="stylesheet" />
+
+<div class="box-shadow-bc">
+
+    <div class="text-center mg-t-30">
+
+        @if (@Model.UserId != 0)
+
+        {
+
+            <img src="~/DocImg/@Model.ProfileImg" class="wd-100 rounded-circle" alt="">
+
+        }
+
+        @if (@Model.UserId == 0)
+
+        {
+
+            <img src="~/Content/img/headphone.jpg" class="wd-100 rounded-circle" alt="">
+
+        }
+
+        @*<img src="~/DocImg/@Model.ProfileImg" alt="">*@
+
+        <div class="col-lg-12 mg-t-21 p-0">
+
+            <h1 class="profile-title tx-17"> @Model.Name</h1>
+
+            <div class="custom-file">
+
+                <input type="file" title="search image" id="FileUploadImage" name="FileUploadImage" class="custom-file-input-1">
+
+                <a href="javascript:void(0);" class="link-button" for="customFile">Upload Profile Photo</a>
+
+            </div><!-- custom-file -->
+
+        </div>
+
+    </div>
+
+    <hr />
+
+    <h1 class="profile-title tx-18 pd-l-30 mg-t-40 mg-b-20"> My account</h1>
+
+    <ul class="account-list">
+
+        <li class="active"><a href="/Dashboard/PersonalProfile">Profile Information</a></li>
+
+        <li><a href="/Address/AddressesList">Manage Address</a></li>
+
+        <li><a href="/ChangePassword/Index">Change Password</a></li>
+
+    </ul>
+
+</div>
