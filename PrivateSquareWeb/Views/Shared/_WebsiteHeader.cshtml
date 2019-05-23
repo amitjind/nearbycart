@@ -210,7 +210,7 @@
                                                 <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
 
                                                 <div class="ps-cart-item__thumbnail">
-                                                    <a href="/WebHome/ProductDetail/@item.ProductId"></a>
+                                                    <a href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"></a>
                                                     <img src="~/DocImg/@item.ImageName" alt="Image">
                                                 </div>
                                                 <div class="ps-cart-item__content">
