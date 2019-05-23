@@ -249,8 +249,10 @@ namespace PrivateSquareWeb.Controllers.Website
 			ViewBag.LowerLimit = 1;
 			ViewBag.PageIndex = 1;
 			ViewBag.ProductsFrom = 0;
-			//ListAllProduct = CommonFile.GetProduct();
-			if (String.IsNullOrWhiteSpace(objModel.SearchBarText))
+            ViewBag.LowerLimit = 1;
+            ViewBag.PageNoactive = 1;
+            //ListAllProduct = CommonFile.GetProduct();
+            if (String.IsNullOrWhiteSpace(objModel.SearchBarText))
 			{
 				//var SearchList = ListAllProduct.Where(x => x.ProductName.ToUpper().Contains(objModel.SearchBarText.ToString().ToUpper())).ToList();
 				if (objModel.ParentCatId == 0)
@@ -309,7 +311,8 @@ namespace PrivateSquareWeb.Controllers.Website
 
 			int pageindex = ViewBag.PageIndex;
 			ViewBag.PageIndex = pageindex;
-			var SearchList1 = ListAllProduct.Where(x => x.ProductName.ToUpper().Contains(objModel.SearchBarText.ToString().ToUpper())).ToList();
+           
+            var SearchList1 = ListAllProduct.Where(x => x.ProductName.ToUpper().Contains(objModel.SearchBarText.ToString().ToUpper())).ToList();
 			//ViewBag.UsersProduct = SearchList1.Skip((pageindex - 1) * 12).Take(12);
 			//ViewBag.ProductsFrom = ((pageindex - 1) * 12);
 			//ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
@@ -386,17 +389,20 @@ namespace PrivateSquareWeb.Controllers.Website
 
 		public ActionResult NextPage(string Id)
 		{
-			long? id = Convert.ToInt64(CommonFile.Decode(Id));
+           
+            long? id = Convert.ToInt64(CommonFile.Decode(Id));
 			int pageindex = (int)id;
+
 			if ((pageindex % 5) == 0)
 			{
-				ViewBag.LowerLimit = (pageindex / 5) * 5;
+				ViewBag.LowerLimit = pageindex-4;
 			}
 			else
 			{
 				ViewBag.LowerLimit = ((pageindex / 5) * 5) + 1;
 			}
-			ViewBag.PageIndex = pageindex;
+            ViewBag.PageNoactive = id;
+            ViewBag.PageIndex = pageindex;
 			HeaderPartialModel objModel = new HeaderPartialModel();
 			string SearchCookieValue = Services.GetCookie(this.HttpContext, "SearchBarCookie").Value;
 			dynamic _data = SearchCookieValue;
@@ -430,8 +436,10 @@ namespace PrivateSquareWeb.Controllers.Website
 					}
 					else
 					{
-						ViewBag.NumberOfPages = ViewBag.LowerLimit + 4;
-					}
+                        ViewBag.NumberOfPages = ViewBag.LowerLimit + 4;
+                        //ViewBag.NumberOfPages = ViewBag.LowerLimit;
+
+                    }
 					return View("SearchBar");
 				}
 				var SearchListWithCategory = ListAllProduct.Where(x => x.ParentCatId.Equals(objModel.ParentCatId)).ToList();
@@ -491,7 +499,8 @@ namespace PrivateSquareWeb.Controllers.Website
 			long? id = Convert.ToInt64(CommonFile.Decode(Id));
 			int pageindex = (int)id;
 			ViewBag.PageIndex = pageindex;
-			HeaderPartialModel objModel = new HeaderPartialModel();
+            ViewBag.PageNoactive = id;
+            HeaderPartialModel objModel = new HeaderPartialModel();
 			//HeaderPartialModel objModel = new HeaderPartialModel();
 			string SearchCookieValue = Services.GetCookie(this.HttpContext, "SearchBarCookie").Value;
 			dynamic _data = SearchCookieValue;
@@ -586,7 +595,8 @@ namespace PrivateSquareWeb.Controllers.Website
 			if (id == 0) { id = 1; }
 			int pageindex = (int)id;
 			ViewBag.PageIndex = pageindex;
-			HeaderPartialModel objModel = new HeaderPartialModel();
+            ViewBag.PageNoactive = id;
+            HeaderPartialModel objModel = new HeaderPartialModel();
 			if (pageindex % 5 == 0)
 			{
 				if ((pageindex / 5) == 1)
@@ -617,7 +627,7 @@ namespace PrivateSquareWeb.Controllers.Website
 					}
 					else
 					{
-						ViewBag.NumberOfPages = ViewBag.LowerLimit + 5;
+						ViewBag.NumberOfPages = ViewBag.LowerLimit + 4;
 					}
 					ViewBag.ProductsFrom = ((pageindex - 1) * Constant.NumberOfProducts) + 1;
 					ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);

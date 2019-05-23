@@ -7,10 +7,11 @@
     Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
 }
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="text/javascript">
 
+<script type="text/javascript">
+   
     var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
-       
+
 
         var salePrice = SellingPrice;
         var discountPrice = DiscountPrice;
@@ -50,7 +51,7 @@
         });
     }
     var DeleteItem = function (index) {
-       
+
         var divCart = document.getElementById('CartList');
         var divCartTotal = document.getElementById('CartTotal');
         var updateCartItemCount = document.getElementById('UpdateCartItemCount');
@@ -149,6 +150,7 @@
 
     }
 </script>
+
 <main class="ps-main ps-products-listing pd-23">
     <div class="ps-hero">
         <div class="container">
@@ -157,7 +159,7 @@
         </div>
     </div>
     @{
-    Html.RenderAction("WebSiteSidebar", "WebSidebar");
+        Html.RenderAction("WebSiteSidebar", "WebSidebar");
 
     }
     @using (Html.BeginForm("SearchBar", "WebHome", FormMethod.Post))
@@ -235,31 +237,45 @@
                     }
                     <h1>@ViewBag.NoResultFound</h1>
                 </div>
-                <div class="ps-product-group__footer" id="paginationfooter">
+                <div class="ps-product-group__footer" onload="Pagenoactive()">
                     <div class="ps-pagination mb-50">
                         <ul class="pagination">
                             @if ((ViewBag.SearchResultCount / Constant.NumberOfProducts) > 1)
                             {
                                 var n = ViewBag.LowerLimit;
-                            <li>
-                                <a href="~/ProductCatWise/PreviousPages/@(ViewBag.LowerLimit - 1)">
-                                    <img src="~/WebSiteTheme/images/back.svg" width="15" />
-                                </a>
+                                var pagenoForactive=ViewBag.PageNoactive;
+                                <li>
 
-                                <a href="~/WebHome/PreviousPages/@(Constant.EncodeNumber(ViewBag.LowerLimit-1))"
-                                   onclick="return ActivatePageNumber(@(ViewBag.LowerLimit-1))">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                            </li>
+                                    <a href="~/WebHome/PreviousPages/@(Constant.EncodeNumber(ViewBag.LowerLimit-1))"
+                                       onclick="return ActivatePageNumber(@(ViewBag.LowerLimit-1))">
+                                        <img src="~/WebSiteTheme/images/back.svg" width="15" />
+                                    </a>
+                                </li>
                                 do
                                 {
-                                    <li id="@n"><a href="~/WebHome/NextPage/@(Constant.EncodeNumber(n))" onclick="return ActivatePageNumber(@n)">@n</a></li>
+                                    if (pagenoForactive == n)
+                                    {
+                                        <li id="@n" class="active">
+                                            <a href="~/WebHome/NextPage/@(Constant.EncodeNumber(n))" onclick="return ActivatePageNumber(@n)">
+                                                @n
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li id="@n"><a href="~/WebHome/NextPage/@(Constant.EncodeNumber(n))" onclick="return ActivatePageNumber(@n)">@n</a></li>
+                                    }
                                     n++;
                                 }
+
                                 while (n <= (ViewBag.NumberOfPages));
                                 if ((ViewBag.SearchResultCount / Constant.NumberOfProducts) > ViewBag.NumberOfPages)
                                 {
-                                    <li><a href="~/WebHome/MorePages/@(Constant.EncodeNumber(n))" onclick="return ActivatePageNumber(@n)"><i class="fa fa-angle-right"></i></a></li>
+                                    <li>
+                                        <a href="~/WebHome/MorePages/@(Constant.EncodeNumber(n))" onclick="return ActivatePageNumber(@n)">
+                                            <img src="~/WebSiteTheme/images/right-arrow.svg" width="15" />
+                                        </a>
+                                    </li>
                                 }
 
                             }
@@ -331,22 +347,74 @@
 
 <script>
     var ActivatePageNumber = function (id) {
-        if (id == 0) { id = 1; }
-        localStorage.setItem("PageNumber", id);
-        return true;
+        //if (id == 0) { id = 1; }
+        //localStorage.setItem("PageNumber", id);
+        //debugger
+
+        var localstorageid = localStorage.getItem("PageNumber");
+        if (localstorageid == 0) {
+            localStorage.setItem("PageNumber", 1);
+            $(".active").removeClass("active");
+            $("#1").addClass("active");
+            return true;
+        }
+        else {
+            $(".active").removeClass("active");
+            $("#" + id + "").addClass("active");
+            return true;
+        }
+
+
+
+
     }
 </script>
-<script>
+@*<script>
+    debugger
+    window.alert("Hello");
     window.onload = function () {
         var id = localStorage.getItem("PageNumber");
         var removefromlocalstorage = localStorage.setItem("PageNumber", -10);                 //sample value -10 -- put any value instead of -10
         $(".active").removeClass("active");
-       
+
         if (id == -10) {
             $("#1").addClass("active");
-           
+
         }
-       
+
+        else { $("#" + id + "").addClass("active"); }
+    }
+</script>*@
+@*<script>
+    console.log("search bar ");
+    $(document).ready(function () {
+        alert('document ready');
+        var id = localStorage.getItem("PageNumber");
+        var removefromlocalstorage = localStorage.setItem("PageNumber", -10);                 //sample value -10 -- put any value instead of -10
+        $(".active").removeClass("active");
+
+        if (id == -10) {
+            $("#1").addClass("active");
+
+        }
+
+        else { $("#" + id + "").addClass("active"); }
+    });
+
+</script>*@
+<script>
+    var Pagenoactive = function () {
+    
+        alert("Pagenoactive");
+        var id = localStorage.getItem("PageNumber");
+        var removefromlocalstorage = localStorage.setItem("PageNumber", -10);                 //sample value -10 -- put any value instead of -10
+        $(".active").removeClass("active");
+
+        if (id == -10) {
+            $("#1").addClass("active");
+
+        }
+
         else { $("#" + id + "").addClass("active"); }
     }
 </script>

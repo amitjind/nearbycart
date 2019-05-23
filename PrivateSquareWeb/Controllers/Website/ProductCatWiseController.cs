@@ -89,7 +89,8 @@ namespace PrivateSquareWeb.Controllers.Website
 			// return PartialView("~/Views/ProductCatWise/PartialCatwiseProductValue.cshtml", objModel);
 		}
 		public PartialViewResult PartialCatwiseProductValue(string id)
-		{
+
+        {
 			long? Id = Convert.ToInt64(CommonFile.Decode(id));
 			var jsonString1 = "{\"ProductCatId\":\"" + Id + "\"}";
 			Services.SetCookie(this.ControllerContext.HttpContext, "ProductCatWiseCatId", jsonString1.ToString());
@@ -311,88 +312,95 @@ namespace PrivateSquareWeb.Controllers.Website
 			return PartialView("~/Views/ProductCatWise/PartialCatwiseProductValue.cshtml");
 		}
 
-		public PartialViewResult PreviousPages(long id)
-		{
-		  
-			int pageindex = (int)id;
-			ViewBag.PageIndex = pageindex;
-			HeaderPartialModel objModel = new HeaderPartialModel();
+        public PartialViewResult PreviousPages(long id)
+        {
 
-			ViewBag.LowerLimit = id - 4;
-			#region  For binding products in next page
+            int pageindex = (int)id;
+            //if (pageindex != 0)
+            //{
+                ViewBag.PageIndex = pageindex;
+                HeaderPartialModel objModel = new HeaderPartialModel();
 
-		   
-			if (String.IsNullOrWhiteSpace(objModel.SearchBarText))
-			{
+                ViewBag.LowerLimit = id - 4;
+                #region  For binding products in next page
 
-				if (objModel.ParentCatId == 0)
-				{
-					ViewBag.UsersProduct = ListAllProduct.Skip((pageindex - 1) * Constant.NumberOfProducts).Take(Constant.NumberOfProducts);
-					ViewBag.SearchResultCount = ListAllProduct.Count;
-					if ((ViewBag.SearchResultCount / 10) < (pageindex + 4))
-					{
-						ViewBag.NumberOfPages = ViewBag.LowerLimit * 5;
-					}
-					else
-					{
-						ViewBag.NumberOfPages = pageindex;
-					}
-					ViewBag.ProductsFrom = ((pageindex - 1) * Constant.NumberOfProducts) + 1;
-					ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
 
-					Services.SetCookie(this.ControllerContext.HttpContext, "NumberOfPages", ViewBag.NumberOfPages.ToString());
-					Services.SetCookie(this.ControllerContext.HttpContext, "LowerLimit", ViewBag.LowerLimit.ToString());
-					Services.SetCookie(this.ControllerContext.HttpContext, "SearchResutlCount", ViewBag.SearchResultCount.ToString());
-					return PartialView("~/Views/ProductCatWise/PartialCatwiseProductValue.cshtml");
-				}
-				var SearchListWithCategory = ListAllProduct.Where(x => x.ParentCatId.Equals(objModel.ParentCatId)).ToList();
-				ViewBag.UsersProduct = SearchListWithCategory.Skip((pageindex - 1) * Constant.NumberOfProducts).Take(Constant.NumberOfProducts);
-				ViewBag.SearchResultCount = SearchListWithCategory.Count;
-				if ((ViewBag.SearchResultCount / 10) < (pageindex + 4))
-				{
-					ViewBag.NumberOfPages = ViewBag.LowerLimit + ((ViewBag.SearchResultCount - 5) - 1);
-				}
-				else
-				{
-					ViewBag.NumberOfPages = pageindex + 4;
-				}
-				ViewBag.ProductsFrom = ((pageindex - 1) * Constant.NumberOfProducts) + 1;
-				ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
-				string NumberOfPages2 = ViewBag.NumberOfPages;
-				string LowerLimit2 = ViewBag.LowerLimit;
-				string SearchResultCount2 = ViewBag.SearchResultCount;
-				Services.SetCookie(this.ControllerContext.HttpContext, "NumberOfPages", NumberOfPages2);
-				Services.SetCookie(this.ControllerContext.HttpContext, "LowerLimit", LowerLimit2);
-				Services.SetCookie(this.ControllerContext.HttpContext, "SearchResutlCount", SearchResultCount2);
-				return PartialView("~/Views/ProductCatWise/PartialCatwiseProductValue.cshtml");
-			}
-			if (objModel.ParentCatId == 0)
-			{
-				var SearchList = ListAllProduct.Where(x => x.ProductName.ToUpper().Contains(objModel.SearchBarText.ToString().ToUpper())).ToList();
-				ViewBag.UsersProduct = SearchList.Skip((pageindex - 1) * Constant.NumberOfProducts).Take(Constant.NumberOfProducts);
-				ViewBag.SearchResultCount = SearchList.Count;
-			}
-			else
-			{
-				var SearchList = ListAllProduct.Where(x => x.ProductName.ToUpper().Contains(objModel.SearchBarText.ToString().ToUpper())).ToList();
+                if (String.IsNullOrWhiteSpace(objModel.SearchBarText))
+                {
 
-				var SearchListWithCategory = SearchList.Where(x => x.ParentCatId.Equals(objModel.ParentCatId)).ToList();
-				ViewBag.UsersProduct = SearchListWithCategory.Skip((pageindex - 1) * Constant.NumberOfProducts).Take(Constant.NumberOfProducts);
+                    if (objModel.ParentCatId == 0)
+                    {
+                        ViewBag.UsersProduct = ListAllProduct.Skip((pageindex - 1) * Constant.NumberOfProducts).Take(Constant.NumberOfProducts);
+                        ViewBag.SearchResultCount = ListAllProduct.Count;
+                        if ((ViewBag.SearchResultCount / 10) < (pageindex + 4))
+                        {
+                            ViewBag.NumberOfPages = ViewBag.LowerLimit * 5;
+                        }
+                        else
+                        {
+                            ViewBag.NumberOfPages = pageindex;
+                        }
+                        ViewBag.ProductsFrom = ((pageindex - 1) * Constant.NumberOfProducts) + 1;
+                        ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
 
-				ViewBag.SearchResultCount = SearchListWithCategory.Count;
-			}
+                        Services.SetCookie(this.ControllerContext.HttpContext, "NumberOfPages", ViewBag.NumberOfPages.ToString());
+                        Services.SetCookie(this.ControllerContext.HttpContext, "LowerLimit", ViewBag.LowerLimit.ToString());
+                        Services.SetCookie(this.ControllerContext.HttpContext, "SearchResutlCount", ViewBag.SearchResultCount.ToString());
+                        return PartialView("~/Views/ProductCatWise/PartialCatwiseProductValue.cshtml");
+                    }
+                    var SearchListWithCategory = ListAllProduct.Where(x => x.ParentCatId.Equals(objModel.ParentCatId)).ToList();
+                    ViewBag.UsersProduct = SearchListWithCategory.Skip((pageindex - 1) * Constant.NumberOfProducts).Take(Constant.NumberOfProducts);
+                    ViewBag.SearchResultCount = SearchListWithCategory.Count;
+                    if ((ViewBag.SearchResultCount / 10) < (pageindex + 4))
+                    {
+                        ViewBag.NumberOfPages = ViewBag.LowerLimit + ((ViewBag.SearchResultCount - 5) - 1);
+                    }
+                    else
+                    {
+                        ViewBag.NumberOfPages = pageindex + 4;
+                    }
+                    ViewBag.ProductsFrom = ((pageindex - 1) * Constant.NumberOfProducts) + 1;
+                    ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
+                    string NumberOfPages2 = ViewBag.NumberOfPages;
+                    string LowerLimit2 = ViewBag.LowerLimit;
+                    string SearchResultCount2 = ViewBag.SearchResultCount;
+                    Services.SetCookie(this.ControllerContext.HttpContext, "NumberOfPages", NumberOfPages2);
+                    Services.SetCookie(this.ControllerContext.HttpContext, "LowerLimit", LowerLimit2);
+                    Services.SetCookie(this.ControllerContext.HttpContext, "SearchResutlCount", SearchResultCount2);
+                    return PartialView("~/Views/ProductCatWise/PartialCatwiseProductValue.cshtml");
+                }
+                if (objModel.ParentCatId == 0)
+                {
+                    var SearchList = ListAllProduct.Where(x => x.ProductName.ToUpper().Contains(objModel.SearchBarText.ToString().ToUpper())).ToList();
+                    ViewBag.UsersProduct = SearchList.Skip((pageindex - 1) * Constant.NumberOfProducts).Take(Constant.NumberOfProducts);
+                    ViewBag.SearchResultCount = SearchList.Count;
+                }
+                else
+                {
+                    var SearchList = ListAllProduct.Where(x => x.ProductName.ToUpper().Contains(objModel.SearchBarText.ToString().ToUpper())).ToList();
 
-			#endregion
-			ViewBag.ProductsFrom = ((pageindex - 1) * Constant.NumberOfProducts) + 1;
-			ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
-			string NumberOfPages3 = ViewBag.NumberOfPages;
-			string LowerLimit3 = ViewBag.LowerLimit;
-			string SearchResultCount3 = ViewBag.SearchResultCount;
-			Services.SetCookie(this.ControllerContext.HttpContext, "NumberOfPages", NumberOfPages3);
-			Services.SetCookie(this.ControllerContext.HttpContext, "LowerLimit", LowerLimit3);
-			Services.SetCookie(this.ControllerContext.HttpContext, "SearchResutlCount", SearchResultCount3);
-			return PartialView("~/Views/ProductCatWise/PartialCatwiseProductValue.cshtml");
-		}
+                    var SearchListWithCategory = SearchList.Where(x => x.ParentCatId.Equals(objModel.ParentCatId)).ToList();
+                    ViewBag.UsersProduct = SearchListWithCategory.Skip((pageindex - 1) * Constant.NumberOfProducts).Take(Constant.NumberOfProducts);
+
+                    ViewBag.SearchResultCount = SearchListWithCategory.Count;
+                }
+
+                #endregion
+                ViewBag.ProductsFrom = ((pageindex - 1) * Constant.NumberOfProducts) + 1;
+                ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
+                string NumberOfPages3 = ViewBag.NumberOfPages;
+                string LowerLimit3 = ViewBag.LowerLimit;
+                string SearchResultCount3 = ViewBag.SearchResultCount;
+                Services.SetCookie(this.ControllerContext.HttpContext, "NumberOfPages", NumberOfPages3);
+                Services.SetCookie(this.ControllerContext.HttpContext, "LowerLimit", LowerLimit3);
+                Services.SetCookie(this.ControllerContext.HttpContext, "SearchResutlCount", SearchResultCount3);
+                return PartialView("~/Views/ProductCatWise/PartialCatwiseProductValue.cshtml");
+            //}
+            //else
+            //{
+                
+            //}
+        }
 
 		public PartialViewResult _Pagination(long id, long? searchresultcount, long? lowerlimit, long? numberofpages)
 		{
