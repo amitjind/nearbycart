@@ -5,20 +5,20 @@
         @if ((ViewBag.SearchResultCount / 10) > 1)
         {
             var n = ViewBag.LowerLimit;
-            @*<li><a href="javascript:void()" onclick="previouspages(@(ViewBag.LowerLimit-1))"><i class="fa fa-angle-left"></i></a></li>*@
-            <li><a href="javascript:void()" onclick="previouspages(@(ViewBag.LowerLimit-1))">
+            @*<li><a href="javascript:void();" onclick="previouspages(@(ViewBag.LowerLimit-1))"><i class="fa fa-angle-left"></i></a></li>*@
+            <li><a href="javascript:void();" onclick="previouspages(@(ViewBag.LowerLimit-1))">
                 <img src="~/WebSiteTheme/images/back.svg" width="15" /></a>
             </li>
             do
             {
-                <li id="@n"><a href="javascript:void()" onclick="nextpage(@n)">@n</a></li>
+                <li id="@n"><a href="javascript:void();" onclick="nextpage(@n)">@n</a></li>
                 n++;
             }
             while (n <= (ViewBag.NumberOfPages));
             if ((ViewBag.SearchResultCount / 12) > ViewBag.NumberOfPages)
             {
                 <li>
-                    <a href="javascript:void()" onclick="morepages(@n)">
+                    <a href="javascript:void();" onclick="morepages(@n)">
                         <img src="~/WebSiteTheme/images/right-arrow.svg" width="15" />
                      </a>
                 </li>

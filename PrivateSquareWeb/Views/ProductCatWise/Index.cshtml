@@ -59,7 +59,7 @@
         var val = document.getElementById("firstslider").value;
         document.getElementById("TxtPriceRange").value = val;
         ProductPriceWise(val);
-    }
+    };
     var ProductPriceWise = function (val) {
 
         $("#DivItemBind").html("");
@@ -78,14 +78,14 @@
                 $("#DivItemBind").html(result);
             }
         });
-    }
+    };
 </script>
 <script>
     var ActivatePageNumber = function (id) {
         if (id == 0) { id = 1; }
         localStorage.setItem("PageNumber", id);
         return true;
-    }
+    };
 </script>
 <main class="ps-main ps-products-listing">
     <div class="ps-hero">
@@ -260,64 +260,110 @@
 	var sortdropdown = document.getElementById("sortby");
     sortdropdown.onchange = function () {
         $("body").removeClass("loaded");
-		if (this.selectedIndex !== 0) {
-			var sortorder = this.value;
 
-			pageindexcounter = @ViewBag.ToProductsCount;
-			var pagecounter = pageindexcounter / 12;
+        if (this.selectedIndex !== 0) {
+            var sortorder = this.value;
 
-			var productcatid = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
-			$.ajax({
-				url: "../../ProductCatWise/Sortby",
-				type: "POST",
-				data: {
-					"sortorder": sortorder,
-					"PageIndex": pagecounter,
-					"productcatid": productcatid
+            pageindexcounter = @ViewBag.ToProductsCount;
+            var pagecounter = pageindexcounter / 12;
 
-				},
-				success: function (result) {
-					$("#DivItemBind").html(result);
+            var productcatid = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+            $.ajax({
+                url: "../../ProductCatWise/Sortby",
+                type: "POST",
+                data: {
+                    "sortorder": sortorder,
+                    "PageIndex": pagecounter,
+                    "productcatid": productcatid
+
+                },
+                success: function (result) {
+                    $("#DivItemBind").html(result);
+                   
+                    //setTimeout(function () {
+                        //$("#abc").load(location.href + ' #abc');
+                        //$("#paginationfooter").load(location.href + ' #paginationfooter');
+                    //}, 2000);
+                   
+                   
+                    $.ajax({
+                        url: "../../ProductCatWise/_Pagination",
+                        type: "POST",
+                        data: {
+                            "id": 0,
+                            "searchresultcount": null,
+                            "lowerlimit": null,
+                            "numberofpages": null
+                        },
+                        success: function (result) {
+                            //debugger;
+                            console.log(result);
+                            $("#paginationfooter").html(result);
+
+                           
+                            $("#1").addClass("active");
+                            $("#active").removeClass("active");
+                            //var ActivatePageNo = ActivatePagination(id);
+                        }
+                    });
+                    $.ajax({
+                        url: "../../ProductCatWise/PageCountingPartialView",
+                        type: "POST",
+                        data: {
+                            "id": 1                           
+                        },
+                        success: function (result) {                        
+                           
+                            $("#abc").html(result);                           
+                        }
+                    });
+
+
                     pageindexcounter++;
                     $(".ps-loading").addClass("loaded");
-				}
-			});
+                }
+            });
 
-		}
-	}
+        }
+    };
 </script>
 @*//Below script is called when the next page is requested by the user from the  pagination bar of the  Categorywise Product Page*@
 <script>
 
     var nextpage = function (id) {
+       
+        var sortdropdown = document.getElementById("sortby");
+        var sortdropdownvalue = sortdropdown.value;
+
         $("body").removeClass("loaded");
-		var ActivatePageNo = ActivatePagination(id);
-		var FromProductsCount = '@ViewBag.ProductsFrom';
-		var ToProductsCount = '@ViewBag.ToProductsCount';
-		$.ajax({
-			url: "../../ProductCatWise/NextPage/",
-			type: "POST",
-			data: {
-				"id": id
-			},
-			success: function (result) {
+        var ActivatePageNo = ActivatePagination(id);
+        var FromProductsCount = '@ViewBag.ProductsFrom';
+        var ToProductsCount = '@ViewBag.ToProductsCount';
+        $.ajax({
+            url: "../../ProductCatWise/NextPage/",
+            type: "POST",
+            data: {
+                "id": id,
+                "sortingby": sortdropdownvalue
+            },
+            success: function (result) {
 
 
                 $("#DivItemBind").html(result);
                 $("body").addClass("loaded");
-			}
-		});
+            }
+        });
 
-		var ProductsCountNumber = PageCounting(id);
-		if (id == 1) {
-			$("#pagenumber2").removeClass("active");
-			$("#pagenumber1").addClass("active");
-		}
-		else {
-			$("#pagenumber1").removeClass("active");
-			$("#pagenumber2").addClass("active");
-		}
-	}
+        var ProductsCountNumber = PageCounting(id);
+        if (id == 1) {
+            $("#pagenumber2").removeClass("active");
+            $("#pagenumber1").addClass("active");
+        }
+        else {
+            $("#pagenumber1").removeClass("active");
+            $("#pagenumber2").addClass("active");
+        }
+    };
 </script>
 @*////Below is the script for fetching More pages in the pagination bar of the  Categorywise Product Page*@
 <script>
@@ -339,7 +385,7 @@
                         "numberofpages": numberofpages
                     },
                     success: function (result) {
-                        debugger
+                        console.log(result);
                         $("#paginationfooter").html(result);
                         var ActivatePageNo = ActivatePagination(id);
                     }
@@ -348,7 +394,7 @@
             }
         });
 
-    }
+    };
 </script>
 @*//Below is the script for fetching previous pages in the pagination bar of the  Categorywise Product Page*@
 <script>
@@ -372,7 +418,7 @@
                         "numberofpages": numberofpages
                     },
                     success: function (result) {
-                       
+
                         $("#paginationfooter").html(result);
                         var ActivatePageNo = ActivatePagination(id);
                     }
@@ -380,7 +426,7 @@
                 var ProductsCountNumber = PageCounting(id);
             }
         });
-    }
+    };
 </script>
 <script>
     var PageCounting = function (id) {
@@ -394,19 +440,18 @@
                 $("#abc").html(result);
             }
         });
-    }
+    };
 </script>
 <script>
     var ActivatePagination = function (id) {
         $(".active").removeClass("active");
         $("#" + id + "").addClass("active");
 
-    }
+    };
 </script>
 <script>
-    window.onload = function ()
-    {
+    window.onload = function () {
         $("#@Model.ParentCatId")[0].click();
 
-    }
+    };
 </script>    

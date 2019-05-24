@@ -12,7 +12,8 @@ namespace PrivateSquareWeb.Controllers.Website
 	public class ProductCatWiseController : Controller
 	{
 		static List<ProductModel> ListAllProduct;
-		JwtTokenManager _JwtTokenManager = new JwtTokenManager();
+        static List<ProductModel> sortedproducts;
+        JwtTokenManager _JwtTokenManager = new JwtTokenManager();
 
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
 		public ActionResult Index(string id)
@@ -149,7 +150,8 @@ namespace PrivateSquareWeb.Controllers.Website
 		{
 			long? Id = Convert.ToInt64(CommonFile.Decode(productcatid));
 			ProductModel objModel = new ProductModel();
-			string SortOrder = "";
+            var SearchProductList = new List<ProductModel>();
+            string SortOrder = "";
 			switch (sortorder)
 			{
 				case 1:
@@ -166,19 +168,48 @@ namespace PrivateSquareWeb.Controllers.Website
 					break;
 			}
 
-			var sortedproducts = CommonFile.GetSortedProducts(SortOrder, pageindex, Id);
-			var ProductList = ListAllProduct.Where(x => x.ProductCatId == Id).ToList();
+            //sortedproducts = CommonFile.GetSortedProducts(SortOrder, pageindex, Id);
+            
+            sortedproducts = ListAllProduct.Where(x => x.ProductCatId == Id).ToList();
+            if (sortorder == 1)
+            {
+                sortedproducts = sortedproducts.OrderBy(x => x.DiscountPrice).ToList();
+            }
+            if (sortorder == 2)
+            {
+                sortedproducts = sortedproducts.OrderByDescending(x => x.DiscountPrice).ToList();
+            }
+
+            var ProductList = ListAllProduct.Where(x => x.ProductCatId == Id).ToList();
 
 			ViewBag.UsersProduct = sortedproducts.Take(Constant.NumberOfProducts);
 			ViewBag.SearchCatId = productcatid;
-
 			var ProductCatList = CommonFile.GetProductCategory(null);
 
-			ViewBag.ProductCatList = ProductCatList;
+            //this is for Showing 1–12 of 118 results
+            ViewBag.ProductsFrom = ((pageindex - 1) * Constant.NumberOfProducts);
+            ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
+
+            //This is from paging 
+            SearchProductList = ListAllProduct.Where(x => x.ProductCatId == Id).ToList();
+            ViewBag.SearchResultCount = SearchProductList.Count;
+            ViewBag.NumberOfPages = 5;
+            ViewBag.LowerLimit = 1;
+            ViewBag.NumberOfPages = SearchProductList.Count / 10;
+
+            string NumberOfPages =Convert.ToString(SearchProductList.Count / 10);
+            string SearchResultCount = Convert.ToString(SearchProductList.Count);
+
+            Services.SetCookie(this.ControllerContext.HttpContext, "NumberOfPages", "5");
+            Services.SetCookie(this.ControllerContext.HttpContext, "LowerLimit", "1");
+            Services.SetCookie(this.ControllerContext.HttpContext, "SearchResutlCount", SearchResultCount);
+
+
+            ViewBag.ProductCatList = ProductCatList;
 			return PartialView("~/Views/ProductCatWise/PartialCatwiseProductValue.cshtml", objModel);
 		}
 
-		public PartialViewResult NextPage(long id)
+		public PartialViewResult NextPage(long id,string sortingby)
 		{
 			string SearchCookieValue = Services.GetCookie(this.HttpContext, "ProductCatWiseCatId").Value;
 			dynamic _data = SearchCookieValue;
@@ -190,14 +221,15 @@ namespace PrivateSquareWeb.Controllers.Website
 		
 			var SearchProductList = new List<ProductModel>();
 			if (!CommonFile.IsParentCategory(ProductCatId))
-			{
-				SearchProductList = ListAllProduct.Where(x => x.ProductCatId == ProductCatId).ToList();
-			}
+			{                
+                    SearchProductList = sortedproducts;
+                //SearchProductList = ListAllProduct.Where(x => x.ProductCatId == ProductCatId).ToList();
+            }
 			else
 			{
 				SearchProductList = ListAllProduct.Where(x => x.ParentCatId == ProductCatId).ToList();
-			}
-			ViewBag.UsersProduct = SearchProductList.Skip((pageindex - 1) * Constant.NumberOfProducts).Take(Constant.NumberOfProducts);
+			}            
+            ViewBag.UsersProduct = SearchProductList.Skip((pageindex - 1) * Constant.NumberOfProducts).Take(Constant.NumberOfProducts);
 		   
 			return PartialView("~/Views/ProductCatWise/PartialCatwiseProductValue.cshtml");
 		}
