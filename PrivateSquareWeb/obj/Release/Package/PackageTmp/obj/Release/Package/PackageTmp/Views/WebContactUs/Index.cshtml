@@ -1,0 +1,128 @@
+﻿@model PrivateSquareWeb.Models.ContactUsModel
+
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
+}
+@using (Html.BeginForm("ContactUsWeb", "WebContactUs", FormMethod.Post))
+
+{
+    @Html.AntiForgeryToken()
+
+    <div class="header--sidebar"></div>
+    <div class="ps-hero">
+        <div class="container">
+            <h3>Contact Page</h3>
+           
+        </div>
+    </div>
+    <div id="contact-map" data-address="New York, NY" data-title="BAKERY LOCATION!" data-zoom="17"></div>
+    <main class="ps-main">
+        <div class="ps-container">
+            <div class="ps-contact">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 ">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <form class="ps-form--contact" action="do_action" method="post">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                    <div class="form-group">
+                                        <label>Name <sup>*</sup></label>
+                                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", placeholder = "Enter your Full name" })
+                                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                    <div class="form-group">
+                                        <label>Email <sup>*</sup></label>
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter Email" })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Your Message <sup>*</sup></label>
+                                @Html.TextBoxFor(m => m.Message, new { @class = "form-control", placeholder = "Enter Message" })
+                                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                                @*<textarea class="form-control" rows="7"></textarea>*@
+                            </div>
+                            <div class="form-group">
+                                <p style="color:red;"> @ViewBag.ResponseMessage</p>
+                                <input type="submit" class="ps-btn pl-60 pr-60" value="Submit" />
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 ">
+                        <div class="ps-contact__info">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                    <div class="ps-block--contact">
+                                        @*<h3>OFFICE AT Panchkula</h3>
+                                        <h4>
+                                            , Swastik Vihar, Sector 5 MDC,</h4>
+                                        <p><i class="fa fa-envelope-o"></i><a href="#">Panchkula, Haryana 134114</a></p>
+                                        <p><i class="fa fa-phone"></i> +91-172-4668920</p>*@
+                                    </div>
+                                </div>
+                             
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                    <div class="ps-block--contact">
+                                        <h3>FOLLOW US</h3>
+                                        <ul class="ps-social">
+                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-feed"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+   
+    <div class="ps-section--features">
+        <div class="ps-container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                    <div class="ps-iconbox">
+                        <header>
+                            <i class="ps-icon-delivery"></i>
+                            <h3>FREE SHIPPING</h3>
+                            <p>ON ORDER OVER $199</p>
+                        </header>
+                        <p>Want to track a package? Find tracking information and order details from Your Orders.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                    <div class="ps-iconbox">
+                        <header>
+                            <i class="ps-icon-wallet"></i>
+                            <h3>100% MONEY BACK.</h3>
+                            <p>WITHIN 30 DAYS AFTER DELIVERY.</p>
+                        </header>
+                        <p>You may return most new, unopened items sold within 30 days of delivery for a full refund.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                    <div class="ps-iconbox">
+                        <header>
+                            <i class="ps-icon-customer-service"></i>
+                            <h3>SUPPORT 24/7.</h3>
+                            <p>WE CAN HELP YOU ONLINE.</p>
+                        </header>
+                        <p>We offer a 24/7 customer hotline so you’re never alone if you have a question.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

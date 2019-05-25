@@ -1,0 +1,54 @@
+﻿@model PrivateSquareWeb.Models.AddressModel
+@{
+
+    ViewBag.Title = "Index";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="slim-mainpanel mg-t-40">
+
+    <div class="container">
+
+        <div>
+
+            <div class="form-layout">
+
+                <div class="row">
+
+                    <div class="col-sm-6 col-md-3">
+
+                        @{
+
+                            //Html.RenderPartial("_Header");
+
+                            Html.RenderAction("HeaderValue", "SidebarProfile");
+
+                        }
+
+                    </div>
+
+                    <div class="col-sm-6 col-md-9">
+
+                        <div class="box-shadow-bc pd-40 text-center addresses min-height">
+
+                            <img src="~/WebSiteTheme/blue-location-icon-26.png" class="address-icon mg-t-115" />
+
+                            <p>No Addresses found in your account</p>
+
+                            <a href="~/Address/AddAddress" title="add address" class="btn btn-block btn-sign-in common-button m-auto">Add Address</a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

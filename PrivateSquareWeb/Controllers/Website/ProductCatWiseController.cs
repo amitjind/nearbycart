@@ -221,8 +221,15 @@ namespace PrivateSquareWeb.Controllers.Website
 		
 			var SearchProductList = new List<ProductModel>();
 			if (!CommonFile.IsParentCategory(ProductCatId))
-			{                
+			{
+                if (sortedproducts != null)
+                {
                     SearchProductList = sortedproducts;
+                }
+                else
+                {
+                    SearchProductList = ListAllProduct.Where(x => x.ProductCatId == ProductCatId).ToList();
+                }
                 //SearchProductList = ListAllProduct.Where(x => x.ProductCatId == ProductCatId).ToList();
             }
 			else
@@ -261,7 +268,14 @@ namespace PrivateSquareWeb.Controllers.Website
 					var ProductCatId = Services.GetCookie(this.HttpContext, "ProductCatId").Value;
 					if (!CommonFile.IsParentCategory(long.Parse(CommonFile.Decode(ProductCatId))))
 					{
-						SearchProductList = ListAllProduct.Where(x => x.ProductCatId == long.Parse(CommonFile.Decode(ProductCatId))).ToList();
+                        if (sortedproducts != null)
+                        {
+                            SearchProductList = sortedproducts;
+                        }
+                        else
+                        {
+                            SearchProductList = ListAllProduct.Where(x => x.ProductCatId == long.Parse(CommonFile.Decode(ProductCatId))).ToList();
+                        }
 					}
 					else { SearchProductList = ListAllProduct.Where(x => x.ParentCatId == long.Parse(CommonFile.Decode(ProductCatId))).ToList(); }
 					ViewBag.UsersProduct = SearchProductList.Skip((pageindex - 1) * Constant.NumberOfProducts).Take(Constant.NumberOfProducts);

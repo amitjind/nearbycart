@@ -33,8 +33,7 @@
                 TotalAmount: TotalAmount
             },
             success: function (result) {  
-                $("#Cartcontent").load(location.href + ' #Cartcontent');
-                
+                $("#Cartcontent").load(location.href + ' #Cartcontent');                
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
                     
               
@@ -125,7 +124,8 @@
                         '</div>';
                 }
                 if (JsonResponse.length == null || JsonResponse.length == 0) {
-                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
+                    //updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><span><i class="ps-icon-cart">' + JsonResponse.length + '</i></span></a>';
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
                     divCartTotal.innerHTML = '<div class="ps-cart__total" >< p > YOUR SHOPPING BAG IS EMPTY</p ></div>';
                    
                     Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';

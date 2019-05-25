@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+
+
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NearByCart</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CLibre+Baskerville:400,700" rel="stylesheet">
+
+    @Styles.Render("~/websitetheme/plugins/revolution/css")
+
+  
+
+    @RenderSection("scripts", required: false)
+
+
+
+</head>
+
+
+
+<body class="ps-loading">
+
+    <header>
+        <div id="headerDiv">
+            @{
+
+
+
+                Html.RenderAction("HeaderValue", "WebsiteHeader");
+
+            }
+        </div>
+    </header>
+
+    <div>
+
+        @RenderBody()
+
+
+
+    </div>
+
+    <footer>
+
+        @{Html.RenderPartial("_WebSiteFooter");
+
+        }
+
+    </footer>
+
+    @Scripts.Render("~/websitetheme/bundles/jquery")
+    <script>
+        var weburl = window.location.pathname;
+
+        $(".main-menu li a").each(function () {
+
+            var menuhref = $(this).attr('href');
+
+            if (weburl == menuhref) {
+
+                $(".main-menu li").removeClass("current-menu-item");
+
+                $(this).parent('li').addClass("current-menu-item");
+
+            }
+
+            else {
+
+            }
+
+        })
+    </script>
+    <script>
+        $(window).load(function () {
+           // $("#1").addClass("active");
+        });
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
