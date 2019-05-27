@@ -83,11 +83,11 @@
 
                 $("#Cartcontent").load(location.href + ' #Cartcontent');               
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
-                
+                $('#' + Id).hide();
                 setTimeout(
                     function () {
-                        $('#' + Id).hide();
-                        swal(" ", "One more added !", "success");
+                        
+                        //swal(" ", "One more added !", "success");
                     }, 2000
                 );
 
@@ -130,11 +130,11 @@
             success: function (result) {
                 $("#Cartcontent").load(location.href + ' #Cartcontent'); 
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
-
+                $('#' + Id).hide();
                 setTimeout(
                     function () {
-                        $('#' + Id).hide();
-                        swal(" ", "Quantity removed !", "success");
+                       
+                        //swal(" ", "Quantity removed !", "success");
                     }, 2000
                 );
             },
@@ -334,8 +334,11 @@
                                                                 <p>@item.Type</p>
                                                                 <h4 class="card-title"><span><input type="radio" name="rdoAddress" id="rdoAddress[]" value="@item.Id" /></span> @item.Name</h4>
                                                                 <p class="card-text">
-                                                                    @item.Address.Replace("$^", " "), @item.CityName, @item.StateName<br />
-                                                                    @item.Landmark<br /> @item.Mobile<br /> @item.Pincode<br /> @item.AlternatePhone
+                                                                    if( @item.Address!=null)
+                                                                    {
+                                                                        @item.Address, @item.CityName, @item.StateName<br />
+                                                                        @item.Landmark<br /> @item.Mobile<br /> @item.Pincode<br /> @item.AlternatePhone
+                                                                    }
                                                                 </p>
                                                                 <p class="card-text">
 

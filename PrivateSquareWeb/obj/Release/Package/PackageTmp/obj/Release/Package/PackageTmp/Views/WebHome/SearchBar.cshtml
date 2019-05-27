@@ -46,7 +46,7 @@
                 swal(" ", "Product Added to the Cart", "success");
             },
             error: function (error) {
-                console.log(error);
+                //console.log(error);
             }
         });
     }
@@ -94,7 +94,8 @@
                         '</div>';
                 }
                 if (JsonResponse.length == null || JsonResponse.length == 0) {
-                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
+                    //updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
                     divCartTotal.innerHTML = '<div class="ps-cart__total" >< p > YOUR SHOPPING BAG IS EMPTY</p ></div>';
 
                     Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';

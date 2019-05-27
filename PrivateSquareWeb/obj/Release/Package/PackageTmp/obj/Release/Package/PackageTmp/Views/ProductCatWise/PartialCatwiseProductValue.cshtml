@@ -31,13 +31,12 @@
             },
             success: function (result) {
                 $("#Cartcontent").load(location.href + ' #Cartcontent');                
-                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
-                    //$(".ps-loading").addClass("loaded");
-                    //swal(" ", "Product Added to the Side Cart111", "success");
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');                   
+                
                 setTimeout(
                     function () {
-                        $(".ps-loading").addClass("loaded");
-                        swal(" ", "Product Added to the Side Cart", "success");
+                $(".ps-loading").addClass("loaded");
+                swal(" ", "Product Added to the Side Cart", "success");
                     }, 2000
                 );
                
@@ -47,8 +46,6 @@
             }
         });
     }
-</script>
-<script type="text/javascript">
     var DeleteItem = function (index) {
 
         var divCart = document.getElementById('CartList');
@@ -93,7 +90,8 @@
                         '</div>';
                 }
                 if (JsonResponse.length == null || JsonResponse.length == 0) {
-                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
+                    //updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
                     divCartTotal.innerHTML = '<div class="ps-cart__total" >< p > YOUR SHOPPING BAG IS EMPTY</p ></div>';
 
                     Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';
@@ -111,15 +109,15 @@
                 divCartTotal.innerHTML = CartTotal;
 
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
-                    //$(".ps-loading").addClass("loaded");
-                    //swal(" ", "Product removed", "success");
+                //$(".ps-loading").addClass("loaded");
+                //swal(" ", "Product removed", "success");
                 setTimeout(
                     function () {
                         $(".ps-loading").addClass("loaded");
                         swal(" ", "Product removed", "success");
                     }, 2000
                 );
-               
+
             },
             error: function (error) {
                 console.log(error);

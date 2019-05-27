@@ -46,8 +46,6 @@
             }
         });
     }
-</script>
-<script type="text/javascript">
     var DeleteItem = function (index) {
 
         var divCart = document.getElementById('CartList');
@@ -111,15 +109,15 @@
                 divCartTotal.innerHTML = CartTotal;
 
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
-                    //$(".ps-loading").addClass("loaded");
-                    //swal(" ", "Product removed", "success");
+                //$(".ps-loading").addClass("loaded");
+                //swal(" ", "Product removed", "success");
                 setTimeout(
                     function () {
                         $(".ps-loading").addClass("loaded");
                         swal(" ", "Product removed", "success");
                     }, 2000
                 );
-               
+
             },
             error: function (error) {
                 console.log(error);

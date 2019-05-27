@@ -192,7 +192,8 @@
                             }
                             else
                             {
-                                <a class="ps-cart__toggle" href="#"><span><i class="ps-icon-cart">@Model.CartItemCount</i></span></a>
+                                @*<a class="ps-cart__toggle" href="#"><span><i class="ps-icon-cart">@Model.CartItemCount</i></span></a>*@
+                                <a class="ps-cart__toggle" href="#"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
                             }
                         }
 

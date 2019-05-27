@@ -199,7 +199,7 @@ namespace PrivateSquareWeb.CommonCls
 					FromMailerPWD = ConfigurationManager.AppSettings["FromMailerPWDGoD"];
 					#endregion
 				}
-				var senderEmail = new MailAddress(FromMailAddress, "Sender");
+				var senderEmail = new MailAddress(FromMailAddress, "NearByCart");
 				var receiverEmail = new MailAddress(receiverEmailId, userName);
 				var password = FromMailerPWD;
 				//var body = "<b>Thanks For Visit Your </b><p> User Name Is=" + userName + "</p><p> Password Is= " + userPassword + "</p>";
