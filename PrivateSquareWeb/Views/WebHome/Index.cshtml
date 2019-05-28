@@ -40,7 +40,13 @@
                 setTimeout(
                     function () {
                         $(".ps-loading").addClass("loaded");
-                        swal(" ", "Product Added to the Side Cart", "success");
+                        //swal(" ", "Product Added to the Side Cart", "success");
+                        swal({                           
+                            text: "Product Added to the Cart",
+                            timer: 1000,
+                            showConfirmButton: false
+                        });
+                       
                     }, 2000
                 );
                
@@ -67,7 +73,13 @@
                     swal("Product already added to the Wishlist");
                 }
                 else {
-                    swal(" ", result, "success");
+                    //swal(" ", result, "success");
+                    swal({
+                        text: result,
+                        type: "success",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
                 }
             },
             error: function (error) {
@@ -148,7 +160,7 @@
                 setTimeout(
                     function () {
                         $(".ps-loading").addClass("loaded");
-                        swal(" ", "Product removed", "success");
+                        //swal(" ", "Product removed", "success");
                     }, 2000
                 );
             },
@@ -454,7 +466,9 @@
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                         <div class="ps-iconbox">
                             <header>
-                                <i class="ps-icon-delivery"></i>
+
+                                <img src="~/WebSiteTheme/images/user/shipped.svg" height="50"width="50" />
+                                @*<i class="ps-icon-delivery"></i>*@
                                 <h3>FREE SHIPPING</h3>
                                 <p>ON ORDER OVER ₹500</p>
                             </header>
@@ -464,7 +478,8 @@
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                         <div class="ps-iconbox">
                             <header>
-                                <i class="ps-icon-wallet"></i>
+                                <img src="~/WebSiteTheme/images/user/refund.svg"  height="50"width="50" />
+                                @*<i class="ps-icon-wallet"></i>*@                                
                                 <h3>100% MONEY BACK.</h3>
                                 <p>WITHIN 30 DAYS AFTER DELIVERY.</p>
                             </header>
@@ -474,7 +489,8 @@
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                         <div class="ps-iconbox">
                             <header>
-                                <i class="ps-icon-customer-service"></i>
+                                <img src="~/WebSiteTheme/images/user/headset.svg" height="50"width="50" />
+                                @*<i class="ps-icon-customer-service"></i>*@
                                 <h3>SUPPORT 24/7.</h3>
                                 <p>WE CAN HELP YOU ONLINE.</p>
                             </header>

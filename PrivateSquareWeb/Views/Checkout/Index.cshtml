@@ -86,7 +86,11 @@
                 $('#' + Id).hide();
                 setTimeout(
                     function () {
-                        
+                        swal({
+                            text: "Product Added to the Cart",
+                            timer: 1000,
+                            showConfirmButton: false
+                        });
                         //swal(" ", "One more added !", "success");
                     }, 2000
                 );
@@ -203,7 +207,7 @@
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
                     $("#Cartcontent").load(location.href + ' #Cartcontent');
                     $("body").addClass("loaded");
-                    swal(" ", "Product removed", "success");
+                    //swal(" ", "Product removed", "success");
                 })
 
             },

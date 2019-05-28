@@ -36,7 +36,12 @@
                 setTimeout(
                     function () {
                 $(".ps-loading").addClass("loaded");
-                swal(" ", "Product Added to the Side Cart", "success");
+                        //swal(" ", "Product Added to the Side Cart", "success");
+                        swal({
+                            text: "Product Added to the Cart",
+                            timer: 1000,
+                            showConfirmButton: false
+                        });
                     }, 2000
                 );
                
@@ -114,7 +119,7 @@
                 setTimeout(
                     function () {
                         $(".ps-loading").addClass("loaded");
-                        swal(" ", "Product removed", "success");
+                        //swal(" ", "Product removed", "success");
                     }, 2000
                 );
 
@@ -145,7 +150,13 @@
                 }
                 else {
                     $("body").addClass("loaded");
-                    swal(" ", result, "success");
+                    //swal(" ", result, "success");
+                    swal({
+                        text: result,
+                        type: "success",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
                 }
             },
             error: function (error) {

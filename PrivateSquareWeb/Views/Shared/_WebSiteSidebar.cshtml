@@ -1,5 +1,4 @@
-﻿
-<style>
+﻿<style>
     .ContainSpace {
         margin-left: 25px;
     }
@@ -9,7 +8,7 @@
 <script>
     var AddToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount) {
 
-       
+
 
         var discountPrice = 0;
         var ProductId = Id;
@@ -33,7 +32,7 @@
                 Discount: discountPrice,
                 TotalAmount: TotalAmount
             },
-            success: function (result) {                
+            success: function (result) {
                 $("#refreshThisDivWhenProductIsAddedToCart_50").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart_50');
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
                 //$('#' + Id).hide();
@@ -41,11 +40,11 @@
                 setTimeout(
                     function () {
                         $('#' + Id).hide();
-                        swal(" ", "One more added !", "success");
+                        //swal(" ", "One more added !", "success");
                     }, 2000
                 );
 
-              
+
 
             },
             error: function (error) {
@@ -98,7 +97,7 @@
                 setTimeout(
                     function () {
                         $('#' + Id).hide();
-                        swal(" ", "Quantity removed !", "success");
+                        //swal(" ", "Quantity removed !", "success");
                     }, 2000
                 );
 
