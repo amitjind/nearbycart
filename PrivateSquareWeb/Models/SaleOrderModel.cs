@@ -29,5 +29,9 @@ namespace PrivateSquareWeb.Models
         public string Operation { get; set; }
         public Boolean IsCouponApplied { get; set; }
         public string OrderDatestring { get; set; }
+        public decimal IProductsTotal { get; set; }
+        public decimal Shippingcharges { get; set; }
+
+
     }
 }

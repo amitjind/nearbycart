@@ -1,78 +1,6 @@
 ﻿@model PrivateSquareWeb.Models.HeaderPartialModel
 
-<script type="text/javascript">
-    //var DeleteItem = function (index) {
-    //    $(".ps-loading").addClass("loaded");
 
-    //    var divCart = document.getElementById('CartList');
-    //    var divCartTotal = document.getElementById('CartTotal');
-    //    var updateCartItemCount = document.getElementById('UpdateCartItemCount');
-    //    var CartString = "";
-    //    var CartTotal = "";
-
-    //    $.ajax({
-    //        url: "../../WebsiteHeader/RemoveToCart",
-    //        type: "POST",
-
-    //        data: {
-    //            index: index
-    //        },
-    //        success: function (result) {
-    //            var JsonResponse = JSON.parse(result);
-
-    //            var ProductName = "";
-    //            var Qty = "";
-    //            var ImageName = "";
-    //            var TotalAmount = 0;
-    //            for (var i = 0; i < JsonResponse.length; i++) {
-
-
-    //                ProductName = JsonResponse[i].ProductName;
-    //                Qty = JsonResponse[i].Qty;
-    //                TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
-    //                ImageName = JsonResponse[i].ImageName;
-    //                console.log('~/DocImg/' + ImageName);
-    //                CartString = CartString + '<div class="ps-cart-item"><a class="ps-cart-item__close" onclick="DeleteItem(' + i + ')"></a>' +
-    //                    '<div class="ps-cart-item__thumbnail">' +
-    //                    '<a href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '"></a>' +
-    //                    '<img src="../../DocImg/' + ImageName + '" alt="">' +
-    //                    '</div>' +
-    //                    '<div class="ps-cart-item__content">' +
-    //                    '<a class="ps-cart-item__title" href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '">' + JsonResponse[i].ProductName + '</a>' +
-    //                    '<p><span>Quantity:<i>' + JsonResponse[i].Qty + '</i></span><span>Total:<i>₹ ' + JsonResponse[i].Amount + '</i></span></p></div>' +
-    //                    '</div>';
-    //            }
-    //            if (JsonResponse.length == null || JsonResponse.length == 0) {
-    //                updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
-    //                divCartTotal.innerHTML = '<div class="ps-cart__total" >< p > YOUR SHOPPING BAG IS EMPTY</p ></div>';
-
-    //                Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';
-    //            }
-    //            if (JsonResponse.length > 0) {
-
-
-    //                CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
-    //                    "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
-    //                updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
-
-    //            }
-
-    //            divCart.innerHTML = CartString;
-    //            divCartTotal.innerHTML = CartTotal;
-
-    //            $("#CartCount").load(location.href + ' #CartCount');
-    //            $("body").addClass("loaded");
-
-
-    //        },
-    //        error: function (error) {
-    //            console.log(error);
-    //        }
-    //    });
-    //}
-
-
-</script>
 <script type="text/javascript">
     var Logout = function () {
 
@@ -143,16 +71,12 @@
                                             <li><a href="~/WebHome/MyOrders">My Orders</a></li>
                                             <li><a href="~/WebHome/WishList">My Wishlist</a></li>
                                             <li><a href="~/ChangePassword/WebIndex">Change Password</a></li>
-                                            <li><a href="/WebLogin/Logout">Log Out</a></li>
-                                            @*<li><a href="/WebLogin/Logout?url=@Request.Url.AbsoluteUri.ToString()">Log Out</a></li>*@
+                                            <li><a href="/WebLogin/Logout">Log Out</a></li>                                           
                                         </ul>
                                     </div>
                                 }
                                 else if (@Model.UserId == 0)
                                 {
-
-                                    @*<a onclick="Sendurl()">Login & Regiser</a>*@
-
                                     <a href="/WebLogin/Index?url=@Request.Url.AbsoluteUri.ToString()">Login & Regiser</a>
                                 }
                             }
@@ -188,11 +112,9 @@
                                 <div id="UpdateCartItemCount">
                                     <a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
                                 </div>
-
                             }
                             else
                             {
-                                @*<a class="ps-cart__toggle" href="#"><span><i class="ps-icon-cart">@Model.CartItemCount</i></span></a>*@
                                 <a class="ps-cart__toggle" href="#"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
                             }
                         }
@@ -205,21 +127,15 @@
                                     @{ int index = 0;
                                         foreach (var item in ViewBag.AddToCart)
                                         {
-
                                             <div class="ps-cart-item">
-
                                                 <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
-
                                                 <div class="ps-cart-item__thumbnail">
                                                     <a href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"></a>
                                                     <img src="~/DocImg/@item.ImageName" alt="Image">
                                                 </div>
                                                 <div class="ps-cart-item__content">
                                                     <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"> @item.ProductName</a>
-                                                    @*<a class="ps-cart-item__title" href="/WebHome/ProductDetail/@item.ProductId"> @item.ProductName</a>*@
-
                                                     <p><span>Quantity:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
-
                                                 </div>
                                             </div>
                                             index++;
@@ -260,19 +176,12 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
             </div>
         </div>
     </nav>
 </header>
 <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
+    <div class="modal-dialog">        
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>

@@ -50,9 +50,24 @@ namespace PrivateSquareWeb.Controllers.Website
 			ViewBag.ProductsFrom = ((pageindex - 1) * Constant.NumberOfProducts);
 			ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
 			ViewBag.SearchResultCount = SearchProductList.Count;
-			ViewBag.NumberOfPages = SearchProductList.Count / 10;
-			ViewBag.LowerLimit = 1;
-			ViewBag.NumberOfPages = 5;
+            ViewBag.LowerLimit = 1;
+
+            int nop = SearchProductList.Count / Constant.NumberOfProducts;
+            int remindernop = SearchProductList.Count % 12;
+                     
+            if (nop<Constant.NumberOfPages)
+            {
+                if (remindernop > 0)
+                {
+                    nop = nop + 1;
+                }
+                ViewBag.NumberOfPages = nop;
+            }
+            else
+            {
+                ViewBag.NumberOfPages = Constant.NumberOfPages;
+            }
+		
 			var ProductCategory = ProductCatList.Where(x => x.Id.Equals(Id));         
 			ViewBag.ProductCatList = EncodedCategories.Where(x =>x.ParentCatId==ProductCategory.Single().ParentCatId);
             if (!CommonFile.IsParentCategory(Id))
@@ -171,6 +186,10 @@ namespace PrivateSquareWeb.Controllers.Website
             //sortedproducts = CommonFile.GetSortedProducts(SortOrder, pageindex, Id);
             
             sortedproducts = ListAllProduct.Where(x => x.ProductCatId == Id).ToList();
+            if (sortedproducts.Count == 0)
+            {
+                sortedproducts = ListAllProduct.Where(x => x.ParentCatId == Id).ToList();
+            }
             if (sortorder == 1)
             {
                 sortedproducts = sortedproducts.OrderBy(x => x.DiscountPrice).ToList();
@@ -180,7 +199,7 @@ namespace PrivateSquareWeb.Controllers.Website
                 sortedproducts = sortedproducts.OrderByDescending(x => x.DiscountPrice).ToList();
             }
 
-            var ProductList = ListAllProduct.Where(x => x.ProductCatId == Id).ToList();
+            //var ProductList = ListAllProduct.Where(x => x.ProductCatId == Id).ToList();
 
 			ViewBag.UsersProduct = sortedproducts.Take(Constant.NumberOfProducts);
 			ViewBag.SearchCatId = productcatid;
@@ -191,16 +210,31 @@ namespace PrivateSquareWeb.Controllers.Website
             ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
 
             //This is from paging 
-            SearchProductList = ListAllProduct.Where(x => x.ProductCatId == Id).ToList();
-            ViewBag.SearchResultCount = SearchProductList.Count;
-            ViewBag.NumberOfPages = 5;
+            //SearchProductList = ListAllProduct.Where(x => x.ProductCatId == Id).ToList();
+            //ViewBag.SearchResultCount = SearchProductList.Count;           
+            ViewBag.SearchResultCount = sortedproducts.Count;
+
+            int nop = sortedproducts.Count / Constant.NumberOfProducts;
+            int remindernop = sortedproducts.Count % 12;
+            if (nop < Constant.NumberOfPages)
+            {
+                if (remindernop > 0)
+                {
+                    nop = nop + 1;
+                }
+                ViewBag.NumberOfPages = nop;
+            }
+            else
+            {
+                ViewBag.NumberOfPages = Constant.NumberOfPages;
+            }
             ViewBag.LowerLimit = 1;
-            ViewBag.NumberOfPages = SearchProductList.Count / 10;
+            
 
-            string NumberOfPages =Convert.ToString(SearchProductList.Count / 10);
-            string SearchResultCount = Convert.ToString(SearchProductList.Count);
+            int NumberOfPages =Convert.ToInt32(ViewBag.NumberOfPages);
+            string SearchResultCount = Convert.ToString(sortedproducts.Count);
 
-            Services.SetCookie(this.ControllerContext.HttpContext, "NumberOfPages", "5");
+            Services.SetCookie(this.ControllerContext.HttpContext, "NumberOfPages", NumberOfPages.ToString());
             Services.SetCookie(this.ControllerContext.HttpContext, "LowerLimit", "1");
             Services.SetCookie(this.ControllerContext.HttpContext, "SearchResutlCount", SearchResultCount);
 

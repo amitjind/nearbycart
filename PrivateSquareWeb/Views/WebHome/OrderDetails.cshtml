@@ -1,52 +1,81 @@
 ﻿@model PrivateSquareWeb.Models.SaleOrderModel
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "OrderDetails";
-                Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
 }
 <div class="ps-hero">
     <div class="container">
-        <h3>Order Details</h3>       
+        <a href="~/WebHome/MyOrders">back To Orders</a>
+        <h3>Order Details</h3>
     </div>
 </div>
+
 <div class="ps-content pt-80 pb-80" id="wishlistproducts">
     <div class="ps-container">
         <div class="table-responsive">
+            <table class="table">
+                <tr><td>Order Summary</td><td></td></tr>
+                <tr>
+                    <td>items Sub Total</td>
+                    <td>
+                        ₹ @ViewBag.TotalAmount <br />
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Delivery Charges
+                    </td>
+                    <td>
+                        ₹ @ViewBag.charges
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total Amount</td>
+                    <td>
+
+                        @{
+                            var a = ViewBag.TotalAmount + ViewBag.charges;
+                        }
+                        ₹ @a
+
+                    </td>
+                </tr>
+
+            </table>
             <table class="table ps-table ps-table--whishlist">
                 <thead>
                     <tr>
                         <th>ProductName</th>
-                        <th>PRICE</th>
+                        <th>PRICE/Quantity</th>
+                        <th>Total Amount</th>
                         <th>Product</th>
-                        <th>Quantity</th>
+
                     </tr>
-                   
+
                 </thead>
 
-                <tbody>                   
+                <tbody>
                     @foreach (var orders in ViewBag.Orderdetails)
-                    {                      
-                    <tr>
-                        <td><a class="ps-product--compare" href="#"><img class="mr-15" src="~/DocImg/@orders.ProductImage" alt="Product Image">@orders.ProductName</a></td>
-                        <td>₹ @orders.Amount</td>
+                    {
+                        //var productsamount = orders.Amount;
+                        //var productsqty = orders.Quantity;
+                        //var Totalamount = (productsamount * productsqty);
+                        <tr>
+                            <td><a class="ps-product--compare" href="#"><img class="mr-15" src="~/DocImg/@orders.ProductImage" alt="Product Image">@orders.ProductName</a></td>
+                            <td>₹ @orders.Amount*@orders.Quantity</td>
+                            <td>₹ @orders.IProductsTotal</td>
+                            <td><a class="ps-product-link" href="~/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((orders.Id).ToString())))">View Product</a></td>
 
-                        <td><a class="ps-product-link" href="~/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((orders.Id).ToString())))">View Product</a></td>
-                        <td>@orders.Quantity   </td>
-                    </tr>
+                        </tr>
                     }
-                   
-                </tbody>               
-            </table>  
-            <table class="table ps-table ps-table--whishlist">
-                <tr>
-                    <td>Total Amount</td>
-                    <td>
-                        @ViewBag.TotalAmount  @*( plus Extra Shipping )*@
-                    </td>
-                </tr>
+
+                </tbody>
             </table>
+
         </div>
     </div>
 </div>

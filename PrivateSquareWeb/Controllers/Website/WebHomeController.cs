@@ -369,14 +369,25 @@ namespace PrivateSquareWeb.Controllers.Website
                 var _request = JsonConvert.SerializeObject(objmodel);
                 ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetOrders, _request);
                 var Orderdetails = JsonConvert.DeserializeObject<List<SaleOrderModel>>(ObjResponse.Response);
-
+                
                 decimal TotalAmount = 0;
+                List<SaleOrderModel> Locallist = new List<SaleOrderModel>();
                 foreach (var orders in Orderdetails)
                 {
                     TotalAmount = +(orders.Amount * Convert.ToInt32(orders.Quantity)) + (TotalAmount);
+                    orders.IProductsTotal = (orders.Amount * Convert.ToInt32(orders.Quantity));
+                    Locallist.Add(orders);
+                }
+                if (TotalAmount >= 500)
+                {
+                    ViewBag.charges = 0;
+                }
+                else
+                {
+                    ViewBag.charges = 50;
                 }
                 ViewBag.TotalAmount = TotalAmount;
-                ViewBag.Orderdetails = Orderdetails;
+                ViewBag.Orderdetails = Locallist;
 
 
                 return View(objmodel);
