@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
 namespace PrivateSquareWeb
 {
-	public class Constant
+    public class Constant
 	{
 		public const string DomainUrl = " http://nearbycart.com/";//http://localhost:53693/        http://192.168.1.150:2552/
 		public const string ApiRegister = "User/Registeration";// For Mobile Login
@@ -63,11 +59,11 @@ namespace PrivateSquareWeb
 		public static int[] ParentCategories =new int[] { 36, 37, 38, 39, 41, 42 };
 		public const int MinimumAmountForFreeDelivery = 500;
 		public const int ShippingCharges = 50;
-		public static string EncodeNumber(int id)
+        public const int NumberOfPages = 5;
+        public static string EncodeNumber(int id)
 		{
 			byte[] encoded = System.Text.Encoding.UTF8.GetBytes(id.ToString());
 			return Convert.ToBase64String(encoded);
-		
 		}
 	}
 }
