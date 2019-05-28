@@ -6,14 +6,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
-
 namespace PrivateSquareWeb.Controllers.Website
 {
     public class CheckoutController : Controller
     {
-        //HttpContextBase httpContext ;
         JwtTokenManager _JwtTokenManager = new JwtTokenManager();
-        // GET: Checkout
         public ActionResult Index()
         {
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
@@ -23,28 +20,21 @@ namespace PrivateSquareWeb.Controllers.Website
             {
                 PreRequiestCheckout();
             }
-
             return View(BindCartItems());
         }
         public List<AddressModel> GetUserAddress()
         {
-            var GetUserAddressList = new List<AddressModel>();
             AddressModel objmodel = new AddressModel();
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
             if (MdUser.Id != 0)
                 objmodel.UserId = Convert.ToInt64(MdUser.Id);
             var _request = JsonConvert.SerializeObject(objmodel);
             ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetUserAddress, _request);
-            GetUserAddressList = JsonConvert.DeserializeObject<List<AddressModel>>(ObjResponse.Response);
-
-            return GetUserAddressList;
-
+            return JsonConvert.DeserializeObject<List<AddressModel>>(ObjResponse.Response).ToList();
         }
         [HttpPost]
         public JsonResult GetAddress(long? id)
         {
-            var GetUserAddressList = new List<AddressModel>();
-
             AddressModel objmodel = new AddressModel();
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
             if (MdUser.Id != 0)
@@ -52,76 +42,18 @@ namespace PrivateSquareWeb.Controllers.Website
             objmodel.Id = id;
             var _request = JsonConvert.SerializeObject(objmodel);
             ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetUserAddress, _request);
-
             return Json(ObjResponse.Response);
-
         }
         private void bindCountryStateCity()
         {
-            var StateList = CommonFile.GetState();
-            ViewBag.StateList = new SelectList(StateList, "Id", "Name");
             var CityList = CommonFile.GetCity();
             ViewBag.CityList = new SelectList(CityList, "Id", "Name");
         }
         [HttpPost]
-        public string AddressesList1(AddressModel ObjModel)
-        {
-            List<AddressModel> ListUserAddress;
-            ListUserAddress = GetUserAddress();
-            LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
-            ObjModel.UserId = MdUser.Id;
-
-            //if (ModelState.IsValid)
-
-            if (ObjModel.Id == null)
-                ObjModel.Id = 0;
-            if (MdUser.Id != 0)
-            {
-                ObjModel.UserId = Convert.ToInt64(MdUser.Id);
-            }
-            if (ObjModel.Id != 0)
-            {
-                ObjModel.Operation = "update";
-            }
-            else
-            {
-                ObjModel.Operation = "insert";
-            }
-            var _request = JsonConvert.SerializeObject(ObjModel);
-            ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiSaveAddress, _request);
-            if (String.IsNullOrWhiteSpace(ObjResponse.Response))
-
-            {
-                @ViewBag.ResponseMessage = "Error ! Unable to Submit Address";
-                PreRequiestCheckout();
-                return "0";
-            }
-
-            if (ObjResponse.Response.Equals("Save Address"))
-            {
-                ViewBag.UserAddress = ListUserAddress;
-                PreRequiestCheckout();
-                return "1";
-            }
-
-            //else
-            //{
-            //    PreRequiestCheckout();
-            //}
-            PreRequiestCheckout();
-            return "null";
-        }
-
-        [HttpPost]
         public ActionResult AddressesList(AddressModel ObjModel)
         {
-            //////////////////////////////////////////////////////////
-             List<AddressModel> ListUserAddress;
-            ListUserAddress = GetUserAddress();
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
             ObjModel.UserId = MdUser.Id;
-           
-
             if (ObjModel.Id == null)
                 ObjModel.Id = 0;
             if (MdUser.Id != 0)
@@ -138,19 +70,16 @@ namespace PrivateSquareWeb.Controllers.Website
             }
             var _request = JsonConvert.SerializeObject(ObjModel);
             ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiSaveAddress, _request);
-
-            if (String.IsNullOrWhiteSpace(ObjResponse.Response))
+            if (string.IsNullOrWhiteSpace(ObjResponse.Response))
             {
-                @ViewBag.ResponseMessage = "Error ! Unable to Submit Address";
+                ViewBag.ResponseMessage = "Error ! Unable to Submit Address";
                 PreRequiestCheckout();
                 return View("AddAddress", ObjModel);
             }
-
             if (ObjResponse.Response.Equals("Save Address"))
             {
-                ViewBag.UserAddress = ListUserAddress;
+                ViewBag.UserAddress = GetUserAddress();
                 PreRequiestCheckout();
-
                 AddressModel ObjModelnew = new AddressModel();
                 ObjModel = null;
                 BindCartItems();
@@ -162,58 +91,7 @@ namespace PrivateSquareWeb.Controllers.Website
                 BindCartItems();
                 return RedirectToAction("Index", "Checkout", ObjModel);
             }
-
-
-
-
-            //////////////////////////////////////////////////////
-            //List<AddressModel> ListUserAddress;
-            //ListUserAddress = GetUserAddress();
-            //LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
-            //ObjModel.UserId = MdUser.Id;
-
-            ////if (ModelState.IsValid)
-
-            //if (ObjModel.Id == null)
-            //    ObjModel.Id = 0;
-            //if (MdUser.Id != 0)
-            //{
-            //    ObjModel.UserId = Convert.ToInt64(MdUser.Id);
-            //}
-            //if (ObjModel.Id != 0)
-            //{
-            //    ObjModel.Operation = "update";
-            //}
-            //else
-            //{
-            //    ObjModel.Operation = "insert";
-            //}
-            //var _request = JsonConvert.SerializeObject(ObjModel);
-            //ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiSaveAddress, _request);
-            //if (String.IsNullOrWhiteSpace(ObjResponse.Response))
-
-            //{
-            //    @ViewBag.ResponseMessage = "Error ! Unable to Submit Address";
-            //    PreRequiestCheckout();
-            //    return View("AddAddress", ObjModel);
-            //}
-
-            //if (ObjResponse.Response.Equals("Save Address"))
-            //{
-            //    ViewBag.UserAddress = ListUserAddress;
-            //    PreRequiestCheckout();
-            //    AddressModel ObjModelnew = new AddressModel();
-            //    return View("Index", ObjModelnew);
-            //}
-
-            ////else
-            ////{
-            ////    PreRequiestCheckout();
-            ////}
-            //PreRequiestCheckout();
-            //return View("Index", ObjModel);
         }
-
         private void PreRequiestCheckout()
         {
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
@@ -232,11 +110,9 @@ namespace PrivateSquareWeb.Controllers.Website
                 ViewBag.ShippingCharges = 0;
                 ViewBag.TotalAmountAfterCharges = ViewBag.TotalAmount;
             }
-            List<AddressModel> UserAddressList = GetUserAddress();
-            ViewBag.UserAddress = UserAddressList;
+            ViewBag.UserAddress = GetUserAddress();
             bindCountryStateCity();
         }
-
         [HttpPost]
         public JsonResult PlaceOrder(long AddressId, string PaymentMode)
         {
@@ -259,7 +135,6 @@ namespace PrivateSquareWeb.Controllers.Website
             String Response = "[{\"Response\":\"" + ObjResponse.Response + "\"}]";
             return Json(Response);
         }
-
         private SaleOrderModel GetSaleOrderValues(List<AddToCartModel> ListCart, string PaymentMode)
         {
             decimal TotalAmount = 0;
@@ -319,7 +194,6 @@ namespace PrivateSquareWeb.Controllers.Website
         [HttpPost]
         public ActionResult GetCoupon(string CouponCode)
         {
-
             CouponModel ObjCouponModel = new CouponModel();
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
             if (MdUser.Id != 0)
@@ -382,29 +256,29 @@ namespace PrivateSquareWeb.Controllers.Website
                 return JavaScript("swal('Error')");
             }
         }
+        #region Save Coupon History
+        //private void SaveCouponHistory(SaleOrderModel couponModel)
+        //{
+        //    CouponModel ObjcouponModel = new CouponModel();
+        //    LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
+        //    if (MdUser.Id != 0)
+        //    {
+        //        ObjcouponModel.UserId = MdUser.Id;
+        //    }
+        //    ObjcouponModel.CouponId = 1;
+        //    ObjcouponModel.OrderId = 15;
+        //    ObjcouponModel.Discount = 100;
+        //    ObjcouponModel.Operation = "insert";
+        //    var _request = JsonConvert.SerializeObject(ObjcouponModel);
+        //    ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiSaveCouponHistory, _request);
+        //    if (ObjResponse.Response.Equals("Coupon History Saved"))
+        //    {
 
-        private void SaveCouponHistory(SaleOrderModel couponModel)
-        {
-            CouponModel ObjcouponModel = new CouponModel();
-            LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
-            if (MdUser.Id != 0)
-            { ObjcouponModel.UserId = MdUser.Id; }
-            ObjcouponModel.CouponId = 1;
-            ObjcouponModel.OrderId = 15;
-            ObjcouponModel.Discount = 100;
-            ObjcouponModel.Operation = "insert";
-            var _request = JsonConvert.SerializeObject(ObjcouponModel);
-            ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiSaveCouponHistory, _request);
-            if (ObjResponse.Response.Equals("Coupon History Saved"))
-            {
-                //return "Coupon History Saved";
-            }
-
-            //return "error saving coupon history";
-        }
+        //    }
+        //}
+        #endregion
         public ActionResult OrderSuccessful()
         {
-            //return RedirectToAction("Index", "WebHome");
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
             if (MdUser.Id == 0)
             {
@@ -414,7 +288,6 @@ namespace PrivateSquareWeb.Controllers.Website
         }
         public ActionResult DeleteAddress(int? id)
         {
-
             AddressModel objModel = new AddressModel();
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
             objModel.UserId = MdUser.Id;
@@ -424,25 +297,21 @@ namespace PrivateSquareWeb.Controllers.Website
             ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiSaveAddress, _request);
             return RedirectToAction("index");
         }
-
         public AddressModel BindCartItems()
         {
             AddressModel objModel = new AddressModel();
-            var ProductCatList = CommonFile.GetProductCategory(null);
-            ViewBag.ProductCatList = ProductCatList;
+            ViewBag.ProductCatList = CommonFile.GetProductCategory(null);
             List<AddToCartModel> ListAddToCart = Services.GetMyCart(this.ControllerContext.HttpContext, _JwtTokenManager);
             ViewBag.AddToCart = ListAddToCart;
             objModel.CartItemCount = ListAddToCart.Count();
             ViewBag.TotalAmount = GetTotalAmount(ListAddToCart);
             return objModel;
         }
-
         public decimal GetTotalAmount(List<AddToCartModel> ListCart)
         {
             AddToCart objAddToCart = new AddToCart();
             return objAddToCart.GetTotalAmount(ListCart);
         }
-
         public SaleOrderModel GetLastPlacedOrder()
         {
             LoginModel MdUser = Services.GetLoginWebUser(this.ControllerContext.HttpContext, _JwtTokenManager);
