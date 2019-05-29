@@ -44,11 +44,11 @@
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
                 $(".ps-loading").addClass("loaded");
                 //swal(" ", "Product Added to the Cart", "success");
-                swal({
-                    text: "Product Added to the Cart",
-                    timer: 1000,
-                    showConfirmButton: false
-                });
+                //swal({
+                //    text: "Product Added to the Cart",
+                //    timer: 1000,
+                //    showConfirmButton: false
+                //});
             },
             error: function (error) {
                 //console.log(error);
@@ -100,8 +100,8 @@
                 }
                 if (JsonResponse.length == null || JsonResponse.length == 0) {
                     //updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
-                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
-                    divCartTotal.innerHTML = '<div class="ps-cart__total" >< p > YOUR SHOPPING BAG IS EMPTY</p ></div>';
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
+                    divCartTotal.innerHTML = '<div class="ps-cart__total" ></div>';
 
                     Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';
                 }
@@ -139,9 +139,11 @@
             success: function (result) {
                 if (result == "Please Login to access wishlist") {
                     swal(result);
+
                 }
                 else if (result == "Product Exists") {
-                    swal("Product already added to the Wishlist");
+                    //swal("Product already added to the Wishlist");
+                    window.location.href = ("../WebLogin/Index");
                 }
                 else {
                     //swal(" ", result, "success");    

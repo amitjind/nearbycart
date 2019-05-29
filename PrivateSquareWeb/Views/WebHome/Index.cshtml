@@ -41,11 +41,11 @@
                     function () {
                         $(".ps-loading").addClass("loaded");
                         //swal(" ", "Product Added to the Side Cart", "success");
-                        swal({                           
-                            text: "Product Added to the Cart",
-                            timer: 1000,
-                            showConfirmButton: false
-                        });
+                        //swal({                           
+                        //    text: "Product Added to the Cart",
+                        //    timer: 1000,
+                        //    showConfirmButton: false
+                        //});
                        
                     }, 2000
                 );
@@ -67,7 +67,8 @@
             data: { ProductId: ProductId },
             success: function (result) {
                 if (result == "Please Login to access wishlist") {
-                    swal(result);
+                    //swal(result);
+                    window.location.href = ("../WebLogin/Index");
                 }
                 else if (result == "Product Exists") {
                     swal("Product already added to the Wishlist");
@@ -137,7 +138,7 @@
                 }
                 if (JsonResponse.length == null || JsonResponse.length == 0) {
                     //updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><span><i class="ps-icon-cart">' + JsonResponse.length + '</i></span></a>';
-                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
                     divCartTotal.innerHTML = '<div class="ps-cart__total" >< p > YOUR SHOPPING BAG IS EMPTY</p ></div>';
                    
                     Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';

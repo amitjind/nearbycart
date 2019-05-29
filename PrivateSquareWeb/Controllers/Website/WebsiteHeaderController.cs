@@ -37,6 +37,7 @@ namespace PrivateSquareWeb.Controllers.Website
 
             ViewBag.ParentCategories = new SelectList(parentcategories, "Id", "Name");
             objModel.ParentCatId = objmodel1.ParentCatId;
+            ViewBag.ProductCatList = CommonFile.GetProductCategory(null);
             return PartialView("~/Views/Shared/_WebsiteHeader.cshtml", objModel);
         }
         public JsonResult RemoveToCart(int index)

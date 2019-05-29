@@ -16,69 +16,58 @@
 
     if (ViewBag.MyOrders == null)
     {
-        Response.Redirect("../../WebLogin/Index");
-       @*<script>
-        debugger
-        //window.history.forward();
-        window.onload = function () {
-
-                window.history.forward();
-
-        };
-
-        window.onunload = function () {
-            if (ViewBag.MyOrders == null)
-            {
-                window.history.forward();
-            }
-            else {
-
-            }
-            //null;
-        };
-    </script>*@
-        //Response.Redirect("~/WebLogin/Index");
+        Response.Redirect("../../WebLogin/Index");      
     }
     else { }
-}
 }
 
 
 <div class="ps-hero">
     <div class="container">
-        <h3>My orders</h3>
-      
+        <h3>My orders</h3>      
     </div>
 </div>
 <div class="ps-content pt-80 pb-80" id="wishlistproducts">
     <div class="ps-container">
         <div class="table-responsive">
-            <table class="table ps-table ps-table--whishlist">
-                <thead>
-                    <tr>
-                        <th>Order No</th>
-                        <th>PRICE</th>
-                        <th>View</th>
-                        <th>ORDER DATE</th>
-                    </tr>
-                </thead>
+            @{
+                var ordercount = ViewBag.MyOrders;
+                if (ordercount.Count == 0)
+                {
+            <p>You have No orders </p>
+                }
+                else
+                {
+                    
+                     <table class="table ps-table ps-table--whishlist">
+                        <thead>
+                            <tr>
+                                <th>Order No</th>
+                                <th>PRICE</th>
+                                <th>View</th>
+                                <th>ORDER DATE</th>
+                            </tr>
+                        </thead>
 
-                <tbody>
-                    @foreach (var orders in ViewBag.MyOrders)
-                    {
-                        <tr>
-                            <td><a class="ps-product--compare" href="#"><img class="mr-15" src="~/DocImg/user.png" alt="">@orders.OrderNo</a></td>
-                            <td>₹ @orders.Amount</td>
-                            <td><a class="ps-product-link" href="~/WebHome/OrderDetails/@(Constant.EncodeNumber(int.Parse((orders.Id).ToString())))">View Order</a></td>
-                            <td>
-                               @orders.OrderDatestring
-                            
-                            </td>
-                        </tr>
-                    }
-                  
-                </tbody>
-            </table>
+                        <tbody>
+                            @foreach (var orders in ViewBag.MyOrders)
+                            {
+                                <tr>
+                                    <td><a class="ps-product--compare" href="#"><img class="mr-15" src="~/DocImg/user.png" alt="">@orders.OrderNo</a></td>
+                                    <td>₹ @orders.Amount</td>
+                                    <td><a class="ps-product-link" href="~/WebHome/OrderDetails/@(Constant.EncodeNumber(int.Parse((orders.Id).ToString())))">View Order</a></td>
+                                    <td>
+                                        @orders.OrderDatestring
+
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                }
+            }
+
         </div>
     </div>
 </div>

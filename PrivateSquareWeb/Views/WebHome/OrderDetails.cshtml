@@ -16,36 +16,7 @@
 <div class="ps-content pt-80 pb-80" id="wishlistproducts">
     <div class="ps-container">
         <div class="table-responsive">
-            <table class="table">
-                <tr><td>Order Summary</td><td></td></tr>
-                <tr>
-                    <td>items Sub Total</td>
-                    <td>
-                        ₹ @ViewBag.TotalAmount <br />
 
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Delivery Charges
-                    </td>
-                    <td>
-                        ₹ @ViewBag.charges
-                    </td>
-                </tr>
-                <tr>
-                    <td>Total Amount</td>
-                    <td>
-
-                        @{
-                            var a = ViewBag.TotalAmount + ViewBag.charges;
-                        }
-                        ₹ @a
-
-                    </td>
-                </tr>
-
-            </table>
             <table class="table ps-table ps-table--whishlist">
                 <thead>
                     <tr>
@@ -75,9 +46,91 @@
 
                 </tbody>
             </table>
+            @*<table class="table">
+                <tr><td>Order Summary</td><td></td></tr>
+                <tr>
+                    <td>items Sub Total</td>
+                    <td>
+                        ₹ @ViewBag.TotalAmount <br />
 
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Delivery Charges
+                    </td>
+                    <td>
+                        ₹ @ViewBag.charges
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total Amount</td>
+                    <td>
+
+                        @{
+                            var a = ViewBag.TotalAmount + ViewBag.charges;
+                        }
+                        ₹ @a
+
+                    </td>
+                </tr>
+
+            </table>*@
+
+            <div class="col-lg-12">
+               
+                <div class="col-lg-12">
+                    <h3>Order Summary</h3>
+                </div>
+                 <div class="col-lg-4 spc-mrg-tp-30">
+
+                        <p><strong>items Sub Total</strong></p>
+                        <p><strong>Delivery Charges</strong></p>
+                        <p><strong>Total Amount</strong></p>
+
+                    </div>
+                    <div class="col-lg-4 spc-mrg-tp-30">
+                        <p>₹ @ViewBag.TotalAmount </p>
+                        <p>₹ @ViewBag.charges</p>
+                        <p>
+                            @{
+                                var a = ViewBag.TotalAmount + ViewBag.charges;
+                            }
+                            ₹ @a
+                        </p>
+                    </div>
+
+
+
+                </div>
+
+
+
+
+                @*<table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th scope="row">items Sub Total</th>
+                        <td>	₹ 5187.00 </td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">Delivery Charges</th>
+                        <td>₹ 0</td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">Total Amount</th>
+                        <td>₹ 5187.00</td>
+
+                    </tr>
+                </tbody>
+            </table>*@
+
+
+
+            </div>
         </div>
-    </div>
 </div>
 <div class="ps-section--partner">
     <div class="ps-container">

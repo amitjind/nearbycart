@@ -40,56 +40,58 @@
 
 <div class="header--sidebar"></div>
 <header class="header" data-sticky="true">
-    <div class="header__top">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6 col-md-8 col-sm-6 col-xs-12 ">
-                    @*<p>SCO 68, Swastik Vihar, Sector 5 MDC, Panchkula, Haryana 134114</p>*@
-                </div>
-                <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 ">
-                    <div class="dropdown">
-                        <div class="header__actions">
-                            @{ if (@Model.UserId != 0)
+    @*<div class="header__top">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 col-md-8 col-sm-6 col-xs-12 ">
+                        <p>SCO 68, Swastik Vihar, Sector 5 MDC, Panchkula, Haryana 134114</p>
+                    </div>
+                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 ">
+                        <div class="dropdown">
+                            <div class="header__actions">
+                                @{ if (@Model.UserId != 0)
 
-                                {
-                                    <div class="btn-group ps-dropdown">
-                                        @{
-                                            if (Model.RegisterType != "UNV")
-                                            {
+                                    {
+                                        <div class="btn-group ps-dropdown">
+                                            @{
+                                                if (Model.RegisterType != "UNV")
+                                                {
 
-                                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.UserName <img src="~/WebSiteTheme/images/angle-arrow-down.svg" width="10" /></a>
+                                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.UserName <img src="~/WebSiteTheme/images/angle-arrow-down.svg" width="10" /></a>
+                                                }
+                                                else
+                                                {
+                                                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">[Unverified]</button>
+                                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        @Model.UserName  <img src="~/WebSiteTheme/images/angle-arrow-down.svg" width="10" />
+                                                    </a>
+                                                }
                                             }
-                                            else
-                                            {
-                                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">[Unverified]</button>
-                                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    @Model.UserName  <img src="~/WebSiteTheme/images/angle-arrow-down.svg" width="10" />
-                                                </a>
-                                            }
-                                        }
-                                        <ul class="dropdown-menu dropdown-content nag_l">
-                                            <li><a href="~/WebHome/MyOrders">My Orders</a></li>
-                                            <li><a href="~/WebHome/WishList">My Wishlist</a></li>
-                                            <li><a href="~/ChangePassword/WebIndex">Change Password</a></li>
-                                            <li><a href="/WebLogin/Logout">Log Out</a></li>                                           
-                                        </ul>
-                                    </div>
+                                            <ul class="dropdown-menu dropdown-content nag_l">
+                                                <li><a href="~/WebHome/MyOrders">My Orders</a></li>
+                                                <li><a href="~/WebHome/WishList">My Wishlist</a></li>
+                                                <li><a href="~/ChangePassword/WebIndex">Change Password</a></li>
+                                                <li><a href="/WebLogin/Logout">Log Out</a></li>
+                                            </ul>
+                                        </div>
+                                    }
+                                    else if (@Model.UserId == 0)
+                                    {
+                                        <a href="/WebLogin/Index?url=@Request.Url.AbsoluteUri.ToString()">Login & Regiser</a>
+                                    }
                                 }
-                                else if (@Model.UserId == 0)
-                                {
-                                    <a href="/WebLogin/Index?url=@Request.Url.AbsoluteUri.ToString()">Login & Regiser</a>
-                                }
-                            }
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>*@
     <nav class="navigation">
         <div class="container-fluid">
             <div class="left">
-                <div class="header__logo"><a class="ps-logo" href="/WebHome/Index"><img src="~/WebSiteTheme/images/logo.png" alt=""></a></div>
+                <div class="header__logo  spc-mrg-tp-18 ">
+                    <a class="ps-logo" href="/WebHome/Index"><img src="~/WebSiteTheme/images/Nearbycart_logo.jpg" alt=""></a>
+                </div>
             </div>
 
             <div class="center mt-8">
@@ -102,86 +104,203 @@
                     </div>
                 }
             </div>
-            <div class="right">
-                <div class="menu-toggle"><span></span></div>
-                <div class="ps-cart" id="Cartcontent">
-                    <div id="CartCount">
-                        @{
-                            if (Model.CartItemCount != 0)
-                            {
-                                <div id="UpdateCartItemCount">
-                                    <a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
-                                </div>
-                            }
-                            else
-                            {
-                                <a class="ps-cart__toggle" href="#"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
-                            }
-                        }
 
-                    </div>
-                    <div class="ps-cart__listing">
-                        <div id="refreshThisDivWhenProductIsAddedToCart_50" class="nag_add_cartheader">
-                                 <div id="CartList2">
-                                      <div id="CartList">
-                                    @{ int index = 0;
-                                        foreach (var item in ViewBag.AddToCart)
+            <div class="right">
+                @*<table>
+                    <tr>
+                        <td>*@
+                            <div>
+                                <div>
+                                    <div class="dropdown">
+                                        <div class="header__actions pull-left">
+                                            @{ if (@Model.UserId != 0)
+
+                                                {
+                                                    <div class="btn-group ps-dropdown spc-mrg-tp-lft ">
+                                                        @{
+                                                            if (Model.RegisterType != "UNV")
+                                                            {
+
+                                                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.UserName <img src="~/WebSiteTheme/images/angle-arrow-down.svg" width="10" /></a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">[Unverified]</button>
+                                                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    @Model.UserName  <img src="~/WebSiteTheme/images/angle-arrow-down.svg" width="10" />
+                                                                </a>
+                                                            }
+                                                        }
+                                                        <ul class="dropdown-menu dropdown-content nag_l">
+                                                            <li><a href="~/WebHome/MyOrders">My Orders</a></li>
+                                                            <li><a href="~/WebHome/WishList">My Wishlist</a></li>
+                                                            <li><a href="~/ChangePassword/WebIndex">Change Password</a></li>
+                                                            <li><a href="/WebLogin/Logout">Log Out</a></li>
+                                                        </ul>
+                                                    </div>
+                                                }
+                                                else if (@Model.UserId == 0)
+                                                {
+                                                    <a href="/WebLogin/Index?url=@Request.Url.AbsoluteUri.ToString()">Login & Regiser</a>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @*</td>
+                        <td>*@
+                            <div class="menu-toggle"><span></span></div>
+                            <div class="ps-cart" id="Cartcontent">
+                                <div id="CartCount">
+                                    @{
+                                        if (Model.CartItemCount != 0)
                                         {
-                                            <div class="ps-cart-item">
-                                                <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
-                                                <div class="ps-cart-item__thumbnail">
-                                                    <a href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"></a>
-                                                    <img src="~/DocImg/@item.ImageName" alt="Image">
-                                                </div>
-                                                <div class="ps-cart-item__content">
-                                                    <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"> @item.ProductName</a>
-                                                    <p><span>Quantity:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
-                                                </div>
+                                            <div id="UpdateCartItemCount">
+                                                <a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
                                             </div>
-                                            index++;
+                                        }
+                                        else
+                                        {
+                                            <a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>
                                         }
                                     }
 
                                 </div>
-                                 </div>
-                                 <div class="ps-cart__total" id="CartTotal">
-                                        @{
+                                <div class="ps-cart__listing">
+                                    <div id="refreshThisDivWhenProductIsAddedToCart_50" class="nag_add_cartheader">
+                                        <div id="CartList2">
+                                            <div id="CartList">
+                                                @{ int index = 0;
+                                                    foreach (var item in ViewBag.AddToCart)
+                                                    {
+                                                        <div class="ps-cart-item">
+                                                            <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
+                                                            <div class="ps-cart-item__thumbnail">
+                                                                <a href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"></a>
+                                                                <img src="~/DocImg/@item.ImageName" alt="Image">
+                                                            </div>
+                                                            <div class="ps-cart-item__content">
+                                                                <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"> @item.ProductName</a>
+                                                                <p><span>Quantity:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
+                                                            </div>
+                                                        </div>
+                                                        index++;
+                                                    }
+                                                }
 
-                                            if (Model.CartItemCount != 0)
-                                            {
-                                                <p>Number of items:<span>@Model.CartItemCount</span></p>
-                                                <p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>
-                                            }
-                                            else
-                                            {
-                                                <div class="ps-cart__total">
-                                                    <p>YOUR SHOPPING BAG IS EMPTY</p>
-                                                </div>
-                                            }
-                                        }
-                                 </div>
-                                 <div id="CheckoutDiv">
-                                        @{
+                                            </div>
+                                        </div>
+                                        <div class="ps-cart__total" id="CartTotal">
+                                            @{
 
-                                            if (Model.CartItemCount != 0)
-                                            {
-                                                <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>
+                                                if (Model.CartItemCount != 0)
+                                                {
+                                                    <p>Number of items:<span>@Model.CartItemCount</span></p>
+                                                    <p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>
+                                                }
+                                                else
+                                                {
+                                                    <div class="ps-cart__total">
+                                                        <p>YOUR SHOPPING BAG IS EMPTY</p>
+                                                    </div>
+                                                }
                                             }
-                                            else
-                                            {
+                                        </div>
+                                        <div id="CheckoutDiv">
+                                            @{
 
+                                                if (Model.CartItemCount != 0)
+                                                {
+                                                    <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>
+                                                }
+                                                else
+                                                {
+
+                                                }
                                             }
-                                        }
-                                 </div>
-                        </div>
-                    </div>
-                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @*</td>
+                    </tr>
+                </table>*@
+
             </div>
         </div>
     </nav>
+
+    <aside class="ps-sidebar" data-mh="product-page">
+        <aside class="spc-mrg-padding  ps-widget--category">
+            @*<div class="ps-widget__header cate_back">
+                <h3>Category</h3>
+            </div>*@
+            <div class="ps-widget__content">
+                <ul class="ps-list--checked-1 ">
+                    @{
+                        foreach (var Cat in ViewBag.ProductCatList)
+                        {
+                            if (Cat.ParentCatId == 0)
+                            {
+
+                                <li class="nbc-main-category">
+
+                                    <a id="@Cat.Id" href="javascript:void()" data-toggle="collapse" data-target="#subcategories@(Cat.Id)" class="cate-main-list">@Cat.Name </a>
+                                    <ul class="ps-list--checked-1 sub_cate" style="padding-left: 10px;" id="sidebarsubcategories">
+                                        @foreach (var subcat in ViewBag.ProductCatList)
+                                        {
+                                            if (subcat.ParentCatId == Cat.Id)
+                                            {
+                                                <li><a id="@subcat.Id" href="~/ProductCatWise/Index/@Constant.EncodeNumber(int.Parse((subcat.Id).ToString()))"> @subcat.Name </a></li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        }
+
+                    }
+                </ul>
+            </div>
+        </aside>
+    </aside>
+
 </header>
+
+@*<div class="ps-widget--sidebar ps-widget--category">
+    <ul class="menu-list ps-widget__content ps-widget__header ">
+
+        @{
+            foreach (var Cat in ViewBag.ProductCatList)
+            {
+                if (Cat.ParentCatId == 0)
+                {
+
+                    <li class="nbc-main-category">
+                        <h4>
+                            <a id="@Cat.Id" href="javascript:void()" data-toggle="collapse" data-target="#subcategories@(Cat.Id)" class="cate-main-list">@Cat.Name </a>
+                        </h4>
+
+                        <ul class="ps-list--checked-1 sub_cate" style="padding-left: 10px;" id="sidebarsubcategories">
+                                @foreach (var subcat in ViewBag.ProductCatList)
+                                {
+                                    if (subcat.ParentCatId == Cat.Id)
+                                    {
+                                        <li><a id="@subcat.Id" href="~/ProductCatWise/Index/@Constant.EncodeNumber(int.Parse((subcat.Id).ToString()))"> @subcat.Name </a></li>
+                                    }
+                                }
+                            </ul>
+                    </li>
+                }
+            }
+
+        }
+    </ul>
+</div>*@
+
 <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">        
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -220,19 +339,19 @@
                 "userid":@Model.UserId
             },
             success: function (result)
-            {               
+            {
                 console.log(JSON.parse(result));
                 var response = JSON.parse(result);
                 console.log(response.Id);
                 if (response.Id == 1)
                 {
 
-                    otplabel.innerText = "YOUR ACCOUNT VERIFIED";                    
+                    otplabel.innerText = "YOUR ACCOUNT VERIFIED";
                     window.location.reload();
                 }
                 else {
                     otplabel.innerText = "Otp Not matched";
-                   
+
                     return;
                 }
 
