@@ -3,7 +3,7 @@
         margin-left: 25px;
     }
 </style>
-
+<link href="~/WebSiteTheme/css/StyleSheetG.css" rel="stylesheet" />
 @model PrivateSquareWeb.Models.ProductModel
 <script>
     var AddToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount) {
@@ -111,100 +111,102 @@
 
 <aside class="ps-sidebar" data-mh="product-page">
     @*<aside class="ps-widget--sidebar ps-widget--category">
-        <div class="ps-widget__header cate_back">
-            <h3>Category</h3>
-        </div>
+            <div class="ps-widget__header cate_back">
+                <h3>Category</h3>
+            </div>
 
-        <div class="ps-widget__content">
-            <ul class="ps-list--checked-1">
-                @{
-                    foreach (var Cat in ViewBag.ProductCatList)
-                    {
-                        if (Cat.ParentCatId == 0)
+            <div class="ps-widget__content">
+                <ul class="ps-list--checked-1">
+                    @{
+                        foreach (var Cat in ViewBag.ProductCatList)
+                        {
+                            if (Cat.ParentCatId == 0)
+                            {
+
+                                <li class="nbc-main-category">
+
+                                    <a id="@Cat.Id" href="javascript:void()" data-toggle="collapse" data-target="#subcategories@(Cat.Id)" class="cate-main-list">@Cat.Name </a>
+                                    <ul class="ps-list--checked-1 sub_cate" style="padding-left: 10px;" id="sidebarsubcategories">
+                                        @foreach (var subcat in ViewBag.ProductCatList)
+                                        {
+                                            if (subcat.ParentCatId == Cat.Id)
+                                            {
+                                                <li><a id="@subcat.Id" href="~/ProductCatWise/Index/@Constant.EncodeNumber(int.Parse((subcat.Id).ToString()))"> @subcat.Name </a></li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        }
+
+                    }
+                </ul>
+            </div>
+        </aside>*@
+    <div class="sidenav">
+        <aside class="ps-widget--sidebar ps-widget--category">
+            <div class="ps-widget__header cate_back">
+                <h3>Your Cart</h3>
+            </div>
+            <div id="refreshThisDivWhenProductIsAddedToCart" class="nag_add_cart">
+
+                <div id="CartList">
+                    @{ int index = 0;
+                        foreach (var item in ViewBag.AddToCart)
                         {
 
-                            <li class="nbc-main-category">
+                            <div class="ps-cart-item">
 
-                                <a id="@Cat.Id" href="javascript:void()" data-toggle="collapse" data-target="#subcategories@(Cat.Id)" class="cate-main-list">@Cat.Name </a>
-                                <ul class="ps-list--checked-1 sub_cate" style="padding-left: 10px;" id="sidebarsubcategories">
-                                    @foreach (var subcat in ViewBag.ProductCatList)
-                                    {
-                                        if (subcat.ParentCatId == Cat.Id)
-                                        {
-                                            <li><a id="@subcat.Id" href="~/ProductCatWise/Index/@Constant.EncodeNumber(int.Parse((subcat.Id).ToString()))"> @subcat.Name </a></li>
-                                        }
-                                    }
-                                </ul>
-                            </li>
+                                <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
+
+                                <div class="ps-cart-item__thumbnail">
+                                    <a href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"></a>
+                                    <img src="~/DocImg/@item.ImageName" alt="Image">
+                                </div>
+                                <div class="ps-cart-item__content">
+                                    <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"> @item.ProductName</a>
+                                </div>
+                                <div class="ntotal_cart form-group--number">
+                                    <div class="pull-left SpanForQuantity+@item.ProductId">
+                                        <div id="@item.ProductId" class="lds-ellipsis n_loader"><div></div><div></div><div></div><div></div></div>
+                                        <button class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span>    - </span></button>
+                                        <input id="@("SidebarTxtQty"+item.ProductId)" name="@("SidebarTxtQty"+index)" class="iten_set" type="text" value="@item.Qty" readonly>
+                                        <button class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span> + </span> </button>
+                                    </div><div class="ml-10 pull-left mt-5">Total:<i>₹ @item.Amount</i></div>
+                                </div>
+                            </div>
+                            index++;
                         }
                     }
 
-                }
-            </ul>
-        </div>
-    </aside>*@
-    <aside class="ps-widget--sidebar ps-widget--category">
-        <div class="ps-widget__header cate_back">
-            <h3>Your Cart</h3>
-        </div>
-        <div id="refreshThisDivWhenProductIsAddedToCart" class="nag_add_cart">
+                </div>
 
-            <div id="CartList">
-                @{ int index = 0;
-                    foreach (var item in ViewBag.AddToCart)
-                    {
+                <div class="fix_add_cart">
+                    <div id="CartTotal">
+                        @{
 
-                        <div class="ps-cart-item">
-
-                            <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
-
-                            <div class="ps-cart-item__thumbnail">
-                                <a href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"></a>
-                                <img src="~/DocImg/@item.ImageName" alt="Image">
-                            </div>
-                            <div class="ps-cart-item__content">
-                                <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"> @item.ProductName</a>
-                            </div>
-                            <div class="ntotal_cart form-group--number">
-                                <div class="pull-left SpanForQuantity+@item.ProductId">
-                                    <div id="@item.ProductId" class="lds-ellipsis n_loader"><div></div><div></div><div></div><div></div></div>
-                                    <button class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span>    - </span></button>
-                                    <input id="@("SidebarTxtQty"+item.ProductId)" name="@("SidebarTxtQty"+index)" class="iten_set" type="text" value="@item.Qty" readonly>
-                                    <button class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'",@"\'")','@item.ImageName','@item.Price','@item.Amount')"><span> + </span> </button>
-                                </div><div class="ml-10 pull-left mt-5">Total:<i>₹ @item.Amount</i></div>
-                            </div>
-                        </div>
-                        index++;
-                    }
-                }
-
-            </div>
-
-            <div class="fix_add_cart">
-                <div id="CartTotal">
+                            if (Model.CartItemCount != 0)
+                            {
+                                <p>Number of items: <span>@Model.CartItemCount</span></p>
+                                <p>Item Total: <span>₹ @ViewBag.TotalAmount</span></p>
+                            }
+                            else
+                            {
+                                <p>YOUR SHOPPING BAG IS EMPTY</p>
+                            }
+                        }
+                    </div>
                     @{
 
                         if (Model.CartItemCount != 0)
                         {
-                            <p>Number of items: <span>@Model.CartItemCount</span></p>
-                            <p>Item Total: <span>₹ @ViewBag.TotalAmount</span></p>
-                        }
-                        else
-                        {
-                            <p>YOUR SHOPPING BAG IS EMPTY</p>
+                            <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out</a></div>
                         }
                     }
                 </div>
-                @{
-
-                    if (Model.CartItemCount != 0)
-                    {
-                        <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out</a></div>
-                    }
-                }
             </div>
-        </div>
-    </aside>
+        </aside>
+    </div>
 </aside>
 
 <script>
