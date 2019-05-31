@@ -32,8 +32,8 @@
                 Discount: discountPrice,
                 TotalAmount: TotalAmount
             },
-            success: function (result) {  
-                         
+            success: function (result) {
+                console.log(result);
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
                     $("#Cartcontent").load(location.href + ' #Cartcontent');       
               
@@ -172,10 +172,10 @@
     }
 </script>
 
-@*<div class="ps-hero pd-sm">
+<div class="ps-hero pd-sm">
 
-</div>*@
-<main class="ps-main ps-products-listing pd-23">
+</div>
+<main class="ps-main ps-products-listing pd-23 ">
     @{
     Html.RenderAction("WebSiteSidebar", "WebSidebar");
     }
