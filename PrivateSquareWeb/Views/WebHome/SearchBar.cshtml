@@ -138,12 +138,12 @@
             data: { ProductId: ProductId },
             success: function (result) {
                 if (result == "Please Login to access wishlist") {
-                    swal(result);
+                    window.location.href = "../WebLogin/Index";
 
                 }
                 else if (result == "Product Exists") {
-                    //swal("Product already added to the Wishlist");
-                    window.location.href = ("../WebLogin/Index");
+                    swal("Product already added to the Wishlist");
+                    
                 }
                 else {
                     //swal(" ", result, "success");    

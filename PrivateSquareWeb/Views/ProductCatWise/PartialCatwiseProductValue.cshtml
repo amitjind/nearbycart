@@ -37,17 +37,16 @@
                     function () {
                 $(".ps-loading").addClass("loaded");
                         //swal(" ", "Product Added to the Side Cart", "success");
-                        swal({
-                            text: "Product Added to the Cart",
-                            timer: 1000,
-                            showConfirmButton: false
-                        });
+                        //swal({
+                        //    text: "Product Added to the Cart",
+                        //    timer: 1000,
+                        //    showConfirmButton: false
+                        //});
                     }, 2000
                 );
                
             },
-            error: function (error) {
-                console.log(error);
+            error: function (error) {                
             }
         });
     }
@@ -96,7 +95,7 @@
                 }
                 if (JsonResponse.length == null || JsonResponse.length == 0) {
                     //updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
-                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
+                    updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i></a>';
                     divCartTotal.innerHTML = '<div class="ps-cart__total" >< p > YOUR SHOPPING BAG IS EMPTY</p ></div>';
 
                     Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';
@@ -141,9 +140,8 @@
             data: { ProductId: ProductId },
             success: function (result) {
                 if (result == "Please Login to access wishlist") {
-                    $("body").addClass("loaded");
-                    swal(result);
-                }
+                    window.location.href = ("../../WebLogin/Index");
+                } 
                 else if (result == "Product Exists") {
                     $("body").addClass("loaded");
                     swal("Product already added to the Wishlist");

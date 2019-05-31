@@ -3,9 +3,31 @@
 @{
     /**/
 
+    /**/
+
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
+    //Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
+    Layout = null;
 }
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NearByCart</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CLibre+Baskerville:400,700" rel="stylesheet">
+
+    @Styles.Render("~/websitetheme/plugins/revolution/css")
+
+
+
+    @*@RenderSection("scripts", required: false)*@
+
+
+
+</head>
 
 @Styles.Render("~/theme/css")
 <style>
@@ -55,7 +77,7 @@
         });
     }
     function SignUp(lasturl) {
-       
+
         var email = document.getElementById('emailIdRegister').value;
         var newemail = email.trim();
         email = newemail;
@@ -104,8 +126,7 @@
                     //$(".ps-loading").addClass("loaded");
                     return;
                 }
-                else
-                {
+                else {
                     document.getElementById("valemailIdRegister").innerText = "";
                 }
             }
@@ -115,8 +136,7 @@
                     //$(".ps-loading").addClass("loaded");
                     return;
                 }
-                else
-                {
+                else {
                     document.getElementById("valemailIdRegister").innerText = "";
                 }
             }
@@ -172,22 +192,21 @@
                         return;
                     }
                     else {
-                        
+
                         //$(".ps-loading").addClass("loaded");
                         //window.location.href = "/WebHome/Index";
                         window.location.href = response;
 
                     }
-                    
+
                 }
             });
         }
-    }   
-    function checkLoginvalidation() {       
+    }
+    function checkLoginvalidation() {
         var ErrorOccured = null;
         var email = document.getElementById('EmailId').value;
-        if (email == '')
-        {
+        if (email == '') {
             document.getElementById("valEmail").innerText = "Email Required";
             ErrorOccured = "Email Required";
         }
@@ -197,8 +216,7 @@
         }
 
         var email = document.getElementById('Password').value;
-        if (email == '')
-        {
+        if (email == '') {
             document.getElementById("valPassword").innerText = "Password Required";
             ErrorOccured = "Password Required";
         }
@@ -207,11 +225,10 @@
             document.getElementById("valPassword").innerText = "";
         }
 
-        if (ErrorOccured == null)
-        {
+        if (ErrorOccured == null) {
             var respons = $("#LoginUserValid").submit();
         }
-        else { return ; }
+        else { return; }
 
     }
     var DeleteItem = function (index) {
@@ -276,7 +293,7 @@
                 divCartTotal.innerHTML = CartTotal;
 
                 $("#refreshThisDivWhenProductIsAddedToCart_50").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart_50');
-                swal(" ", "Quantity removed !", "success"); 
+                swal(" ", "Quantity removed !", "success");
             },
             error: function (error) {
                 console.log(error);
@@ -300,14 +317,17 @@
 
     }
 </script>
-@using (Html.BeginForm("LoginUser", "WebLogin", new { lasturl = ViewBag.lasturl } , FormMethod.Post, new {  enctype = "multipart/form-data", id = "LoginUserValid" }))
+
+@using (Html.BeginForm("LoginUser", "WebLogin", new { lasturl = ViewBag.lasturl }, FormMethod.Post, new { enctype = "multipart/form-data", id = "LoginUserValid" }))
 {
-    
+
     @Html.AntiForgeryToken()
     <div class="ps-hero">
-
+        <div class="header__logo  spc-mrg-tp-18 ">
+            @*<a class="ps-logo" href="https://bit.ly/2wu9Xw8"><img src="~/WebSiteTheme/images/Nearbycart_logo.jpg" width="200" alt=""></a>*@
+            <a class="ps-logo" href="/WebHome/Index"><img src="~/WebSiteTheme/images/Nearbycart_logo.jpg" alt="" width="200"></a>
+        </div>
         <div class="container">
-
             <h3>Login & Registration</h3>
 
             <p>NearByCart online shopping</p>
@@ -432,6 +452,7 @@
 
 }
 
+
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 
 <script>
@@ -454,8 +475,7 @@
 
 </script>
 <script type="text/javascript">
-    $(".search-frm").hide();
-    $(".right").offset().right;
+    $(".search-frm").hide();   
 
 </script>
 

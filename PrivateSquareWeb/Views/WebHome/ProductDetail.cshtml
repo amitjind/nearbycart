@@ -35,7 +35,7 @@
             success: function (result) {
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
               
-                swal(" ", "Product Added to the Cart", "success");
+                //swal(" ", "Product Added to the Cart", "success");
             },
             error: function (error) {
                 console.log(error);
@@ -52,14 +52,21 @@
             type: "POST",
             data: { ProductId: ProductId },
             success: function (result) {
-                if (result == "Please Login to access wishlist") {
-                    swal(result);
+                debugger;
+                if (result == "Please Login to access wishlist")
+                {
+                    window.location.href = "../../WebLogin/Index";
                 }
                 else if (result == "Product Exists") {
                     swal("Product already added to the Wishlist");
                 }
                 else {
-                    swal(" ", result, "success");
+                    swal({
+                        text: result,
+                        type: "success",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
                 }
             },
             error: function (error) {
@@ -126,7 +133,7 @@
                 debugger
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
 
-                swal(" ", "Product Added to the Cart", "success");
+                //swal(" ", "Product Added to the Cart", "success");
 
             },
             error: function (error) {
@@ -175,7 +182,7 @@
                             </div>
                         </div>
                         <div class="ps-product__shopping">
-                            <a class="ps-btn" onclick="AddToCart('@Model.Id','@Model.ProductName.Replace("'",@"\'")','@Model.SellingPrice','@Model.DiscountPrice','@Model.ProductImage')">Order Now</a>
+                            <a class="ps-btn" onclick="AddToCart('@Model.Id','@Model.ProductName.Replace("'",@"\'")','@Model.SellingPrice','@Model.DiscountPrice','@Model.ProductImage')">Add To cart</a>
                             <div class="ps-product__actions"><a class="mr-10" href="#" onclick="AddToWishlist(@Model.Id)"><i class="ps-icon-heart"></i></a></div>
                         </div>
                     </div>

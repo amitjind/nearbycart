@@ -134,21 +134,21 @@
                             @if ((ViewBag.SearchResultCount / 10) > 1)
                             {
                                 var n = ViewBag.LowerLimit;
-                            <li>
-                                
-                                <a href="~/ProductCatWise/PreviousPages/@(ViewBag.LowerLimit - 1))"
-                                   onclick="return ActivatePageNumber(@(ViewBag.LowerLimit-1))">
-                                    <img src="~/WebSiteTheme/images/back.svg" width="15" />                                   
-                                </a>
+                                <li>
 
-                            </li>
+                                    <a href="~/ProductCatWise/PreviousPages/@(ViewBag.LowerLimit - 1))"
+                                       onclick="return ActivatePageNumber(@(ViewBag.LowerLimit-1))">
+                                        <img src="~/WebSiteTheme/images/back.svg" width="15" />
+                                    </a>
+
+                                </li>
                                 do
                                 {
                                     if (n == 1)
                                     {
                                         <li id="@n" class="active">
                                             <a href="javascript:void()" onclick="nextpage(@n)">
-                                                @n 
+                                                @n
                                             </a>
                                         </li>
                                     }
@@ -158,7 +158,7 @@
                                             <a href="javascript:void()" onclick="nextpage(@n)">
                                                 @n
                                             </a>
-                                         </li>
+                                        </li>
                                     }
                                     n++;
                                 }
@@ -168,7 +168,7 @@
                                     <li>
                                         <a href="javascript:void()" onclick="morepages(@n,@ViewBag.SearchResultCount,@ViewBag.NumberOfPages,@ViewBag.LowerLimit)">
                                             <img src="~/WebSiteTheme/images/right-arrow.svg" width="15" />
-                                         </a>
+                                        </a>
                                     </li>
                                 }
 
@@ -199,36 +199,38 @@
             </div>
         </div>
 
-        @*<aside class="ps-sidebar" data-mh="product-page">*@
 
-            @*This html required in later*@
-            @*<aside class="ps-widget--sidebar ps-widget--filter ">
+    }
+        <div>
+            @*<aside class="ps-sidebar" data-mh="product-page">*@
+            @{
+                Html.RenderAction("WebSiteSidebar", "WebSidebar");
+            }
+            @*</aside>*@
+            <aside class="ps-sidebar" data-mh="product-page">
+
+                @*This html required in later*@
+                <aside class="ps-widget--sidebar ps-widget--filter ">
                     <div class="ps-widget__header">
                         <h3>Price Filter</h3>
                     </div>
                     <div class="ps-widget__content">
-                            <div class="ac-slider" data-default-min="300" data-default-max="2000" data-max="3450" data-step="50" data-unit="$"></div>
-                            <p class="ac-slider__meta">Price:<span class="ac-slider__value ac-slider__min"> 10</span>-<span class="ac-slider__value ac-slider__max">10000</span></p>
+                        <div class="ac-slider" data-default-min="300" data-default-max="2000" data-max="3450" data-step="50" data-unit="$"></div>
+                        <p class="ac-slider__meta">Price:<span class="ac-slider__value ac-slider__min"> 10</span>-<span class="ac-slider__value ac-slider__max">10000</span></p>
 
-                            <input type="range" id="firstslider" min="0" max="10000" step="100" value="0" onchange="showvalue(this.value)" /><br>
+                        <input type="range" id="firstslider" min="0" max="10000" step="100" value="0" onchange="showvalue(this.value)" /><br>
 
-                            <input type="text" id="TxtPriceRange" name="TxtPriceRange" readonly />
+                        <input type="text" id="TxtPriceRange" name="TxtPriceRange" readonly />
 
-                            <input type="submit" id="BtnPriceRange" name="submit" onclick="ProductPriceWise()" value="PriceRange" style="display:none;" />
+                        <input type="submit" id="BtnPriceRange" name="submit" onclick="ProductPriceWise()" value="PriceRange" style="display:none;" />
 
-                        </div>
+                    </div>
 
-                </aside>*@
+                </aside>
 
-        @*</aside>*@
-    }
-        <div>
-            @*<aside class="ps-sidebar" data-mh="product-page">*@
-                @{
-                    Html.RenderAction("WebSiteSidebar", "WebSidebar");
-                }
-            @*</aside>*@
+            </aside>
         </div>
+  
 </main>
 
 @*<div>
@@ -451,8 +453,8 @@
     };
 </script>
 <script>
-    window.onload = function () {
+    @*window.onload = function () {
         $("#@Model.ParentCatId")[0].click();
 
-    };
+    };*@
 </script>    

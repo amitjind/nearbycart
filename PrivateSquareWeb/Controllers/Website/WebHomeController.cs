@@ -78,6 +78,7 @@ namespace PrivateSquareWeb.Controllers.Website
                     }
                 }
                 ViewBag.SimilarProductList = ListAllProduct.Where(x => x.ProductCatId == objModel.ProductCatId).ToList();       //ViewBag for showing similar products in the Product Detail Page
+                ViewBag.ProductCatList = CommonFile.GetProductCategory(null);
                 return View(objModel);
             }
             catch (Exception ex)
