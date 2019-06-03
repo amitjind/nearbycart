@@ -147,7 +147,13 @@
 
 <div class="ps-hero">
     <div class="container">
-        <h3>@Model.ProductName</h3>       
+        <div>
+            <a href="/WebHome/Index">Home../</a>
+            @ViewBag.ParentCatDiscription../
+            <a href="~/ProductCatWise/Index/@Constant.EncodeNumber(int.Parse((ViewBag.ProductCatId).ToString()))"> @ViewBag.ProductCatDiscription </a>
+
+        </div>
+        <h3>@Model.ProductName</h3>
     </div>
 </div>
 <main class="ps-main">
