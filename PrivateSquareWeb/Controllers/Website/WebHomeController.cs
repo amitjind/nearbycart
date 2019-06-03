@@ -50,6 +50,7 @@ namespace PrivateSquareWeb.Controllers.Website
                 id = Convert.ToInt64(CommonFile.Decode(Id));
                 List<ProductModel> Product = GetProduct(id);
                 ProductModel objModel = new ProductModel();
+
                 if (Product != null && Product.Count() > 0)
                 {
                     objModel.Id = id;
@@ -78,7 +79,35 @@ namespace PrivateSquareWeb.Controllers.Website
                     }
                 }
                 ViewBag.SimilarProductList = ListAllProduct.Where(x => x.ProductCatId == objModel.ProductCatId).ToList();       //ViewBag for showing similar products in the Product Detail Page
+
                 ViewBag.ProductCatList = CommonFile.GetProductCategory(null);
+
+                var Productlist = ListAllProduct.Where(X => X.Id == id).SingleOrDefault();
+                var Menuslist= CommonFile.GetProductCategory(null);
+                if (Menuslist != null && Menuslist.Count > 0)
+                {
+                    foreach (var mlist in Menuslist)
+                    {
+                        if (mlist.Id == Productlist.ParentCatId)
+                        {
+                            ViewBag.ParentCatDiscription = mlist.Name;
+                            ViewBag.ParentCatId = Productlist.ParentCatId;
+                            break;
+                        }
+                    }
+                    foreach (var mlist in Menuslist)
+                    {
+                        if (mlist.Id == Productlist.ProductCatId)
+                        {
+                            ViewBag.ProductCatDiscription = mlist.Name;
+                            ViewBag.ProductCatId = Productlist.ProductCatId;
+                            break;
+                        }
+                    }
+                }
+
+               
+
                 return View(objModel);
             }
             catch (Exception ex)

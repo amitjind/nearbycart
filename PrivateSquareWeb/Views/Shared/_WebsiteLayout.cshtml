@@ -26,35 +26,39 @@
 
 
 
+@*<body class="ps-loading">*@
 <body class="ps-loading">
 
-    <header>
-        <div id="headerDiv">
-            @{
+
+
+        <header>
+            <div id="headerDiv">
+                @{
 
 
 
-                Html.RenderAction("HeaderValue", "WebsiteHeader");
+                    Html.RenderAction("HeaderValue", "WebsiteHeader");
+
+                }
+            </div>
+        </header>
+
+        <div >
+
+            @RenderBody()
+
+
+
+        </div>
+
+        <footer>
+
+            @{Html.RenderPartial("_WebSiteFooter");
 
             }
-        </div>
-    </header>
 
-    <div>
-
-        @RenderBody()
-
-
-
-    </div>
-
-    <footer>
-
-        @{Html.RenderPartial("_WebSiteFooter");
-
-        }
-
-    </footer>
+        </footer>
+   
 
     @Scripts.Render("~/websitetheme/bundles/jquery")
     <script>
@@ -80,7 +84,7 @@
     </script>
     <script>
         $(window).load(function () {
-           // $("#1").addClass("active");
+            // $("#1").addClass("active");
         });
     </script>
 

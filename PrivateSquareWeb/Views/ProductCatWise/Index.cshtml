@@ -91,8 +91,39 @@
 <main class="ps-main ps-products-listing">
     <div class="ps-hero">
         <div class="container">
+            @*<div>
+                @switch (Model.ParentCatId)
+                {
+                    case 36:
+                        <a href="/WebHome/Index">@Model.ParentCatId Beauty & Personal care</a>
+                        break;
+                    case 37:
+                        <a href="/WebHome/Index">@Model.ParentCatId Household Supplies</a>
+                        break;
+                    case 38:
+                        <a href="/WebHome/Index">@Model.ParentCatId Diet & Nutrition</a>
+                        break;
+                    case 39:
+                        <a href="/WebHome/Index">
+                            @Model.ParentCatId All Grocery & Gourmet Foods
+                        </a>
+                        break;
+
+                    case 41:
+                        <a href="/WebHome/Index">
+                            @Model.ParentCatId Baby Care
+                        </a>
+                        break;
+                    case 43:
+                        <a href="/WebHome/Index">
+                            @Model.ParentCatId Combos
+                        </a>
+                        break;
+                }
+                <h5 id="CategoryHeading">@Model.CategoryName</h5>
+            </div>*@
             <h3 id="CategoryHeading">@Model.CategoryName</h3>
-        </div>
+        </div>       
     </div>
     @using (Html.BeginForm("ProcessForm", "ProductCatWise", FormMethod.Post))
     {
