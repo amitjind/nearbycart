@@ -1,0 +1,32 @@
+﻿<div class="row">
+    <div class="search-result" style="position:relative">
+    </div>
+    <div id="CartList">
+        @{
+            foreach (var item in ViewBag.SearchSuggestions)
+            {
+                <div class="ps-cart-item" style="background-color:black">
+                    <div class="ps-cart-item__thumbnail">
+                        <a href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"></a>
+                        <img src="~/DocImg/@item.ProductImage" alt="Image">
+                    </div>
+                    <div class="ps-cart-item__content">
+                        <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.Id).ToString())))"> <b>@item.ProductName</b></a>
+
+                        <a href="javascript:void();" id="AddToCartSearchSuggestion" onclick="AddToCart('@item.Id','@item.ProductName.Replace("'",@"\'")','@item.SellingPrice','@item.DiscountPrice','@item.ProductImage')">AddToCart</a>
+                    </div>
+                    <div class="ntotal_cart form-group--number">
+                        <div class="pull-left SpanForQuantity+@item.ProductId">
+                            <div id="@item.ProductId" class="lds-ellipsis n_loader"></div>
+                            
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+    <div class="view-all">
+        <a href="javascript:void();">VIEW ALL PRODUCTS</a>
+    </div>
+</div>

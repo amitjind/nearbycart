@@ -9,7 +9,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
-   
+
     var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
 
 
@@ -143,13 +143,13 @@
                 }
                 else if (result == "Product Exists") {
                     swal("Product already added to the Wishlist");
-                    
+
                 }
                 else {
-                    //swal(" ", result, "success");    
+                    //swal(" ", result, "success");
                     swal({
                         text: result,
-                        type:"success",
+                        type: "success",
                         timer: 2000,
                         showConfirmButton: false
                     });
@@ -178,13 +178,7 @@
     }
     @using (Html.BeginForm("SearchBar", "WebHome", FormMethod.Post))
     {
-        //{
-        //    Html.RenderAction("WebSiteSidebar", "WebSidebar");
-
-        //}
-
-
-        <div class="ps-content" data-mh="product-page">
+        <div class="ps-content" id="SearchResultProducts" data-mh="product-page">
             <div class="ps-product-group no-sidebar pt-40" data-item="4">
                 <div class="ps-product-group__header">
                     <div class="ps-filter">
@@ -209,7 +203,7 @@
 
                     </div>
                 </div>
-                <div class="ps-product-group__content">
+                <div class="ps-product-group__content" id="AppendToLazyLoader">
                     @foreach (var Users in ViewBag.UsersProduct)
                     {
                         <div class="ps-product-group__action"></div>
@@ -226,12 +220,6 @@
                                             <img src="~/DocImg/@Users.ProductImage" alt="">
                                         }
                                     }
-
-                                    @*<ul class="ps-product__actions">
-
-                                            <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
-                                            <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
-                                        </ul>*@
                                     <ul class="ps-product__actions">
                                         <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
                                         <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
@@ -251,71 +239,7 @@
                     }
                     <h1>@ViewBag.NoResultFound</h1>
                 </div>
-                <div class="ps-product-group__footer">
-                    <div class="ps-pagination mb-50">
-                        <ul class="pagination">
-                            @if ((ViewBag.SearchResultCount / Constant.NumberOfProducts) > 1)
-                            {
-                                var n = ViewBag.LowerLimit;
-                                var pagenoForactive=ViewBag.PageNoactive;
-                                <li>
-
-                                    <a href="~/WebHome/PreviousPages/@(Constant.EncodeNumber(ViewBag.LowerLimit-1))"
-                                       onclick="return ActivatePageNumber(@(ViewBag.LowerLimit-1))">
-                                        <img src="~/WebSiteTheme/images/back.svg" width="15" />
-                                    </a>
-                                </li>
-                                do
-                                {
-                                    if (pagenoForactive == n)
-                                    {
-                                        <li id="@n" class="active">
-                                            <a href="~/WebHome/NextPage/@(Constant.EncodeNumber(n))" onclick="return ActivatePageNumber(@n)">
-                                                @n
-                                            </a>
-                                        </li>
-                                    }
-                                    else
-                                    {
-                                        <li id="@n"><a href="~/WebHome/NextPage/@(Constant.EncodeNumber(n))" onclick="return ActivatePageNumber(@n)">@n</a></li>
-                                    }
-                                    n++;
-                                }
-
-                                while (n <= (ViewBag.NumberOfPages));
-                                if ((ViewBag.SearchResultCount / Constant.NumberOfProducts) > ViewBag.NumberOfPages)
-                                {
-                                    <li>
-                                        <a href="~/WebHome/MorePages/@(Constant.EncodeNumber(n))" onclick="return ActivatePageNumber(@n)">
-                                            <img src="~/WebSiteTheme/images/right-arrow.svg" width="15" />
-                                        </a>
-                                    </li>
-                                }
-
-                            }
-                            else
-                            {
-                                if (ViewBag.SearchResultCount < Constant.NumberOfProducts)
-                                {
-                                    @*<li class="active"><a href="#">1</a></li>*@
-                                }
-                                else
-                                {
-                                    if ((ViewBag.SearchResultCount % Constant.NumberOfProducts) != 0)
-                                    {
-
-                                        <li class="active"><a href="~/WebHome/NextPage/@Constant.EncodeNumber(1)">1</a></li>
-                                        <li><a href="~/WebHome/NextPage/@Constant.EncodeNumber(2)">2</a></li>
-                                    }
-                                    else
-                                    {
-                                        <li class="active"><a href="#">1</a></li>
-                                    }
-                                }
-                            }
-                        </ul>
-                    </div>
-                </div>
+                <a href="javascript:void();" onclick="NextPage()" id="ViewMoreProducts" onmouseover="HoverProducts()" class="btn-block" name="1">View More Products</a> 
             </div>
         </div>
     }
@@ -361,10 +285,6 @@
 
 <script>
     var ActivatePageNumber = function (id) {
-        //if (id == 0) { id = 1; }
-        //localStorage.setItem("PageNumber", id);
-        //debugger
-
         var localstorageid = localStorage.getItem("PageNumber");
         if (localstorageid == 0) {
             localStorage.setItem("PageNumber", 1);
@@ -377,58 +297,51 @@
             $("#" + id + "").addClass("active");
             return true;
         }
-
-
-
-
     }
 </script>
-@*<script>
-    debugger
-    window.alert("Hello");
-    window.onload = function () {
-        var id = localStorage.getItem("PageNumber");
-        var removefromlocalstorage = localStorage.setItem("PageNumber", -10);                 //sample value -10 -- put any value instead of -10
-        $(".active").removeClass("active");
-
-        if (id == -10) {
-            $("#1").addClass("active");
-
-        }
-
-        else { $("#" + id + "").addClass("active"); }
-    }
-</script>*@
-@*<script>
-    console.log("search bar ");
-    $(document).ready(function () {
-        alert('document ready');
-        var id = localStorage.getItem("PageNumber");
-        var removefromlocalstorage = localStorage.setItem("PageNumber", -10);                 //sample value -10 -- put any value instead of -10
-        $(".active").removeClass("active");
-
-        if (id == -10) {
-            $("#1").addClass("active");
-
-        }
-
-        else { $("#" + id + "").addClass("active"); }
-    });
-
-</script>*@
 <script>
     var Pagenoactive = function () {
-    
+
         alert("Pagenoactive");
         var id = localStorage.getItem("PageNumber");
         var removefromlocalstorage = localStorage.setItem("PageNumber", -10);                 //sample value -10 -- put any value instead of -10
         $(".active").removeClass("active");
-
         if (id == -10) {
             $("#1").addClass("active");
-
         }
-
         else { $("#" + id + "").addClass("active"); }
     }
+</script>
+<script>
+    var NextPage = function () {
+        var pageindex = $("#ViewMoreProducts").attr('name');
+        $("body").removeClass("loaded");
+        $.ajax({
+            url: "../../WebHome/LazyLoaderProducts",
+            data: {
+                "pageindex": pageindex
+            },
+            success: function (result) {
+
+                $("body").addClass('loaded');
+                $("#AppendToLazyLoader").append(result);
+                var PageNumber = parseInt(pageindex, 10);
+                PageNumber++;
+                $("#ViewMoreProducts").attr('name', PageNumber);
+                console.log('After incrementing, the page index is : ');
+                console.log($("#ViewMoreProducts").attr('name'));
+            }
+        });
+    }
+</script>
+<script>
+    var HoverProducts = function () {
+        $("#ViewMoreProducts").click();
+    }
+    //window.onscroll = function (ev) {
+    //    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+    //        //console.log('you are at the bottom of the page');
+           
+    //    }
+    //};
 </script>

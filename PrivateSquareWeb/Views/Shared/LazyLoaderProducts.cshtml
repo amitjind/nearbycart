@@ -1,0 +1,33 @@
+﻿@foreach (var Users in ViewBag.LazyLoaderProducts)
+{
+    <div class="ps-product-group__action"></div>
+    <div class="ps-product-wrap">
+        <div class="ps-product--fashion">
+            <div class="ps-product__thumbnail">
+                <a class="ps-product__overlay" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))"></a>
+                @{ if (@Users.ProductImage == null)
+                    {
+                        <img src="~/DocImg/deafult.png" alt="">
+                    }
+                    else
+                    {
+                        <img src="~/DocImg/@Users.ProductImage" alt="">
+                    }
+                }
+                <ul class="ps-product__actions">
+                    <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
+                    <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
+                </ul>
+            </div>
+            <div class="ps-product__content">
+                <a class="ps-product__title" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))">@Users.ProductName</a>
+                <p class="ps-product__price">
+                    @Users.DiscountPrice
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
+}

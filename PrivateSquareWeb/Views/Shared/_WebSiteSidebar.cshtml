@@ -110,39 +110,6 @@
 </script>
 
 <aside class="ps-sidebar" data-mh="product-page">
-    @*<aside class="ps-widget--sidebar ps-widget--category">
-            <div class="ps-widget__header cate_back">
-                <h3>Category</h3>
-            </div>
-
-            <div class="ps-widget__content">
-                <ul class="ps-list--checked-1">
-                    @{
-                        foreach (var Cat in ViewBag.ProductCatList)
-                        {
-                            if (Cat.ParentCatId == 0)
-                            {
-
-                                <li class="nbc-main-category">
-
-                                    <a id="@Cat.Id" href="javascript:void();" data-toggle="collapse" data-target="#subcategories@(Cat.Id)" class="cate-main-list">@Cat.Name </a>
-                                    <ul class="ps-list--checked-1 sub_cate" style="padding-left: 10px;" id="sidebarsubcategories">
-                                        @foreach (var subcat in ViewBag.ProductCatList)
-                                        {
-                                            if (subcat.ParentCatId == Cat.Id)
-                                            {
-                                                <li><a id="@subcat.Id" href="~/ProductCatWise/Index/@Constant.EncodeNumber(int.Parse((subcat.Id).ToString()))"> @subcat.Name </a></li>
-                                            }
-                                        }
-                                    </ul>
-                                </li>
-                            }
-                        }
-
-                    }
-                </ul>
-            </div>
-        </aside>*@
     <div class="sidenav">
         <aside class="ps-widget--sidebar ps-widget--category">
             <div class="ps-widget__header cate_back">

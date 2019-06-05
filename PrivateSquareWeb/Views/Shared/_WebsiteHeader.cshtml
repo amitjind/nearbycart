@@ -17,58 +17,20 @@
                             window.history.forward();
                         }
                         else {
-
                         }
                     };
                     Response.Redirect("../../WebLogin/Index");
                 }
-
                 else {
-
                 }
             },
             error: function (error) {
                 //console.log('error');
             }
-
         })
-
-
     }
 </script>
-<body>
-
-    <script>
-        var globlevariable = 0;
-        var AgainClckbyFunction = false;
-
-        var checkothermenuactiveornot = function (CatId) {
-           
-            //if (AgainClckbyFunction == false) {
-            //    if (globlevariable == 0) {
-            //        globlevariable = CatId;
-            //    }
-            //    else {
-
-            //        if (AgainClckbyFunction != true) {                      
-            //            AgainClckbyFunction = true;
-            //            $("#" + globlevariable + "").click();
-            //        }
-            //        else {
-
-            //        }
-            //    }
-
-            //}
-            //else
-            //{
-            //    globlevariable = CatId;
-            //    AgainClckbyFunction = false;
-            //}
-        }
-    </script>
-</body>
-<header class="header" data-sticky="true">   
+<header class="header" data-sticky="true">
     <nav class="navigation">
         <div class="container-fluid">
             <div class="left">
@@ -84,6 +46,9 @@
                     <div class="col-lg-12 pull-left">
                         @Html.TextBoxFor(m => m.SearchBarText, new { @class = "form-control brder_rdius", placeholder = "Search Product…", value = "TxtSearch", id = "TxtSearch" })
                         <button class="search-top"><i class="ps-icon-search"></i></button>
+                        <div class="row" id="SearchResults" style="display:none">
+
+                        </div>
                     </div>
                 }
             </div>
@@ -92,144 +57,144 @@
                 @*<table>
                     <tr>
                         <td>*@
-                            <div>
-                                <div>
-                                    <div class="dropdown">
-                                        <div class="header__actions pull-left">
-                                            @{ if (@Model.UserId != 0)
+                <div>
+                    <div>
+                        <div class="dropdown">
+                            <div class="header__actions pull-left">
+                                @{ if (@Model.UserId != 0)
 
+                                    {
+                                        <div class="btn-group ps-dropdown spc-mrg-tp-lft ">
+                                            @{
+                                                if (Model.RegisterType != "UNV")
                                                 {
-                                                    <div class="btn-group ps-dropdown spc-mrg-tp-lft ">
-                                                        @{
-                                                            if (Model.RegisterType != "UNV")
-                                                            {
 
-                                                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.UserName <img src="~/WebSiteTheme/images/angle-arrow-down.svg" width="10" /></a>
-                                                            }
-                                                            else
-                                                            {
-                                                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">[Unverified]</button>
-                                                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    @Model.UserName  <img src="~/WebSiteTheme/images/angle-arrow-down.svg" width="10" />
-                                                                </a>
-                                                            }
-                                                        }
-                                                        <ul class="dropdown-menu dropdown-content nag_l">
-                                                            <li><a href="~/WebHome/MyOrders">My Orders</a></li>
-                                                            <li><a href="~/WebHome/WishList">My Wishlist</a></li>
-                                                            <li><a href="~/ChangePassword/WebIndex">Change Password</a></li>
-                                                            <li><a href="/WebLogin/Logout">Log Out</a></li>
-                                                        </ul>
-                                                    </div>
+                                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.UserName <img src="~/WebSiteTheme/images/angle-arrow-down.svg" width="10" /></a>
                                                 }
-                                                else if (@Model.UserId == 0)
+                                                else
                                                 {
-                                                    @*<table>
-                    <tr>
-                        <td>
-                            <img src="~/WebSiteTheme/images/location.svg" />
-                        </td>
-                        <td>
-                        <p>Deliver To <br>MajriChok</p>
-                        </td>
-                    </tr>
-                </table>*@
-
-                                                    <a href="/WebLogin/Index?url=@Request.Url.AbsoluteUri.ToString()">
-
-
-                                                        <img src="~/WebSiteTheme/images/user.svg" />@*<div><span class="full-width">Deliver to</span><span>majri chown</span></div>*@
-                                                    </a>
-
-                                                    <a href="/WebLogin/Index?url=@Request.Url.AbsoluteUri.ToString()">
-
-
-                                                        <img src="~/WebSiteTheme/images/user.svg" />Login & Regiser
+                                                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">[Unverified]</button>
+                                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        @Model.UserName  <img src="~/WebSiteTheme/images/angle-arrow-down.svg" width="10" />
                                                     </a>
                                                 }
                                             }
+                                            <ul class="dropdown-menu dropdown-content nag_l">
+                                                <li><a href="~/WebHome/MyOrders">My Orders</a></li>
+                                                <li><a href="~/WebHome/WishList">My Wishlist</a></li>
+                                                <li><a href="~/ChangePassword/WebIndex">Change Password</a></li>
+                                                <li><a href="/WebLogin/Logout">Log Out</a></li>
+                                            </ul>
                                         </div>
-                                    </div>
-                                </div>
+                                    }
+                                    else if (@Model.UserId == 0)
+                                    {
+                                        @*<table>
+                                                <tr>
+                                                    <td>
+                                                        <img src="~/WebSiteTheme/images/location.svg" />
+                                                    </td>
+                                                    <td>
+                                                    <p>Deliver To <br>MajriChok</p>
+                                                    </td>
+                                                </tr>
+                                            </table>*@
+
+                                        <a href="/WebLogin/Index?url=@Request.Url.AbsoluteUri.ToString()">
+
+
+                                            <img src="~/WebSiteTheme/images/user.svg" />@*<div><span class="full-width">Deliver to</span><span>majri chown</span></div>*@
+                                        </a>
+
+                                        <a href="/WebLogin/Index?url=@Request.Url.AbsoluteUri.ToString()">
+
+
+                                            <img src="~/WebSiteTheme/images/user.svg" />Login & Regiser
+                                        </a>
+                                    }
+                                }
                             </div>
-                        @*</td>
-                        <td>*@
-                            <div class="menu-toggle"><span></span></div>
-                            <div class="ps-cart" id="Cartcontent">
-                                <div id="CartCount">
-                                    @{
-                                        if (Model.CartItemCount != 0)
+                        </div>
+                    </div>
+                </div>
+                @*</td>
+                    <td>*@
+                <div class="menu-toggle"><span></span></div>
+                <div class="ps-cart" id="Cartcontent">
+                    <div id="CartCount">
+                        @{
+                            if (Model.CartItemCount != 0)
+                            {
+                                <div id="UpdateCartItemCount">
+                                    <a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
+                                </div>
+                            }
+                            else
+                            {
+                                <a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i>Cart</a>
+                            }
+                        }
+
+                    </div>
+                    <div class="ps-cart__listing">
+                        <div id="refreshThisDivWhenProductIsAddedToCart_50" class="nag_add_cartheader">
+                            <div id="CartList2">
+                                <div id="CartList">
+                                    @{ int index = 0;
+                                        foreach (var item in ViewBag.AddToCart)
                                         {
-                                            <div id="UpdateCartItemCount">
-                                                <a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>@Model.CartItemCount</i></span><i class="ps-icon-cart"></i></a>
+                                            <div class="ps-cart-item">
+                                                <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
+                                                <div class="ps-cart-item__thumbnail">
+                                                    <a href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"></a>
+                                                    <img src="~/DocImg/@item.ImageName" alt="Image">
+                                                </div>
+                                                <div class="ps-cart-item__content">
+                                                    <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"> @item.ProductName</a>
+                                                    <p><span>Quantity:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
+                                                </div>
                                             </div>
-                                        }
-                                        else
-                                        {
-                                            <a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i>Cart</a>
+                                            index++;
                                         }
                                     }
 
                                 </div>
-                                <div class="ps-cart__listing">
-                                    <div id="refreshThisDivWhenProductIsAddedToCart_50" class="nag_add_cartheader">
-                                        <div id="CartList2">
-                                            <div id="CartList">
-                                                @{ int index = 0;
-                                                    foreach (var item in ViewBag.AddToCart)
-                                                    {
-                                                        <div class="ps-cart-item">
-                                                            <a class="ps-cart-item__close" onclick="DeleteItem(@index)"></a>
-                                                            <div class="ps-cart-item__thumbnail">
-                                                                <a href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"></a>
-                                                                <img src="~/DocImg/@item.ImageName" alt="Image">
-                                                            </div>
-                                                            <div class="ps-cart-item__content">
-                                                                <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"> @item.ProductName</a>
-                                                                <p><span>Quantity:<i> @item.Qty</i></span><span>Total:<i>₹ @item.Amount</i></span></p>
-                                                            </div>
-                                                        </div>
-                                                        index++;
-                                                    }
-                                                }
-
-                                            </div>
-                                        </div>
-                                        <div class="ps-cart__total" id="CartTotal">
-                                            @{
-
-                                                if (Model.CartItemCount != 0)
-                                                {
-                                                    <p>Number of items:<span>@Model.CartItemCount</span></p>
-                                                    <p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>
-                                                }
-                                                else
-                                                {
-                                                    <div class="ps-cart__total">
-                                                        <p>YOUR SHOPPING BAG IS EMPTY</p>
-                                                    </div>
-                                                }
-                                            }
-                                        </div>
-                                        <div id="CheckoutDiv">
-                                            @{
-
-                                                if (Model.CartItemCount != 0)
-                                                {
-                                                    <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>
-                                                }
-                                                else
-                                                {
-
-                                                }
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                        @*</td>
-                    </tr>
-                </table>*@
+                            <div class="ps-cart__total" id="CartTotal">
+                                @{
+
+                                    if (Model.CartItemCount != 0)
+                                    {
+                                        <p>Number of items:<span>@Model.CartItemCount</span></p>
+                                        <p>Item Total:<span>₹ @ViewBag.TotalAmount</span></p>
+                                    }
+                                    else
+                                    {
+                                        <div class="ps-cart__total">
+                                            <p>YOUR SHOPPING BAG IS EMPTY</p>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <div id="CheckoutDiv">
+                                @{
+
+                                    if (Model.CartItemCount != 0)
+                                    {
+                                        <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*</td>
+                        </tr>
+                    </table>*@
 
             </div>
         </div>
@@ -238,8 +203,8 @@
     <aside class="ps-sidebar" data-mh="product-page">
         <aside class="spc-mrg-padding  ps-widget--category">
             @*<div class="ps-widget__header cate_back">
-                <h3>Category</h3>
-            </div>*@
+                    <h3>Category</h3>
+                </div>*@
             <div class="ps-widget__content">
                 <ul class="ps-list--checked-1 ">
                     @{
@@ -337,13 +302,13 @@
 </script>
 <script>
     var Sendurl = function () {
-        debugger
         var productcatid = location.pathname.toString();
         $.ajax({
             url: "../../WebLogin/Index",
             //type: "POST",
 
             data: {
+
 
                 "url": productcatid
 
@@ -352,7 +317,35 @@
         });
     }
 </script>
+<script>
+    document.getElementById("TxtSearch").addEventListener("keypress", function () {
+        var searchtext = $('#TxtSearch').val();
+        //console.log(searchtext);
+        if (searchtext.length > 2) {
+            $.ajax({
+                url: "../../WebHome/SearchSuggestions",
+                data: {
+                    "Prefix": searchtext
+                },
+                success: function (result) {
+                    //SearchResults
+                    $("#SearchResults").hide();
+                    $("#SearchResults").html("");
+                    $("#SearchResults").html(result);
+                    $("#SearchResults").toggle('slide');
+                }
+            });
+        }
 
+    }, false);
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $("#SearchResults").mouseleave(function () {
+            $(this).hide();
+        });
+    });
+</script>
 
 
 
