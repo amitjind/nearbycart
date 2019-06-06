@@ -1,60 +1,9 @@
 ﻿@model PrivateSquareWeb.Models.ProductModel
-
 @{
-                /**/
-
-                /**/
-
-                ViewBag.Title = "Index";
-                Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
 }
-
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="text/javascript">
-    //this is Product cata wise product show page & add cart ()
-    //var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
-       
-    //    var salePrice = SellingPrice;
-    //    var discountPrice = DiscountPrice;
-    //    var ProductId = Id;
-    //    var ProductName = "" + ProductName + "";
-    //    var Qty = 1;
-    //    var ImageName = ProductImage;
-    //    var Price = discountPrice; /*Number((Number(salePrice) - Number(discountPrice)));*/
-    //    var Amount = Number(Price) * Number(Qty);
-    //    var TotalAmount = 0;
-
-    //    $("body").removeClass("loaded");
-    //    $.ajax({
-    //        url: "../../WebHome/AddToCart",
-    //        type: "POST",
-
-    //        data: {
-    //            ProductId: ProductId,
-    //            ProductName: ProductName,
-    //            Qty: Qty,
-    //            ImageName: ImageName,
-    //            Price: Price,
-    //            Amount: Amount,
-    //            Discount: discountPrice,
-    //            TotalAmount: TotalAmount
-    //        },
-    //        success: function (result) {
-
-    //            $("#Cartcontent").load(location.href + ' #Cartcontent');
-    //            swal(" ", "Product Added to the Cart", "success");
-    //            $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
-    //                $(".ps-loading").addClass("loaded");
-    //                swal(" ", "Product Added to Cart222222", "success");
-    //            })
-    //        },
-    //        error: function (error) {
-
-    //        }
-    //    });
-    //}
-</script>
-
 <script type="text/javascript">
     function showvalue(s) {
         var val = document.getElementById("firstslider").value;
@@ -91,59 +40,26 @@
 <main class="ps-main ps-products-listing">
     <div class="ps-hero">
         <div class="container">
-            @*<div>
-                @switch (Model.ParentCatId)
-                {
-                    case 36:
-                        <a href="/WebHome/Index">@Model.ParentCatId Beauty & Personal care</a>
-                        break;
-                    case 37:
-                        <a href="/WebHome/Index">@Model.ParentCatId Household Supplies</a>
-                        break;
-                    case 38:
-                        <a href="/WebHome/Index">@Model.ParentCatId Diet & Nutrition</a>
-                        break;
-                    case 39:
-                        <a href="/WebHome/Index">
-                            @Model.ParentCatId All Grocery & Gourmet Foods
-                        </a>
-                        break;
-
-                    case 41:
-                        <a href="/WebHome/Index">
-                            @Model.ParentCatId Baby Care
-                        </a>
-                        break;
-                    case 43:
-                        <a href="/WebHome/Index">
-                            @Model.ParentCatId Combos
-                        </a>
-                        break;
-                }
-                <h5 id="CategoryHeading">@Model.CategoryName</h5>
-            </div>*@
             <h3 id="CategoryHeading">@Model.CategoryName</h3>
-        </div>       
+        </div>
     </div>
     @using (Html.BeginForm("ProcessForm", "ProductCatWise", FormMethod.Post))
     {
-        <div class="ps-content" data-mh="product-page">
+        <div class="ps-content ps-content-height" data-mh="product-page">
             <div class="ps-product-group" data-item="5">
 
-                <div class="ps-product-group__content">
+                <div class="ps-product-group__content ps-content-height">
                     <div class="ps-product-group__action">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <div id="abc">
-                                    <p>Showing @((ViewBag.ProductsFrom) + 1)–@((ViewBag.ProductsFrom) + ViewBag.ToProductsCount) of @ViewBag.SearchResultCount results</p>
+                                    <p>@*Showing @((ViewBag.ProductsFrom) + 1)–@((ViewBag.ProductsFrom) + ViewBag.ToProductsCount) of*@ @ViewBag.SearchResultCount results</p>
                                 </div>
-                                @*<p>Showing <span id="FromProductsCount">1</span>–<span id="ToProductsCount">12</span> of @ViewBag.SearchResultCount results</p>*@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="sortbyclass">
                                 <select class="ps-select" id="sortby" title="Sort By--">
                                     <option value="1">Price: Low to High</option>
                                     <option value="2">Price: High to Low</option>
-                                    @*<option value="3">Popularity</option>*@
                                     <option value="4">Newest Arrivals</option>
                                 </select>
 
@@ -151,7 +67,7 @@
                         </div>
                     </div>
 
-                    <div id="DivItemBind">
+                    <div id="DivItemBind" class="ps-content-height">
                         @{
                             Html.RenderAction("PartialCatwiseProductValue", "ProductCatWise");
                         }
@@ -160,71 +76,7 @@
                 </div>
 
                 <div class="ps-product-group__footer" id="paginationfooter">
-                    <div class="ps-pagination mb-50">
-                        <ul class="pagination">
-                            @if ((ViewBag.SearchResultCount / 10) > 1)
-                            {
-                                var n = ViewBag.LowerLimit;
-                                <li>
-
-                                    <a href="~/ProductCatWise/PreviousPages/@(ViewBag.LowerLimit - 1))"
-                                       onclick="return ActivatePageNumber(@(ViewBag.LowerLimit-1))">
-                                        <img src="~/WebSiteTheme/images/back.svg" width="15" />
-                                    </a>
-
-                                </li>
-                                do
-                                {
-                                    if (n == 1)
-                                    {
-                                        <li id="@n" class="active">
-                                            <a href="javascript:void()" onclick="nextpage(@n)">
-                                                @n
-                                            </a>
-                                        </li>
-                                    }
-                                    else
-                                    {
-                                        <li id="@n">
-                                            <a href="javascript:void()" onclick="nextpage(@n)">
-                                                @n
-                                            </a>
-                                        </li>
-                                    }
-                                    n++;
-                                }
-                                while (n <= (ViewBag.NumberOfPages));
-                                if ((ViewBag.SearchResultCount / 10) > ViewBag.NumberOfPages)
-                                {
-                                    <li>
-                                        <a href="javascript:void()" onclick="morepages(@n,@ViewBag.SearchResultCount,@ViewBag.NumberOfPages,@ViewBag.LowerLimit)">
-                                            <img src="~/WebSiteTheme/images/right-arrow.svg" width="15" />
-                                        </a>
-                                    </li>
-                                }
-
-                            }
-                            else
-                            {
-                                if (ViewBag.SearchResultCount < 10)
-                                {
-                                    @*<li class="active"><a href="#">1</a></li>*@
-                                }
-                                else
-                                {
-                                    if ((ViewBag.SearchResultCount % 10) != 0)
-                                    {
-                                        <li class="active" id="pagenumber1"><a href="javascript:void()" onclick="nextpage(1)">1</a></li>
-                                        <li id="pagenumber2"><a href="javascript:void()" onclick="nextpage(2)">2</a></li>
-                                    }
-                                    else
-                                    {
-                                        <li class="active"><a href="#">1</a></li>
-                                    }
-                                }
-                            }
-                        </ul>
-                    </div>
+                    <a href="javascript:void();" id="ViewMore" name="1" onclick="ViewMore()"><b>View More</b></a>
                 </div>
 
             </div>
@@ -232,63 +84,31 @@
 
 
     }
-        <div>
-            @*<aside class="ps-sidebar" data-mh="product-page">*@
-            @{
-                Html.RenderAction("WebSiteSidebar", "WebSidebar");
-            }
-            @*</aside>*@
-            <aside class="ps-sidebar" data-mh="product-page">
-
-                @*This html required in later*@
-                <aside class="ps-widget--sidebar ps-widget--filter ">
-                    <div class="ps-widget__header">
-                        <h3>Price Filter</h3>
-                    </div>
-                    <div class="ps-widget__content">
-                        <div class="ac-slider" data-default-min="300" data-default-max="2000" data-max="3450" data-step="50" data-unit="$"></div>
-                        <p class="ac-slider__meta">Price:<span class="ac-slider__value ac-slider__min"> 10</span>-<span class="ac-slider__value ac-slider__max">10000</span></p>
-
-                        <input type="range" id="firstslider" min="0" max="10000" step="100" value="0" onchange="showvalue(this.value)" /><br>
-
-                        <input type="text" id="TxtPriceRange" name="TxtPriceRange" readonly />
-
-                        <input type="submit" id="BtnPriceRange" name="submit" onclick="ProductPriceWise()" value="PriceRange" style="display:none;" />
-
-                    </div>
-
-                </aside>
-
-            </aside>
-        </div>
-  
-</main>
-
-@*<div>
+    <div>
         @{
             Html.RenderAction("WebSiteSidebar", "WebSidebar");
         }
-    </div>*@
-@*<p class="budget">What is your budget?</p>
-    <label for="range">
-        <input type="range" name="range" id="range" min="0" max="300" step="5" value="175" />
-    </label>*@
+        <aside class="ps-sidebar" data-mh="product-page">
+            <aside class="ps-widget--sidebar ps-widget--filter ">
+                <div class="ps-widget__header">
+                    <h3>Price Filter</h3>
+                </div>
+                <div class="ps-widget__content">
+                    <div class="ac-slider" data-default-min="300" data-default-max="2000" data-max="3450" data-step="50" data-unit="$"></div>
+                    <p class="ac-slider__meta">Price:<span class="ac-slider__value ac-slider__min"> 10</span>-<span class="ac-slider__value ac-slider__max">10000</span></p>
+                    <input type="range" id="firstslider" min="0" max="10000" step="100" value="0" onchange="showvalue(this.value)" /><br>
+                    <input type="text" id="TxtPriceRange" name="TxtPriceRange" readonly />
+                    <input type="submit" id="BtnPriceRange" name="submit" onclick="ProductPriceWise()" value="PriceRange" style="display:none;" />
+
+                </div>
+
+            </aside>
+
+        </aside>
+    </div>
+
+</main>
 <output for="range" class="output"></output>
-<div class="slim-mainpanel">
-    @*<div class="price-range-block">
-            <div class="sliderText">jQuery UI Price Range Slider</div>
-            <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
-            <div style="margin:30px auto">
-                <input type="number" min=0 max="9900" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" />
-                <input type="number" min=0 max="10000" oninput="validity.valid||(value='10000');" id="max_price" class="price-range-field" />
-            </div>
-            <button class="price-range-search" id="price-range-submit">Search</button>
-            <div id="searchResults" class="search-results-block"></div>
-            <input type="submit" id="BtnPriceRange" name="submit" onclick="ProductPriceWise()" value="PriceRange" style="display:none;" />
-        </div>*@
-</div><!-- slim-mainpanel -->
-@*//Below script is called when the a type of sort order is selected by the user from the dropdown*@
-@*<script src="~/WebSiteTheme/js/jquery.ui-slider.js"></script>*@
 <script>
 	var pageindexcounter;
 	var sortdropdown = document.getElementById("sortby");
@@ -313,47 +133,39 @@
                 },
                 success: function (result) {
                     $("#DivItemBind").html(result);
-                   
-                    //setTimeout(function () {
-                        //$("#abc").load(location.href + ' #abc');
-                        //$("#paginationfooter").load(location.href + ' #paginationfooter');
-                    //}, 2000);
-                   
-                   
-                    $.ajax({
-                        url: "../../ProductCatWise/_Pagination",
-                        type: "POST",
-                        data: {
-                            "id": 0,
-                            "searchresultcount": null,
-                            "lowerlimit": null,
-                            "numberofpages": null
-                        },
-                        success: function (result) {
-                            //debugger;
-                            console.log(result);
-                            $("#paginationfooter").html(result);
-
-                           
-                            $("#1").addClass("active");
-                            $("#active").removeClass("active");
-                            //var ActivatePageNo = ActivatePagination(id);
-                        }
-                    });
-                    $.ajax({
-                        url: "../../ProductCatWise/PageCountingPartialView",
-                        type: "POST",
-                        data: {
-                            "id": 1                           
-                        },
-                        success: function (result) {                        
-                           
-                            $("#abc").html(result);                           
-                        }
-                    });
+                    //$.ajax({
+                    //    url: "../../ProductCatWise/_Pagination",
+                    //    type: "POST",
+                    //    data: {
+                    //        "id": 0,
+                    //        "searchresultcount": null,
+                    //        "lowerlimit": null,
+                    //        "numberofpages": null
+                    //    },
+                    //    success: function (result) {
+                    //        console.log(result);
+                    //        $("#paginationfooter").html(result);
 
 
-                    pageindexcounter++;
+                    //        $("#1").addClass("active");
+                    //        $("#active").removeClass("active");
+                    //        //var ActivatePageNo = ActivatePagination(id);
+                    //    }
+                    //});
+                    //$.ajax({
+                    //    url: "../../ProductCatWise/PageCountingPartialView",
+                    //    type: "POST",
+                    //    data: {
+                    //        "id": 1
+                    //    },
+                    //    success: function (result) {
+
+                    //        $("#abc").html(result);
+                    //    }
+                    //});
+
+
+                    //pageindexcounter++;
                     $(".ps-loading").addClass("loaded");
                 }
             });
@@ -365,7 +177,7 @@
 <script>
 
     var nextpage = function (id) {
-       
+
         var sortdropdown = document.getElementById("sortby");
         var sortdropdownvalue = sortdropdown.value;
 
@@ -484,8 +296,26 @@
     };
 </script>
 <script>
-    @*window.onload = function () {
-        $("#@Model.ParentCatId")[0].click();
+    var ViewMore = function () {
+        var sortdropdown = document.getElementById("sortby");
+        var pageindex = $("#ViewMore").attr('name');
+        $("body").removeClass("loaded");
+        $.ajax({
+            url: "../../ProductCatWise/LazyLoader",
+            data: {
+                "id": pageindex,
+                "sortingby": sortdropdown.value
+            },
+            success: function (result) {
 
-    };*@
-</script>    
+                $("body").addClass('loaded');
+                $("#DivItemBind").append(result);
+                var PageNumber = parseInt(pageindex, 10);
+                PageNumber++;
+                $("#ViewMore").attr('name', PageNumber);
+                console.log('After incrementing, the page index is : ');
+                console.log($("#ViewMore").attr('name'));
+            }
+        });
+    }
+</script>

@@ -1,32 +1,71 @@
 ﻿<div class="row">
-    <div class="search-result" style="position:relative">
-    </div>
-    <div id="CartList">
+    <div id="CartList" class="crt_wdth">
         @{
             foreach (var item in ViewBag.SearchSuggestions)
             {
-                <div class="ps-cart-item" style="background-color:black">
+                <div class="ps-cart-item pdng_itm" style="background-color:black">
                     <div class="ps-cart-item__thumbnail">
-                        <a href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.ProductId).ToString())))"></a>
+                        <a href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.Id).ToString())))"></a>
                         <img src="~/DocImg/@item.ProductImage" alt="Image">
                     </div>
                     <div class="ps-cart-item__content">
                         <a class="ps-cart-item__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((item.Id).ToString())))"> <b>@item.ProductName</b></a>
-
-                        <a href="javascript:void();" id="AddToCartSearchSuggestion" onclick="AddToCart('@item.Id','@item.ProductName.Replace("'",@"\'")','@item.SellingPrice','@item.DiscountPrice','@item.ProductImage')">AddToCart</a>
+                        <input type="text" value="1" class="iten_set inpt_btn" style="float:none;color:black" id="@item.Id" name="QtyText" />
+                        <a href="javascript:void();" class="add_cart" id="AddToCartSearchSuggestion" onclick="AddToCartFromSearchSuggestions('@item.Id','@item.ProductName.Replace("'",@"\'")','@item.SellingPrice','@item.DiscountPrice','@item.ProductImage')">AddToCart</a>
                     </div>
-                    <div class="ntotal_cart form-group--number">
+                    @*<div class="ntotal_cart form-group--number">
                         <div class="pull-left SpanForQuantity+@item.ProductId">
                             <div id="@item.ProductId" class="lds-ellipsis n_loader"></div>
-                            
+
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             }
         }
-
-    </div>
-    <div class="view-all">
-        <a href="javascript:void();">VIEW ALL PRODUCTS</a>
+        <a href="javascript:void();" style="color:black">VIEW ALL PRODUCTS</a>
     </div>
 </div>
+<script type="text/javascript">
+    var AddToCartFromSearchSuggestions = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
+        var Qty = parseInt(($('#'+Id).val()),10);
+        var salePrice = SellingPrice;
+        var discountPrice = DiscountPrice;
+        var ProductId = Id;
+        var ProductName = "" + ProductName + "";
+        //var Qty = parseInt(($("#QtyTextBox").text()),10);
+        var ImageName = ProductImage;
+        var Price = discountPrice;
+        var Amount = Number(Price) * Number(Qty);
+
+        var TotalAmount = 0;
+        $("body").removeClass("loaded");
+        $.ajax({
+            url: "../../WebHome/AddToCart",
+            type: "POST",
+
+            data: {
+                ProductId: ProductId,
+                ProductName: ProductName,
+                Qty: Qty,
+                ImageName: ImageName,
+                Price: Price,
+                Amount: Amount,
+                Discount: discountPrice,
+                TotalAmount: TotalAmount
+            },
+            success: function (result) {
+                $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
+                $("#Cartcontent").load(location.href + ' #Cartcontent');
+
+                setTimeout(
+                    function () {
+                        $(".ps-loading").addClass("loaded");
+                    }, 2000
+                );
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>

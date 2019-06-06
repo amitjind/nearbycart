@@ -74,8 +74,6 @@
             },
             success: function (result) {
                 var JsonResponse = JSON.parse(result);
-                console.log(JsonResponse);
-                console.log(JsonResponse.length);
                 var ProductName = "";
                 var Qty = "";
                 var ImageName = "";
@@ -87,7 +85,6 @@
                     Qty = JsonResponse[i].Qty;
                     TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
                     ImageName = JsonResponse[i].ImageName;
-                    console.log('~/DocImg/' + ImageName);
                     CartString = CartString + '<div class="ps-cart-item"><a class="ps-cart-item__close" onclick="DeleteItem(' + i + ')"></a>' +
                         '<div class="ps-cart-item__thumbnail">' +
                         '<a href="/WebHome/ProductDetail/' + JsonResponse[i].ProductId + '"></a>' +
@@ -106,20 +103,15 @@
                     Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';
                 }
                 if (JsonResponse.length > 0) {
-
-
                     CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
                         "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
                     updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
-
                 }
-
                 divCart.innerHTML = CartString;
                 divCartTotal.innerHTML = CartTotal;
 
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
                     $(".ps-loading").addClass("loaded");
-                    //swal(" ", "Product removed", "success");
                 })
             },
             error: function (error) {
@@ -146,7 +138,6 @@
 
                 }
                 else {
-                    //swal(" ", result, "success");
                     swal({
                         text: result,
                         type: "success",
@@ -158,10 +149,7 @@
             error: function (error) {
                 console.log('error');
             }
-
         })
-
-
     }
 </script>
 
@@ -169,7 +157,6 @@
     <div class="ps-hero">
         <div class="container">
             <h3>SEARCH RESULTS</h3>
-
         </div>
     </div>
     @{
@@ -178,7 +165,7 @@
     }
     @using (Html.BeginForm("SearchBar", "WebHome", FormMethod.Post))
     {
-        <div class="ps-content" id="SearchResultProducts" data-mh="product-page">
+        <div class="ps-content ps-content-height " id="SearchResultProducts" data-mh="product-page">
             <div class="ps-product-group no-sidebar pt-40" data-item="4">
                 <div class="ps-product-group__header">
                     <div class="ps-filter">
@@ -190,17 +177,13 @@
                                 <div class="ps-filter__result">
                                     @if (ViewBag.SearchResultCount >= Constant.NumberOfProducts)
                                     {
-
                                         <p>Showing @(ViewBag.ProductsFrom)–@((ViewBag.ProductsFrom) + ViewBag.ToProductsCount) of @ViewBag.SearchResultCount results</p>
-
-
                                     }
                                     else
                                     {<p>Showing 1–@ViewBag.SearchResultCount of @ViewBag.SearchResultCount results</p>}
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="ps-product-group__content" id="AppendToLazyLoader">
@@ -231,15 +214,12 @@
                                         @Users.DiscountPrice
                                     </p>
                                 </div>
-
                             </div>
                         </div>
-
-
                     }
                     <h1>@ViewBag.NoResultFound</h1>
                 </div>
-                <a href="javascript:void();" onclick="NextPage()" id="ViewMoreProducts" onmouseover="HoverProducts()" class="btn-block" name="1">View More Products</a> 
+                <a href="javascript:void();" onclick="NextPage()" id="ViewMoreProducts" onmouseover="HoverProducts()" class="btn-block" name="1">View More Products</a>
             </div>
         </div>
     }
@@ -322,14 +302,11 @@
                 "pageindex": pageindex
             },
             success: function (result) {
-
                 $("body").addClass('loaded');
                 $("#AppendToLazyLoader").append(result);
                 var PageNumber = parseInt(pageindex, 10);
                 PageNumber++;
                 $("#ViewMoreProducts").attr('name', PageNumber);
-                console.log('After incrementing, the page index is : ');
-                console.log($("#ViewMoreProducts").attr('name'));
             }
         });
     }
@@ -338,10 +315,21 @@
     var HoverProducts = function () {
         $("#ViewMoreProducts").click();
     }
-    //window.onscroll = function (ev) {
-    //    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-    //        //console.log('you are at the bottom of the page');
-           
-    //    }
-    //};
+    var lastScrollTop = 0;
+    var flag = 1;
+    window.onscroll = function (ev) {
+        var st = window.pageYOffset || document.documentElement.scrollTop;
+        if (st > lastScrollTop) {
+            if (flag == 1) {
+                if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight / 1.5)) {
+                    $("#ViewMoreProducts").click();
+                    flag = 0;
+                }
+            }
+        }
+        else {
+            flag = 1;
+        }
+        lastScrollTop = st <= 0 ? 0 : st;
+    }
 </script>

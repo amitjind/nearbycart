@@ -9,15 +9,11 @@ using System.Web.Mvc;
 namespace PrivateSquareWeb.Controllers.Website
 {
     [HandleError]
-
     public class WebHomeController : Controller
     {
         JwtTokenManager _JwtTokenManager = new JwtTokenManager();
-        static List<ProductImages> EditProductImageList;
+        //static List<ProductImages> EditProductImageList;
         static List<ProductModel> ListAllProduct;
-
-        // GET: WebHome
-
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Index()
         {
@@ -34,7 +30,6 @@ namespace PrivateSquareWeb.Controllers.Website
             ViewBag.FifthCategory = PopularProducts.Where(x => x.ParentCatId == Constant.ParentCategories[4]).Take(Constant.NumberOfProductsInFrontPage);
             ViewBag.ProductCatList = CommonFile.GetProductCategory(null);
             return View();
-
         }
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
@@ -46,7 +41,6 @@ namespace PrivateSquareWeb.Controllers.Website
                 id = Convert.ToInt64(CommonFile.Decode(Id));
                 List<ProductModel> Product = GetProduct(id);
                 ProductModel objModel = new ProductModel();
-
                 if (Product != null && Product.Count() > 0)
                 {
                     objModel.Id = id;
@@ -66,7 +60,7 @@ namespace PrivateSquareWeb.Controllers.Website
                     {
                         String[] ProductImages = objModel.ProductImages.Split(',');
                         ListProductImages = GetSelectedProductImages(ProductImages, objModel.ProductImage);
-                        EditProductImageList = ListProductImages;
+                        //EditProductImageList = ListProductImages;
                         ViewBag.ProductImages = ListProductImages;
                     }
                     else
@@ -107,7 +101,6 @@ namespace PrivateSquareWeb.Controllers.Website
             {
                 return View("PageNotFound", "Eror");
             }
-
         }
         private List<ProductImages> GetSelectedProductImages(String[] ProductImages, String DefaultImage)
         {
