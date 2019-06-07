@@ -1,5 +1,4 @@
 ﻿@model PrivateSquareWeb.Models.ProductModel
-
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 
@@ -129,7 +128,6 @@
         });
     }
 </script>
-
 <script type="text/javascript">
     var AddToWishlist = function (Id) {
         $("body").removeClass("loaded");
@@ -165,7 +163,6 @@
 
     }
 </script>
-
 @foreach (var Users in ViewBag.UsersProduct)
 {
     <div class="ps-product-wrap">
@@ -174,12 +171,11 @@
                 <a class="ps-product__overlay" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))"></a>
                 @{ if (@Users.ProductImage != null)
                     {
-                        <img src="~/DocImg/@Users.ProductImage" alt="">
+                        <img src="~/DocImg/@Users.ProductImage" alt="Product Image">
                     }
                     else
                     {
                         <img src="~/WebSiteTheme/images/product/fashion-1.jpg" alt="No Image">
-
                     }
                 }               
                 <ul class="ps-product__actions">
@@ -190,7 +186,7 @@
             <div class="ps-product__content">
                 <a class="ps-product__title" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))">@Users.ProductName</a>
                 <p class="ps-product__price">
-                    ₹@Users.DiscountPrice
+                    <b>₹</b>@Users.DiscountPrice<b style="float:right">@Users.Quantity</b>
                 </p>
             </div>
         </div>

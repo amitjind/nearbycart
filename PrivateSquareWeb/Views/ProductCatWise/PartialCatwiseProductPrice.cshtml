@@ -1,6 +1,5 @@
 ﻿@model PrivateSquareWeb.Models.ProductModel
 <script type="text/javascript">
-
     var AddToCartCatWise = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage, ProductCatId) {
         console.log(Id + ProductName + SellingPrice + DiscountPrice + ProductImage + "  CategoryId" + ProductCatId);
        
@@ -39,7 +38,6 @@
         });
     }
 </script>
-
 <script type="text/javascript">
     var AddToWishlist = function (Id) {
 
@@ -60,23 +58,19 @@
 <div class="row row-sm mrg-btm-20">
     @foreach (var Users in ViewBag.UsersProduct)
     {
-
         <div class="ps-product-wrap">
             <div class="ps-product--fashion">
                 <div class="ps-product__thumbnail">
                     <a class="ps-product__overlay" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))"></a>
                     @{ if (@Users.ProductImage != null)
                         {
-                            <img src="~/DocImg/@Users.ProductImage" alt="">
+                            <img src="~/DocImg/@Users.ProductImage" alt="Product Image">
                         }
                         else
                         {
-                            <img src="~/WebSiteTheme/images/product/fashion-1.jpg" alt="">
-
+                            <img src="~/WebSiteTheme/images/product/fashion-1.jpg" alt="Default Image">
                         }
                     }
-                  
-                    @*<div class="ps-badge ps-badge--sale-off"><span>-@off%</span></div>*@
                     <ul class="ps-product__actions">
                         <li><a href="#" title="Favorite"><i class="ps-icon-heart" onclick="AddToWishlist(@Users.Id)"></i></a></li>
                     </ul>
@@ -84,12 +78,11 @@
                 <div class="ps-product__content">
                     <a class="ps-product__title" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))">@Users.ProductName</a>
                     <p class="ps-product__price">
-                        ₹@Users.DiscountPrice
+                        <b>₹</b>@Users.DiscountPrice<b style="float:right">@Users.Quantity</b>
                     </p><a class="ps-product__cart" onclick="AddToCartCatWise('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage','@Users.ProductCatId')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a>
                 </div>
             </div>
         </div>
-
     }
-</div><!-- row -->
+</div>
 

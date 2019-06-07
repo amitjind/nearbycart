@@ -130,15 +130,6 @@ namespace PrivateSquareWeb.CommonCls
 		{
 			var GetUserProductList = new List<ProductModel>();
 			ProductModel objmodel = new ProductModel();
-			// LoginModel MdUser = Services.GetLoginUser(HttpContextBase httpContext, _JwtTokenManager);
-			//if (MdUser.Id != 0)
-			//    objmodel.UserId = Convert.ToInt64(MdUser.Id);
-
-			// var _request = JsonConvert.SerializeObject(objmodel);
-			//ResponseModel ObjResponse = CommonFile.GetApiResponse(Constant.ApiGetProduct, _request);
-			//GetUserProductList = JsonConvert.DeserializeObject<List<ProductModel>>(ObjResponse.Response);
-
-
 			var _request = _JwtTokenManager.GenerateToken(JsonConvert.SerializeObject(objmodel));
 			ResponseModel ObjResponse = CommonFile.GetApiResponseJWT(Constant.ApiGetProduct, _request);
 			GetUserProductList = JsonConvert.DeserializeObject<List<ProductModel>>(ObjResponse.Response);

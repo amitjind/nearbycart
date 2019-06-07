@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-
 namespace PrivateSquareWeb.Controllers.Website
 {
     [HandleError]
@@ -51,10 +50,8 @@ namespace PrivateSquareWeb.Controllers.Website
             ViewBag.ToProductsCount = Enumerable.Count(ViewBag.UsersProduct);
             ViewBag.SearchResultCount = SearchProductList.Count;
             ViewBag.LowerLimit = 1;
-
             int nop = SearchProductList.Count / Constant.NumberOfProducts;
             int remindernop = SearchProductList.Count % 12;
-
             if (nop < Constant.NumberOfPages)
             {
                 if (remindernop > 0)
@@ -67,7 +64,6 @@ namespace PrivateSquareWeb.Controllers.Website
             {
                 ViewBag.NumberOfPages = Constant.NumberOfPages;
             }
-
             var ProductCategory = ProductCatList.Where(x => x.Id.Equals(Id));
             ViewBag.ProductCatList = EncodedCategories.Where(x => x.ParentCatId == ProductCategory.Single().ParentCatId);
             if (!CommonFile.IsParentCategory(Id))
@@ -160,7 +156,6 @@ namespace PrivateSquareWeb.Controllers.Website
             var SearchProductList = ListAllProduct.Where(x => x.DiscountPrice > Convert.ToDecimal(0) && (x.DiscountPrice < Convert.ToDecimal(ProductPrice)) && x.ProductCatId == CategoryId).ToList();
             return SearchProductList;
         }
-
         public ActionResult Sortby(int sortorder, int pageindex, string productcatid)
         {
             long? Id = Convert.ToInt64(CommonFile.Decode(productcatid));
@@ -230,7 +225,6 @@ namespace PrivateSquareWeb.Controllers.Website
             ViewBag.ProductCatList = ProductCatList;
             return PartialView("~/Views/ProductCatWise/PartialCatwiseProductValue.cshtml", objModel);
         }
-
         #region -- Pagination methods - obsolete after applying Lazyloader
         public PartialViewResult NextPage(long id, string sortingby)
         {
@@ -515,14 +509,12 @@ namespace PrivateSquareWeb.Controllers.Website
             return PartialView("~/Views/ProductCatWise/PageCountingPartialView.cshtml");
         }
         #endregion
-
-        public PartialViewResult LazyLoader(int id, string sortingby)
+        public PartialViewResult LazyLoader(int pageindex, string sortingby)
         {
             string SearchCookieValue = Services.GetCookie(this.HttpContext, "ProductCatWiseCatId").Value;
             dynamic _data = SearchCookieValue;
             var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(_data);
             int ProductCatId = int.Parse(json["ProductCatId"].ToString());
-            int pageindex = id;
             var SearchProductList = new List<ProductModel>();
             if (!CommonFile.IsParentCategory(ProductCatId))
             {
@@ -559,7 +551,6 @@ namespace PrivateSquareWeb.Controllers.Website
                     SearchProductList = ListAllProduct.Where(x => x.ParentCatId == ProductCatId).ToList();
             }
             ViewBag.LazyLoaderProducts = SearchProductList.Skip((pageindex) * Constant.NumberOfProducts).Take(Constant.NumberOfProducts);
-
             return PartialView("~/Views/Shared/LazyLoaderProducts.cshtml");
         }
     }

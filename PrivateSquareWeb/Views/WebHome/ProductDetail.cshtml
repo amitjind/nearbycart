@@ -1,58 +1,17 @@
 ﻿@model PrivateSquareWeb.Models.ProductModel
-
 @{
     ViewBag.Title = "ProductDetail";
     Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
 }
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
-
-    var AddToCartSimilarProducts = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
-        var salePrice = SellingPrice;
-        var discountPrice = DiscountPrice;
-        var ProductId = Id;
-        var ProductName = "" + ProductName + "";
-        var Qty = 1;
-        var ImageName = ProductImage;
-        var Price = discountPrice; /*Number((Number(salePrice) - Number(discountPrice)));*/
-        var Amount = Number(Price) * Number(Qty);
-
-        var TotalAmount = 0;
-        
-        $.ajax({
-            url: "../../WebHome/AddToCart",
-            type: "POST",
-            data: {
-                ProductId: ProductId,
-                ProductName: ProductName,
-                Qty: Qty,
-                ImageName: ImageName,
-                Price: Price,
-                Amount: Amount,
-                Discount: discountPrice,
-                TotalAmount: TotalAmount
-            },
-            success: function (result) {
-                $("#Cartcontent").load(location.href + ' #Cartcontent');
-              
-                //swal(" ", "Product Added to the Cart", "success");
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-    }
-</script>
-<script type="text/javascript">
     var AddToWishlist = function (Id) {
-
         var ProductId = Id;
         $.ajax({
             url: "../../WebHome/AddToWishlist",
             type: "POST",
             data: { ProductId: ProductId },
             success: function (result) {
-                debugger;
                 if (result == "Please Login to access wishlist")
                 {
                     window.location.href = "../../WebLogin/Index";
@@ -72,21 +31,15 @@
             error: function (error) {
                 console.log('error');
             }
-
         })
-        
-
     }
 </script>
 <script type="text/javascript">
     var GetTotal = function ()
     {
-      
         var salePrice =@Model.SellingPrice;
-        var discountPrice=@Model.DiscountPrice;
-      
-        var Qty = document.getElementById('TxtQty').value;
-       
+        var discountPrice=@Model.DiscountPrice;      
+        var Qty = document.getElementById('TxtQty').value;       
         var LblTotal = document.getElementById('TotalAmount');
         if (Qty.trim() == '' || Qty.trim() == null) {
             alert('Minum 1 Qty Required');
@@ -98,27 +51,21 @@
         }
     }
     </script>
-
 <script>
-    //this add to cart call in web site Product Details page
     var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
-        debugger
+        $('body').removeClass("loaded");
         var salePrice = SellingPrice;
         var discountPrice = DiscountPrice;
         var ProductId = Id;
         var ProductName = "" + ProductName + "";
         var Qty =document.getElementById('TxtQty').value;
-      
         var ImageName = ProductImage;
         var Price = discountPrice;
         var Amount = Number(Price) * Number(Qty);
-
         var TotalAmount = 0;
-
         $.ajax({
             url: "../../WebHome/AddToCart",
             type: "POST",
-
             data: {
                 ProductId: ProductId,
                 ProductName: ProductName,
@@ -130,11 +77,8 @@
                 TotalAmount: TotalAmount
             },
             success: function (result) {
-                debugger
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
-
-                //swal(" ", "Product Added to the Cart", "success");
-
+                $("body").addClass("loaded");   
             },
             error: function (error) {
                 console.log(error);
@@ -142,16 +86,12 @@
         });
     }
 </script>
-
-
-
 <div class="ps-hero">
     <div class="container">
         <div>
             <a href="/WebHome/Index">Home../</a>
             @ViewBag.ParentCatDiscription../
             <a href="~/ProductCatWise/Index/@Constant.EncodeNumber(int.Parse((ViewBag.ProductCatId).ToString()))"> @ViewBag.ProductCatDiscription </a>
-
         </div>
         <h3>@Model.ProductName</h3>
     </div>
@@ -162,29 +102,23 @@
             <div class="row">
                 <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12 ">
                     <div class="ps-product__thumbnail">
-
                         <div class="ps-product__image">
-                            <div class="item"><img class="zoom" src="~/DocImg/@Model.ProductImage" alt="" data-zoom-image="~/DocImg/@Model.ProductImage"></div>
-                            
+                            <div class="item"><img class="zoom" src="~/DocImg/@Model.ProductImage" alt="" data-zoom-image="~/DocImg/@Model.ProductImage"></div> 
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12 ">
                     <div class="ps-product__info">
-                        
                         <h1>@Model.ProductName</h1>
-                        <p class="ps-product__category">@*<a href="#">Men</a>,<a href="#">  Nike</a>,<a href="#">  Jordan</a>*@</p>
+                        <p class="ps-product__category"></p>
                         <h3 class="ps-product__price"><span>₹</span> @Model.DiscountPrice </h3>
                         <div class="ps-product__short-desc">
                             <p>@Model.Description</p>
                         </div>
-
                         <div class="ps-product__block ps-product__size">
                             <h4>CHOOSE QUANTITY</h4>
-
                             <div class="form-group ps-number pull-left">
                                 <input id="TxtQty" class="form-control" type="text" value="1" onblur="GetTotal()"><span class="up"></span><span class="down"></span>
-                                @*<input class="form-control" type="text" value="1"><span class="up"></span><span class="down"></span>*@
                             </div>
                         </div>
                         <div class="ps-product__shopping">
@@ -194,10 +128,8 @@
                     </div>
                 </div>
             </div>
-          
             </div>
         </div>
-   
 </main>
 <div class="ps-section pb-50">
     <div class="ps-container">
@@ -211,39 +143,38 @@
                 {
                     <div class="ps-product--fashion">
                         <div class="ps-product__thumbnail">
-                            <a class="ps-product__overlay" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))"></a><img class="lazy" src="~/DocImg/@Users.ProductImage" alt="">
-                            @{
-                                string off = (100 - Math.Round((@Users.DiscountPrice / @Users.SellingPrice) * 100)).ToString();
-                            }
-                            @*<div class="ps-badge ps-badge--sale-off"><span>-@off%</span></div>*@
+                            <a class="ps-product__overlay" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))"></a><img class="lazy" src="~/DocImg/@Users.ProductImage" alt="ProductImage">
                             <ul class="ps-product__actions">
                                 <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
                                 <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
                             </ul>
-                            @*<ul class="ps-product__actions">
-                                <li>
-                                    <a class="ps-product__cart" href="#" onclick="AddToCartSimilarProducts('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a>
-                                </li>
-                                <li><a href="#" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
-                            </ul>*@
                         </div>
                         <div class="ps-product__content">
                             <a class="ps-product__title" href="#">@Users.ProductName</a>
                             <p class="ps-product__price">
-                                <del>₹@Users.SellingPrice</del>₹@Users.DiscountPrice
+                                <b>₹</b>@Users.DiscountPrice<b style="float:right">@Users.Quantity</b>
                             </p>
-                            
                         </div>
                     </div>
                 }
-
             </div>
         </div>
     </div>
 </div>
 <div class="ps-section--partner">
     <div class="ps-container">
-        
     </div>
 </div>
-
+<script>
+    checkothermenuactiveornot = function (id) {
+        var currentclass = $("#" + id).attr('class');
+        if (currentclass == 'cate-main-list') {
+            $("#" + id).addClass('active_li');
+            $('ul[name =' + id+']').css('max-height', '1000px');
+        }
+        else {
+            $("#" + id).removeClass('active_li');
+            $('ul[name =' + id + ']').css('max-height', '0px');
+        }
+    }
+</script>

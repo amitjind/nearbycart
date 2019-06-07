@@ -9,10 +9,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
-
     var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
-
-
         var salePrice = SellingPrice;
         var discountPrice = DiscountPrice;
         var ProductId = Id;
@@ -21,7 +18,6 @@
         var ImageName = ProductImage;
         var Price = discountPrice;
         var Amount = Number(Price) * Number(Qty);
-
         var TotalAmount = 0;
         $("body").removeClass("loaded");
         $.ajax({
@@ -43,15 +39,9 @@
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
                 $(".ps-loading").addClass("loaded");
-                //swal(" ", "Product Added to the Cart", "success");
-                //swal({
-                //    text: "Product Added to the Cart",
-                //    timer: 1000,
-                //    showConfirmButton: false
-                //});
             },
             error: function (error) {
-                //console.log(error);
+                console.log(error);
             }
         });
     }
@@ -79,8 +69,6 @@
                 var ImageName = "";
                 var TotalAmount = 0;
                 for (var i = 0; i < JsonResponse.length; i++) {
-
-
                     ProductName = JsonResponse[i].ProductName;
                     Qty = JsonResponse[i].Qty;
                     TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
@@ -122,7 +110,6 @@
 </script>
 <script type="text/javascript">
     var AddToWishlist = function (Id) {
-
         var ProductId = Id;
         $.ajax({
             url: "../../WebHome/AddToWishlist",
@@ -131,11 +118,9 @@
             success: function (result) {
                 if (result == "Please Login to access wishlist") {
                     window.location.href = "../WebLogin/Index";
-
                 }
                 else if (result == "Product Exists") {
                     swal("Product already added to the Wishlist");
-
                 }
                 else {
                     swal({
@@ -180,7 +165,7 @@
                                         <p>Showing @(ViewBag.ProductsFrom)–@((ViewBag.ProductsFrom) + ViewBag.ToProductsCount) of @ViewBag.SearchResultCount results</p>
                                     }
                                     else
-                                    {<p>Showing 1–@ViewBag.SearchResultCount of @ViewBag.SearchResultCount results</p>}
+                                    {<p>@ViewBag.SearchResultCount results</p>}
                                 </div>
                             </div>
                         </div>
@@ -204,14 +189,14 @@
                                         }
                                     }
                                     <ul class="ps-product__actions">
-                                        <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
-                                        <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
+                                        <li><a href="javascript:" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
+                                        <li><a href="javascript:" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="ps-product__content">
                                     <a class="ps-product__title" href="/WebHome/ProductDetail/@Constant.EncodeNumber(int.Parse((Users.Id).ToString()))">@Users.ProductName</a>
                                     <p class="ps-product__price">
-                                        @Users.DiscountPrice
+                                        <b>₹</b>@Users.DiscountPrice <b style="float:right">@Users.Quantity</b>
                                     </p>
                                 </div>
                             </div>
@@ -219,19 +204,18 @@
                     }
                     <h1>@ViewBag.NoResultFound</h1>
                 </div>
-                <a href="javascript:void();" onclick="NextPage()" id="ViewMoreProducts" onmouseover="HoverProducts()" class="btn-block" name="1">View More Products</a>
+                <a href="javascript:" style="left:430px" onclick="NextPage()" id="ViewMoreProducts" onmouseover="HoverProducts()" class="btn-block" name="1">View More Products</a>
             </div>
         </div>
     }
 </main>
-
 <div class="ps-section--features">
     <div class="ps-container">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                 <div class="ps-iconbox">
                     <header>
-                        <i class="ps-icon-delivery"></i>
+                        <img src="~/WebSiteTheme/images/user/shipped.svg" height="50" width="50" />
                         <h3>FREE SHIPPING</h3>
                         <p>ON ORDER OVER ₹500</p>
                     </header>
@@ -241,7 +225,7 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                 <div class="ps-iconbox">
                     <header>
-                        <i class="ps-icon-wallet"></i>
+                        <img src="~/WebSiteTheme/images/user/refund.svg" height="50" width="50" />
                         <h3>100% MONEY BACK.</h3>
                         <p>WITHIN 30 DAYS AFTER DELIVERY.</p>
                     </header>
@@ -251,7 +235,7 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                 <div class="ps-iconbox">
                     <header>
-                        <i class="ps-icon-customer-service"></i>
+                        <img src="~/WebSiteTheme/images/user/headset.svg" height="50" width="50" />
                         <h3>SUPPORT 24/7.</h3>
                         <p>WE CAN HELP YOU ONLINE.</p>
                     </header>
@@ -261,8 +245,6 @@
         </div>
     </div>
 </div>
-
-
 <script>
     var ActivatePageNumber = function (id) {
         var localstorageid = localStorage.getItem("PageNumber");
@@ -294,6 +276,9 @@
 </script>
 <script>
     var NextPage = function () {
+        if ($("#ViewMoreProducts").text() == '~~~~That is all Folks~~~~') {
+            return;
+        }
         var pageindex = $("#ViewMoreProducts").attr('name');
         $("body").removeClass("loaded");
         $.ajax({
@@ -302,11 +287,17 @@
                 "pageindex": pageindex
             },
             success: function (result) {
-                $("body").addClass('loaded');
-                $("#AppendToLazyLoader").append(result);
-                var PageNumber = parseInt(pageindex, 10);
-                PageNumber++;
-                $("#ViewMoreProducts").attr('name', PageNumber);
+                if (result == "") {
+                    $("#ViewMoreProducts").text('~~~~That is all Folks~~~~');
+                    $("body").addClass('loaded');
+                }
+                else {
+                    $("body").addClass('loaded');
+                    $("#AppendToLazyLoader").append(result);
+                    var PageNumber = parseInt(pageindex, 10);
+                    PageNumber++;
+                    $("#ViewMoreProducts").attr('name', PageNumber);
+                }
             }
         });
     }

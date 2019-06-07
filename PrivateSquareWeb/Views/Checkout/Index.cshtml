@@ -3,10 +3,6 @@
     var PlaceOrder = function () {
         var radioAddressBtns = document.getElementsByName("rdoAddress");
         var AddressId = 0;
-
-
-
-
         var rdoPaymentModeBtns = document.getElementsByName("rdoPaymentMode");
         var PaymentMode = "COD";
         for (var x = 0; x < rdoPaymentModeBtns.length; x++) {
@@ -27,12 +23,6 @@
                 return;
             }
         }
-     @*if (@ViewBag.RegisterType=="UNV")
-        {
-            swal("Please Verified Your Account First");
-            return;
-        }*@
-
         $.ajax({
             url: "../../Checkout/PlaceOrder",
             type: "POST",
@@ -41,29 +31,22 @@
                 "PaymentMode": PaymentMode
             },
             success: function (result) {
-                //console.log(result);
                 var response = JSON.parse(result);
-                //alert(response[0].Response)
-                //if (response[0].Response == "Order Saved")
                 swal(" ", response[0].Response, "success");
                 {
                     window.location.href = "/Checkout/OrderSuccessful";
                 }
-
-
             }
         });
     }
 </script>
 <script>
     var AddToCartFromSideBar = function (Id, ProductName, ProductImage, Price, Amount) {
-
         var discountPrice = 0;
         var ProductId = Id;
         var ProductNamevar = "" + ProductName + "";
         var Qty = 1;
         var ImageName = ProductImage;
-
         var TotalAmount = 0;
         $('#' + Id).show();
         $.ajax({
@@ -80,8 +63,7 @@
                 TotalAmount: TotalAmount
             },
             success: function (result) {
-
-                $("#Cartcontent").load(location.href + ' #Cartcontent');               
+                $("#Cartcontent").load(location.href + ' #Cartcontent');
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
                 $('#' + Id).hide();
                 setTimeout(
@@ -91,10 +73,8 @@
                             timer: 1000,
                             showConfirmButton: false
                         });
-                        //swal(" ", "One more added !", "success");
                     }, 2000
                 );
-
             },
             error: function (error) {
                 console.log(error);
@@ -104,19 +84,17 @@
 </script>
 <script>
     var RemoveToSideCart = function (Id, ProductName, ProductImage, Price, Amount, index) {
-       
         var QtyTxt = $("#SidebarTxtQty" + Id).val();
         if (QtyTxt == "1") {
             swal('Quantity cannot be less than 1');
             return;
-        }       
+        }
         var discountPrice = 0;
         var ProductId = Id;
         var ProductNameVar = "" + ProductName + "";
         var Qty = 1;
         var ImageName = ProductImage;
         var TotalAmount = 0;
-
         $('#' + Id).show();
         $.ajax({
             url: "../../WebHome/RemoveQtyToCart",
@@ -132,13 +110,11 @@
                 TotalAmount: TotalAmount
             },
             success: function (result) {
-                $("#Cartcontent").load(location.href + ' #Cartcontent'); 
+                $("#Cartcontent").load(location.href + ' #Cartcontent');
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
                 $('#' + Id).hide();
                 setTimeout(
                     function () {
-                       
-                        //swal(" ", "Quantity removed !", "success");
                     }, 2000
                 );
             },
@@ -150,17 +126,14 @@
 </script>
 <script type="text/javascript">
     var DeleteItem = function (index) {
-
         var divCart = document.getElementById('CartList');
         var divCartTotal = document.getElementById('CartTotal');
         var CartString = "";
         var CartTotal = "";
-
         $("body").removeClass("loaded");
         $.ajax({
             url: "../../WebsiteHeader/RemoveToCart",
             type: "POST",
-
             data: {
                 index: index
             },
@@ -173,8 +146,6 @@
                 var ImageName = "";
                 var TotalAmount = 0;
                 for (var i = 0; i < JsonResponse.length; i++) {
-
-
                     ProductName = JsonResponse[i].ProductName;
                     Qty = JsonResponse[i].Qty;
                     TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
@@ -191,37 +162,26 @@
                         '</div>';
                 }
                 if (JsonResponse.length == null || JsonResponse.length == 0) {
-
                 }
                 if (JsonResponse.length > 0) {
-
-
                     CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
                         "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
-
                 }
-
                 divCart.innerHTML = CartString;
                 divCartTotal.innerHTML = CartTotal;
-                // $("#CartCount").load(location.href + ' #CartCount');
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart', function () {
                     $("#Cartcontent").load(location.href + ' #Cartcontent');
                     $("body").addClass("loaded");
-                    //swal(" ", "Product removed", "success");
                 })
-
             },
             error: function (error) {
                 console.log(error);
             }
         });
     }
-
-
 </script>
 <script type="text/javascript">
     function onlyNumbers() {
-        debugger
         if ($.trim($("#Mobile").val()).length != 10) {
             $("#SpanForPhone").html("Please Enter 10 Digit Mobile Num");
             return;
@@ -229,13 +189,11 @@
         else { $("#SpanForPhone").html("") }
     }
 </script>
-
 @model PrivateSquareWeb.Models.AddressModel
 @{
     ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
 }
-
 @using (Html.BeginForm("AddressesList", "Checkout", FormMethod.Post, new { enctype = "multipart/form-data", id = "AddressForm" }))
 {
     @Html.AntiForgeryToken()
@@ -246,17 +204,13 @@
     </div>
     <div class="ps-checkout pt-40 pb-40">
         <div class="ps-container">
-
             <div id="refreshThisDivWhenProductIsAddedToCart">
                 <div class="col-md-8">
-
                     <div id="CartList" class="ps-cart-listing">
                         @{
                             var productscount = ViewBag.AddToCart.Count;
                             if (productscount != 0)
                             {
-
-
                                 <table class="table ps-cart__table product_list_img">
                                     <thead>
                                         <tr>
@@ -270,42 +224,30 @@
                                         @{ int index = 0;
                                             foreach (var item in ViewBag.AddToCart)
                                             {
-
                                                 <tr>
                                                     <td>  <a href="/WebHome/ProductDetail/@item.ProductId" class="ps-product--compare"><img src="~/DocImg/@item.ImageName" alt="Image" class="ps-product--compare place_order_img">@item.ProductName</a></td>
-
                                                     <td>
                                                         <div id="@item.ProductId" class="lds-ellipsis n_loader"><div></div><div></div><div></div><div></div></div>
                                                         <div class="form-group--number SpanForQuantity+@item.ProductId">
-
                                                             <button class="minus" value="Remove one" onclick="RemoveToSideCart('@item.ProductId','@item.ProductName','@item.ProductName.Replace("'", @"\'")','@item.ImageName','@item.Price','@item.Amount','@index')"><span> - </span></button>
                                                             <input id="@("SidebarTxtQty" + item.ProductId)" name="@("SidebarTxtQty" + index)" type="text" value="@item.Qty" readonly class="form-control ng_cart_int">
                                                             <button class="plus" value="Add one more" onclick="AddToCartFromSideBar('@item.ProductId','@item.ProductName.Replace("'", @"\'")','@item.ImageName','@item.Price','@item.Amount')"><span> + </span> </button>
-
                                                         </div>
                                                     </td>
                                                     <td> <span>Total: ₹ @item.Amount </span></td>
                                                     <td> <a class="ps-cart-item__close ps-remove" onclick="DeleteItem(@index)"></a></td>
-
                                                 </tr>
                                                 index++;
                                             }
                                         }
-
-
                                     </tbody>
                                 </table>
-
                             }
                             else
                             {
-
                                 <h1> Your cart is empty</h1><br />
                             }
                         }
-
-
-
                     </div>
                     <form class="ps-form--checkout" action="do_action" method="post">
                         <div class="row">
@@ -323,33 +265,25 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
                                             @{int indexer = 0;
                                                 if (ViewBag.UserAddress != null)
                                                 {
                                                     foreach (var item in ViewBag.UserAddress)
                                                     {
-
                                                         <tr>
                                                             <td>
-
-
-
                                                                 <p>@item.Type</p>
                                                                 <h4 class="card-title"><span><input type="radio" name="rdoAddress" id="rdoAddress[]" value="@item.Id" /></span> @item.Name</h4>
                                                                 <p class="card-text">
-                                                                   
-                                                                        @if (item.Address != null)
-                                                                        {
-                                                                            @item.Address.Replace("$^", "");
-                                                                            @item.CityName 
-                                                                            @item.StateName<br />
-                                                                            @item.Landmark<br /> @item.Mobile<br /> @item.Pincode<br /> @item.AlternatePhone
-                                                                        }
-                                                                   
+                                                                    @if (item.Address != null)
+                                                                    {
+                                                                        @item.Address.Replace("$^", "");
+                                                                        @item.CityName
+                                                                        @item.StateName<br />
+                                                                        @item.Landmark<br /> @item.Mobile<br /> @item.Pincode<br /> @item.AlternatePhone
+                                                                    }
                                                                 </p>
                                                                 <p class="card-text">
-
                                                                 </p>
                                                             </td>
                                                             <td>
@@ -357,8 +291,6 @@
                                                                     <a href="~/Checkout/DeleteAddress?id=@item.Id" class="">
                                                                         Delete
                                                                     </a>
-
-                                                                    @*<a href="~/Checkout/DeleteAddress?id=@item.Id">*@
                                                                     <a href="javascript:void(0);" onclick="EditAddress(@item.Id)">
                                                                         Edit
                                                                     </a>
@@ -374,48 +306,28 @@
                                 </div>
                                 <div class="ps-checkout__billing">
                                     <div class="container">
-
                                         <div>
-
                                             <div class="form-layout">
-
                                                 <div class="row">
-
                                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-
                                                     <div class="col-sm-12 col-md-12">
                                                         <div id="addaddresslink">
                                                             <a class="ps-btn ps-btn-wdth-100" onclick="addnewaddress()">Add New Address</a>
                                                         </div>
                                                         <div class="box-shadow-bc pd-40 addresses min-height" style="display:none" id="addnewaddress">
-
                                                             <label id="MsgOfAddress" class="section-sub-title mg-t-20  mg-b-20">Create new address</label>
-
                                                             <div class="row" id="Addressform">
-
                                                                 <div class="col-lg-8">
-
                                                                     <div class="row">
-
                                                                         <div class="col-lg-6">
-
                                                                             <div class="form-group">
-
                                                                                 <label class="form-control-label">Name: <span class="tx-danger">*</span></label>
-
-                                                                                @*@Html.HiddenFor(m => m.Id)
-                                                                                    @Html.HiddenFor(m => m.UserId)*@
-
                                                                                 @Html.HiddenFor(m => m.UserId, new { @class = "form-control", @autocomplete = "off" })
                                                                                 @Html.HiddenFor(m => m.Id, new { @class = "form-control", @autocomplete = "off" })
                                                                                 @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Enter Name", @autocomplete = "off" })
                                                                                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                                                                                 <span class="field-validation-error text-danger" id="SpanForName"></span>
-
                                                                             </div>
-
                                                                         </div><!-- col-6 -->
                                                                         <div class="col-lg-6">
                                                                             <div class="form-group">
@@ -424,7 +336,6 @@
                                                                                 <span class="field-validation-error text-danger" id="SpanForAddressLine1"></span>
                                                                             </div>
                                                                         </div>
-
                                                                         <div class="col-lg-6">
                                                                             <div class="form-group">
                                                                                 <label class="form-control-label">Address Line 2 :</label>
@@ -434,119 +345,62 @@
                                                                         <div style="display:none">
                                                                             @Html.TextBoxFor(m => m.Address, new { id = "CompleteAddress" })
                                                                         </div>
-
-
                                                                         <div class="col-lg-6">
-
                                                                             <div class="form-group">
-
                                                                                 <label class="form-control-label">Pincode: <span class="tx-danger">*</span></label>
-
-
-
                                                                                 @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @placeholder = "Pincode optional", @autocomplete = "off" })
                                                                                 @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
                                                                                 <span class="field-validation-error text-danger" id="SpanForPincode"></span>
-
                                                                             </div>
-
                                                                         </div><!-- col-6 -->
-
                                                                         <div class="col-lg-6">
-
                                                                             <div class="form-group">
-
                                                                                 <label class="form-control-label">Locality: <span class="tx-danger">*</span></label>
-
                                                                                 @Html.TextBoxFor(m => m.Locality, new { @class = "form-control", @placeholder = "Locality", @autocomplete = "off", id = "LocalityTextBox" })
                                                                                 @Html.ValidationMessageFor(model => model.Locality, "", new { @class = "text-danger" })
                                                                                 <span class="field-validation-error text-danger" id="SpanForLocality"></span>
-
                                                                             </div>
-
                                                                         </div><!-- col-6 -->
                                                                         <!-- col-6 -->
-
                                                                         <div class="col-lg-6">
-
                                                                             <div class="form-group">
-
                                                                                 <label class="form-control-label">City: <span class="tx-danger">*</span></label>
-
                                                                                 @Html.DropDownListFor(m => m.CityId, ViewBag.CityList as SelectList, "--Select--", new { @class = "form-control select2-show-search" })
                                                                                 @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
                                                                                 <span class="field-validation-error text-danger" id="SpanForCity"></span>
-
                                                                             </div>
-
                                                                         </div><!-- col-6 -->
-
                                                                         <div class="col-lg-6">
-
                                                                             <div class="form-group">
-
                                                                                 <label class="form-control-label">Landmark: <span class="tx-danger"></span></label>
-
                                                                                 @Html.TextBoxFor(m => m.Landmark, new { @class = "form-control", @placeholder = "Landmark", @autocomplete = "off" })
                                                                                 @Html.ValidationMessageFor(model => model.Landmark, "", new { @class = "text-danger" })
-
                                                                             </div>
-
                                                                         </div><!-- col-6 -->
                                                                         <div class="col-lg-6">
-
                                                                             <div class="form-group">
-
                                                                                 <label class="form-control-label">Phone Number: <span class="tx-danger">*</span></label>
                                                                                 @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @maxlength = "10", @placeholder = "10-digit number", @autocomplete = "off", @Type = "number", @onblur = "onlyNumbers(this);" })
-                                                                                @*@Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @placeholder = "10-digit number", @autocomplete = "off" })*@
                                                                                 @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
                                                                                 <span class="field-validation-error text-danger" id="SpanForPhone"></span>
-
                                                                             </div>
-
                                                                         </div><!-- col-6 -->
-                                                                        @*<div class="col-lg-6">
-
-                                                                                <div class="form-group">
-
-                                                                                    <label class="form-control-label">Alternate phone: <span class="tx-danger"></span></label>
-
-                                                                                    @Html.TextBoxFor(m => m.AlternatePhone, new { @class = "form-control", @placeholder = "Alternate phone", @autocomplete = "off" })
-                                                                                    @Html.ValidationMessageFor(model => model.AlternatePhone, "", new { @class = "text-danger" })
-
-                                                                                </div>
-
-                                                                            </div>*@<!-- col-6 -->
+                                                                        <!-- col-6 -->
                                                                         <div class="col-lg-12">
-
                                                                             <a onclick="cancel()" class="btn cancel-button mg-r-10">CANCEL</a>
-
                                                                             <input type="button" class="btn save-button" onclick="AddAddress()" id="SAVE" value="SAVE" />
-                                                                            @*<input type="button" class="btn save-button" onclick="AddAddress()" value="update" />*@
-
                                                                         </div>
-
                                                                     </div>
-
                                                                 </div>
-
                                                             </div>
-
                                                         </div>
-
                                                     </div>
-
                                                 </div>
-
                                             </div>
-
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </form>
                 </div>
@@ -564,7 +418,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <tr>
                                         <td> Price(@ViewBag.ItemCount)=@ViewBag.TotalAmount</td>
                                         <td class="totalamount">@ViewBag.TotalAmount</td>
@@ -581,7 +434,6 @@
                                         <td>Order Total</td>
                                         <td class="totalamountaftercharges">₹@ViewBag.TotalAmountAfterCharges</td>
                                     </tr>
-
                                     <tr>
                                         <td>  </td>
                                         <td>
@@ -601,27 +453,19 @@
                         </div>
                         <footer>
                             <h3>Payment Method</h3>
-
                             <div class="form-group cheque">
                                 <div class="ps-radio ps-radio--small">
-
-
                                     <input class="form-control" type="radio" id="rdoPaymentMode3" name="rdoPaymentMode" value="Pick Up Order" onclick="pickupchecked()">
                                     <label for="rdoPaymentMode3">Pick Up Order</label>
                                 </div>
-
                             </div>
                             <div class="form-group cheque">
                                 <div class="ps-radio ps-radio--small">
-
-
                                     <input class="form-control" type="radio" id="rdoPaymentMode5" name="rdoPaymentMode" checked value="COD" onclick="codchecked()">
                                     <label for="rdoPaymentMode5">Cash on delivery</label>
                                 </div>
-
                             </div>
                             <div class="form-group paypal">
-
                                 @{
                                     if (ViewBag.TotalAmount == 0)
                                     {
@@ -632,9 +476,7 @@
                                         <input type="button" class="ps-btn ps-btn--fullwidth" onclick="PlaceOrder()" value="Place Order">
                                     }
                                 }
-
                             </div>
-
                         </footer>
                     </div>
                     <div class="ps-shipping">
@@ -656,25 +498,20 @@
                                 </p>
                             }
                         }
-
                     </div>
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-md-12">
-
                 </div>
             </div>
         </div>
     </div>
-
 }
-
 <script>
     var addnewaddress = function () {
         $('#addnewaddress').toggle("slide");
         $('#addaddresslink').toggle("slide");
         document.getElementById("SAVE").value = "save";
-
         document.getElementById("Name").value = "";
         document.getElementById("AddressLine1").value = "";
         document.getElementById("AddressLine2").value = "";
@@ -687,8 +524,6 @@
         document.getElementById("Id").value = "";
         document.getElementById("UserId").value = "";
     }
-
-
 </script>
 <script>
     var showpromocode = function () {
@@ -697,7 +532,6 @@
 </script>
 <script>
     var EditAddress = function (id) {
-        //alert('editadress');
         document.getElementById("SAVE").value = "UPDATE";
         document.getElementById("MsgOfAddress").innerHTML = "Edit Address";
         document.getElementById("addnewaddress").style.display = "block";
@@ -712,7 +546,6 @@
                 console.log(result);
                 var data = JSON.parse(result);
                 if ((data)) {
-                    //addnewaddress();
                     var Address = data[0].Address.split("$^");
                     var pincode = (data[0].Pincode).replace("    ", "");
                     document.getElementById("Name").value = (data[0].Name);
@@ -722,21 +555,16 @@
                     document.getElementById("Pincode").value = (pincode);
                     document.getElementById("LocalityTextBox").value = (data[0].Locality);
                     document.getElementById("CityId").value = (data[0].CityId);
-                    //document.getElementById("AlternatePhone").value = (data[0].AlternatePhone);
                     document.getElementById("Landmark").value = (data[0].Landmark);
                     document.getElementById("Id").value = (data[0].Id);
                     document.getElementById("UserId").value = (data[0].UserId);
                 }
                 else {
-
                 }
             }
         });
-
     }
-
     var cancel = function () {
-
         document.getElementById("Name").innerHTML = "";
         document.getElementById("AddressLine1").innerHTML = "";
         document.getElementById("AddressLine2").innerHTML = "";
@@ -744,24 +572,17 @@
         document.getElementById("Pincode").innerHTML = "";
         document.getElementById("LocalityTextBox").innerHTML = "";
         document.getElementById("CityId").innerHTML = "";
-
         document.getElementById("Landmark").innerHTML = "";
         document.getElementById("Id").innerHTML = "";
         document.getElementById("UserId").innerHTML = "";
-        //if (true) {
         document.getElementById("SAVE").value = "save";
         document.getElementById("MsgOfAddress").innerHTML = "ADD Address";
-
         document.getElementById('addnewaddress').style.display = "none";
         document.getElementById('addaddresslink').style.display = "block";
         return;
-        //}
-
-
     }
 </script>
 <script>
-
     var GetCoupon = function () {
         var CouponCode = document.getElementById("promocodetext").value;
         $.ajax({
@@ -771,7 +592,6 @@
                 "CouponCode": CouponCode
             },
             success: function (result) {
-
                 if (isNaN(result)) { }          //Checking whether TotalAmount is a number or not (NaN means - Not a number)
                 else {
                     if (result < 0)             //It means amount is less than 500
@@ -789,7 +609,6 @@
                     }
                     else                        //means total amount is greater than or equal to 500
                     {
-                        //$('.totalamount').html(result);
                         $('.totalamountaftercharges').html(result);
                          var coupondiscount =parseInt(@ViewBag.TotalAmount);
                         coupondiscount = parseInt(result)- coupondiscount;
@@ -798,13 +617,7 @@
                         $('.couponresponse').html(CouponCode+' Coupon applied successfully');
                         $('.ps-form--icon').toggle("slide");
                     }
-
-
-                    //console.log(result);
                 }
-
-
-
             }
         });
     }
@@ -812,32 +625,24 @@
 <script>
     var pickupchecked = function () {
         if ($("#rdoPaymentMode3").prop("checked")) {
-            //alert('pick up checked');
             $('.ps-checkout__billing').hide("slide");
-            //$('.ps-form--checkout').html("<b>You will have to pick this order from: </b>");
             $('#pickupdetails').show("slide");
         }
     }
     var codchecked = function () {
         $('.ps-checkout__billing').show("slide");
-
         $('#pickupdetails').hide("slide");
     }
 </script>
 <script>
     var AddAddress = function () {
-        //alert('AddAddress');
-        debugger
         var ErrorOccured = null;
-
         if ($.trim($("#LocalityTextBox").val()) == '') {
             $("#SpanForLocality").html("Please mention locality");
             ErrorOccured += 'LocalityTextBox null';
         } else {
             $("#SpanForLocality").html("");
         }
-
-
         if ($.trim($("#Name").val()) == '') {
             $("#SpanForName").html("Please mention Name");
             ErrorOccured += 'Name null';
@@ -845,8 +650,6 @@
         else {
             $("#SpanForName").html("");
         }
-
-
         if ($.trim($("#Mobile").val()) == '') {
             $("#SpanForPhone").html("Please mention Mobile Number");
             ErrorOccured += 'Mobile null';
@@ -854,29 +657,18 @@
         else if ($.trim($("#Mobile").val()).length != 10) {
             $("#SpanForPhone").html("Please Enter 10 Digit Mobile Number");
             ErrorOccured += 'Mobile length';
-            //ErrorOccured = false;
-
         }
         else {
             $("#SpanForPhone").html("");
-            //ErrorOccured = false;
         }
-        //if ($.trim($("#Pincode").val()) == '' ||
         if ($.trim($("#Pincode").val()).length != 6) {
-            debugger
             if ($.trim($("#Pincode").val()).length > 6) {
                 $("#SpanForPincode").html("Only 6 digits Pin");
                 ErrorOccured += 'Pin Code not in 6 digit';
             }
-            //else {
-            //    $("#SpanForPincode").html("Please enter 6 digits Pin");
-            //    ErrorOccured += 'pin code null';
-            //}
-
         }
         else {
             $("#SpanForPincode").html("");
-            //ErrorOccured = false;
         }
         if ($("#CityId").val() === "") {
             $("#SpanForCity").html("Please select a city");
@@ -884,27 +676,19 @@
         }
         else {
             $("#SpanForCity").html("");
-            //ErrorOccured = false;
         }
         if ($("#AddressLine1").val() == "") {
             $("#SpanForAddressLine1").html("Address cannot be empty");
-            //ErrorOccured += 'adress null';
         }
         else {
             $("#SpanForAddressLine1").html("");
-            //ErrorOccured = false;
         }
         if (ErrorOccured == null) {
-            //var CompleteAddress = $("AddressLine1").val() + $("AddressLine2").val();
             var x = $("#CompleteAddress").val($("AddressLine1").val());
             console.log($("#AddressLine1").val() + $("#AddressLine2").val());
             $("#CompleteAddress").val($("#AddressLine1").val() + "$^" + $("#AddressLine2").val());
-
-            //var AddresstoLog = null;
-
             var respons = $("#AddressForm").submit();
         }
         else { return; }
-
     }
 </script>

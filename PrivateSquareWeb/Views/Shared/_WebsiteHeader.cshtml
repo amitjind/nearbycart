@@ -1,9 +1,6 @@
 ﻿@model PrivateSquareWeb.Models.HeaderPartialModel
-
-
 <script type="text/javascript">
     var Logout = function () {
-
         $.ajax({
             url: "../../WebLogin/Logout",
             type: "Get",
@@ -25,7 +22,6 @@
                 }
             },
             error: function (error) {
-                //console.log('error');
             }
         })
     }
@@ -38,37 +34,28 @@
                     <a class="ps-logo" href="/WebHome/Index"><img src="~/WebSiteTheme/images/aman.svg" alt=""></a>
                 </div>
             </div>
-
             <div class="center mt-8">
-
                 @using (Html.BeginForm("SearchBar", "WebHome", FormMethod.Post, new { @class = "search-frm" }))
                 {
                     <div class="col-lg-12 pull-left">
                         @Html.TextBoxFor(m => m.SearchBarText, new { @class = "form-control brder_rdius", placeholder = "Search Product…", value = "TxtSearch", id = "TxtSearch" })
                         <button class="search-top"><i class="ps-icon-search"></i></button>
                         <div class="row" id="SearchResults" style="display:none">
-
                         </div>
                     </div>
                 }
             </div>
-
             <div class="right">
-                @*<table>
-                    <tr>
-                        <td>*@
                 <div>
                     <div>
                         <div class="dropdown">
                             <div class="header__actions pull-left">
                                 @{ if (@Model.UserId != 0)
-
                                     {
                                         <div class="btn-group ps-dropdown spc-mrg-tp-lft ">
                                             @{
                                                 if (Model.RegisterType != "UNV")
                                                 {
-
                                                     <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.UserName <img src="~/WebSiteTheme/images/angle-arrow-down.svg" width="10" /></a>
                                                 }
                                                 else
@@ -89,26 +76,10 @@
                                     }
                                     else if (@Model.UserId == 0)
                                     {
-                                        @*<table>
-                                                <tr>
-                                                    <td>
-                                                        <img src="~/WebSiteTheme/images/location.svg" />
-                                                    </td>
-                                                    <td>
-                                                    <p>Deliver To <br>MajriChok</p>
-                                                    </td>
-                                                </tr>
-                                            </table>*@
-
                                         <a href="/WebLogin/Index?url=@Request.Url.AbsoluteUri.ToString()">
-
-
-                                            <img src="~/WebSiteTheme/images/user.svg" />@*<div><span class="full-width">Deliver to</span><span>majri chown</span></div>*@
+                                            <img src="~/WebSiteTheme/images/user.svg" />
                                         </a>
-
                                         <a href="/WebLogin/Index?url=@Request.Url.AbsoluteUri.ToString()">
-
-
                                             <img src="~/WebSiteTheme/images/user.svg" />Login & Regiser
                                         </a>
                                     }
@@ -117,8 +88,6 @@
                         </div>
                     </div>
                 </div>
-                @*</td>
-                    <td>*@
                 <div class="menu-toggle"><span></span></div>
                 <div class="ps-cart" id="Cartcontent">
                     <div id="CartCount">
@@ -134,7 +103,6 @@
                                 <a class="ps-cart__toggle" href="#"><i class="ps-icon-cart"></i>Cart</a>
                             }
                         }
-
                     </div>
                     <div class="ps-cart__listing">
                         <div id="refreshThisDivWhenProductIsAddedToCart_50" class="nag_add_cartheader">
@@ -157,12 +125,10 @@
                                             index++;
                                         }
                                     }
-
                                 </div>
                             </div>
                             <div class="ps-cart__total" id="CartTotal">
                                 @{
-
                                     if (Model.CartItemCount != 0)
                                     {
                                         <p>Number of items:<span>@Model.CartItemCount</span></p>
@@ -178,7 +144,6 @@
                             </div>
                             <div id="CheckoutDiv">
                                 @{
-
                                     if (Model.CartItemCount != 0)
                                     {
                                         <div class="ps-cart__footer"><a class="ps-btn" href="/Checkout/Index">Check out<i class="ps-icon-arrow-left"></i></a></div>
@@ -192,19 +157,11 @@
                         </div>
                     </div>
                 </div>
-                @*</td>
-                        </tr>
-                    </table>*@
-
             </div>
         </div>
     </nav>
-
     <aside class="ps-sidebar" data-mh="product-page">
         <aside class="spc-mrg-padding  ps-widget--category">
-            @*<div class="ps-widget__header cate_back">
-                    <h3>Category</h3>
-                </div>*@
             <div class="ps-widget__content">
                 <ul class="ps-list--checked-1 ">
                     @{
@@ -212,11 +169,9 @@
                         {
                             if (Cat.ParentCatId == 0)
                             {
-
                                 <li class="nbc-main-category">
-
                                     <a onclick="checkothermenuactiveornot(@Cat.Id)" id="@Cat.Id" href="javascript:void(0);" data-toggle="collapse" data-target="#subcategories@(Cat.Id)" class="cate-main-list">@Cat.Name </a>
-                                    <ul class="ps-list--checked-1 sub_cate" style="padding-left: 10px;" id="sidebarsubcategories">
+                                    <ul class="ps-list--checked-1 sub_cate" style="padding-left: 10px;" id="sidebarsubcategories" name="@Cat.Id">
                                         @foreach (var subcat in ViewBag.ProductCatList)
                                         {
                                             if (subcat.ParentCatId == Cat.Id)
@@ -228,13 +183,11 @@
                                 </li>
                             }
                         }
-
                     }
                 </ul>
             </div>
         </aside>
     </aside>
-
 </header>
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -246,33 +199,25 @@
             <div class="modal-body">
                 <input id="otpText" type="text" placeholder="ENTER YOUR OTP " />
                 <label id="otplabel" style="color:red"></label>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" onclick="otp()">Submit</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
 </div>
-
 <script type="text/javascript">
     var otp = function () {
-
         var otp = document.getElementById('otpText').value;
         if (otp == "") {
             otplabel.innerText = "Otp Required";
             return;
-
         }
-
         $.ajax({
             url: "../../WebLogin/Otp",
             type: "POST",
-
             data: {
-
                 "Otp":otp,
                 "userid":@Model.UserId
             },
@@ -289,10 +234,8 @@
                 }
                 else {
                     otplabel.innerText = "Otp Not matched";
-
                     return;
                 }
-
             },
             error: function (error) {
                 console.log(error);
@@ -305,22 +248,15 @@
         var productcatid = location.pathname.toString();
         $.ajax({
             url: "../../WebLogin/Index",
-            //type: "POST",
-
             data: {
-
-
                 "url": productcatid
-
             }
-
         });
     }
 </script>
 <script>
     document.getElementById("TxtSearch").addEventListener("keypress", function () {
         var searchtext = $('#TxtSearch').val();
-        //console.log(searchtext);
         if (searchtext.length > 2) {
             $.ajax({
                 url: "../../WebHome/SearchSuggestions",
@@ -328,7 +264,6 @@
                     "Prefix": searchtext
                 },
                 success: function (result) {
-                    //SearchResults
                     $("#SearchResults").hide();
                     $("#SearchResults").html("");
                     $("#SearchResults").html(result);
@@ -336,7 +271,6 @@
                 }
             });
         }
-
     }, false);
 </script>
 <script>
@@ -346,6 +280,3 @@
         });
     });
 </script>
-
-
-

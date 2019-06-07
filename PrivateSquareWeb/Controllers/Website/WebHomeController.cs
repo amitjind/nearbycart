@@ -12,7 +12,6 @@ namespace PrivateSquareWeb.Controllers.Website
     public class WebHomeController : Controller
     {
         JwtTokenManager _JwtTokenManager = new JwtTokenManager();
-        //static List<ProductImages> EditProductImageList;
         static List<ProductModel> ListAllProduct;
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Index()
@@ -60,7 +59,6 @@ namespace PrivateSquareWeb.Controllers.Website
                     {
                         String[] ProductImages = objModel.ProductImages.Split(',');
                         ListProductImages = GetSelectedProductImages(ProductImages, objModel.ProductImage);
-                        //EditProductImageList = ListProductImages;
                         ViewBag.ProductImages = ListProductImages;
                     }
                     else
@@ -264,10 +262,8 @@ namespace PrivateSquareWeb.Controllers.Website
             ViewBag.ProductsFrom = 0;
             ViewBag.LowerLimit = 1;
             ViewBag.PageNoactive = 1;
-            //ListAllProduct = CommonFile.GetProduct();
             if (String.IsNullOrWhiteSpace(objModel.SearchBarText))
             {
-                //var SearchList = ListAllProduct.Where(x => x.ProductName.ToUpper().Contains(objModel.SearchBarText.ToString().ToUpper())).ToList();
                 if (objModel.ParentCatId == 0)
                 {
                     ViewBag.UsersProduct = ListAllProduct.Take(Constant.NumberOfProducts);

@@ -11,10 +11,8 @@
         ProductPriceWise(val);
     };
     var ProductPriceWise = function (val) {
-
         $("#DivItemBind").html("");
         var CategoryId = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
-
         var Price = val;
         $.ajax({
             url: "../../ProductCatWise/PartialCatwiseProductPrice",
@@ -24,7 +22,6 @@
                 "CategoryId": CategoryId
             },
             success: function (result) {
-
                 $("#DivItemBind").html(result);
             }
         });
@@ -47,7 +44,6 @@
     {
         <div class="ps-content ps-content-height" data-mh="product-page">
             <div class="ps-product-group" data-item="5">
-
                 <div class="ps-product-group__content ps-content-height">
                     <div class="ps-product-group__action">
                         <div class="row">
@@ -62,27 +58,20 @@
                                     <option value="2">Price: High to Low</option>
                                     <option value="4">Newest Arrivals</option>
                                 </select>
-
                             </div>
                         </div>
                     </div>
-
                     <div id="DivItemBind" class="ps-content-height">
                         @{
                             Html.RenderAction("PartialCatwiseProductValue", "ProductCatWise");
                         }
                     </div>
-
                 </div>
-
                 <div class="ps-product-group__footer" id="paginationfooter">
-                    <a href="javascript:void();" id="ViewMore" name="1" onclick="ViewMore()"><b>View More</b></a>
+                    <a href="javascript:" id="ViewMore" name="1" onclick="ViewMore()"><b>View More</b></a>
                 </div>
-
             </div>
         </div>
-
-
     }
     <div>
         @{
@@ -99,14 +88,10 @@
                     <input type="range" id="firstslider" min="0" max="10000" step="100" value="0" onchange="showvalue(this.value)" /><br>
                     <input type="text" id="TxtPriceRange" name="TxtPriceRange" readonly />
                     <input type="submit" id="BtnPriceRange" name="submit" onclick="ProductPriceWise()" value="PriceRange" style="display:none;" />
-
                 </div>
-
             </aside>
-
         </aside>
     </div>
-
 </main>
 <output for="range" class="output"></output>
 <script>
@@ -114,13 +99,11 @@
 	var sortdropdown = document.getElementById("sortby");
     sortdropdown.onchange = function () {
         $("body").removeClass("loaded");
-
+        $("#ViewMore").attr('name', '1');
         if (this.selectedIndex !== 0) {
             var sortorder = this.value;
-
             pageindexcounter = @ViewBag.ToProductsCount;
             var pagecounter = pageindexcounter / 12;
-
             var productcatid = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
             $.ajax({
                 url: "../../ProductCatWise/Sortby",
@@ -129,51 +112,15 @@
                     "sortorder": sortorder,
                     "PageIndex": pagecounter,
                     "productcatid": productcatid
-
                 },
                 success: function (result) {
                     $("#DivItemBind").html(result);
-                    //$.ajax({
-                    //    url: "../../ProductCatWise/_Pagination",
-                    //    type: "POST",
-                    //    data: {
-                    //        "id": 0,
-                    //        "searchresultcount": null,
-                    //        "lowerlimit": null,
-                    //        "numberofpages": null
-                    //    },
-                    //    success: function (result) {
-                    //        console.log(result);
-                    //        $("#paginationfooter").html(result);
-
-
-                    //        $("#1").addClass("active");
-                    //        $("#active").removeClass("active");
-                    //        //var ActivatePageNo = ActivatePagination(id);
-                    //    }
-                    //});
-                    //$.ajax({
-                    //    url: "../../ProductCatWise/PageCountingPartialView",
-                    //    type: "POST",
-                    //    data: {
-                    //        "id": 1
-                    //    },
-                    //    success: function (result) {
-
-                    //        $("#abc").html(result);
-                    //    }
-                    //});
-
-
-                    //pageindexcounter++;
                     $(".ps-loading").addClass("loaded");
                 }
             });
-
         }
     };
 </script>
-@*//Below script is called when the next page is requested by the user from the  pagination bar of the  Categorywise Product Page*@
 <script>
 
     var nextpage = function (id) {
@@ -211,7 +158,6 @@
         }
     };
 </script>
-@*////Below is the script for fetching More pages in the pagination bar of the  Categorywise Product Page*@
 <script>
     var morepages = function (id, searchresultcount, lowerlimit, numberofpages) {
         $.ajax({
@@ -219,7 +165,6 @@
             type: "POST",
             data: { "id": id },
             success: function (result) {
-
                 $("#DivItemBind").html(result);
                 $.ajax({
                     url: "../../ProductCatWise/_Pagination",
@@ -239,20 +184,16 @@
                 var ProductsCountNumber = PageCounting(id);
             }
         });
-
     };
 </script>
-@*//Below is the script for fetching previous pages in the pagination bar of the  Categorywise Product Page*@
 <script>
     var previouspages = function (id, searchresultcount, lowerlimit, numberofpages) {
-
         if (id == 0) { return false; }
         $.ajax({
             url: "../../ProductCatWise/PreviousPages",
             type: "POST",
             data: { "id": id },
             success: function (result) {
-
                 $("#DivItemBind").html(result);
                 $.ajax({
                     url: "../../ProductCatWise/_Pagination",
@@ -264,7 +205,6 @@
                         "numberofpages": numberofpages
                     },
                     success: function (result) {
-
                         $("#paginationfooter").html(result);
                         var ActivatePageNo = ActivatePagination(id);
                     }
@@ -292,7 +232,6 @@
     var ActivatePagination = function (id) {
         $(".active").removeClass("active");
         $("#" + id + "").addClass("active");
-
     };
 </script>
 <script>
@@ -303,7 +242,7 @@
         $.ajax({
             url: "../../ProductCatWise/LazyLoader",
             data: {
-                "id": pageindex,
+                "pageindex": pageindex,
                 "sortingby": sortdropdown.value
             },
             success: function (result) {
@@ -313,8 +252,10 @@
                 var PageNumber = parseInt(pageindex, 10);
                 PageNumber++;
                 $("#ViewMore").attr('name', PageNumber);
-                console.log('After incrementing, the page index is : ');
-                console.log($("#ViewMore").attr('name'));
+                if (result== "") {
+                    $("#ViewMore").text('~~~~That is all folks~~~~');
+                    $("#ViewMore").removeAttr('onclick');
+                }
             }
         });
     }

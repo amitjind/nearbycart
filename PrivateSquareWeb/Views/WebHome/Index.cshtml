@@ -6,7 +6,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
     var AddToCart = function (Id, ProductName, SellingPrice, DiscountPrice, ProductImage) {
-
         var salePrice = SellingPrice;
         var discountPrice = DiscountPrice;
         var ProductId = Id;
@@ -15,13 +14,11 @@
         var ImageName = ProductImage;
         var Price = discountPrice;
         var Amount = Number(Price) * Number(Qty);
-
         var TotalAmount = 0;
         $("body").removeClass("loaded");
         $.ajax({
             url: "../../WebHome/AddToCart",
             type: "POST",
-
             data: {
                 ProductId: ProductId,
                 ProductName: ProductName,
@@ -36,14 +33,11 @@
                 console.log(result);
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
                 $("#Cartcontent").load(location.href + ' #Cartcontent');
-
                 setTimeout(
                     function () {
                         $(".ps-loading").addClass("loaded");
                     }, 2000
                 );
-
-
             },
             error: function (error) {
                 console.log(error);
@@ -60,14 +54,12 @@
             data: { ProductId: ProductId },
             success: function (result) {
                 if (result == "Please Login to access wishlist") {
-                    //swal(result);
                     window.location.href = ("../WebLogin/Index");
                 }
                 else if (result == "Product Exists") {
                     swal("Product already added to the Wishlist");
                 }
                 else {
-                    //swal(" ", result, "success");
                     swal({
                         text: result,
                         type: "success",
@@ -79,27 +71,21 @@
             error: function (error) {
                 swal('Unexpected error in adding products to the wishlist');
             }
-
         })
-
-
     }
 </script>
 <script type="text/javascript">
     var DeleteItem = function (index) {
-
         var divCart = document.getElementById('CartList');
         var divCartTotal = document.getElementById('CartTotal');
         var updateCartItemCount = document.getElementById('UpdateCartItemCount');
         var Blankdiv = document.getElementById('CheckoutDiv');
         var CartString = "";
         var CartTotal = "";
-
         $("body").removeClass("loaded");
         $.ajax({
             url: "../../WebsiteHeader/RemoveToCart",
             type: "POST",
-
             data: {
                 index: index
             },
@@ -112,8 +98,6 @@
                 var ImageName = "";
                 var TotalAmount = 0;
                 for (var i = 0; i < JsonResponse.length; i++) {
-
-
                     ProductName = JsonResponse[i].ProductName;
                     Qty = JsonResponse[i].Qty;
                     TotalAmount = Number(TotalAmount) + Number(JsonResponse[i].Amount);
@@ -137,24 +121,16 @@
                     Blankdiv.innerHTML = '<div class="ps-cart__total" ><p> YOUR SHOPPING BAG IS EMPTY</p></div>';
                 }
                 if (JsonResponse.length > 0) {
-
-
                     CartTotal = CartTotal + "<p>Number of items:<span>" + JsonResponse.length + "</span></p>" +
                         "<p>Item Total:<span>₹" + TotalAmount + "</span></p>";
                     updateCartItemCount.innerHTML = '<a class="ps-cart__toggle" href="~/ViewCart/ViewCart"><span><i>' + JsonResponse.length + '</i></span><i class="ps-icon-cart"></i></a>';
-
                 }
-
                 divCart.innerHTML = CartString;
                 divCartTotal.innerHTML = CartTotal;
-
                 $("#refreshThisDivWhenProductIsAddedToCart").load(location.href + ' #refreshThisDivWhenProductIsAddedToCart');
-
-
                 setTimeout(
                     function () {
                         $(".ps-loading").addClass("loaded");
-                        //swal(" ", "Product removed", "success");
                     }, 2000
                 );
             },
@@ -164,9 +140,6 @@
         });
     }
 </script>
-<div class="ps-hero pd-sm">
-
-</div>
 <main class="ps-main ps-products-listing pd-23 ">
     @{
         Html.RenderAction("WebSiteSidebar", "WebSidebar");
@@ -178,14 +151,10 @@
                 <div class="ps-product-group__header">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
-                            <a class="ps-collection" href="#">
-                                <img src="~/WebSiteTheme/images/banner.jpg" />
-                            </a>
+                            <a class="ps-collection" href="#"><img src="~/WebSiteTheme/images/banner.jpg" /></a>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
-                            <a class="ps-collection" href="#">
-                                <img src="~/WebSiteTheme/images/banner1.jpg" />
-                            </a>
+                            <a class="ps-collection" href="#"><img src="~/WebSiteTheme/images/banner1.jpg" /></a>
                         </div>
                     </div>
                 </div>
@@ -200,44 +169,35 @@
                                 <div class="ps-product__thumbnail">
                                     <a class="ps-product__overlay" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))"></a>
                                     @{ if (@Users.ProductImage == null)
-
                                         {
                                             <img class="lazy" src="~/DocImg/deafult.png" alt="">
-
                                         }
                                         else
                                         {
-                                            <img class="lazy" src="~/DocImg/@Users.ProductImage" alt="">
-
+                                            <img class="lazy" src="~/DocImg/@Users.ProductImage" alt="ProductImage">
                                         }
                                     }
                                     <ul class="ps-product__actions">
-
                                         <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
                                         <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
                                     </ul>
                                 </div>
-
                                 <div class="ps-product__content">
                                     <a class="ps-product__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))">@Users.ProductName</a>
                                     <p class="ps-product__price">
-                                        ₹@Users.DiscountPrice
+                                        <b>₹</b>@Users.DiscountPrice<b style="float:right">@Users.Quantity</b>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     }
-
-
                 </div>
-
             </div>
             <div class="ps-product-group" data-item="5">
                 <div class="nearCart_header col-lg-12 mt-15">
                     <h2>Household Supplies</h2><a class="ps-product-link pull-right" href="/ProductCatWise/Index/@Constant.EncodeNumber(Constant.ParentCategories[1])">View More</a>
                 </div>
                 <div class="ps-section__content">
-
                     @foreach (var Users in ViewBag.SecondCategory)
                     {
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
@@ -245,39 +205,28 @@
                                 <div class="ps-product__thumbnail">
                                     <a class="ps-product__overlay" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))"></a>
                                     @{ if (@Users.ProductImage == null)
-
                                         {
                                             <img class="lazy" src="~/DocImg/deafult.png" alt="">
-
                                         }
                                         else
                                         {
                                             <img class="lazy" src="~/DocImg/@Users.ProductImage" alt="">
-
                                         }
                                     }
-
-                                    @*<div class="ps-badge ps-badge--sale-off"><span>-@off%</span></div>*@
-
                                     <ul class="ps-product__actions">
-
-
                                         <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
                                         <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
                                     </ul>
                                 </div>
-
                                 <div class="ps-product__content">
                                     <a class="ps-product__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))">@Users.ProductName</a>
                                     <p class="ps-product__price">
-                                        ₹@Users.DiscountPrice
+                                        <b>₹</b>@Users.DiscountPrice<b style="float:right">@Users.Quantity</b>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     }
-
-
                 </div>
             </div>
             <div class="ps-product-group" data-item="5">
@@ -285,7 +234,6 @@
                     <h2>Diet & Nutrition</h2><a class="ps-product-link pull-right" href="/ProductCatWise/Index/@Constant.EncodeNumber(Constant.ParentCategories[2])">View More</a>
                 </div>
                 <div class="ps-section__content">
-
                     @foreach (var Users in ViewBag.ThirdCategory)
                     {
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
@@ -293,38 +241,28 @@
                                 <div class="ps-product__thumbnail">
                                     <a class="ps-product__overlay" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))"></a>
                                     @{ if (@Users.ProductImage == null)
-
                                         {
                                             <img class="lazy" src="~/DocImg/deafult.png" alt="">
-
                                         }
                                         else
                                         {
                                             <img class="lazy" src="~/DocImg/@Users.ProductImage" alt="">
-
                                         }
                                     }
-
-                                    @*<div class="ps-badge ps-badge--sale-off"><span>-@off%</span></div>*@
-
                                     <ul class="ps-product__actions">
-
                                         <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
                                         <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
                                     </ul>
                                 </div>
-
                                 <div class="ps-product__content">
                                     <a class="ps-product__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))">@Users.ProductName</a>
                                     <p class="ps-product__price">
-                                        ₹@Users.DiscountPrice
+                                        <b>₹</b>@Users.DiscountPrice<b style="float:right">@Users.Quantity</b>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     }
-
-
                 </div>
             </div>
             <div class="ps-product-group" data-item="5">
@@ -332,7 +270,6 @@
                     <h2>All Grocery & Gourmet Foods</h2><a class="ps-product-link pull-right" href="/ProductCatWise/Index/@Constant.EncodeNumber(Constant.ParentCategories[3])">View More</a>
                 </div>
                 <div class="ps-section__content">
-
                     @foreach (var Users in ViewBag.FourthCategory)
                     {
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
@@ -340,31 +277,23 @@
                                 <div class="ps-product__thumbnail">
                                     <a class="ps-product__overlay" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))"></a>
                                     @{ if (@Users.ProductImage == null)
-
                                         {
                                             <img class="lazy" src="~/DocImg/deafult.png" alt="">
-
                                         }
                                         else
                                         {
                                             <img class="lazy" src="~/DocImg/@Users.ProductImage" alt="">
-
                                         }
                                     }
-
-                                    @*<div class="ps-badge ps-badge--sale-off"><span>-@off%</span></div>*@
-
                                     <ul class="ps-product__actions">
-
                                         <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
                                         <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
                                     </ul>
                                 </div>
-
                                 <div class="ps-product__content">
                                     <a class="ps-product__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))">@Users.ProductName</a>
                                     <p class="ps-product__price">
-                                        ₹@Users.DiscountPrice
+                                        <b>₹</b>@Users.DiscountPrice<b style="float:right">@Users.Quantity</b>
                                     </p>
                                 </div>
                             </div>
@@ -377,7 +306,6 @@
                     <h2>Baby Care</h2><a class="ps-product-link pull-right" href="/ProductCatWise/Index/@Constant.EncodeNumber(Constant.ParentCategories[4])">View More</a>
                 </div>
                 <div class="ps-section__content">
-
                     @foreach (var Users in ViewBag.FifthCategory)
                     {
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
@@ -385,28 +313,23 @@
                                 <div class="ps-product__thumbnail">
                                     <a class="ps-product__overlay" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))"></a>
                                     @{ if (@Users.ProductImage == null)
-
                                         {
                                             <img class="lazy" src="~/DocImg/deafult.png" alt="">
-
                                         }
                                         else
                                         {
                                             <img class="lazy" src="~/DocImg/@Users.ProductImage" alt="">
-
                                         }
                                     }
                                     <ul class="ps-product__actions">
-
                                         <li><a href="javascript:void();" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
                                         <li><a href="javascript:void();" title="Favorite" onclick="AddToWishlist(@Users.Id)"><i class="ps-icon-heart"></i></a></li>
                                     </ul>
                                 </div>
-
                                 <div class="ps-product__content">
                                     <a class="ps-product__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))">@Users.ProductName</a>
                                     <p class="ps-product__price">
-                                        ₹@Users.DiscountPrice
+                                        <b>₹</b>@Users.DiscountPrice<b style="float:right">@Users.Quantity</b>
                                     </p>
                                 </div>
                             </div>
@@ -433,13 +356,12 @@
                                         <li><a href="javascript:void(0);" onclick="AddToCart('@Users.Id','@Users.ProductName.Replace("'",@"\'")','@Users.SellingPrice','@Users.DiscountPrice','@Users.ProductImage')" title="Add To Cart"><i class="ps-icon-cart-2"></i></a></li>
                                         <li><a href="javascript:void(0);" class="submit-link" onclick="AddToWishlist(@Users.Id)" title="Favorite"><i class="ps-icon-heart"></i></a></li>
                                         <li><input type="submit" style="display:none" value="Save" /></li>
-
                                     </ul>
                                 </div>
                                 <div class="ps-product__content">
                                     <a class="ps-product__title" href="/WebHome/ProductDetail/@(Constant.EncodeNumber(int.Parse((Users.Id).ToString())))">@Users.ProductName</a>
                                     <p class="ps-product__price">
-                                        ₹@Users.DiscountPrice
+                                        <b>₹</b>@Users.DiscountPrice<b style="float:right">@Users.Quantity</b>
                                     </p>
                                 </div>
                             </div>
@@ -454,7 +376,6 @@
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                         <div class="ps-iconbox">
                             <header>
-
                                 <img src="~/WebSiteTheme/images/user/shipped.svg" height="50" width="50" />
                                 <h3>FREE SHIPPING</h3>
                                 <p>ON ORDER OVER ₹500</p>
@@ -497,4 +418,3 @@
         $("#" + id + "").addClass("current");
     }
 </script>
-

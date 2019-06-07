@@ -1,43 +1,29 @@
 ﻿@model PrivateSquareWeb.Models.ProductModel
-
 @{
-    /**/
-
     ViewBag.Title = "WishList";
     Layout = "~/Views/Shared/_WebsiteLayout.cshtml";
 }
-
 <script type="text/javascript">
     var DeleteWishlistItem = function (ProductId) {
-
-        
-
         var productid = ProductId;
-      
         $.ajax({
             url: "../../WebHome/DeleteFromWishlist/"+productid,
             type: "POST",
-            
             data: {
                 ProductId: ProductId
             },
             success: function (result) {
-               
                 $("#wishlistproducts").load(location.href + ' #wishlistproducts');
-                
             },
             error: function (error) {
-                
                 $("#wishlistproducts").load(location.href + ' #wishlistproducts');
             }
         });
     }
 </script>
-
 <div class="ps-hero">
     <div class="container">
         <h3>wishlist</h3>
-     
     </div>
 </div>
 <div class="ps-content pt-80 pb-80" id="wishlistproducts">
@@ -55,7 +41,6 @@
                                 <th></th>
                             </tr>
                         </thead>
-
                         <tbody>
                             @foreach (var products in ViewBag.Wishlist)
                             {
@@ -68,7 +53,6 @@
                                     </td>
                                 </tr>
                             }
-
                         </tbody>
                     </table>
                 }
@@ -77,13 +61,11 @@
                     <p>YOUR WISHLIST BAG IS EMPTY</p>
                 }
             }
-
         </div>
     </div>
 </div>
 <div class="ps-section--partner">
-    <div class="ps-container">
-      
+    <div class="ps-container">      
     </div>
 </div>
 <div class="ps-section--features">
@@ -92,9 +74,9 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                 <div class="ps-iconbox">
                     <header>
-                        <i class="ps-icon-delivery"></i>
+                        <img src="~/WebSiteTheme/images/user/shipped.svg" height="50" width="50" />
                         <h3>FREE SHIPPING</h3>
-                        <p>ON ORDER OVER $199</p>
+                        <p>ON ORDER OVER ₹500</p>
                     </header>
                     <p>Want to track a package? Find tracking information and order details from Your Orders.</p>
                 </div>
@@ -102,7 +84,7 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                 <div class="ps-iconbox">
                     <header>
-                        <i class="ps-icon-wallet"></i>
+                        <img src="~/WebSiteTheme/images/user/refund.svg" height="50" width="50" />
                         <h3>100% MONEY BACK.</h3>
                         <p>WITHIN 30 DAYS AFTER DELIVERY.</p>
                     </header>
@@ -112,7 +94,7 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                 <div class="ps-iconbox">
                     <header>
-                        <i class="ps-icon-customer-service"></i>
+                        <img src="~/WebSiteTheme/images/user/headset.svg" height="50" width="50" />
                         <h3>SUPPORT 24/7.</h3>
                         <p>WE CAN HELP YOU ONLINE.</p>
                     </header>
@@ -122,4 +104,3 @@
         </div>
     </div>
 </div>
-

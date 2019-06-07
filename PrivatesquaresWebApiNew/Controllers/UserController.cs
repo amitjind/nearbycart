@@ -300,12 +300,7 @@ namespace PrivatesquaresWebApiNew.Controllers
 
         {
             var data = new JwtTokenManager().DecodeToken(requestModel.Data);
-
-            //var data = requestModel.Data;
-
             ProductModel objProductModel = JsonConvert.DeserializeObject<ProductModel>(data);
-
-            // var sendResponse = new ResponseModel() { Response = JsonConvert.SerializeObject(userServices.GetProduct(objProductModel)), Success = true };
             return Json(new ResponseModel()
             {
                 Response = new JwtTokenManager()
@@ -314,10 +309,6 @@ namespace PrivatesquaresWebApiNew.Controllers
                                                                 userServices.GetProduct(objProductModel))),
                 Success = true
             });
-            // var sendJson = Json(sendResponse);
-
-            //return sendJson;
-
         }
         [Route("api/User/GetUserInterest")]
         [HttpPost]
@@ -746,7 +737,6 @@ namespace PrivatesquaresWebApiNew.Controllers
         [HttpPost]
         public IHttpActionResult GetPopularProductId(RequestModel requestModel)
         {
-
             var data = requestModel.Data;
             ProductModel objProductModel = JsonConvert.DeserializeObject<ProductModel>(data);
             var sendResponse = new ResponseModel() { Response = JsonConvert.SerializeObject(userServices.GetPopularProductId(objProductModel)), Success = true };
